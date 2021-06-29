@@ -26,12 +26,17 @@ compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
 cw=Vref*60e6
 
 parser = argparse.ArgumentParser()
+# required input
 parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat'],required = True,type = str, help = 'Human model or Rat model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
-parser.add_argument('--diabetes',choices = ['Severe','Moderate','Non'],required = True,type=str,help='diabete status (Severe/Moderate/Non)')
-parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition')
+
+# diabetic options
+parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
+parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition?')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
+# pregnancy option
+#parser.add_argument('--pregnant', choices=['mid','late'], default=None, type=str, help='pregnant female? (mid/late)')
 args = parser.parse_args()
 sex = args.sex
 humOrrat = args.species
@@ -39,18 +44,27 @@ sup_or_multi = args.type
 diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
+# preg = args.pregnant
 
-if inhib != None:
-    file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+if diabete != 'Non':
+    if inhib != None:
+        file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    else:
+        file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+
 else:
-    file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    file_to_save = sex + '_' + humOrrat[0:3] +'_normal'
+    
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
-
+    
+if sup_or_multi == 'superficial':
+    parts = ['sup']
+else:
+    parts = ['sup','jux1','jux2','jux3','jux4','jux5']
+    
 def multiprocessing_func(seg):
     compute_segment(seg,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
-
-parts = ['sup','jux1','jux2','jux3','jux4','jux5']
 
 if __name__ == '__main__':
 
@@ -61,6 +75,8 @@ if __name__ == '__main__':
     #========================================================
     # Cortical collecting duct
     #========================================================
+    print('Collecting duct begin')
+    print('CCD start')
     NCCD = 200
     if sex == 'Male':
         filename = './datafiles/CCDparams_M_'+humOrrat[0:3]+'.dat'
@@ -265,11 +281,13 @@ if __name__ == '__main__':
                     file = open('./'+file_to_save+'/'+ccd[j].sex+'_'+humOrrat[0:3]+'_'+ccd[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('CCD finished.')
+    print('\n')
     #========================================================
     # Outer medullary collecting duct
     #========================================================
+    print('OMCD start')
     NOMCD = 200
     if sex == 'Male':
         filename = './datafiles/OMCDparams_M_'+humOrrat[0:3]+'.dat'
@@ -477,11 +495,13 @@ if __name__ == '__main__':
                     file = open('./'+file_to_save+'/'+omcd[j].sex+'_'+humOrrat[0:3]+'_'+omcd[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('OMCD finished.')
+    print('\n')
     #========================================================
     # Inner medullary collecting duct
     #========================================================
+    print('IMCD start')
     NIMCD = 200
     if sex == 'Male':
         filename = './datafiles/IMCDparams_M_'+humOrrat[0:3]+'.dat'
@@ -686,5 +706,5 @@ if __name__ == '__main__':
                     file = open('./'+file_to_save+'/'+imcd[j].sex+'_'+humOrrat[0:3]+'_'+imcd[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('IMCD finished.')

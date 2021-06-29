@@ -23,6 +23,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     #========================================================
     # Proximal convolute tubule
     #========================================================
+    print('PCT start')
     if humOrrat == 'human':
         NPT = 181
     elif humOrrat == 'rat':
@@ -265,12 +266,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+pt[j].sex+'_'+humOrrat[0:3]+'_'+pt[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k]*Scaletorq)+'\n')
             else:
-                print('What is this?',transporter_type)	
+                raise Exception('What is this?',transporter_type)	
     print('PCT finished.')
-
+    print('\n')
     #========================================================
     # S3
     #========================================================
+    print('S3 start')
     if humOrrat == 'human':
         NS3 = 20
     elif humOrrat == 'rat':
@@ -513,11 +515,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+s3[j].sex+'_'+humOrrat[0:3]+'_'+s3[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k]*Scaletorq)+'\n')
             else:
-                print('What is this?',transporter_type)	
+                raise Exception('What is this?',transporter_type)	
     print('S3 finished.')
+    print('\n')
     #========================================================
     # Short descending limb
     #========================================================
+    print('SDL start')
     NSDL = 200
     if humOrrat == 'human':
         method = 'Newton'
@@ -626,10 +630,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         file_Na_para.write(str(jsol[0,0,4])+'\n')
 
     print('SDL finished.')
+    print('\n')
     #========================================================
     # Long descending limb
     #========================================================
     if sup_or_jux != 'sup':
+        print('LDL start')
         NLDL = 200
         if sex == 'Male':
             filename = './datafiles/LDLparams_M_'+humOrrat[0:3]+'.dat'
@@ -735,9 +741,11 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
 
 
         print('LDL finished.')
+        print('\n')
     #========================================================
     # Long ascending limb
     #========================================================
+        print('LAL start')
         NLAL = 200
         if sex == 'Male':
             filename = './datafiles/LALparams_M_rat.dat'
@@ -843,9 +851,11 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
 
 
         print('LAL finished.')
+        print('\n')
     #========================================================
     # Medulla thick ascending limb
     #========================================================
+    print('mTAL start')
     NmTAL = 200
     if sex == 'Male':
         filename = './datafiles/mTALparams_M_'+humOrrat[0:3]+'.dat'
@@ -1044,11 +1054,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+mtal[j].sex+'_'+humOrrat[0:3]+'_'+mtal[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('mTAL finished.')
+    print('\n')
     #========================================================
     # Cortex thick ascending limb
     #========================================================
+    print('cTAL start')
     NcTAL = 200
     if sex == 'Male':
         filename = './datafiles/cTALparams_M_'+humOrrat[0:3]+'.dat'
@@ -1247,11 +1259,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+ctal[j].sex+'_'+humOrrat[0:3]+'_'+ctal[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('cTAL finished.')
+    print('\n')
     #========================================================
     # Distal convoluted tubule
     #========================================================
+    print('DCT start')
     NDCT = 200
     if sex == 'Male':
         filename = './datafiles/DCTparams_M_'+humOrrat[0:3]+'.dat'
@@ -1455,11 +1469,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+dct[j].sex+'_'+humOrrat[0:3]+'_'+dct[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('DCT finished.')
+    print('\n')
     #========================================================
     # Connecting tubule
     #========================================================
+    print('CNT start')
     NCNT = 200
     if sex == 'Male':
         filename = './datafiles/CNTparams_M_'+humOrrat[0:3]+'.dat'
@@ -1543,7 +1559,6 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     for j in range(NCNT):
         file.write(str(cnt[j].pres[0])+'\n')
     file.close()
-    print('CNT finished.')
     #========================================================
     # output fluxes through transporters
     #========================================================
@@ -1664,6 +1679,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file = open('./'+file_to_save+'/'+cnt[j].sex+'_'+humOrrat[0:3]+'_'+cnt[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'_'+sup_or_jux+'.txt','a')
                     file.write(str(fluxs[k])+'\n')
             else:
-                print('What is this?',transporter_type)
+                raise Exception('What is this?',transporter_type)
     print('CNT finished.')
     print(sup_or_jux+' finished.')
+    print('\n')
