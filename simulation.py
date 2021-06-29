@@ -32,15 +32,15 @@ parser.add_argument('--type',choices = ['superficial','multiple'],required = Tru
 parser.add_argument('--diabete',choices = ['Y','N'],required = True,type=str,help='diabete status (Y/N)')
 parser.add_argument('--inhibition',choices=['ACE'],default = None,type = str,help = 'any transporter inhibition')
 args = parser.parse_args()
-gender = args.sex
+sex = args.sex
 humOrrat = args.species
 sup_or_multi = args.type
 diabete = args.diabete
 inhib = args.inhibition
 if inhib != None:
-    file_to_save = inhib+'_'+gender+'_'+humOrrat[0:3]+'_'+diabete+'_diab'
+    file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'
 else:
-    file_to_save = gender+'_'+humOrrat[0:3]+'_'+diabete+'_diab'
+    file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
 
@@ -63,13 +63,13 @@ for sup_or_jux in parts:
         NPT = 181 #176
     elif humOrrat == 'rat':
         NPT = 176
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'PTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'PTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='PTparams_F_'+humOrrat[0:3]+'.dat'
-    # if humOrrat == 'human' and gender == 'Female':
+    # if humOrrat == 'human' and sex == 'Female':
     #     method = 'Newton'
     # else:
     #     method = 'Broyden'
@@ -313,9 +313,9 @@ for sup_or_jux in parts:
         NS3 = 20
     elif humOrrat == 'rat':
         NS3 = 25
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'S3params_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'S3params_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='S3params_F_'+humOrrat[0:3]+'.dat'
@@ -561,9 +561,9 @@ for sup_or_jux in parts:
         method = 'Newton'
     elif humOrrat == 'rat':
         method = 'Broyden'
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'SDLparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'SDLparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='SDLparams_F_'+humOrrat[0:3]+'.dat'
@@ -669,9 +669,9 @@ for sup_or_jux in parts:
     #========================================================
     if sup_or_jux != 'sup':
         NLDL = 200
-        if gender == 'Male':
+        if sex == 'Male':
             filename = 'LDLparams_M_'+humOrrat[0:3]+'.dat'
-        elif gender == 'Female':
+        elif sex == 'Female':
             filename = 'LDLparams_F_'+humOrrat[0:3]+'.dat'
         else:
             filename ='LDLparams_F_'+humOrrat[0:3]+'.dat'
@@ -777,9 +777,9 @@ for sup_or_jux in parts:
     # Long ascending limb
     #========================================================
         NLAL = 200
-        if gender == 'Male':
+        if sex == 'Male':
             filename = 'LALparams_M_rat.dat'
-        elif gender == 'Female':
+        elif sex == 'Female':
             filename = 'LALparams_F_rat.dat'
         else:
             filename ='LALparams_F_rat.dat'
@@ -885,9 +885,9 @@ for sup_or_jux in parts:
     # Medulla thick ascending limb
     #========================================================
     NmTAL = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'mTALparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'mTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='mTALparams_F_'+humOrrat[0:3]+'.dat'
@@ -1088,9 +1088,9 @@ for sup_or_jux in parts:
     # Cortex thick ascending limb
     #========================================================
     NcTAL = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'cTALparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'cTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='cTALparams_F_'+humOrrat[0:3]+'.dat'
@@ -1292,9 +1292,9 @@ for sup_or_jux in parts:
     #========================================================
     # This segment is not included in human model.
     NMD = 2
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'MDparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'MDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='MDparams_F_'+humOrrat[0:3]+'.dat'
@@ -1347,9 +1347,9 @@ for sup_or_jux in parts:
     # Distal convoluted tubule
     #========================================================
     NDCT = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'DCTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'DCTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='DCTparams_F_'+humOrrat[0:3]+'.dat'
@@ -1555,9 +1555,9 @@ for sup_or_jux in parts:
     # Connecting tubule
     #========================================================
     NCNT = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = 'CNTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = 'CNTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='CNTparams_F_'+humOrrat[0:3]+'.dat'
@@ -1767,9 +1767,9 @@ for sup_or_jux in parts:
 # Cortical collecting duct
 #========================================================
 NCCD = 200
-if gender == 'Male':
+if sex == 'Male':
     filename = 'CCDparams_M_'+humOrrat[0:3]+'.dat'
-elif gender == 'Female':
+elif sex == 'Female':
     filename = 'CCDparams_F_'+humOrrat[0:3]+'.dat'
 else:
     filename ='CCDparams_F_'+humOrrat[0:3]+'.dat'
@@ -1976,9 +1976,9 @@ print('CCD finished.')
 # Outer medullary collecting duct
 #========================================================
 NOMCD = 200
-if gender == 'Male':
+if sex == 'Male':
     filename = 'OMCDparams_M_'+humOrrat[0:3]+'.dat'
-elif gender == 'Female':
+elif sex == 'Female':
     filename = 'OMCDparams_F_'+humOrrat[0:3]+'.dat'
 else:
     filename ='OMCDparams_F_'+humOrrat[0:3]+'.dat'
@@ -2188,9 +2188,9 @@ print('OMCD finished.')
 # Inner medullary collecting duct
 #========================================================
 NIMCD = 200
-if gender == 'Male':
+if sex == 'Male':
     filename = 'IMCDparams_M_'+humOrrat[0:3]+'.dat'
-elif gender == 'Female':
+elif sex == 'Female':
     filename = 'IMCDparams_F_'+humOrrat[0:3]+'.dat'
 else:
     filename ='IMCDparams_F_'+humOrrat[0:3]+'.dat'

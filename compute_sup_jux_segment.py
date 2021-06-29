@@ -16,12 +16,7 @@ import AE1
 import NHE1
 import flux
 
-def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save):
-    # gender = 'Male'
-    # diabete = 'N'
-    # humOrrat = 'human'
-    # sup_or_multi = 'multiple'
-    # inhib = None
+def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save):
     solute = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu']
     compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
     cw=Vref*60e6
@@ -32,9 +27,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
         NPT = 181
     elif humOrrat == 'rat':
         NPT = 176
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/PTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/PTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/PTparams_F_'+humOrrat[0:3]+'.dat'
@@ -280,9 +275,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
         NS3 = 20
     elif humOrrat == 'rat':
         NS3 = 25
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/S3params_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/S3params_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/S3params_F_'+humOrrat[0:3]+'.dat'
@@ -528,9 +523,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
         method = 'Newton'
     elif humOrrat == 'rat':
         method = 'Broyden'
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/SDLparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/SDLparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/SDLparams_F_'+humOrrat[0:3]+'.dat'
@@ -636,9 +631,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     #========================================================
     if sup_or_jux != 'sup':
         NLDL = 200
-        if gender == 'Male':
+        if sex == 'Male':
             filename = './datafiles/LDLparams_M_'+humOrrat[0:3]+'.dat'
-        elif gender == 'Female':
+        elif sex == 'Female':
             filename = './datafiles/LDLparams_F_'+humOrrat[0:3]+'.dat'
         else:
             filename ='./datafiles/LDLparams_F_'+humOrrat[0:3]+'.dat'
@@ -744,9 +739,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     # Long ascending limb
     #========================================================
         NLAL = 200
-        if gender == 'Male':
+        if sex == 'Male':
             filename = './datafiles/LALparams_M_rat.dat'
-        elif gender == 'Female':
+        elif sex == 'Female':
             filename = './datafiles/LALparams_F_rat.dat'
         else:
             filename ='./datafiles/LALparams_F_rat.dat'
@@ -852,9 +847,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     # Medulla thick ascending limb
     #========================================================
     NmTAL = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/mTALparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/mTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/mTALparams_F_'+humOrrat[0:3]+'.dat'
@@ -1055,9 +1050,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     # Cortex thick ascending limb
     #========================================================
     NcTAL = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/cTALparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/cTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/cTALparams_F_'+humOrrat[0:3]+'.dat'
@@ -1258,9 +1253,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     # Distal convoluted tubule
     #========================================================
     NDCT = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/DCTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/DCTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/DCTparams_F_'+humOrrat[0:3]+'.dat'
@@ -1466,9 +1461,9 @@ def compute_segment(sup_or_jux,gender,humOrrat,sup_or_multi,diabete,inhib,unx,fi
     # Connecting tubule
     #========================================================
     NCNT = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/CNTparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/CNTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/CNTparams_F_'+humOrrat[0:3]+'.dat'

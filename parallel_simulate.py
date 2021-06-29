@@ -33,7 +33,7 @@ parser.add_argument('--diabetes',choices = ['Severe','Moderate','Non'],required 
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
 args = parser.parse_args()
-gender = args.sex
+sex = args.sex
 humOrrat = args.species
 sup_or_multi = args.type
 diabete = args.diabetes
@@ -41,14 +41,14 @@ inhib = args.inhibition
 unx = args.unx
 
 if inhib != None:
-    file_to_save = inhib+'_'+gender+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
 else:
-    file_to_save = gender+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
 
 def multiprocessing_func(seg):
-    compute_segment(seg,gender,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
+    compute_segment(seg,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
 
 parts = ['sup','jux1','jux2','jux3','jux4','jux5']
 
@@ -62,9 +62,9 @@ if __name__ == '__main__':
     # Cortical collecting duct
     #========================================================
     NCCD = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/CCDparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/CCDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/CCDparams_F_'+humOrrat[0:3]+'.dat'
@@ -271,9 +271,9 @@ if __name__ == '__main__':
     # Outer medullary collecting duct
     #========================================================
     NOMCD = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/OMCDparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/OMCDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/OMCDparams_F_'+humOrrat[0:3]+'.dat'
@@ -483,9 +483,9 @@ if __name__ == '__main__':
     # Inner medullary collecting duct
     #========================================================
     NIMCD = 200
-    if gender == 'Male':
+    if sex == 'Male':
         filename = './datafiles/IMCDparams_M_'+humOrrat[0:3]+'.dat'
-    elif gender == 'Female':
+    elif sex == 'Female':
         filename = './datafiles/IMCDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/IMCDparams_F_'+humOrrat[0:3]+'.dat'
