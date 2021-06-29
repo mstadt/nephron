@@ -119,6 +119,13 @@ def newton_rat(func,x,k,cell):
         else:
             print('What is this segment?', cell.segment)
             raise Exception('cell.segment is not characterized')
+        delta = amp*np.array(F*IJ.T)[0]
+        x-= delta
+        f = np.matrix(fun(x,k))
+        iter+=1
+        print(iter, np.linalg.norm(f))
+        TOLpcn = np.max(delta/x)
+    return x
     
 
 
