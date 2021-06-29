@@ -330,7 +330,7 @@ def newton_human(func,x,k,cell):
                     else:
                         amp = 0.8
             elif cell.diabete == 'Non' and cell.inhib == 'SGLT2':
-                if cell.unx == 'N'
+                if cell.unx == 'N':
                     if cell.sex == 'male':
                         if np.linalg.norm(f)>100:
                             if k == 0:
