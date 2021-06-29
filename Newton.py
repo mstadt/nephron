@@ -82,6 +82,44 @@ def newton_rat(func,x,k,cell):
     print('to do')
     if cell.humOrrat != 'rat':
         raise Exception('newton_rat only for rat model')
+    fun=equations.conservation_eqs
+    f=np.matrix(fun(x,k))
+    TOLpcn = 1
+    i = 1
+    iter = 0
+    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
+        i += 1
+        J = np.matrix(Jac(fun,x,k))
+        IJ = J.I
+        F = np.matrix(fun(x,k))
+        if cell.segment == 'PT':
+            amp = 1.0
+        elif cell.segment == 'S3':
+            amp = 1.0
+        elif cell.segment == 'SDL':
+            amp = 1.0
+        elif cell.segment == 'LDL':
+            amp = 1.0
+        elif cell.segment == 'LAL':
+            amp = 1.0
+        elif cell.segment == 'mTAL':
+            amp = 1.0
+        elif cell.segment == 'cTAL':
+            amp = 1.0
+        elif cell.segment == 'DCT':
+            amp = 1.0
+        elif cell.segment == 'CNT':
+            amp = 1.0
+        elif cell.segment == 'CCD':
+            amp = 1.0
+        elif cell.segment == 'OMCD':
+            amp = 1.0
+        elif cell.segment == 'IMCD':
+            amp = 1.0
+        else:
+            print('What is this segment?', cell.segment)
+            raise Exception('cell.segment is not characterized')
+    
 
 
 # human newton solver
@@ -89,3 +127,435 @@ def newton_human(func,x,k,cell):
     print('to do')
     if cell.humOrrat != 'hum':
         raise Exception('newton_human only for human model')
+    fun=equations.conservation_eqs
+    f=np.matrix(fun(x,k))
+    TOLpcn = 1
+    i = 1
+    iter = 0
+    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
+        i += 1
+        J = np.matrix(Jac(fun,x,k))
+        IJ = J.I
+        F = np.matrix(fun(x,k))
+        #==================================
+        # PCT
+        #==================================
+        if cell.segment == 'PT':
+            amp = 1.0
+        #================================
+        # S3
+        #=================================
+        elif cell.segment == 'S3':
+            if cell.diabete == 'Non' and cell.unx == 'Y':
+                if cell.sex == 'male':
+                    amp = 1.0
+                if cell.sex == 'female':
+                    amp = 0.6
+            else:
+                amp = 1.0
+        #===============================
+        # SDL
+        #===============================
+        elif cell.segment == 'SDL':
+            amp = 1.0
+        #===============================
+        # LDL
+        #==============================
+        elif cell.segment == 'LDL':
+            amp = 1.0
+        #===============================
+        # LAL
+        #===============================
+        elif cell.segment == 'LAL':
+            amp = 1.0
+        #============================
+        # mTAL
+        #============================
+        elif cell.segment == 'mTAL':
+            if cell.inhib == 'ACE':
+                if np.linalg.norm(f)>100:
+                    amp = 0.2
+                else:
+                    amp = 0.8
+            elif cell.diabete == 'Non':
+                if np.linalg.norm(f)>100:
+                    amp=0.2
+                else:
+                    amp=1.0
+            elif cell.diabete == 'Moderate':
+                if np.linalg.norm(f)>100:
+                    amp = 0.2
+                else:
+                    amp = 1.0
+            elif cell.diabete == 'Severe':
+                if np.linalg.norm(f)>100:
+                    amp = 0.2
+                else:
+                    amp = 1.0
+            else:
+                amp = 1.0
+        elif cell.segment == 'cTAL':
+            if np.linalg.norm(f)>100:
+                amp = 0.2
+            else:
+                amp = 1.0
+        #================================
+        # MD
+        #================================
+        elif cell.segment == 'MD':
+            if np.linalg.norm(f)>100:
+                amp = 0.2
+            else:
+                amp = 0.8
+        #====================================
+        # DCT
+        #====================================
+        elif cell.segment == 'DCT':
+            if cell.inhib == 'ACE':
+                if cell.sex == 'male':
+                    amp = 0.5
+                elif cell.sex == 'female':
+                    amp = 0.8
+            else:
+                if cell.sex == 'female':
+                    if cell.type == 'jux1':
+                        amp = 0.9
+                    elif cell.type == 'jux2':
+                        amp = 0.7
+                    elif cell.type == 'jux3':
+                        amp = 0.7
+                    elif cell.type == 'sup':
+                        if np.linalg.norm(f)>2000:
+                            amp = 0.5
+                        else:
+                            amp = 0.5
+                    else:
+                        amp = 1.0
+                else:
+                    amp = 0.5      
+        #====================================
+        # CNT
+        #====================================
+        elif cell.segment == 'CNT':
+            if cell.sex == 'male':
+                if np.linalg.norm(f)>100:
+                    amp = 0.5
+                else:
+                    amp = 0.8
+            elif cell.sex == 'female':
+                if cell.type == 'sup':
+                    if np.linalg.norm(f)>100:
+                        amp = 0.5
+                    else:
+                        amp = 0.8
+                elif cell.type == 'jux1':
+                    if np.linalg.norm(f)>1000:
+                        if k==0:
+                            amp = 0.5
+                        else:
+                            amp = 0.13
+                    else:
+                        amp = 0.8
+                elif cell.type == 'jux2':
+                    if np.linalg.norm(f)>1000:
+                        if k==0:
+                            amp = 0.3
+                        else:
+                            amp = 0.5
+                    else:
+                        amp = 0.8
+                elif cell.type == 'jux3':
+                    if np.linalg.norm(f)>1000:
+                        if k==0:
+                            amp = 0.3
+                        else:
+                            amp = 0.5
+                    else:
+                        amp = 0.8
+                elif cell.type == 'jux4':
+                    if np.linalg.norm(f)>1000:
+                        if k==0:
+                            amp = 0.3
+                        else:
+                            amp = 0.5
+                    else:
+                        amp = 0.8
+                elif cell.type == 'jux5':
+                    if np.linalgnorm(f)>1000:
+                        if k==0:
+                            amp = 0.1
+                        else:
+                            amp = 0.17
+                    else:
+                        amp = 1.0
+        #====================================
+        # CCD
+        #====================================
+        elif cell.segment == 'CCD':
+            if cell.inhib == 'ACE':
+                if cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            amp = 0.8
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+                elif cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            amp = 0.4
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+            elif cell.diabete == 'Non' and cell.inhib != 'SGLT2':
+                if cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            if cell.unx == 'Y':
+                                amp = 0.6
+                            else:
+                                amp = 0.5
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+                elif cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            amp = 0.2
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+            elif cell.diabete == 'Non' and cell.inhib == 'SGLT2':
+                if cell.unx == 'N'
+                    if cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k == 0:
+                                amp = 0.8
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+                    elif cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k == 0:
+                                amp = 0.8
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+                elif cell.unx == 'Y':
+                    if cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k == 0:
+                                amp = 0.5
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+                    elif cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k == 0:
+                                amp = 0.2
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+            elif cell.diabete == 'Moderate':
+                if cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            amp = 0.5
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+                elif cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if cell.inhib != 'SGLT2':
+                            amp = 0.2
+                        else:
+                            amp = 0.7
+                    else:
+                        amp = 0.8
+            elif cell.diabete == 'Severe' and cell.inhib != 'SGLT2':
+                if cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k==0:
+                            amp = 0.5
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+                elif cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if k == 0:
+                            if cell.inhib == 'SGLT2':
+                                amp = 0.47
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.2
+                    else:
+                        amp = 0.8
+            else:
+                amp = 1.0
+        #=================================
+        # OMCD
+        #=================================
+        elif cell.segment == 'OMCD':
+            if np.linalg.norm(f)>100:
+                amp = 0.5
+            else:
+                amp = 0.8
+        #===================================
+        # IMCD
+        #===================================
+        elif cell.segment == 'IMCD':
+            if cell.inhib == 'ACE':
+                if np.linalg.norm(f)>100:
+                    if k==0:
+                        amp=0.2
+                    else:
+                        amp = 0.1
+                else:
+                    if k==0:
+                        amp = 1.5
+                    else:
+                        amp = 0.9
+            elif cell.diabete == 'Non' and cell.unx == 'N':
+                if cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if k==0:
+                            amp = 0.2
+                        else:
+                            amp = 0.1
+                    else:
+                        if k==0:
+                            amp = 0.5
+                        else:
+                            amp = 0.5
+                elif cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k==0:
+                            amp = 0.27
+                        else:
+                            amp = 0.2
+                    else:
+                        if k==0:
+                            amp = 0.8
+                        else:
+                            amp = 0.8
+            elif cell.diabete == 'Non' and cell.inhib == 'SGLT2' and cell.unx == 'Y':
+                if cell.sex == 'female':
+                    if np.linalg.norm(f)>100:
+                        if k==0:
+                            amp = 0.2
+                        else:
+                            amp = 0.1
+                    else:
+                        if k==0:
+                            amp = 0.5
+                        else:
+                            amp = 0.5
+                elif cell.sex == 'male':
+                    if np.linalg.norm(f)>100:
+                        if k==0:
+                            amp = 0.23
+                        else:
+                            amp = 0.8
+                    else:
+                        amp = 0.8
+            elif cell.diabete == 'Moderate':
+                if cell.inhib != 'SGLT2':
+                    if cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.2
+                            else:
+                                amp = 0.1
+                        else:
+                            amp = 0.5
+                    elif cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.19
+                            else:
+                                amp = 0.17
+                        else:
+                            if k==0:
+                                amp = 0.8
+                            else:
+                                amp = 0.8
+                elif cell.inhib == 'SGLT2':
+                    if cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.5
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+                    elif cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.7
+                            else:
+                                amp = 0.2
+                        else:
+                            amp = 0.8
+            elif cell.diabete == 'Severe':
+                if cell.inhib == 'SGLT2':
+                    if cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.2
+                            else:
+                                amp = 0.1
+                        else:
+                            if k==0:
+                                amp = 0.5
+                            else:
+                                amp = 0.5
+                    elif cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.23
+                            else:
+                                amp = 0.17
+                        else:
+                            if k==0:
+                                amp = 0.8
+                            else:
+                                amp = 0.8
+                else:
+                    if cell.sex == 'female':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.2
+                            else:
+                                amp = 0.1
+                        else:
+                            if k == 0:
+                                amp = 0.5
+                            else:
+                                amp = 0.5
+                    elif cell.sex == 'male':
+                        if np.linalg.norm(f)>100:
+                            if k==0:
+                                amp = 0.13
+                            else:
+                                amp = 0.17
+                        else:
+                            if k==0:
+                                amp = 0.8
+                            else:
+                                amp = 0.8
+            else:
+                amp = 1.0
+        else:
+            print('What is this segment?', cell.segment)
+            raise Exception('cell.segment is not characterized')
