@@ -363,9 +363,9 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
         # solving the system
         if method == 'Newton':
-            if humOrrat = 'human':
+            if humOrrat == 'human':
                 sol = Newton.newton_human(equations.conservation_eqs,x,i,cell[i])
-            elif humOrrat = 'rat':
+            elif humOrrat == 'rat':
                 if cell.preg != 'non':
                     sol = Newton_preg.newton_preg_rat(equations.conservation_eqs,x,i,cell[i])
                 else:
