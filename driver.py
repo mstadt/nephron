@@ -8,6 +8,7 @@ import electrochemical
 import water
 from values import *
 import Newton
+import Newton_preg # for pregnancy model
 import timeit
 import boundaryBath
 import time
@@ -365,7 +366,10 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             if humOrrat = 'human':
                 sol = Newton.newton_human(equations.conservation_eqs,x,i,cell[i])
             elif humOrrat = 'rat':
-                sol = Newton.newton_rat(equations.conservation_eqs,x,i,cell[i])
+                if cell.preg != 'non':
+                    sol = Newton_preg.newton_preg_rat(equations.conservation_eqs,x,i,cell[i])
+                else:
+                    sol = Newton.newton_rat(equations.conservation_eqs,x,i,cell[i])
             else:
                 raise Exception('human or rat?', humOrrat)
         elif method == 'Broyden':
