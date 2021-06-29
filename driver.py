@@ -411,7 +411,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 #================================OUTPUT IN TO FILE================================        
     if cell[0].segment == 'PT':
         # directory to store outlet files
-        if os.isdir('outlets') == False:
+        if os.path.isdir('outlets') == False:
             os.makedirs('outlets')
         file=open('./outlets/PToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
