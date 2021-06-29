@@ -67,7 +67,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
   
     # read data from output of previous segment.
     if cell[0].segment == 'S3':
-        inputfile = open('outlets/PToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/PToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -89,7 +89,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'SDL':
-        inputfile = open('outlets/S3outlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/S3outlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -108,7 +108,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             cell[i].conc[:,4] = cell[i].conc[:,5]
 
     if cell[0].segment == 'LDL':
-        inputfile = open('outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -124,7 +124,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'LAL':
-        inputfile = open('outlets/LDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/LDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -141,9 +141,9 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     if cell[0].segment == 'mTAL':
         if cell[0].type == 'sup':
-            inputfile = open('outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+            inputfile = open('./outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         else:
-            inputfile = open('outlets/LALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+            inputfile = open('./outlets/LALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -159,7 +159,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'cTAL':
-        inputfile = open('outlets/mTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/mTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -175,7 +175,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'MD':
-        inputfile = open('outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -191,7 +191,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])    
 
     if cell[0].segment == 'DCT':
-        inputfile = open('outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -208,7 +208,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     if cell[0].segment == 'CNT':
         #print(cell[0].sex,cell[0].humOrrat,sup_or_jux)
-        inputfile = open('outlets/DCToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
+        inputfile = open('./outlets/DCToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -236,7 +236,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             water_vol = []
             for neph in nephs:
                 soluts_conc = []
-                inputfile = open('outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_'+neph+'.txt','r')
+                inputfile = open('./outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_'+neph+'.txt','r')
                 for i in range(NS):
                     line = inputfile.readline()
                     conclist = line.split(' ')
@@ -260,7 +260,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             for k in range(N):
                 cell[k].vol_init[0] = cell[0].vol[0]
         elif sup_or_multi == 'superficial':
-            inputfile = open('outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_sup.txt','r')
+            inputfile = open('./outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_sup.txt','r')
             for i in range(NS):
                 line = inputfile.readline()
                 conclist = line.split(' ')
@@ -278,7 +278,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'OMCD':
-        inputfile = open('outlets/CCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','r')
+        inputfile = open('./outlets/CCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -296,7 +296,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[0].pres[0] = float(preslist[0])
 
     if cell[0].segment == 'IMCD':
-        inputfile = open('outlets/OMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','r')
+        inputfile = open('./outlets/OMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','r')
         for i in range(NS):
             line = inputfile.readline()
             conclist = line.split(' ')
@@ -411,9 +411,9 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 #================================OUTPUT IN TO FILE================================        
     if cell[0].segment == 'PT':
         # directory to store outlet files
-        if os.makedirs('outlets') == False:
+        if os.isdir('outlets') == False:
             os.makedirs('outlets')
-        file=open('outlets/PToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/PToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4],cell[N-1].conc[j,5]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -422,7 +422,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.close()
 
     elif cell[0].segment == 'S3':
-        file=open('outlets/S3outlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/S3outlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -430,7 +430,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'SDL':
-        file=open('outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/SDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -438,7 +438,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'LDL':
-        file=open('outlets/LDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/LDLoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4],cell[N-1].conc[j,5]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -446,7 +446,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'LAL':
-        file=open('outlets/LALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/LALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4],cell[N-1].conc[j,5]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -462,7 +462,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'cTAL':
-        file=open('outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/cTALoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4],cell[N-1].conc[j,5]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -470,7 +470,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'MD':
-        file=open('outlets/MDoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/MDoutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -478,7 +478,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'DCT':
-        file=open('outlets/DCToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/DCToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
@@ -486,7 +486,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'CNT':
-        file=open('outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
+        file=open('./outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_'+sup_or_jux+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,2],cell[N-1].conc[j,3],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[2],cell[N-1].vol[3],cell[N-1].vol[4]))
@@ -494,7 +494,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))        
         file.close()
     elif cell[0].segment == 'CCD':
-        file=open('outlets/CCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
+        file=open('./outlets/CCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,2],cell[N-1].conc[j,3],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[2],cell[N-1].vol[3],cell[N-1].vol[4]))
@@ -502,7 +502,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))    
         file.close()
     elif cell[0].segment == 'OMCD':
-        file=open('outlets/OMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
+        file=open('./outlets/OMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,2],cell[N-1].conc[j,3],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[2],cell[N-1].vol[3],cell[N-1].vol[4]))
@@ -510,7 +510,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         file.write(str(cell[N-1].pres[0]))
         file.close()
     elif cell[0].segment == 'IMCD':
-        file=open('outlets/IMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
+        file=open('./outlets/IMCDoutlet'+cell[0].sex+cell[0].humOrrat+'.txt','w')
         for j in range(NS):
             file.write('{} {} {} \n'.format(cell[N-1].conc[j,0],cell[N-1].conc[j,1],cell[N-1].conc[j,4]))
         file.write('{} {} {} \n'.format(cell[N-1].vol[0],cell[N-1].vol[1],cell[N-1].vol[4]))
