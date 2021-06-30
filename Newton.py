@@ -136,7 +136,7 @@ def newton_rat(func,x,k,cell):
                     if np.linalg.norm(f)>100:
                         amp = 0.17
                     else:
-                        amp = 1.0
+                        amp = 0.9
                 elif cell.type == 'jux1':
                     if np.linalg.norm(f)>5000:
                         if k==0:
@@ -144,12 +144,12 @@ def newton_rat(func,x,k,cell):
                         else:
                             amp = 0.17
                     else:
-                        amp = 1.0
+                        amp = 0.9
                 else:
                     if np.linalg.norm(f) > 5000:
                         amp = 0.13
                     else:
-                        amp = 1.0
+                        amp = 0.9
             elif cell.sex == 'male':
                 if cell.type == 'sup':
                     if np.linalg.norm(f)>5000:
@@ -160,7 +160,7 @@ def newton_rat(func,x,k,cell):
                     if np.linalg.norm(f)>5000:
                         amp = 0.13
                     else:
-                        amp = 1.0
+                        amp = 0.9
         # CCD     
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1000:
