@@ -136,12 +136,18 @@ def compute_fluxes (cell,j):
             torqvm = 0.020 #Compliance Fortran Code
             PbloodPT = 20.0e0 #Reference pressure
         elif cell.humOrrat == 'rat':
-            Radref = 0.0025/2.0
-            torqR = 0.0011
+            if cell.sex == 'male':
+                Radref = 0.0025/2.0
+                torqR = 0.0011
+                torqvm = 0.030
+                PbloodPT = 9.0e0
+            elif cell.sex == 'female':
+                Radref = 0.002125/2.0 #female radius
+                torqR = 0.00095
+                torqvm = 0.030
+                PbloodPT = 8.0e0
             torqL = 2.50e-4
             torqd = 1.50e-5
-            torqvm = 0.030
-            PbloodPT = 9.0e0
         if cell.humOrrat == 'rat':
             fac1 = 8.0*visc*(cell.vol_init[0]*Vref)*torqL/(Radref**2)
         elif cell.humOrrat == 'hum':
