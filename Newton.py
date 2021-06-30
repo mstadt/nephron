@@ -288,7 +288,7 @@ def newton_human(func,x,k,cell):
                     else:
                         amp = 0.8
                 elif cell.type == 'jux5':
-                    if np.linalgnorm(f)>1000:
+                    if np.linalg.norm(f)>1000:
                         if k==0:
                             amp = 0.1
                         else:
