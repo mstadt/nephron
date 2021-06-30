@@ -63,8 +63,8 @@ if sup_or_multi == 'superficial':
 else:
     parts = ['sup','jux1','jux2','jux3','jux4','jux5']
     
-def multiprocessing_func(seg):
-    compute_segment(seg,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
+def multiprocessing_func(sup_or_jux):
+    compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
 
 if __name__ == '__main__':
 

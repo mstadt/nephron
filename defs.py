@@ -85,6 +85,8 @@ class membrane:
         self.diabete = 'Non'
         # unx status
         self.unx = 'N'
+        # pregnancy status
+        self.preg = 'non'
         # tubule length
         self.len = 0.0
         # luminal diameter
