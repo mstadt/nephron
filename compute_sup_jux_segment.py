@@ -23,7 +23,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     #========================================================
     # Proximal convolute tubule
     #========================================================
-    print('PCT start')
+    print('%s PCT start' %(sup_or_jux))
     if humOrrat == 'human':
         NPT = 181
     elif humOrrat == 'rat':
@@ -267,12 +267,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k]*Scaletorq)+'\n')
             else:
                 raise Exception('What is this?',transporter_type)	
-    print('PCT finished.')
+    print('%s PCT finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # S3
     #========================================================
-    print('S3 start')
+    print('%s S3 start' %(sup_or_jux))
     if humOrrat == 'human':
         NS3 = 20
     elif humOrrat == 'rat':
@@ -516,12 +516,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k]*Scaletorq)+'\n')
             else:
                 raise Exception('What is this?',transporter_type)	
-    print('S3 finished.')
+    print('%s S3 finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # Short descending limb
     #========================================================
-    print('SDL start')
+    print('%s SDL start' %(sup_or_jux))
     NSDL = 200
     if humOrrat == 'human':
         method = 'Newton'
@@ -629,13 +629,13 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         file_Na_para = open('./'+file_to_save+'/'+sdl[j].sex+'_'+humOrrat[0:3]+'_'+sdl[j].segment+'_paracellular_Na_'+sup_or_jux+'.txt','a')
         file_Na_para.write(str(jsol[0,0,4])+'\n')
 
-    print('SDL finished.')
+    print('%s SDL finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # Long descending limb
     #========================================================
     if sup_or_jux != 'sup':
-        print('LDL start')
+        print('%s LDL start' %(sup_or_jux))
         NLDL = 200
         if sex == 'Male':
             filename = './datafiles/LDLparams_M_'+humOrrat[0:3]+'.dat'
@@ -740,12 +740,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
             file_Na_para.write(str(jsol[0,0,4])+'\n')
 
 
-        print('LDL finished.')
+        print('%s LDL finished.' %(sup_or_jux))
         print('\n')
     #========================================================
     # Long ascending limb
     #========================================================
-        print('LAL start')
+        print('%s LAL start' %(sup_or_jux))
         NLAL = 200
         if sex == 'Male':
             filename = './datafiles/LALparams_M_rat.dat'
@@ -850,12 +850,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
             file_Na_para.write(str(jsol[0,0,4])+'\n')
 
 
-        print('LAL finished.')
+        print('%s LAL finished.' %(sup_or_jux))
         print('\n')
     #========================================================
     # Medulla thick ascending limb
     #========================================================
-    print('mTAL start')
+    print('%s mTAL start' %(sup_or_jux))
     NmTAL = 200
     if sex == 'Male':
         filename = './datafiles/mTALparams_M_'+humOrrat[0:3]+'.dat'
@@ -1055,12 +1055,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k])+'\n')
             else:
                 raise Exception('What is this?',transporter_type)
-    print('mTAL finished.')
+    print('%s mTAL finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # Cortex thick ascending limb
     #========================================================
-    print('cTAL start')
+    print('%s cTAL start' %(sup_or_jux))
     NcTAL = 200
     if sex == 'Male':
         filename = './datafiles/cTALparams_M_'+humOrrat[0:3]+'.dat'
@@ -1260,12 +1260,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k])+'\n')
             else:
                 raise Exception('What is this?',transporter_type)
-    print('cTAL finished.')
+    print('%s cTAL finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # Distal convoluted tubule
     #========================================================
-    print('DCT start')
+    print('%s DCT start' %(sup_or_jux))
     NDCT = 200
     if sex == 'Male':
         filename = './datafiles/DCTparams_M_'+humOrrat[0:3]+'.dat'
@@ -1470,12 +1470,12 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k])+'\n')
             else:
                 raise Exception('What is this?',transporter_type)
-    print('DCT finished.')
+    print('%s DCT finished.'%(sup_or_jux))
     print('\n')
     #========================================================
     # Connecting tubule
     #========================================================
-    print('CNT start')
+    print('%s CNT start' %(sup_or_jux))
     NCNT = 200
     if sex == 'Male':
         filename = './datafiles/CNTparams_M_'+humOrrat[0:3]+'.dat'
@@ -1680,6 +1680,6 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k])+'\n')
             else:
                 raise Exception('What is this?',transporter_type)
-    print('CNT finished.')
+    print('%s CNT finished.'%(sup_or_jux))
     print(sup_or_jux+' finished.')
     print('\n')
