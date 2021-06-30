@@ -129,7 +129,7 @@ def newton_rat(func,x,k,cell):
             if np.linalg.norm(f)>100:
                 amp = 0.2
             else:
-                amp = 1.0
+                amp = 0.9
         #===============================
         # cTAL
         #===============================
