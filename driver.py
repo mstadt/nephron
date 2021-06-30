@@ -525,11 +525,17 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     stop=timeit.default_timer()
     ComputationTime=stop-start
-    print('Computation Time for %s %s = %f'%(cell[0].type, cell[0].segment,ComputationTime))
+    if cell[0].segment == 'CCD' or cell[0].segment == 'OMCD' or cell[0].segment == 'IMCD':
+        print('Computation Time for %s = %f'%(cell[0].segment, ComputationTime))
+    else:
+        print('Computation Time for %s %s = %f'%(cell[0].type, cell[0].segment,ComputationTime))
     print('\n')
 
     file=open('ComputationTime.txt','a')
-    file.write('Computation Time for %s %s: %f \n' %(cell[0].type,cell[0].segment,ComputationTime))
+    if cell[0].segment == 'CCD' or cell[0].segment == 'OMCD' or cell[0].segment == 'IMCD':
+        file.write('Computation Time for %s: %f \n' %(cell[0].segment, ComputationTime))
+    else:
+        file.write('Computation Time for %s %s: %f \n' %(cell[0].type,cell[0].segment,ComputationTime))
     file.close()
 
     return cell
