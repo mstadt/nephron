@@ -1,5 +1,5 @@
 # This file is used to check individual segment. Type 'python computation.py' in the terminal to run.
-# requires outlet files from previous simulation
+
 from driver import compute
 from values import *
 from defs import *
@@ -18,56 +18,41 @@ import AE1
 import NHE1
 import flux
 import os
-import argparse
-
 solute = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu']
 compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
 cw=Vref*60e6
 
-parser=argparse.ArgumentParser()
-# required input
-parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
-parser.add_argument('--species',choices=['human','rat'],required = True,type = str, help = 'Human model or Rat model')
-parser.add_argument('--segment', choices = ['PT','S3','SDL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
-parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','jux5', ''], required=True, type=str, help = 'which nephron type? (sup/jux1/jux2/etc), '' is for collecting duct')
-parser.add_argument('--savefile', required=True, type=str, help = 'where to save?')
-# optional input
-# diabetic options
-parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
-parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition?')
-parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
-args=parser.parse_args()
+N=input('Choose number of cells: ')
 
-sex = args.sex
-humOrrat = args.species
-segment = args.segment
-sup_or_jux = args.suporjux
+gender=input('Which gender do you want to simulate? (Male or Female) ')
 
-diabete = args.diabetes
-inhib = args.inhibition
-unx = args.unx
+method=input('Choose a computation method (Newton or Broyden): ')
 
-if segment == 'PT':
-    N = 176
-elif segment == 'S3':
-    N = 25
-else:
-    N = 200
+segment=input('Choose a segment: ')
 
-file_to_save = args.savefile
+diabete=input('Does it have diabete? (Y/N) ')
+
+sup_or_jux=input('Is this superfical or juxtamedullary? (sup/jux1/jux2/jux3/jux4/jux5) ')
+humOrrat =input('human or rat? ')
+inhib=input('Any transport inhibition? (NHE3/ NKCC2) ')
+
+percentage = input('Percentage: ')
+perc = int(percentage)#float(percentage)
+
+file_to_save=input('Input a file name to save data: ')
 if os.path.isdir(file_to_save) == False:
-    os.makedirs(file_to_save)
+	os.makedirs(file_to_save)
 
-if sex == 'Male':
+if gender == 'Male':
 	filename='./datafiles/'+segment+'params_M_'+humOrrat[0:3]+'.dat'
-elif sex == 'Female':
+elif gender == 'Female':
 	filename='./datafiles/'+segment+'params_F_'+humOrrat[0:3]+'.dat'
 else:
-    raise Exception('must be male or female')
+	print('This is a program to simulate sex-specific transport along segments of rat nephron!')
 
-N = int(N)
-method = 'Newton'
-cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = unx)
+cell=compute(int(N),filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = 'N')
+
+N=int(N)
 
 file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_potential_gradient_Lumen_Cell_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
