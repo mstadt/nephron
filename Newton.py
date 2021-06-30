@@ -79,7 +79,6 @@ def broyden(func,x,k,type):
 #=====================================================
 # rat newton solver
 def newton_rat(func,x,k,cell):
-    print('to do')
     if cell.humOrrat != 'rat':
         raise Exception('newton_rat only for rat model')
     fun=equations.conservation_eqs
