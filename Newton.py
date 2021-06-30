@@ -131,7 +131,6 @@ def newton_rat(func,x,k,cell):
 
 # human newton solver
 def newton_human(func,x,k,cell):
-    print('to do')
     if cell.humOrrat != 'hum':
         raise Exception('newton_human only for human model')
     fun=equations.conservation_eqs
