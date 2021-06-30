@@ -31,7 +31,10 @@ def compute_water_fluxes (cell):
         if cell.humOrrat == 'hum':
             PB = 20.0 #This is the reference pressure in plasma that we use to compute the torque and scaling factor.
         elif cell.humOrrat == 'rat':
-            PB = 9.0    
+            if cell.sex == 'male':
+                PB = 9.0
+            elif cell.sex == 'female':
+                PB = 8.0    
     else:
         PB=0
 

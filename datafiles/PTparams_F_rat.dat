@@ -2,7 +2,7 @@
 #  physical dimension
 #
 sex	female
-diameter_female	 0.002    # luminal diameter for female
+diameter_female	 0.002125    # luminal diameter for female
 length_female	0.88   #0.88 tubule length for female
 total 200           # total amount of PT cells
 #

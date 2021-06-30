@@ -3,9 +3,9 @@
 #
 sex	female
 diameter_male	 0.0028    # luminal diameter for male
-diameter_female  0.00238
+diameter_female  0.00252
 length_male		0.5   # tubule length for male
-length_female   0.425
+length_female   0.45
 total 200           # total amount of cells
 #
 #  luminal pressure

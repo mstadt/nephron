@@ -245,12 +245,18 @@ def conservation_eqs (x,i):
                 #torqvm = 0.012 #Compliance
                 PbloodPT = 20.0e0 #Reference pressure
             elif cell1.humOrrat == 'rat':
-                Radref = 0.0025/2.0
-                torqR = 0.0011
+                if cell.sex == 'male':
+                    Radref = 0.0025/2.0
+                    torqR = 0.0011
+                    torqvm = 0.030
+                    PbloodPT = 9.0e0
+                elif cell.sex == 'female':
+                    Radref = 0.002125/2.0 #female radius
+                    torqR = 0.00095
+                    torqvm = 0.030
+                    PbloodPT = 8.0e0
                 torqL = 2.50e-4
                 torqd = 1.50e-5
-                torqvm = 0.030
-                PbloodPT = 9.0e0
             if cell1.humOrrat == 'hum':
                 fac1 = 8.0*visc*(cell1.volref[0]*Vref)*torqL/(Radref**2) 
             elif cell1.humOrrat == 'rat':
@@ -356,18 +362,28 @@ def conservation_eqs (x,i):
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
         elif cell1.humOrrat == 'rat':
-            Radref = 0.0025/2.0
-            torqR = 0.0011
+            if cell.sex == 'male':
+                Radref = 0.0025/2.0
+                torqR = 0.0011
+                torqvm = 0.030
+                PbloodPT = 9.0e0
+            elif cell.sex == 'female':
+                Radref = 0.002125/2.0 #female radius
+                torqR = 0.00095
+                torqvm = 0.030
+                PbloodPT = 8.0e0
             torqL = 2.50e-4
             torqd = 1.50e-5
-            torqvm = 0.030
-            PbloodPT = 9.0e0
+
             RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
             Amcompl = PI*(RMcompl**2)
-            if cell1.segment == 'IMCD':
+            if cell1.segment == 'PT' or cell1.segment == 'S3':
+                RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
+                Amcompl = PI*(RMcompl**2)
+                factor1 = 8.0e0*PI*visc/(Amcompl**2)
                 factor1 = 8.0*PI*visc/(Am**2)
             else:
-                factor1 = 8.0e0*PI*visc/(Amcompl**2)
+                factor1 = 8.0*PI*visc/(Am**2)
 
         if cell1.segment == 'IMCD':
             if cell1.humOrrat == 'rat':
