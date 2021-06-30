@@ -23,7 +23,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     #========================================================
     # Proximal convolute tubule
     #========================================================
-    print('PCT start')
+    print('%s PCT start' %(sup_or_jux))
     if humOrrat == 'human':
         NPT = 181
     elif humOrrat == 'rat':
@@ -267,7 +267,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
                     file.write(str(fluxs[k]*Scaletorq)+'\n')
             else:
                 raise Exception('What is this?',transporter_type)	
-    print('PCT finished.')
+    print('%s PCT finished.' %(sup_or_jux))
     print('\n')
     #========================================================
     # S3
