@@ -28,7 +28,7 @@ segs_early = ['pt', 'sdl', 'mtal', 'dct', 'cnt']
 segs_cd = ['ccd','imcd']
 seg_labels = ['PT', 'DL', 'mTAL', 'DCT', 'CNT', 'CCD', 'urine']
 
-humOrrat = 'rat'
+humOrrat = 'rat' # set to 'hum' for human model
 
 
 # conversion factors

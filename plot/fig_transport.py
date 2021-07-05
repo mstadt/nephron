@@ -32,7 +32,7 @@ segment_jux = ['sdl','ldl','lal']
 segment_cd = ['ccd','omcd','imcd']
 
 
-humOrrat = 'rat'
+humOrrat = 'rat' # set to 'hum' for human model
 
 # conversion factors
 sup_ratio = 2.0/3.0
