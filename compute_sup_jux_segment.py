@@ -16,7 +16,7 @@ import AE1
 import NHE1
 import flux
 
-def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save):
+def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,preg,file_to_save):
     solute = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu']
     compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
     cw=Vref*60e6
@@ -35,7 +35,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     else:
         filename ='./datafiles/PTparams_F_'+humOrrat[0:3]+'.dat'
 
-    pt=compute(NPT,filename,'Broyden',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+    pt=compute(NPT,filename,'Broyden',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg)
     #========================================================
     # output PT Concentrations in Lumen and Cell
     #========================================================
@@ -283,7 +283,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         filename = './datafiles/S3params_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/S3params_F_'+humOrrat[0:3]+'.dat'
-    s3=compute(NS3,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+    s3=compute(NS3,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx,preg = preg)
     #========================================================
     # output S3 Concentrations in Lumen and Cell
     #========================================================
@@ -534,7 +534,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
     else:
         filename ='./datafiles/SDLparams_F_'+humOrrat[0:3]+'.dat'
     #sdl=compute(NSDL,filename,'Broyden',diabete)
-    sdl=compute(NSDL,filename,method,sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+    sdl=compute(NSDL,filename,method,sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg)
     #========================================================
     # output SDL Concentrations in Lumen and Cell
     #========================================================
@@ -643,7 +643,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
             filename = './datafiles/LDLparams_F_'+humOrrat[0:3]+'.dat'
         else:
             filename ='./datafiles/LDLparams_F_'+humOrrat[0:3]+'.dat'
-        ldl=compute(NLDL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+        ldl=compute(NLDL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg)
     #========================================================
     # output LDL Concentrations in Lumen and Cell
     #========================================================
@@ -753,7 +753,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
             filename = './datafiles/LALparams_F_rat.dat'
         else:
             filename ='./datafiles/LALparams_F_rat.dat'
-        lal=compute(NLAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+        lal=compute(NLAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg)
     #========================================================
     # output LAL Concentrations in Lumen and Cell
     #========================================================
@@ -863,7 +863,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         filename = './datafiles/mTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/mTALparams_F_'+humOrrat[0:3]+'.dat'
-    mtal=compute(NmTAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx)
+    mtal=compute(NmTAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx, preg = preg)
     #========================================================
     # output mTAL Concentrations in Lumen and Cell
     #========================================================
@@ -1068,7 +1068,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         filename = './datafiles/cTALparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/cTALparams_F_'+humOrrat[0:3]+'.dat'
-    ctal=compute(NcTAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx)
+    ctal=compute(NcTAL,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx, preg = preg)
     #========================================================
     # output cTAL Concentrations in Lumen and Cell
     #========================================================
@@ -1273,7 +1273,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         filename = './datafiles/DCTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/DCTparams_F_'+humOrrat[0:3]+'.dat'
-    dct=compute(NDCT,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx)
+    dct=compute(NDCT,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx, preg = preg)
     #========================================================
     # output DCT Concentrations in Lumen and Cell
     #========================================================
@@ -1483,7 +1483,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_
         filename = './datafiles/CNTparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/CNTparams_F_'+humOrrat[0:3]+'.dat'
-    cnt=compute(NCNT,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx)
+    cnt=compute(NCNT,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi,inhib,unx = unx, preg = preg)
     #========================================================
     # output CNT Concentrations in Lumen and Cell
     #========================================================

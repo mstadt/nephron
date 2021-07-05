@@ -36,7 +36,8 @@ parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',t
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition?')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
 # pregnancy option
-#parser.add_argument('--pregnant', choices=['mid','late'], default=None, type=str, help='pregnant female? (mid/late)')
+parser.add_argument('--pregnant', choices=['mid','late'], default='non', type=str, help='pregnant female? (mid/late)')
+
 args = parser.parse_args()
 sex = args.sex
 humOrrat = args.species
@@ -44,14 +45,22 @@ sup_or_multi = args.type
 diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
-# preg = args.pregnant
+preg = args.pregnant
 
 if diabete != 'Non':
+    if preg != 'non':
+        raise Exception('pregnant diabetic not done')
     if inhib != None:
         file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
     else:
         file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+elif preg != 'non':
+    if sex == 'Male':
+        raise Exception('pregnant only for female')
+    if humOrrat[0:3] == 'hum':
+        raise Exception('pregnant model not done for human')
 
+    file_to_save = preg+'pregnant_'+humOrrat[0:3]
 else:
     file_to_save = sex + '_' + humOrrat[0:3] +'_normal'
     
@@ -64,7 +73,7 @@ else:
     parts = ['sup','jux1','jux2','jux3','jux4','jux5']
     
 def multiprocessing_func(sup_or_jux):
-    compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,file_to_save)
+    compute_segment(sup_or_jux, sex, humOrrat, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
 
 if __name__ == '__main__':
 
@@ -84,7 +93,7 @@ if __name__ == '__main__':
         filename = './datafiles/CCDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/CCDparams_F_'+humOrrat[0:3]+'.dat'
-    ccd=compute(NCCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+    ccd=compute(NCCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg=preg)
     #========================================================
     # output CCD Concentrations in Lumen and Cell
     #========================================================
@@ -296,9 +305,9 @@ if __name__ == '__main__':
     else:
         filename ='./datafiles/OMCDparams_F_'+humOrrat[0:3]+'.dat'
     if ccd[0].sex == 'male':
-        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
     elif ccd[0].sex == 'female':
-        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
     #========================================================
     # output OMCD Concentrations in Lumen and Cell
     #========================================================
@@ -509,7 +518,7 @@ if __name__ == '__main__':
         filename = './datafiles/IMCDparams_F_'+humOrrat[0:3]+'.dat'
     else:
         filename ='./datafiles/IMCDparams_F_'+humOrrat[0:3]+'.dat'
-    imcd=compute(NIMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx)
+    imcd=compute(NIMCD,filename,'Newton',diabete=diabete,humOrrat=humOrrat,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
     #========================================================
     # output IMCD Concentrations in Lumen and Cell
     #========================================================
