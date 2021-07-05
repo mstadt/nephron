@@ -14,7 +14,7 @@ import boundaryBath
 import time
 import os
 
-def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',sup_or_multi = 'superficial',inhibition=None,unx = 'N'):
+def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',sup_or_multi = 'superficial',inhibition=None,unx = 'N',preg='non'):
 
     start=timeit.default_timer()
 
@@ -29,7 +29,11 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     # the diabetic status of cell.
     if diabete != 'Non':
         for i in range(N):
-            cell[i].diabete = diabete  
+            cell[i].diabete = diabete
+    # pregnancy status of cell
+    if preg != 'non':
+        for i in range(N):
+            cell[i].preg = preg
     # superficial nephron or juxtamedullary nephron
     for i in range(N):
         cell[i].type = sup_or_jux
@@ -371,6 +375,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
                 else:
                     sol = Newton.newton_rat(equations.conservation_eqs,x,i,cell[i])
             else:
+                print('humOrrat:' + humOrrat)
                 raise Exception('human or rat?', humOrrat)
         elif method == 'Broyden':
             sol = Newton.broyden(equations.conservation_eqs,x,i,cell[i].segment)
