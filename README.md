@@ -40,6 +40,9 @@ The unit of volume is **nl/min**.
 
 The unit of flow is **pmol/min**.
 
+#### /plot/
+This folder contains scripts for plotting the output of the model.
+
 ## Research Papers
 Please cite appropriate paper(s) when using this model.
 Published papers related to/using model:
