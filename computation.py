@@ -36,6 +36,9 @@ parser.add_argument('--savefile', required=True, type=str, help = 'where to save
 parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition?')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
+# pregnancy option
+parser.add_argument('--pregnant', choices=['mid','late'], default='non', type=str, help='pregnant female? (mid/late)')
+
 args=parser.parse_args()
 
 sex = args.sex
@@ -46,6 +49,8 @@ sup_or_jux = args.suporjux
 diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
+
+preg = args.preg
 
 if segment == 'PT':
     N = 176
@@ -63,87 +68,88 @@ if sex == 'Male':
 elif sex == 'Female':
 	filename='./datafiles/'+segment+'params_F_'+humOrrat[0:3]+'.dat'
 else:
-    raise Exception('must be male or female')
+	print('sex: ' + sex)
+	raise Exception('must be male or female')
 
 N = int(N)
 method = 'Newton'
-cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = unx)
+cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = unx, preg=preg)
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_potential_gradient_Lumen_Cell_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_potential_gradient_Lumen_Cell_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].ep[0]-cell[j-1].ep[1])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_potential_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_potential_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].ep[0]-cell[j-1].ep[4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_Na_conc_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_Na_conc_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].conc[0,0]-cell[j-1].conc[0,4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_Na_conc_gradient_Cell_LIS_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_Na_conc_gradient_Cell_LIS_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].conc[0,1]-cell[j-1].conc[0,4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_pressure_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_pressure_in_Lumen_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].pres[0])+'\n')
 file.close()
 
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_con_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,0])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_con_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,1])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_con_of_'+solute[i]+'_in_LIS_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_LIS_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,4])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_con_of_'+solute[i]+'_in_Bath_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Bath_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,5])+'\n')
 	file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_water_volume_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_water_volume_in_Lumen_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].vol[0]*cw)+'\n')
 file.close()
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_water_volume_in_Cell_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_water_volume_in_Cell_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].vol[1]*cw)+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_pH_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_pH_in_Lumen_'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(-np.log(abs(cell[j-1].conc[11,0])/1000)/np.log(10))+'\n')
 file.close()
 
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_flow_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,0]*cell[j-1].vol[0]*cw)+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_flow_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,1]*cell[j-1].vol[1]*cw)+'\n')
 	file.close()
 
-file_lumen = open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_osmolality_in_Lumen_'+sup_or_jux+'.txt','w')
-file_cell = open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_osmolality_in_Cell_'+sup_or_jux+'.txt','w')
-file_lis = open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_osmolality_in_LIS_'+sup_or_jux+'.txt','w')
-file_bath = open('./'+file_to_save+'/'+cell[0].sex+cell[0].segment+'_osmolality_in_Bath_'+sup_or_jux+'.txt','w')
+file_lumen = open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_osmolality_in_Lumen_'+sup_or_jux+'.txt','w')
+file_cell = open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_osmolality_in_Cell_'+sup_or_jux+'.txt','w')
+file_lis = open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_osmolality_in_LIS_'+sup_or_jux+'.txt','w')
+file_bath = open('./'+file_to_save+'/'+cell[0].sex+'_'+cell[0].segment+'_osmolality_in_Bath_'+sup_or_jux+'.txt','w')
 for j in range(N):
 	osm_l = 0
 	osm_c = 0
