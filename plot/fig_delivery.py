@@ -6,10 +6,10 @@ import os
 import argparse
 
 compare = 2 #2 or 3
-save_figs = 1 # if want to save figs
+save_figs = 0 # if want to save figs
 
-solute_list = ['Na','K','Cl','HCO3','urea','NH4','glu', 'TA', 'Volume']
-#solute_list = ['Na']
+solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
+
 
 direct1 = 'Male_rat_normal'
 sex1 = 'male'
@@ -70,15 +70,17 @@ def get_delivery(direct, sex, solute, segment, supOrjux):
     elif solute == 'Volume':
         fname = sex+'_'+humOrrat+'_'+segment+'_water_volume_in_Lumen'+supOrjux+'.txt'
         file = open(fname, 'r')
-        delivery = file.readline()
+        delivery = float(file.readline())
         file.close()
     else:
         fname = sex+'_'+humOrrat+'_'+segment+'_flow_of_'+solute+'_in_Lumen'+supOrjux+'.txt'
         file = open(fname, 'r')
-        delivery = file.readline()
+        delivery = float(file.readline())
         file.close()
     os.chdir('..')
-    return delivery
+    # convert to per kidney in micromoles
+    delivery_cf = delivery * cf
+    return delivery_cf
 
 def get_out_deliv(direct, sex, solute, segment, supOrjux):
     # flow at the end of given segment
@@ -91,21 +93,23 @@ def get_out_deliv(direct, sex, solute, segment, supOrjux):
         H2PO4_del = float(np.loadtxt(fname1, delimiter = '\n', unpack = True)[-1])
         HPO4_del = float(np.loadtxt(fname2, delimiter = '\n', unpack = True)[-1])
         delivery = (10**(7.4-6.8) * H2PO4_del - HPO4_del)/(1 + 10**(7.4-6.8))
-        delivery = delivery*cf
+        delivery = delivery
         file1.close()
         file2.close
     elif solute == 'Volume':
         fname = sex+'_'+humOrrat+'_'+segment+'_water_volume_in_Lumen'+supOrjux+'.txt'
         file = open(fname, 'r')
-        delivery = float(np.loadtxt(fname, delimiter = '\n', unpack = True)[-1])*cf
+        delivery = float(np.loadtxt(fname, delimiter = '\n', unpack = True)[-1])
         file.close()
     else:
         fname = sex+'_'+humOrrat+'_'+segment+'_flow_of_'+solute+'_in_Lumen'+supOrjux+'.txt'
         file = open(fname, 'r')
-        delivery = float(np.loadtxt(fname, delimiter = '\n', unpack = True)[-1])*cf
+        delivery = float(np.loadtxt(fname, delimiter = '\n', unpack = True)[-1])
         file.close()
     os.chdir('..')
-    return delivery
+    # convert
+    delivery_cf = delivery * cf
+    return delivery_cf
 
 def get_cd_data(direct, sex, solute, segments):
     # this is for the OMCD or IMCD
@@ -113,8 +117,9 @@ def get_cd_data(direct, sex, solute, segments):
     for seg in segments:
         if seg[-2:].lower() != 'cd':
             raise Exception('only for the collecting duct')
-        direct_deliv.append(float(get_delivery(direct, sex, solute, seg, ''))*cf)
-    return direct_deliv
+        direct_deliv.append(float(get_delivery(direct, sex, solute, seg, '')))
+    direct_deliv_cf = direct_deliv * cf
+    return direct_deliv_cf
 
 def get_data(direct, sex, solute, segments):
     direct_deliv_sup = []
@@ -144,20 +149,20 @@ def get_data(direct, sex, solute, segments):
     temp= np.array(direct_deliv_sup)*neph_weight[0] + np.array(direct_deliv_jux1)*neph_weight[1]\
         + np.array(direct_deliv_jux2)*neph_weight[2] + np.array(direct_deliv_jux3)*neph_weight[3] \
             + np.array(direct_deliv_jux4)*neph_weight[4] + np.array(direct_deliv_jux4)*neph_weight[5]
-    direct_deliv_number = temp*cf
+    direct_deliv_number = temp
     
     # row 0 is superficial vals
     # row 1 is jux1, row 2 jux2,...,row5 jux5
     direct_vals = np.matrix([direct_deliv_sup, direct_deliv_jux1, direct_deliv_jux2, 
-                            direct_deliv_jux3, direct_deliv_jux4, direct_deliv_jux5])*cf
+                            direct_deliv_jux3, direct_deliv_jux4, direct_deliv_jux5])
     
     sup_temp = direct_vals[0] * neph_weight[0]
-    sup_temp1 = np.array(sup_temp) * cf
+    sup_temp1 = np.array(sup_temp)
     sup_vals_weight = sup_temp1[0]
 
     jux_temp = direct_vals[1]*neph_weight[1] + direct_vals[2]*neph_weight[2]+\
         direct_vals[3]*neph_weight[3] + direct_vals[4]*neph_weight[4] + direct_vals[5]*neph_weight[5]
-    jux_temp1 = np.array(jux_temp) * cf
+    jux_temp1 = np.array(jux_temp)
     jux_vals_weight = jux_temp1[0]
     
     return direct_deliv_number, direct_vals, sup_vals_weight, jux_vals_weight
@@ -252,7 +257,7 @@ for solute in solute_list:
         jux3 = ax.bar(sup_pos + 2*bar_width, jux_vals3, bar_width, bottom = sup_vals3, align = 'center', edgecolor = 'black', color = 'white')
         urine3 = ax.bar(later_pos + 2*bar_width, dir_del_urine3, bar_width, align = 'center', edgecolor = 'black', color = c3)
     
-    ax.set_xticks(np.arange(len(seg_labels))+1*bar_width)
+    ax.set_xticks(np.arange(len(seg_labels))+(compare-1)*0.5*bar_width)
     ax.set_xticklabels(seg_labels, fontsize=xticklab_size)
     ax.legend(fontsize=leg_size)
     plt.yticks(fontsize=yticklab_size)
