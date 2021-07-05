@@ -9,7 +9,7 @@ import argparse
 # user input
 #========================================
 compare = 2 #2, 3
-save_figs = 1 # if want to save figs set to 1
+save_figs = 0 # if want to save figs set to 1
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'Volume']
 #solute_list = ['Na']
@@ -34,9 +34,14 @@ segment_cd = ['ccd','omcd','imcd']
 
 humOrrat = 'rat'
 
+# conversion factors
 sup_ratio = 2.0/3.0
 jux_ratio = 1-sup_ratio
 neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_ratio, 0.05*jux_ratio ]
+
+neph_per_kidney = 36000 #number of nephrons per kidney
+p_to_mu = 1e-6 #convert pmol to micromole
+cf = neph_per_kidney * p_to_mu
 
 #==========================================================================
 # save figures/comments options (note: requires save_figs == 1)
@@ -87,7 +92,8 @@ def get_transport(direct, sex, solute, segment, supOrjux):
         file.close()
         transport = start - end
     os.chdir('..')
-    return transport
+    transport_cf = transport * cf
+    return transport_cf
 
 def get_data(direct, sex, solute, segments):
     # get transport data for nephron segments (i.e., not collecting duct)
@@ -102,7 +108,7 @@ def get_data(direct, sex, solute, segments):
         seg = segments[s]
         if seg[-2:] == 'cd':
             print('segment: ' + seg)
-            raise Exception('not for collecting duct, use get_cd_data')
+            raise Exception('not for collecting duct, use get_cd_data for cd')
         if seg != 'ldl' and seg != 'lal':
             sup_trans[s] = get_transport(direct, sex, solute, seg, '_sup')
         jux1_trans[s] = get_transport(direct, sex, solute, seg, '_jux1')
@@ -130,7 +136,7 @@ def get_cd_data(direct, sex, solute, segments):
             print('segment: ' + seg)
             raise Exception('only for collecting duct segments')
         trans[s] = get_transport(direct, sex, solute, seg, '')
-        
+    trans = trans
     return trans
 #=============================================================
 # retrieve data
@@ -307,9 +313,9 @@ for solute in solute_list:
     plt.yticks(fontsize=yticklab_size)
     plt.axhline(0, color = 'k')
     if solute == 'Volume':
-        ax.set_ylabel('volume transport (nl/min)', fontsize = ylab_size)
+        ax.set_ylabel('volume transport (ml/min)', fontsize = ylab_size)
     else:
-        ax.set_ylabel(solute + ' transport (pmol/min)', fontsize = ylab_size)
+        ax.set_ylabel(solute + ' transport ($\mu$mol/min)', fontsize = ylab_size)
     ax.set_title(solute + ' transport', fontsize = title_size)
     
     if save_figs:

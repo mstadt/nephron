@@ -30,9 +30,12 @@ seg_labels = ['PT', 'DL', 'mTAL', 'DCT', 'CNT', 'CCD', 'urine']
 
 humOrrat = 'rat'
 
+
+# conversion factors
 sup_ratio = 2.0/3.0
 jux_ratio = 1-sup_ratio
 neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_ratio, 0.05*jux_ratio ]
+
 
 neph_per_kidney = 36000 #number of nephrons per kidney
 p_to_mu = 1e-6 #convert pmol to micromole
@@ -108,7 +111,7 @@ def get_out_deliv(direct, sex, solute, segment, supOrjux):
         file.close()
     os.chdir('..')
     # convert
-    delivery_cf = delivery * cf
+    delivery_cf = cf * delivery
     return delivery_cf
 
 def get_cd_data(direct, sex, solute, segments):
