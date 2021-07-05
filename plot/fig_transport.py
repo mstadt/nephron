@@ -9,6 +9,7 @@ import argparse
 # user input
 #========================================
 compare = 2 #2, 3
+save_figs = 1 # if want to save figs set to 1
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'Volume']
 #solute_list = ['Na']
@@ -36,6 +37,20 @@ humOrrat = 'rat'
 sup_ratio = 2.0/3.0
 jux_ratio = 1-sup_ratio
 neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_ratio, 0.05*jux_ratio ]
+
+#==========================================================================
+# save figures/comments options (note: requires save_figs == 1)
+#==========================================================================
+if save_figs:
+    plot_folder = input('where to save plots? ')
+    comments = input('any comments? ')
+    
+    if os.path.isdir(plot_folder) == False:
+        os.makedirs(plot_folder)
+        
+    comments_file = open('./'+plot_folder+'/comments.txt', 'w')
+    comments_file.write(comments)
+    comments_file.close()
 
 #========================================
 # functions used
@@ -297,3 +312,5 @@ for solute in solute_list:
         ax.set_ylabel(solute + ' transport (pmol/min)', fontsize = ylab_size)
     ax.set_title(solute + ' transport', fontsize = title_size)
     
+    if save_figs:
+        plt.savefig('./'+plot_folder+'/'+solute+' transport', bbox_inches = 'tight')
