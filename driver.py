@@ -1,6 +1,7 @@
 from defs import *
 import copy
-import set_params 
+import set_params
+import set_params_preg  #for pregnancy model
 import flux
 import numpy as np
 import equations
@@ -47,7 +48,13 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
         cell[i].unx = unx
     # initialize intersitital concentration and read parameters.
     for i in range(N):
-        set_params.read_params(cell[i],filename,i)
+        if preg != 'non':
+            set_params_preg.read_params_preg(cell[i], filename,i)
+        elif preg == 'non':
+            set_params.read_params(cell[i],filename,i)
+        else:
+            print('preg: '+preg)
+            raise Exception('what is pregnancy status?')
         boundaryBath.boundaryBath(cell[i],i)
 
     if cell[0].segment == 'PT':

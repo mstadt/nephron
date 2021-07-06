@@ -45,6 +45,11 @@ def read_params(cell,filename,j):
     file = open(filename,'r')
     
     cell.segment=filename[12:-16]
+
+    # error messages
+    if cell.preg != 'non':
+        print('cell.preg: ' + cell.preg)
+        raise Exception('cell.preg != non needs to use read_params_preg in set_params_preg')
     
     line = file.readline()
     while (line):
@@ -74,6 +79,7 @@ def read_params(cell,filename,j):
             
             # Diameter:
             elif compare_string_prefix(id,"Diameter"):
+                # diabetic diameter
                 if cell.diabete == 'Non':
                     cell.diam = value
                 elif cell.diabete == 'Moderate':
@@ -143,12 +149,12 @@ def read_params(cell,filename,j):
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
-                            cell.len = 0.05*0.85
+                            cell.len = 0.05*0.9 #0.05*0.85, updated female
                     elif cell.segment == 'CNT':
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.85
+                            cell.len = 0.3*0.9 #0.3*0.85, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'hum':
                     if cell.segment == 'cTAL':
@@ -206,7 +212,7 @@ def read_params(cell,filename,j):
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
                         cell.pres[0] = 12.5
-                
+             
                 if cell.diabete != 'Non' and cell.humOrrat == 'hum':
                     if cell.type == 'sup' and cell.segment == 'PT':
                         if cell.sex == 'male':
@@ -283,7 +289,7 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'IMCD':
                         cell.dLPV[0,1] = cell.dLPV[0,1]*1.4
                         cell.dLPV[1,5] = cell.dLPV[1,5]*1.4
-            
+                                
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
                 sid,ind1,ind2 = get_interface_id(id)
@@ -351,7 +357,8 @@ def read_params(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
-                    cell.h[1,0,1] = 0.5*value*1.0e-5/href
+                    cell.h[1,0,1] = 0.5*value*1.0e-5/href                   
+                            
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
                 # retrieve interface and solute id
@@ -582,6 +589,7 @@ def read_params(cell,filename,j):
                         elif cell.sex == 'female':
                             newTransp.act = 1.2*value/(href*Cref)
                 cell.trans.append(newTransp)
+
             # Solute concentrations:
             elif compare_string_prefix(id,"conc"):
                 tmp = (id).split('_')
