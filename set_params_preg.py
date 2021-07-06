@@ -471,38 +471,42 @@ def read_params_preg(cell,filename,j):
             elif compare_string_prefix(id,"vol"):
                 tmp = (id).split('_')  
                 if cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'rat':
-                    if compart_id[tmp[1]] == 0:	
-                        if cell.type == 'jux1':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux2':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-
-                        elif cell.type == 'jux3':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux4':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux5':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
+                    # SNGFR for jux nephrons
+                    if compart_id[tmp[1]] == 0:
+                        if cell.preg == 'mid':
+                            cell.vol[0] = 0.0091 #0.006*1.52
+                        elif cell.preg == 'late':
+                            cell.vol[0] = 0.0062 #0.006*1.0333333
+                        # if cell.type == 'jux1':
+                        #     if cell.sex == 'male':
+                        #         cell.vol[0] = 0.0075
+                        #     elif cell.sex == 'female':
+                        #         cell.vol[0] = 0.006
+                        #     cell.vol_init[0] = cell.vol[0]
+                        # elif cell.type == 'jux2':
+                        #     if cell.sex == 'male':
+                        #         cell.vol[0] = 0.0075
+                        #     elif cell.sex == 'female':
+                        #         cell.vol[0] = 0.006
+                        #     cell.vol_init[0] = cell.vol[0]
+                        # elif cell.type == 'jux3':
+                        #     if cell.sex == 'male':
+                        #         cell.vol[0] = 0.0075
+                        #     elif cell.sex == 'female':
+                        #         cell.vol[0] = 0.006
+                        #     cell.vol_init[0] = cell.vol[0]
+                        # elif cell.type == 'jux4':
+                        #     if cell.sex == 'male':
+                        #         cell.vol[0] = 0.0075
+                        #     elif cell.sex == 'female':
+                        #         cell.vol[0] = 0.006
+                        #     cell.vol_init[0] = cell.vol[0]
+                        # elif cell.type == 'jux5':
+                        #     if cell.sex == 'male':
+                        #         cell.vol[0] = 0.0075
+                        #     elif cell.sex == 'female':
+                        #         cell.vol[0] = 0.006
+                        cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
                         cell.vol_init[compart_id[tmp[1]]] = float(num[0])
