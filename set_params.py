@@ -408,6 +408,29 @@ def read_params(cell,filename,j):
                             cell.h[8,0,4]=80.0
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
                     cell.h[1,0,1] = 0.5*value*1.0e-5/href
+
+                if cell.preg != 'non':
+                    if cell.segment == 'PT' or cell.segment == 'S3':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.3
+                        elif cell.preg == 'late':
+                            preg_rat = 1.5
+                        cell.h[0,0,4] = cell.h[0,0,4]*preg_rat
+                        cell.h[0,4,5] = cell.h[0,4,5]*preg_rat
+                        cell.h[2,0,4] = cell.h[2,0,4]*preg_rat
+                        cell.h[2,4,5] = cell.h[2,4,5]*preg_rat
+                    elif cell.segment == 'DCT' and cell.preg == 'late':
+                        if j>0.66*cell.total:
+                            #DCT2
+                            cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                    elif cell.segment == 'CNT' and cell.preg == 'late':
+                        cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                    elif cell.segment == 'CCD' and cell.preg == 'late':
+                        cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    elif cell.segment == 'OMCD' and cell.preg == 'late':
+                        cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    
+                            
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
                 # retrieve interface and solute id
@@ -440,6 +463,70 @@ def read_params(cell,filename,j):
                             newTransp.act = 1.5*value/(href*Cref)
                         elif newTransp.type == 'KCC4':
                             newTransp.act = 2.0*value/(href*Cref)
+
+                if cell.preg != 'non':
+                    # pregnant model values
+                    if newTransp.type == 'NHE3':
+                        # PCT, S3, mTAL, cTAL, DCT
+                        if cell.preg == 'mid':
+                            preg_rat = 1.4
+                        elif cell.preg == 'late':
+                            preg_rat = 1.5
+                    elif newTransp.type == 'NaKATPase':
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
+                            if cell.preg == 'mid':
+                                preg_rat = 0.75
+                            elif cell.preg == 'late':
+                                preg_rat = 0.65
+                        elif cell.segment == 'mTAL':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.2
+                            elif cell.preg == 'late':
+                                preg_rat = 1.1
+                        elif cell.segment == 'DCT' or cell.segment == 'CNT':
+                            preg_rat = 1.0
+                        elif cell.segment == 'CCD':
+                            if cell.preg == 'mid':
+                                preg_rat = 0.8
+                            elif cell.preg == 'late':
+                                preg_rat = 0.76
+                        elif cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.2
+                            elif cell.preg == 'late':
+                                preg_rat = 1.0
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NaKATPase activity not done for pregnancy in segment')
+                    elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.8
+                        elif cell.preg == 'late':
+                            preg_rat = 2.0
+                    elif newTransp.type == 'KCC4':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.0
+                        elif cell.preg == 'late':
+                            preg_rat = 1.5
+                    elif newTransp.type == 'NCC':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.0
+                        elif cell.preg == 'late':
+                            preg_rat = 0.9
+                    elif newTransp.type == 'ENaC':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.8
+                        elif cell.preg == 'late':
+                            preg_rat = 2.15
+                    elif newTransp.type == 'HKATPase':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.0
+                        elif cell.preg == 'late':
+                            preg_rat = 2.5
+                    else:
+                        preg_rat = 1.0
+                    newTransp.act = preg_rat*newTransp.act
+
 
                 if cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
@@ -638,7 +725,7 @@ def read_params(cell,filename,j):
                         elif cell.sex == 'female':
                             newTransp.act = 1.2*value/(href*Cref)
                 cell.trans.append(newTransp)
-                
+
             # Solute concentrations:
             elif compare_string_prefix(id,"conc"):
                 tmp = (id).split('_')
