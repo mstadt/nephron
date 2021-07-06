@@ -5,6 +5,7 @@ from Newton import Jac
 
 def newton_preg_rat(func,x,k,cell):
     if cell.humOrrat != 'rat':
+        print('humOrrat:' + cell.humOrrat)
         raise Exception('newton_preg_rat only for rat model')
     if cell.sex != 'Female':
         print('sex: ' + cell.sex)
