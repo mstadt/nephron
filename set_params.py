@@ -74,6 +74,7 @@ def read_params(cell,filename,j):
             
             # Diameter:
             elif compare_string_prefix(id,"Diameter"):
+                # diabetic diameter
                 if cell.diabete == 'Non':
                     cell.diam = value
                 elif cell.diabete == 'Moderate':
@@ -92,6 +93,20 @@ def read_params(cell,filename,j):
                         cell.diam = value
                 else:
                     print('What is the diabete status?')
+
+                # pregnant diameter
+                if cell.preg != 'non':
+                    if cell.segment == 'PT' or cell.segment == 'S3':
+                        if cell.preg == 'mid':
+                            cell.diam = value*1.14
+                        elif cell.preg == 'late':
+                            cell.diam = value*1.16
+                    else:
+                        if cell.preg == 'mid':
+                            cell.diam = value*1.08
+                        elif cell.preg == 'late':
+                            cell.diam = value*1.1
+
 
                 if cell.inhib == 'NHE3-50':
                     if cell.sex == 'male':
@@ -138,17 +153,24 @@ def read_params(cell,filename,j):
                 else:
                     cell.len = value
 
+                if cell.preg != 'non':
+                    if cell.segment == 'PT' or cell.segment == 'S3':
+                        if cell.preg == 'mid':
+                            cell.len = value*1.157
+                        elif cell.preg == 'late':
+                            cell.len = value*1.195
+
                 if cell.type != 'sup' and cell.humOrrat == 'rat':
                     if cell.segment == 'cTAL':
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
-                            cell.len = 0.05*0.85
+                            cell.len = 0.05*0.9 #0.05*0.85, updated female
                     elif cell.segment == 'CNT':
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.85
+                            cell.len = 0.3*0.9 #0.3*0.85, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'hum':
                     if cell.segment == 'cTAL':
@@ -206,6 +228,13 @@ def read_params(cell,filename,j):
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
                         cell.pres[0] = 12.5
+
+                if cell.preg != 'non':
+                    if cell.type == 'sup' and cell.segment == 'PT': #not done jux segments
+                        if cell.preg == 'mid':
+                            cell.pres[0] = 11.8
+                        if cell.preg == 'late':
+                            cell.pres[0] = 12.1
                 
                 if cell.diabete != 'Non' and cell.humOrrat == 'hum':
                     if cell.type == 'sup' and cell.segment == 'PT':
@@ -283,7 +312,34 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'IMCD':
                         cell.dLPV[0,1] = cell.dLPV[0,1]*1.4
                         cell.dLPV[1,5] = cell.dLPV[1,5]*1.4
-            
+
+                if cell.preg != 'non':
+                    if cell.segment == 'SDL':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.0
+                        elif cell.preg == 'late':
+                            preg_rat = 3.0
+                    elif cell.segment == 'CCD':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.5
+                        elif cell.preg == 'late':
+                            preg_rat = 1.8
+                    elif cell.segment == 'OMCD':
+                        if cell.preg == 'mid':
+                            preg_rat = 1.5
+                        elif cell.preg == 'late':
+                            preg_rat = 2.1
+                    elif cell.segment == 'IMCD':
+                        if cell.preg == 'mid':
+                            preg_rat = 2.5
+                        elif cell.preg == 'late':
+                            preg_rat = 3.4
+                    else:
+                        preg_rat = 1.0
+                    cell.dLPV[0,1] = cell.dLPV[0,1]*preg_rat
+                    cell.dLPV[1,4] = cell.dLPV[1,4]*preg_rat
+                    cell.dLPV[1,5] = cell.dLPV[1,5]*preg_rat
+                                
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
                 sid,ind1,ind2 = get_interface_id(id)
@@ -582,6 +638,7 @@ def read_params(cell,filename,j):
                         elif cell.sex == 'female':
                             newTransp.act = 1.2*value/(href*Cref)
                 cell.trans.append(newTransp)
+                
             # Solute concentrations:
             elif compare_string_prefix(id,"conc"):
                 tmp = (id).split('_')
