@@ -58,7 +58,9 @@ elif preg != 'non':
     if sex == 'Male':
         raise Exception('pregnant only for female')
     if humOrrat[0:3] == 'hum':
-        raise Exception('pregnant model not done for human')
+        raise Exception('pregnant model not set up for human yet')
+    if inhib != None:
+        raise Exception('pregnant model does not have inhibition set up yet')
 
     file_to_save = preg+'pregnant_'+humOrrat[0:3]
 else:

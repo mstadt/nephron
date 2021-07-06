@@ -45,6 +45,11 @@ def read_params(cell,filename,j):
     file = open(filename,'r')
     
     cell.segment=filename[12:-16]
+
+    # error messages
+    if cell.preg != 'non':
+        print('cell.preg: ' + cell.preg)
+        raise Exception('cell.preg != non needs to use read_params_preg in set_params_preg')
     
     line = file.readline()
     while (line):
@@ -94,20 +99,6 @@ def read_params(cell,filename,j):
                 else:
                     print('What is the diabete status?')
 
-                # pregnant diameter
-                if cell.preg != 'non':
-                    if cell.segment == 'PT' or cell.segment == 'S3':
-                        if cell.preg == 'mid':
-                            cell.diam = value*1.14
-                        elif cell.preg == 'late':
-                            cell.diam = value*1.16
-                    else:
-                        if cell.preg == 'mid':
-                            cell.diam = value*1.08
-                        elif cell.preg == 'late':
-                            cell.diam = value*1.1
-
-
                 if cell.inhib == 'NHE3-50':
                     if cell.sex == 'male':
                         if cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
@@ -152,13 +143,6 @@ def read_params(cell,filename,j):
                     cell.len = value*looplen
                 else:
                     cell.len = value
-
-                if cell.preg != 'non':
-                    if cell.segment == 'PT' or cell.segment == 'S3':
-                        if cell.preg == 'mid':
-                            cell.len = value*1.157
-                        elif cell.preg == 'late':
-                            cell.len = value*1.195
 
                 if cell.type != 'sup' and cell.humOrrat == 'rat':
                     if cell.segment == 'cTAL':
@@ -228,14 +212,7 @@ def read_params(cell,filename,j):
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
                         cell.pres[0] = 12.5
-
-                if cell.preg != 'non':
-                    if cell.type == 'sup' and cell.segment == 'PT': #not done jux segments
-                        if cell.preg == 'mid':
-                            cell.pres[0] = 11.8
-                        if cell.preg == 'late':
-                            cell.pres[0] = 12.1
-                
+             
                 if cell.diabete != 'Non' and cell.humOrrat == 'hum':
                     if cell.type == 'sup' and cell.segment == 'PT':
                         if cell.sex == 'male':
@@ -312,33 +289,6 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'IMCD':
                         cell.dLPV[0,1] = cell.dLPV[0,1]*1.4
                         cell.dLPV[1,5] = cell.dLPV[1,5]*1.4
-
-                if cell.preg != 'non':
-                    if cell.segment == 'SDL':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.0
-                        elif cell.preg == 'late':
-                            preg_rat = 3.0
-                    elif cell.segment == 'CCD':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.5
-                        elif cell.preg == 'late':
-                            preg_rat = 1.8
-                    elif cell.segment == 'OMCD':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.5
-                        elif cell.preg == 'late':
-                            preg_rat = 2.1
-                    elif cell.segment == 'IMCD':
-                        if cell.preg == 'mid':
-                            preg_rat = 2.5
-                        elif cell.preg == 'late':
-                            preg_rat = 3.4
-                    else:
-                        preg_rat = 1.0
-                    cell.dLPV[0,1] = cell.dLPV[0,1]*preg_rat
-                    cell.dLPV[1,4] = cell.dLPV[1,4]*preg_rat
-                    cell.dLPV[1,5] = cell.dLPV[1,5]*preg_rat
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
@@ -407,29 +357,7 @@ def read_params(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
-                    cell.h[1,0,1] = 0.5*value*1.0e-5/href
-
-                if cell.preg != 'non':
-                    if cell.segment == 'PT' or cell.segment == 'S3':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.3
-                        elif cell.preg == 'late':
-                            preg_rat = 1.5
-                        cell.h[0,0,4] = cell.h[0,0,4]*preg_rat
-                        cell.h[0,4,5] = cell.h[0,4,5]*preg_rat
-                        cell.h[2,0,4] = cell.h[2,0,4]*preg_rat
-                        cell.h[2,4,5] = cell.h[2,4,5]*preg_rat
-                    elif cell.segment == 'DCT' and cell.preg == 'late':
-                        if j>0.66*cell.total:
-                            #DCT2
-                            cell.h[1,0,1] = cell.h[1,0,1]*0.35
-                    elif cell.segment == 'CNT' and cell.preg == 'late':
-                        cell.h[1,0,1] = cell.h[1,0,1]*0.35
-                    elif cell.segment == 'CCD' and cell.preg == 'late':
-                        cell.h[1,0,1] = cell.h[1,0,1]*0.55
-                    elif cell.segment == 'OMCD' and cell.preg == 'late':
-                        cell.h[1,0,1] = cell.h[1,0,1]*0.55
-                    
+                    cell.h[1,0,1] = 0.5*value*1.0e-5/href                   
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
@@ -463,70 +391,6 @@ def read_params(cell,filename,j):
                             newTransp.act = 1.5*value/(href*Cref)
                         elif newTransp.type == 'KCC4':
                             newTransp.act = 2.0*value/(href*Cref)
-
-                if cell.preg != 'non':
-                    # pregnant model values
-                    if newTransp.type == 'NHE3':
-                        # PCT, S3, mTAL, cTAL, DCT
-                        if cell.preg == 'mid':
-                            preg_rat = 1.4
-                        elif cell.preg == 'late':
-                            preg_rat = 1.5
-                    elif newTransp.type == 'NaKATPase':
-                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
-                            if cell.preg == 'mid':
-                                preg_rat = 0.75
-                            elif cell.preg == 'late':
-                                preg_rat = 0.65
-                        elif cell.segment == 'mTAL':
-                            if cell.preg == 'mid':
-                                preg_rat = 1.2
-                            elif cell.preg == 'late':
-                                preg_rat = 1.1
-                        elif cell.segment == 'DCT' or cell.segment == 'CNT':
-                            preg_rat = 1.0
-                        elif cell.segment == 'CCD':
-                            if cell.preg == 'mid':
-                                preg_rat = 0.8
-                            elif cell.preg == 'late':
-                                preg_rat = 0.76
-                        elif cell.segment == 'OMCD' or cell.segment == 'IMCD':
-                            if cell.preg == 'mid':
-                                preg_rat = 1.2
-                            elif cell.preg == 'late':
-                                preg_rat = 1.0
-                        else:
-                            print('segment: ' + cell.segment)
-                            raise Exception('NaKATPase activity not done for pregnancy in segment')
-                    elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.8
-                        elif cell.preg == 'late':
-                            preg_rat = 2.0
-                    elif newTransp.type == 'KCC4':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.0
-                        elif cell.preg == 'late':
-                            preg_rat = 1.5
-                    elif newTransp.type == 'NCC':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.0
-                        elif cell.preg == 'late':
-                            preg_rat = 0.9
-                    elif newTransp.type == 'ENaC':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.8
-                        elif cell.preg == 'late':
-                            preg_rat = 2.15
-                    elif newTransp.type == 'HKATPase':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.0
-                        elif cell.preg == 'late':
-                            preg_rat = 2.5
-                    else:
-                        preg_rat = 1.0
-                    newTransp.act = preg_rat*newTransp.act
-
 
                 if cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
