@@ -200,9 +200,9 @@ ep_Bath -0.001
 coupled_Cell_LIS_Cl_HCO3 3.0e-9	1	-1
 coupled_Cell_Bath_Cl_HCO3 3.0e-9	1	-1
 coupled_Cell_LIS_Na_H_male 10.0e-9	1	-1
-coupled_Cell_LIS_Na_H_female	15.0e-9	1	-1
+coupled_Cell_LIS_Na_H_female	8.0e-9	1	-1
 coupled_Cell_Bath_Na_H_male 10.0e-9	1	-1
-coupled_Cell_Bath_Na_H_female	15.0e-9	1	-1
+coupled_Cell_Bath_Na_H_female	8.0e-9	1	-1
 coupled_Cell_LIS_Na_HPO4_male 0.5e-9	2	1
 coupled_Cell_LIS_Na_HPO4_female	0.75e-9	2	1
 coupled_Cell_Bath_Na_HPO4_male 0.5e-9	2	1
