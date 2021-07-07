@@ -50,7 +50,7 @@ diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
 
-preg = args.preg
+preg = args.pregnant
 
 if segment == 'PT':
     N = 176
