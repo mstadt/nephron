@@ -92,9 +92,9 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1000:
                 if k==0:
-                    amp = 0.3
-                else:
                     amp = 0.1
+                else:
+                    amp = 0.2
             else:
                 amp = 0.8
         # OMCD
