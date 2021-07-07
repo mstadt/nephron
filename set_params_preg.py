@@ -343,6 +343,20 @@ def read_params_preg(cell,filename,j):
                     coef.append(int(num[i]))
                 newdLA.coef = coef
                 newdLA.solute_id = vals[2:len(vals)]
+
+                if cell.segment == 'PT' or cell.segment == 'S3':
+                    # NaPi2
+                    if newdLA.solute_id == [0,7]:
+                        if cell.preg == 'mid':
+                            newdLA.perm = 0.9*newdLA.perm 
+                        elif cell.preg == 'late':
+                            newdLA.perm = 0.85*newdLA.perm
+                if cell.segment == 'DCT':
+                    # K-Cl cotransporter
+                    if newdLA.solute_id == [1,2]:
+                        if cell.preg == 'late':
+                            newdLA.perm = 1.5*newdLA.perm
+
                 cell.dLA.append(newdLA)
 
             # Specific transporters:
