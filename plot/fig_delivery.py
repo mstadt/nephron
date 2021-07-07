@@ -5,19 +5,19 @@ import numpy as np
 import os
 import argparse
 
-compare = 2 #2 or 3
+compare = 3 #2 or 3
 save_figs = 0 # if want to save figs
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
 
 
-direct1 = 'Male_rat_normal'
-sex1 = 'male'
+direct1 = 'female-original'
+sex1 = 'female'
 
-direct2 = 'female-original'
+direct2 = 'female-updated'
 sex2 = 'female'
 
-direct3 = 'female-updated'
+direct3 = 'fem-update1'
 sex3 = 'female'
 
 label1 = direct1
