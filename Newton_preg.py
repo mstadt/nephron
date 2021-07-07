@@ -92,9 +92,9 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1000:
                 if k==0:
-                    amp = 0.3
-                else:
                     amp = 0.1
+                else:
+                    amp = 0.2
             else:
                 amp = 0.8
         # OMCD
@@ -105,16 +105,28 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0
         # IMCD
         elif cell.segment == 'IMCD':
-            if np.linalg.norm(f)>100:
-                if k==0:
-                    amp = 0.2
+            if cell.preg == 'mid':
+                if np.linalg.norm(f)>100:
+                    if k==0:
+                        amp = 0.2
+                    else:
+                        amp = 0.5
                 else:
-                    amp = 0.1
-            else:
-                if k==0:
-                    amp = 0.5
+                    if k==0:
+                        amp = 0.5
+                    else:
+                        amp = 0.86
+            elif cell.preg == 'late':
+                if np.linalg.norm(f)>100:
+                    if k==0:
+                        amp = 0.2
+                    else:
+                        amp = 0.1
                 else:
-                    amp = 0.9
+                    if k==0:
+                        amp = 0.5
+                    else:
+                        amp = 0.9
         else:
             print('What is this segment?', cell.segment)
             raise Exception('cell.segment is not characterized')
