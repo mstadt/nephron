@@ -172,10 +172,16 @@ def newton_rat(func,x,k,cell):
                 amp = 0.8
         # OMCD
         elif cell.segment == 'OMCD':
-            if np.linalg.norm(f)>100:
-                amp = 0.8
+            if cell.type == 'sup':
+                if np.linalg.norm(f)>100:
+                    amp = 0.6
+                else:
+                    amp = 0.9
             else:
-                amp = 1.0
+                if np.linalg.norm(f)>100:
+                    amp = 0.8
+                else:
+                    amp = 1.0
         # IMCD
         elif cell.segment == 'IMCD':
             if np.linalg.norm(f)>100:
