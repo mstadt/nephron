@@ -6,6 +6,7 @@ import os
 import argparse
 
 compare = 2 #2 or 3
+save_figs = 0 # if want to save figs set to 1
 #solute_list = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu', 'TA', 'osmolality']
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'osmolality', 'pH']
 
@@ -32,7 +33,19 @@ humOrrat = 'rat'
 segs_total = segs_jux + segs_cd
 Ncells = [176, 25, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200]
 
-
+#==========================================================================
+# save figures/comments options (note: requires save_figs == 1)
+#==========================================================================
+if save_figs:
+    plot_folder = input('where to save plots? ')
+    comments = input('any comments? ')
+    
+    if os.path.isdir(plot_folder) == False:
+        os.makedirs(plot_folder)
+        
+    comments_file = open('./'+plot_folder+'/comments.txt', 'w')
+    comments_file.write(comments)
+    comments_file.close()
 
 
 #=======================================================
@@ -186,5 +199,13 @@ for sol in range(len(solute_list)):
     else:
         ax.set_ylabel('['+solute+'] (mM)', fontsize = ylab_size)
         ax.set_title(solute + ' concentration', fontsize = title_size)
+    
+    if save_figs:
+        if solute == 'pH':
+            plt.savefig('./'+plot_folder+'/pH',bbox_inches = 'tight')
+        elif solute == 'osmolality':
+            plt.savefig('./'+plot_folder+'/osmolality',bbox_inches = 'tight')
+        else:
+            plt.savefig('./'+plot_folder+'/'+solute+' concentration', bbox_inches = 'tight')
                 
             
