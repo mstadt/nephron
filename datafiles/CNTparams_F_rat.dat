@@ -196,11 +196,9 @@ perm_glucose_ICB_LIS	1.0e-4
 #  default permeability = 0
 #
 perm_Na_Lumen_LIS_male	1.0e3
-#perm_Na_Lumen_LIS_female 1.0e3
 perm_Na_Lumen_LIS_female 1.4e3
 perm_K_Lumen_LIS	1.2e3
 perm_Cl_Lumen_LIS_male	1.2e3
-#perm_Cl_Lumen_LIS_female 1.2e3
 perm_Cl_Lumen_LIS_female 1.68e3
 perm_HCO3_Lumen_LIS	0.6e3
 perm_H2CO3_Lumen_LIS	2.0e3
