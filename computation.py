@@ -28,6 +28,7 @@ parser=argparse.ArgumentParser()
 # required input
 parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat'],required = True,type = str, help = 'Human model or Rat model')
+parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
 parser.add_argument('--segment', choices = ['PT','S3','SDL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
 parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','jux5', ''], required=True, type=str, help = 'which nephron type? (sup/jux1/jux2/etc), '' is for collecting duct')
 parser.add_argument('--savefile', required=True, type=str, help = 'where to save?')
@@ -43,6 +44,7 @@ args=parser.parse_args()
 
 sex = args.sex
 humOrrat = args.species
+sup_or_multi = args.type
 segment = args.segment
 sup_or_jux = args.suporjux
 
@@ -73,7 +75,7 @@ else:
 
 N = int(N)
 method = 'Newton'
-cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = unx, preg=preg)
+cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = sup_or_multi,inhibition=inhib,unx = unx, preg=preg)
 if sup_or_jux != '':
 	sup_or_jux = '_' + sup_or_jux
 
