@@ -74,82 +74,84 @@ else:
 N = int(N)
 method = 'Newton'
 cell=compute(N,filename,method,sup_or_jux,diabete=diabete,humOrrat=humOrrat,sup_or_multi = 'multiple',inhibition=inhib,unx = unx, preg=preg)
+if sup_or_jux != '':
+	sup_or_jux = '_' + sup_or_jux
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_potential_gradient_Lumen_Cell_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_potential_gradient_Lumen_Cell'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].ep[0]-cell[j-1].ep[1])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_potential_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_potential_gradient_Lumen_LIS'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].ep[0]-cell[j-1].ep[4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_conc_gradient_Lumen_Lis_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_conc_gradient_Lumen_LIS'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].conc[0,0]-cell[j-1].conc[0,4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_conc_gradient_Cell_LIS_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_conc_gradient_Cell_LIS'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].conc[0,1]-cell[j-1].conc[0,4])+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_pressure_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_pressure_in_Lumen'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].pres[0])+'\n')
 file.close()
 
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Lumen'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,0])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Cell'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,1])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_LIS_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_LIS'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,4])+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Bath_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_con_of_'+solute[i]+'_in_Bath'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,5])+'\n')
 	file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_volume_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_volume_in_Lumen'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].vol[0]*cw)+'\n')
 file.close()
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_volume_in_Cell_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_volume_in_Cell'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].vol[1]*cw)+'\n')
 file.close()
 
-file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_pH_in_Lumen_'+sup_or_jux+'.txt','w')
+file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_pH_in_Lumen'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(-np.log(abs(cell[j-1].conc[11,0])/1000)/np.log(10))+'\n')
 file.close()
 
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Lumen_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Lumen'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,0]*cell[j-1].vol[0]*cw)+'\n')
 	file.close()
 for i in range(NS):
-	file=open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Cell_'+sup_or_jux+'.txt','w')
+	file=open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_flow_of_'+solute[i]+'_in_Cell'+sup_or_jux+'.txt','w')
 	for j in range(1,N):
 		file.write(str(cell[j-1].conc[i,1]*cell[j-1].vol[1]*cw)+'\n')
 	file.close()
 
-file_lumen = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Lumen_'+sup_or_jux+'.txt','w')
-file_cell = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Cell_'+sup_or_jux+'.txt','w')
-file_lis = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_LIS_'+sup_or_jux+'.txt','w')
-file_bath = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Bath_'+sup_or_jux+'.txt','w')
+file_lumen = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Lumen'+sup_or_jux+'.txt','w')
+file_cell = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Cell'+sup_or_jux+'.txt','w')
+file_lis = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_LIS'+sup_or_jux+'.txt','w')
+file_bath = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_osmolality_in_Bath'+sup_or_jux+'.txt','w')
 for j in range(N):
 	osm_l = 0
 	osm_c = 0
@@ -326,50 +328,50 @@ for j in range(1,N):
 # 		file_cell_bath = open(cell[j].sex+'_'+cell[j].segment+'_'+'NaHexchanger_Cell_Bath.txt','a')
 # 		file_cell_bath.write(str(NaH_1_5)+'\n')
 
-file_Na_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_apical_flux_'+sup_or_jux+'.txt','w')
-file_K_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_apical_flux_'+sup_or_jux+'.txt','w')
-file_NH4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_apical_flux_'+sup_or_jux+'.txt','w')
-file_H_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_apical_flux_'+sup_or_jux+'.txt','w')
-file_Cl_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_apical_flux_'+sup_or_jux+'.txt','w')
-file_HCO3_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_apical_flux_'+sup_or_jux+'.txt','w')
-file_HPO4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_apical_flux_'+sup_or_jux+'.txt','w')
-file_H2PO4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_apical_flux_'+sup_or_jux+'.txt','w')
-file_HCO2_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_apical_flux_'+sup_or_jux+'.txt','w')
+file_Na_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_apical_flux'+sup_or_jux+'.txt','w')
+file_K_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_apical_flux'+sup_or_jux+'.txt','w')
+file_NH4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_apical_flux'+sup_or_jux+'.txt','w')
+file_H_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_apical_flux'+sup_or_jux+'.txt','w')
+file_Cl_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_apical_flux'+sup_or_jux+'.txt','w')
+file_HCO3_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_apical_flux'+sup_or_jux+'.txt','w')
+file_HPO4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_apical_flux'+sup_or_jux+'.txt','w')
+file_H2PO4_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_apical_flux'+sup_or_jux+'.txt','w')
+file_HCO2_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_apical_flux'+sup_or_jux+'.txt','w')
 
-file_Na_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_para_flux_'+sup_or_jux+'.txt','w')
-file_K_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_para_flux_'+sup_or_jux+'.txt','w')
-file_NH4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_para_flux_'+sup_or_jux+'.txt','w')
-file_H_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_para_flux_'+sup_or_jux+'.txt','w')
-file_Cl_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_para_flux_'+sup_or_jux+'.txt','w')
-file_HCO3_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_para_flux_'+sup_or_jux+'.txt','w')
-file_HPO4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_para_flux_'+sup_or_jux+'.txt','w')
-file_H2PO4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_para_flux_'+sup_or_jux+'.txt','w')
-file_HCO2_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_para_flux_'+sup_or_jux+'.txt','w')
+file_Na_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_para_flux'+sup_or_jux+'.txt','w')
+file_K_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_para_flux'+sup_or_jux+'.txt','w')
+file_NH4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_para_flux'+sup_or_jux+'.txt','w')
+file_H_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_para_flux'+sup_or_jux+'.txt','w')
+file_Cl_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_para_flux'+sup_or_jux+'.txt','w')
+file_HCO3_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_para_flux'+sup_or_jux+'.txt','w')
+file_HPO4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_para_flux'+sup_or_jux+'.txt','w')
+file_H2PO4_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_para_flux'+sup_or_jux+'.txt','w')
+file_HCO2_flux_para = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_para_flux'+sup_or_jux+'.txt','w')
 
-file_Na_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_alpha_flux_'+sup_or_jux+'.txt','w')
-file_K_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_alpha_flux_'+sup_or_jux+'.txt','w')
-file_NH4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_alpha_flux_'+sup_or_jux+'.txt','w')
-file_H_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_alpha_flux_'+sup_or_jux+'.txt','w')
-file_Cl_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_alpha_flux_'+sup_or_jux+'.txt','w')
-file_HCO3_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_alpha_flux_'+sup_or_jux+'.txt','w')
-file_HPO4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_alpha_flux_'+sup_or_jux+'.txt','w')
-file_H2PO4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_alpha_flux_'+sup_or_jux+'.txt','w')
-file_HCO2_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_alpha_flux_'+sup_or_jux+'.txt','w')
-file_Na_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_beta_flux_'+sup_or_jux+'.txt','w')
-file_K_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_beta_flux_'+sup_or_jux+'.txt','w')
-file_NH4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_beta_flux_'+sup_or_jux+'.txt','w')
-file_H_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_beta_flux_'+sup_or_jux+'.txt','w')
-file_Cl_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_beta_flux_'+sup_or_jux+'.txt','w')
-file_HCO3_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_beta_flux_'+sup_or_jux+'.txt','w')
-file_HPO4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_beta_flux_'+sup_or_jux+'.txt','w')
-file_H2PO4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_beta_flux_'+sup_or_jux+'.txt','w')
-file_HCO2_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_beta_flux_'+sup_or_jux+'.txt','w')
+file_Na_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_alpha_flux'+sup_or_jux+'.txt','w')
+file_K_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_alpha_flux'+sup_or_jux+'.txt','w')
+file_NH4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_alpha_flux'+sup_or_jux+'.txt','w')
+file_H_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_alpha_flux'+sup_or_jux+'.txt','w')
+file_Cl_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_alpha_flux'+sup_or_jux+'.txt','w')
+file_HCO3_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_alpha_flux'+sup_or_jux+'.txt','w')
+file_HPO4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_alpha_flux'+sup_or_jux+'.txt','w')
+file_H2PO4_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_alpha_flux'+sup_or_jux+'.txt','w')
+file_HCO2_flux_alpha = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_alpha_flux'+sup_or_jux+'.txt','w')
+file_Na_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_beta_flux'+sup_or_jux+'.txt','w')
+file_K_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_beta_flux'+sup_or_jux+'.txt','w')
+file_NH4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_NH4_beta_flux'+sup_or_jux+'.txt','w')
+file_H_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H_beta_flux'+sup_or_jux+'.txt','w')
+file_Cl_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cl_beta_flux'+sup_or_jux+'.txt','w')
+file_HCO3_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO3_beta_flux'+sup_or_jux+'.txt','w')
+file_HPO4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HPO4_beta_flux'+sup_or_jux+'.txt','w')
+file_H2PO4_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_H2PO4_beta_flux'+sup_or_jux+'.txt','w')
+file_HCO2_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_HCO2_beta_flux'+sup_or_jux+'.txt','w')
 
-file_K_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_total_flux_'+sup_or_jux+'.txt','w')
-file_Na_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_total_flux_'+sup_or_jux+'.txt','w')
-file_Na_flux_baso = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_baso_flux_'+sup_or_jux+'.txt','w')
-file_Na_flux_Cell_LIS = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_Na_Cell_LIS_flux_'+sup_or_jux+'.txt','w')
-file_water_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_flux_apical_'+sup_or_jux+'.txt','w')
+file_K_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_total_flux'+sup_or_jux+'.txt','w')
+file_Na_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_total_flux'+sup_or_jux+'.txt','w')
+file_Na_flux_baso = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_baso_flux'+sup_or_jux+'.txt','w')
+file_Na_flux_Cell_LIS = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+'_'+cell[0].segment+'_Na_Cell_LIS_flux'+sup_or_jux+'.txt','w')
+file_water_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_flux_apical'+sup_or_jux+'.txt','w')
 
 for j in range(1,N):
 	jsol=np.zeros([15,6,6])
