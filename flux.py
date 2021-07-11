@@ -142,10 +142,17 @@ def compute_fluxes (cell,j):
                 torqvm = 0.030
                 PbloodPT = 9.0e0
             elif cell.sex == 'female':
-                Radref = 0.002125/2.0 #female radius
                 torqR = 0.00095
                 torqvm = 0.030
-                PbloodPT = 8.0e0
+                if cell.preg == 'non':
+                    Radref = 0.002125/2.0 #female radius
+                    PbloodPT = 8.0e0
+                elif cell.preg == 'mid':
+                    Radref = 0.0024225/2.0
+                    PbloodPT = 4.0e0
+                elif cell.preg == 'late':
+                    Radref = 0.002465/2.0
+                    PbloodPT = 4.0e0
             torqL = 2.50e-4
             torqd = 1.50e-5
         if cell.humOrrat == 'rat':

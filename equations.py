@@ -240,9 +240,7 @@ def conservation_eqs (x,i):
                 torqR = 0.0014 #Reference radius
                 torqL = 2.50e-4 #Microvillous length
                 torqd = 1.5e-05 #Height above the microvillous tip
-                #torqvm = 0.030 #Compliance
                 torqvm = 0.020 #Compliance Fortran Code
-                #torqvm = 0.012 #Compliance
                 PbloodPT = 20.0e0 #Reference pressure
             elif cell1.humOrrat == 'rat':
                 if cell.sex == 'male':
@@ -251,10 +249,17 @@ def conservation_eqs (x,i):
                     torqvm = 0.030
                     PbloodPT = 9.0e0
                 elif cell.sex == 'female':
-                    Radref = 0.002125/2.0 #female radius
                     torqR = 0.00095
                     torqvm = 0.030
-                    PbloodPT = 8.0e0
+                    if cell.preg == 'non':
+                        Radref = 0.002125/2.0 #female radius
+                        PbloodPT = 8.0e0
+                    elif cell.preg == 'mid':
+                        Radref = 0.0024225/2.0
+                        PbloodPT = 4.0e0
+                    elif cell.preg == 'late':
+                        Radref = 0.002465/2.0
+                        PbloodPT = 4.0e0
                 torqL = 2.50e-4
                 torqd = 1.50e-5
             if cell1.humOrrat == 'hum':
@@ -368,10 +373,17 @@ def conservation_eqs (x,i):
                 torqvm = 0.030
                 PbloodPT = 9.0e0
             elif cell.sex == 'female':
-                Radref = 0.002125/2.0 #female radius
                 torqR = 0.00095
                 torqvm = 0.030
-                PbloodPT = 8.0e0
+                if cell.preg == 'non':
+                    Radref = 0.002125/2.0
+                    PbloodPT = 8.0e0
+                elif cell.preg == 'mid':
+                    Radref = 0.0024225/2.0
+                    PbloodPT = 4.0e0
+                elif cell.preg == 'late':
+                    Radref = 0.002465/2.0
+                    PbloodPT = 4.0e0
             torqL = 2.50e-4
             torqd = 1.50e-5
 
