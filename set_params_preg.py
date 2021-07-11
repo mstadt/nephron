@@ -107,7 +107,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.157
+                        cell.len = 1.018285
                     elif cell.preg == 'late':
                         cell.len = value*1.195
                 # juxtamedullary segments lengths
@@ -305,8 +305,6 @@ def read_params_preg(cell,filename,j):
                             cell.h[10,0,4]=20.0
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
-                if cell.inhib == 'ACE' and cell.segment == 'DCT':
-                    cell.h[1,0,1] = 0.5*value*1.0e-5/href
 
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
@@ -346,14 +344,14 @@ def read_params_preg(cell,filename,j):
 
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     # NaPi2
-                    if newdLA.solute_id == [0,7]:
+                    if newdLA.solute_id == (0,7):
                         if cell.preg == 'mid':
                             newdLA.perm = 0.9*newdLA.perm 
                         elif cell.preg == 'late':
                             newdLA.perm = 0.85*newdLA.perm
                 if cell.segment == 'DCT':
                     # K-Cl cotransporter
-                    if newdLA.solute_id == [1,2]:
+                    if newdLA.solute_id == (1,2):
                         if cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
 
