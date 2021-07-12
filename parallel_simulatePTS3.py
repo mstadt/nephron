@@ -225,8 +225,8 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
                             Radref = 0.002125/2.0
                             PbloodPT = 8.0e0
                         elif pt[j].preg.lower() == 'mid':
-                            Radref = 0.002125/2.0
-                            PbloodPT = 8.0e0
+                            Radref = 0.0024225/2.0
+                            PbloodPT = 4.0e0
                         elif pt[j].preg.lower() == 'late':
                             Radref = 0.002465/2.0
                             PbloodPT = 4.0e0
