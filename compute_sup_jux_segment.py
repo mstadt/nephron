@@ -164,7 +164,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,preg,
                         if pt[j].preg.lower() == 'non':
                             Radref = 0.002125/2.0
                             PbloodPT = 8.0e0
-                        elif pt[j].preg,lower() == 'mid':
+                        elif pt[j].preg.lower() == 'mid':
                             Radref = 0.0024225/2.0
                             PbloodPT = 4.0e0
                         elif pt[j].preg.lower() == 'late':
