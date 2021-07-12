@@ -420,7 +420,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,preg,
                         torqR = 0.0011
                         torqvm = 0.030
                         PbloodPT = 9.0e0
-                    elif s3[j].sex.lower() == 'female:
+                    elif s3[j].sex.lower() == 'female':
                         torqR = 0.00095
                         torqvm = 0.030
                         if s3[j].preg == 'non':
