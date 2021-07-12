@@ -363,7 +363,7 @@ def conservation_eqs (x,i):
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
                 Amcompl = PI*(RMcompl**2)
-                factor1 = 8.0e0*PI*visc/(Amcompl**2)
+                factor1 = 8.0*PI*visc/(Amcompl**2)
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
         elif cell1.humOrrat == 'rat':
@@ -377,13 +377,13 @@ def conservation_eqs (x,i):
                 torqvm = 0.030
                 if cell.preg == 'non':
                     Radref = 0.002125/2.0
-                    PbloodPT = 8.0e0
+                    PbloodPT = 8.0
                 elif cell.preg == 'mid':
                     Radref = 0.0024225/2.0
-                    PbloodPT = 4.0e0
+                    PbloodPT = 4.0
                 elif cell.preg == 'late':
                     Radref = 0.002465/2.0
-                    PbloodPT = 4.0e0
+                    PbloodPT = 4.0
             torqL = 2.50e-4
             torqd = 1.50e-5
 
@@ -392,8 +392,7 @@ def conservation_eqs (x,i):
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
                 Amcompl = PI*(RMcompl**2)
-                factor1 = 8.0e0*PI*visc/(Amcompl**2)
-                factor1 = 8.0*PI*visc/(Am**2)
+                factor1 = 8.0*PI*visc/(Amcompl**2)
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
 
