@@ -93,9 +93,13 @@ def read_params_preg(cell,filename,j):
                 # pregnant diameter
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.diam = value*1.14
+                        #cell.diam = value*1.14
+                        # current value on neph-preg-rat though inaccurate
+                        cell.diam = 0.0024225
                     elif cell.preg == 'late':
-                        cell.diam = value*1.16
+                        # cell.diam = value*1.16
+                        # current value on neph-preg-rat though inaccurate
+                        cell.diam = 0.00232
                 else:
                     if cell.preg == 'mid':
                         cell.diam = value*1.08
@@ -107,9 +111,9 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = 1.018285
+                        cell.len = value*1.1571420454545456
                     elif cell.preg == 'late':
-                        cell.len = 1.0516
+                        cell.len = value*1.195
                 # juxtamedullary segments lengths
                 elif cell.segment == 'LDL' or cell.segment == 'LAL':
                     if cell.type == 'jux1':
@@ -165,7 +169,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         cell.pres[0] = 11.8
                     if cell.preg == 'late':
-                        cell.pres[0] = 12.1
+                        cell.pres[0] = 12.5
 
             # pH:
             elif compare_string_prefix(id,"pH"):
@@ -191,9 +195,55 @@ def read_params_preg(cell,filename,j):
                 # Non-dimensional factor for water flux: (Pfref)*Vwbar*Cref
                 # Calculate non-dimensional dLPV = Pf*Vwbar*Cref / (Pfref*Vwbar*Cref)
                 # dLPV = Pf/Pfref
-                cell.dLPV[ind1][ind2] = value/Pfref
+
+                preg_rat = 1.0 #reset to 1.0, will change if needed
+
+                if cell.preg != 'non':
+                    # pregnancy water perm (transcellular)
+                    if ind1 == 0 and ind2 == 1:
+                        if cell.segment == 'SDL':
+                            if cell.preg == 'late':
+                                preg_rat = 3.0
+                        elif cell.segment == 'CCD':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.5
+                            elif cell.preg == 'late':
+                                preg_rat = 1.8
+                        elif cell.segment == 'OMCD':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.5
+                            elif cell.preg == 'late':
+                                preg_rat = 2.1
+                        elif cell.segment == 'IMCD':
+                            if cell.preg == 'mid':
+                                preg_rat = 2.5
+                            elif cell.preg == 'late':
+                                preg_rat = 3.4
+                    elif ind1 == 1:
+                        if ind2 == 4 or ind2 == 5:
+                            if cell.segment == 'SDL':
+                                if cell.preg == 'late':
+                                    preg_rat = 3.0
+                            elif cell.segment == 'CCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.5
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.8
+                            elif cell.segment == 'OMCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.5
+                                elif cell.preg == 'late':
+                                    preg_rat = 2.1
+                            elif cell.segment == 'IMCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 2.5
+                                elif cell.preg == 'late':
+                                    preg_rat = 3.4
+
+                cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
                 # symmetry
-                cell.dLPV[ind2][ind1] = value/Pfref
+                cell.dLPV[ind2][ind1] = value/Pfref*preg_rat
+
                 if cell.segment == 'SDL' and cell.type == 'sup':
                     if j>=0.46*cell.total:
                         cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
@@ -211,33 +261,6 @@ def read_params_preg(cell,filename,j):
                 if cell.segment == 'CNT' and cell.type !='sup':
                     if cell.sex == 'female':
                         cell.dLPV = cell.dLPV*4/3
-
-                # pregnancy water perm
-                if cell.segment == 'SDL':
-                    if cell.preg == 'mid':
-                        preg_rat = 1.0
-                    elif cell.preg == 'late':
-                        preg_rat = 3.0
-                elif cell.segment == 'CCD':
-                    if cell.preg == 'mid':
-                        preg_rat = 1.5
-                    elif cell.preg == 'late':
-                        preg_rat = 1.8
-                elif cell.segment == 'OMCD':
-                    if cell.preg == 'mid':
-                        preg_rat = 1.5
-                    elif cell.preg == 'late':
-                        preg_rat = 2.1
-                elif cell.segment == 'IMCD':
-                    if cell.preg == 'mid':
-                        preg_rat = 2.5
-                    elif cell.preg == 'late':
-                        preg_rat = 3.4
-                else:
-                    preg_rat = 1.0
-                cell.dLPV[0,1] = cell.dLPV[0,1]*preg_rat
-                cell.dLPV[1,4] = cell.dLPV[1,4]*preg_rat
-                cell.dLPV[1,5] = cell.dLPV[1,5]*preg_rat
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
@@ -311,20 +334,22 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.3
                     elif cell.preg == 'late':
                         preg_rat = 1.5
-                    cell.h[0,0,4] = cell.h[0,0,4]*preg_rat
-                    cell.h[0,4,5] = cell.h[0,4,5]*preg_rat
-                    cell.h[2,0,4] = cell.h[2,0,4]*preg_rat
-                    cell.h[2,4,5] = cell.h[2,4,5]*preg_rat
+                    #PNa
+                    cell.h[0,0,4] = 10400.0*preg_rat
+                    cell.h[0,4,5] = 5000.0*preg_rat
+                    #PCl
+                    cell.h[2,0,4] = 8000.0*preg_rat
+                    cell.h[2,4,5] = 6000.0*preg_rat
                 elif cell.segment == 'DCT' and cell.preg == 'late':
                     if j>0.66*cell.total:
                         #DCT2
-                        cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                        cell.h[1,0,1] = 0.6*0.35
                 elif cell.segment == 'CNT' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                    cell.h[1,0,1] = 8.0*0.35
                 elif cell.segment == 'CCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    cell.h[1,0,1] = 2.8*0.55
                 elif cell.segment == 'OMCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    cell.h[1,0,1] = 2.4*0.55
                     
                             
             # Coupled transporters:
@@ -432,6 +457,11 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.0
                     elif cell.preg == 'late':
                         preg_rat = 2.5
+                elif newTransp.type == 'Pendrin':
+                    if cell.preg == 'mid':
+                        preg_rat = 1.6
+                    elif cell.preg == 'late':
+                        preg_rat = 1.75
                 else:
                     preg_rat = 1.0
                 newTransp.act = preg_rat*newTransp.act
@@ -496,7 +526,7 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for jux nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.0091 #0.006*1.52
+                            cell.vol[0] = 0.00912 #0.006*1.52
                         elif cell.preg == 'late':
                             cell.vol[0] = 0.0062 #0.006*1.0333333
                         cell.vol_init[0] = cell.vol[0]
