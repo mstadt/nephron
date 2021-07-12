@@ -29,6 +29,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat'],required = True,type = str, help = 'Human model or Rat model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
+parser.add_argument('--file2save', required = True, type = str, help = 'where to save?')
 
 # diabetic options
 parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
@@ -49,10 +50,10 @@ preg = args.pregnant
 if diabete != 'Non':
     if preg != 'non':
         raise Exception('pregnant diabetic not done')
-    if inhib != None:
-        file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
-    else:
-        file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    # if inhib != None:
+    #     file_to_save = inhib+'_'+sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
+    # else:
+    #     file_to_save = sex+'_'+humOrrat[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
 elif preg != 'non':
     if sex == 'Male':
         raise Exception('pregnant only for female')
@@ -61,9 +62,11 @@ elif preg != 'non':
     if inhib != None:
         raise Exception('pregnant model does not have inhibition set up yet')
 
-    file_to_save = preg+'pregnant_'+humOrrat[0:3]
-else:
-    file_to_save = sex + '_' + humOrrat[0:3] +'_normal'
+    #file_to_save = preg+'pregnant_'+humOrrat[0:3]
+# else:
+#     file_to_save = sex + '_' + humOrrat[0:3] +'_normal'
+
+file_to_save = args.file2save
     
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
