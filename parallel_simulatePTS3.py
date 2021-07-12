@@ -210,12 +210,25 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
                     torqvm = 0.020 #Compliance Fortran Code
                     PbloodPT = 20.0e0 #Reference pressure
                 elif pt[j].humOrrat == 'rat':
-                    Radref = 0.0025/2.0
-                    torqR = 0.0011
+                    if pt[j].sex.lower() == 'male':
+                        Radref = 0.0025/2.0
+                        torqR = 0.0011
+                        torqvm = 0.030
+                        PbloodPT = 9.0e0
+                    elif pt[j].sex.lower() == 'female':
+                        torqR = 0.00095
+                        torqvm = 0.030
+                        if pt[j].preg.lower() == 'non':
+                            Radref = 0.002125/2.0
+                            PbloodPT = 8.0e0
+                        elif pt[j].preg.lower() == 'mid':
+                            Radref = 0.0024225/2.0
+                            PbloodPT = 4.0e0
+                        elif pt[j].preg.lower() == 'late':
+                            Radref = 0.002465/2.0
+                            PbloodPT = 4.0e0
                     torqL = 2.50e-4
                     torqd = 1.50e-5
-                    torqvm = 0.030
-                    PbloodPT = 9.0e0
                 if pt[j].humOrrat == 'rat':
                     fac1 = 8.0*visc*(pt[j].vol_init[0]*Vref)*torqL/(Radref**2)
                 elif pt[j].humOrrat == 'hum':
@@ -459,12 +472,25 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
                     torqvm = 0.020 #Compliance Fortran Code
                     PbloodPT = 20.0e0 #Reference pressure
                 elif s3[j].humOrrat == 'rat':
-                    Radref = 0.0025/2.0
-                    torqR = 0.0011
+                    if s3[j].sex.lower() == 'male':
+                        Radref = 0.0025/2.0
+                        torqR = 0.0011
+                        torqvm = 0.030
+                        PbloodPT = 9.0e0
+                    elif s3[j].sex.lower() == 'female':
+                        torqR = 0.00095
+                        torqvm = 0.030
+                        if s3[j].preg == 'non':
+                            Radref = 0.002125/2.0
+                            PbloodPT = 8.0e0
+                        elif s3[j].preg == 'mid':
+                            Radref = 0.0024225/2.0
+                            PbloodPT = 4.0e0
+                        elif s3[j].preg == 'late':
+                            Radref = 0.002465/2.0
+                            PbloodPT = 4.0e0
                     torqL = 2.50e-4
                     torqd = 1.50e-5
-                    torqvm = 0.030
-                    PbloodPT = 9.0e0
                 if s3[j].humOrrat == 'rat':
                     fac1 = 8.0*visc*(s3[j].vol_init[0]*Vref)*torqL/(Radref**2)
                 elif s3[j].humOrrat == 'hum':
@@ -575,7 +601,14 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
                 raise Exception('What is this?',transporter_type)	
     print('%s S3 finished.' %(sup_or_jux))
     print('\n')
-    
 #=============================
 # end compute_segmentPTS3
 #=============================
+
+def multiprocessing_funcPTS3(sup_or_jux):
+    compute_segmentPTS3(sup_or_jux, sex, humOrrat, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
+
+if __name__ == '__main__':
+    pool = multiprocessing.Pool()
+    pool.map(multiprocessing_funcPTS3, parts)
+    pool.close()
