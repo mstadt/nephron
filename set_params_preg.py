@@ -313,20 +313,20 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.3
                     elif cell.preg == 'late':
                         preg_rat = 1.5
-                    cell.h[0,0,4] = cell.h[0,0,4]*preg_rat
-                    cell.h[0,4,5] = cell.h[0,4,5]*preg_rat
-                    cell.h[2,0,4] = cell.h[2,0,4]*preg_rat
-                    cell.h[2,4,5] = cell.h[2,4,5]*preg_rat
+                    cell.h[0,0,4] = 10400.0*preg_rat
+                    cell.h[0,4,5] = 5000.0*preg_rat
+                    cell.h[2,0,4] = 8000.0*preg_rat
+                    cell.h[2,4,5] = 6000.0*preg_rat
                 elif cell.segment == 'DCT' and cell.preg == 'late':
                     if j>0.66*cell.total:
                         #DCT2
-                        cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                        cell.h[1,0,1] = 0.35*0.6
                 elif cell.segment == 'CNT' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.35
+                    cell.h[1,0,1] = 8.0*0.35
                 elif cell.segment == 'CCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    cell.h[1,0,1] = 2.8*0.55
                 elif cell.segment == 'OMCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = cell.h[1,0,1]*0.55
+                    cell.h[1,0,1] = 2.4*0.55
                     
                             
             # Coupled transporters:
