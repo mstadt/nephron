@@ -34,12 +34,12 @@ def compute_water_fluxes (cell):
             if cell.sex == 'male':
                 PB = 9.0
             elif cell.sex == 'female':
-                if cell.preg == 'mid':
+                if cell.preg == 'non':
+                    PB = 8.0
+                elif cell.preg == 'mid':
                     PB = 4.0
                 elif cell.preg == 'late':
                     PB = 4.0
-                elif cell.preg == 'non':
-                    PB = 8.0
                 else:
                     print('cell.preg: ' + str(cell.preg))
                     raise Exception('what is pregnancy status?')
