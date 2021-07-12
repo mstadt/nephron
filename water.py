@@ -37,7 +37,7 @@ def compute_water_fluxes (cell):
                 if cell.preg == 'non':
                     PB = 8.0
                 elif cell.preg == 'mid':
-                    PB = 4.0
+                    PB = 8.0
                 elif cell.preg == 'late':
                     PB = 4.0
                 else:
