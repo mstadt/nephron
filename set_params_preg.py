@@ -348,7 +348,7 @@ def read_params_preg(cell,filename,j):
                     # NaPi2
                     if newdLA.solute_id == (0,7):
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.0*newdLA.perm 
+                            newdLA.perm = 0.9*newdLA.perm 
                         elif cell.preg == 'late':
                             newdLA.perm = 0.85*newdLA.perm
                 if cell.segment == 'DCT':
