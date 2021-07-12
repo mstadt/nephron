@@ -99,7 +99,7 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         # cell.diam = value*1.16
                         # current value on neph-preg-rat though inaccurate
-                        cell.diam = 0.00232
+                        cell.diam = 0.002465
                 else:
                     if cell.preg == 'mid':
                         cell.diam = value*1.08
