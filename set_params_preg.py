@@ -241,8 +241,8 @@ def read_params_preg(cell,filename,j):
                                     preg_rat = 3.4
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
-                print('water permeability')
-                print(ind1, ind2, cell.dLPV[ind1][ind2],preg_rat)
+                #print('water permeability')
+                #print(ind1, ind2, cell.dLPV[ind1][ind2],preg_rat)
                 # symmetry
                 cell.dLPV[ind2][ind1] = value/Pfref*preg_rat
 
@@ -392,8 +392,8 @@ def read_params_preg(cell,filename,j):
                 newTransp.membrane_id = [ind1,ind2]
                 newTransp.type = tmp[3]
                 newTransp.act = value/(href*Cref)
-                print('transporter')
-                print(newTransp.membrane_id,newTransp.type,newTransp.act)
+                #print('transporter')
+                #print(newTransp.membrane_id,newTransp.type,newTransp.act)
                 if cell.type != 'sup' and cell.sex == 'female' and cell.humOrrat == 'rat':
                     if cell.segment == 'mTAL' or cell.segment == 'cTAL':
                         if newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F' or newTransp.type == 'NaKATPase':
@@ -479,7 +479,7 @@ def read_params_preg(cell,filename,j):
                 else:
                     preg_rat = 1.0
                 newTransp.act = preg_rat*newTransp.act
-                print(cell.preg + 'pregnant transporter activity: ' + str(newTransp.act))
+                #print(cell.preg + 'pregnant transporter activity: ' + str(newTransp.act))
                 cell.trans.append(newTransp)
 
             # Solute concentrations:
