@@ -136,12 +136,12 @@ def read_params_preg(cell,filename,j):
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
-                            cell.len = 0.05*0.9 #0.05*0.85, updated female
+                            cell.len = 0.05*0.9 #0.05*0.9, updated female
                     elif cell.segment == 'CNT':
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.9 #0.3*0.85, updated female
+                            cell.len = 0.3*0.9 #0.3*0.9, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'hum':
                     if cell.segment == 'cTAL':
@@ -165,7 +165,7 @@ def read_params_preg(cell,filename,j):
                 if cell.type !='sup' and cell.segment == 'PT' and cell.humOrrat == 'rat':
                     cell.pres[0] = 12.5
 
-                elif cell.type == 'sup' and cell.segment == 'PT': #not done jux segments
+                elif cell.type == 'sup' and cell.segment == 'PT': #not done jux segments for preg models
                     if cell.preg == 'mid':
                         cell.pres[0] = 11.8
                     if cell.preg == 'late':
@@ -241,6 +241,8 @@ def read_params_preg(cell,filename,j):
                                     preg_rat = 3.4
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
+                print('water permeability')
+                print(ind1, ind2, cell.dLPV[ind1][ind2],preg_rat)
                 # symmetry
                 cell.dLPV[ind2][ind1] = value/Pfref*preg_rat
 
@@ -390,8 +392,8 @@ def read_params_preg(cell,filename,j):
                 newTransp.membrane_id = [ind1,ind2]
                 newTransp.type = tmp[3]
                 newTransp.act = value/(href*Cref)
-                #print('transporter')
-                #print(newTransp.membrane_id,newTransp.type,newTransp.act)
+                print('transporter')
+                print(newTransp.membrane_id,newTransp.type,newTransp.act)
                 if cell.type != 'sup' and cell.sex == 'female' and cell.humOrrat == 'rat':
                     if cell.segment == 'mTAL' or cell.segment == 'cTAL':
                         if newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F' or newTransp.type == 'NaKATPase':
@@ -465,7 +467,7 @@ def read_params_preg(cell,filename,j):
                 else:
                     preg_rat = 1.0
                 newTransp.act = preg_rat*newTransp.act
-                
+                print(cell.preg + 'pregnant transporter activity: ' + str(newTransp.act))
                 cell.trans.append(newTransp)
 
             # Solute concentrations:
@@ -513,6 +515,7 @@ def read_params_preg(cell,filename,j):
             elif compare_string_prefix(id,"vol"):
                 tmp = (id).split('_')  
                 if cell.segment == 'PT' and cell.type == 'sup':
+                    # SNGFR for sup nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
                             cell.vol[0] = 0.0056 #0.004*1.4
@@ -533,13 +536,6 @@ def read_params_preg(cell,filename,j):
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
                         cell.vol_init[compart_id[tmp[1]]] = float(num[0])
-                # elif cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'hum':
-                #     if compart_id[tmp[1]] == 0:
-                #         cell.vol[0] = 0.02222
-                #         cell.vol_init[0] = cell.vol[0]
-                #     else:
-                #         cell.vol[compart_id[tmp[1]]] = float(num[0])
-                #         cell.vol_init[compart_id[tmp[1]]] = float(num[0])
                 else:
                     cell.vol[compart_id[tmp[1]]] = float(num[0])
                     cell.vol_init[compart_id[tmp[1]]] = float(num[0])
