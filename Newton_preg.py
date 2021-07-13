@@ -101,11 +101,11 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>100:
                 if cell.preg == 'mid':
-                    amp = 0.8
+                    amp = 0.1
                 elif cell.preg == 'late':
                     amp = 0.5
             else:
-                amp = 1.0
+                amp = 0.9
         # IMCD
         elif cell.segment == 'IMCD':
             if cell.preg == 'mid':
