@@ -93,13 +93,9 @@ def read_params_preg(cell,filename,j):
                 # pregnant diameter
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        #cell.diam = value*1.14
-                        # current value on neph-preg-rat though inaccurate
-                        cell.diam = 0.0024225
+                        cell.diam = value*1.15
                     elif cell.preg == 'late':
-                        # cell.diam = value*1.16
-                        # current value on neph-preg-rat though inaccurate
-                        cell.diam = 0.002465
+                        cell.diam = value*1.19
                 else:
                     if cell.preg == 'mid':
                         cell.diam = value*1.08
@@ -111,7 +107,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.1571420454545456
+                        cell.len = value*1.157142
                     elif cell.preg == 'late':
                         cell.len = value*1.195
                 # juxtamedullary segments lengths
