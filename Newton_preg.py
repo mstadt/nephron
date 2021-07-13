@@ -111,7 +111,7 @@ def newton_preg_rat(func,x,k,cell):
             if cell.preg == 'mid':
                 if np.linalg.norm(f)>100:
                     if k==0:
-                        amp = 0.2
+                        amp = 0.1
                     else:
                         amp = 0.5
                 else:
