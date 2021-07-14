@@ -163,13 +163,22 @@ def newton_rat(func,x,k,cell):
                         amp = 1.0
         # CCD     
         elif cell.segment == 'CCD':
-            if np.linalg.norm(f)>1000:
-                if k==0:
-                    amp = 0.3
+            if cell.sex == 'female':
+                if np.linalg.norm(f)>1000:
+                    if k==0:
+                        amp = 0.3
+                    else:
+                        amp = 0.1
                 else:
-                    amp = 0.1
-            else:
-                amp = 0.8
+                    amp = 0.8
+            elif cell.sex == 'male':
+                if np.linalg.norm(f)>1000:
+                    if k==0:
+                        amp = 0.1
+                    else:
+                        amp = 0.5
+                else:
+                    amp = 0.8
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1000:
