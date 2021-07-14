@@ -255,10 +255,10 @@ def conservation_eqs (x,i):
                         Radref = 0.002125/2.0 #female radius
                         PbloodPT = 8.0e0
                     elif cell.preg == 'mid':
-                        Radref = 0.0024225/2.0
+                        Radref = 0.0024225/2.0 # mp radius
                         PbloodPT = 4.0e0
                     elif cell.preg == 'late':
-                        Radref = 0.002465/2.0
+                        Radref = 0.002465/2.0 #lp radius
                         PbloodPT = 4.0e0
                 torqL = 2.50e-4
                 torqd = 1.50e-5
