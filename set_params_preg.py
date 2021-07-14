@@ -93,9 +93,9 @@ def read_params_preg(cell,filename,j):
                 # pregnant diameter
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.diam = value*1.15
+                        cell.diam = value*1.14
                     elif cell.preg == 'late':
-                        cell.diam = value*1.19
+                        cell.diam = value*1.16
                 else:
                     if cell.preg == 'mid':
                         cell.diam = value*1.08
