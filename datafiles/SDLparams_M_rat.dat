@@ -5,7 +5,7 @@ sex	male
 diameter_male	 0.0020    # luminal diameter for male
 diameter_female  0.0017
 length_male		0.14   # tubule length for male
-length_female   0.119
+length_female   0.126
 total 200           # total amount of SDL cells
 #
 #  luminal pressure
