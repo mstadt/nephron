@@ -5,7 +5,7 @@ sex	male
 diameter_male	 0.0020    # luminal diameter for male
 diameter_female  0.0017
 length_male		0.2   # tubule length for superficial nephron male : 0.2, for jux nephron of male : 0.05
-length_female   0.17
+length_female   0.18
 total 200           # total amount of TAL cells
 #
 #  luminal pressure
