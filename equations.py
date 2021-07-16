@@ -245,7 +245,7 @@ def conservation_eqs (x,i):
             elif cell1.humOrrat == 'rat':
                 if cell.sex.lower() == 'male':
                     Radref = 0.0025/2.0
-                    torqR = 0.0011
+                    torqR = 0.00112
                     torqvm = 0.030
                     PbloodPT = 9.0e0
                 elif cell.sex.lower() == 'female':
@@ -369,7 +369,7 @@ def conservation_eqs (x,i):
         elif cell1.humOrrat == 'rat':
             if cell.sex == 'male':
                 Radref = 0.0025/2.0
-                torqR = 0.0011
+                torqR = 0.00112
                 torqvm = 0.030
                 PbloodPT = 9.0e0
             elif cell.sex == 'female':

@@ -245,6 +245,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             elif humOrrat == 'human':
                 neph_weight = [0.85,(0.15)*0.4,(0.15)*0.3,(0.15)*0.15,(0.15)*0.1,(0.15)*0.05]
             water_vol = []
+            lum_pres = []
             for neph in nephs:
                 soluts_conc = []
                 inputfile = open('./outlets/CNToutlet'+cell[0].sex+cell[0].humOrrat+'_'+neph+'.txt','r')
@@ -260,11 +261,13 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
                 
                 line_ep = inputfile.readline()
                 line_pres = inputfile.readline()
+                lum_pres.append(float(line_pres))
             cell[0].vol[0] = 0
             for i in range(len(nephs)):
                 cell[0].vol[0]=cell[0].vol[0]+neph_weight[i]*water_vol[i]
 
-            cell[0].pres[0] = 6.2
+            #cell[0].pres[0] = 6.2
+            cell[0].pres[0] = lum_pres[0]
             for i in range(NS):
                 cell[0].conc[i,0] = soluts_flow[i]/cell[0].vol[0]
 
