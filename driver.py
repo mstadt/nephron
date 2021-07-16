@@ -266,7 +266,6 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             for i in range(len(nephs)):
                 cell[0].vol[0]=cell[0].vol[0]+neph_weight[i]*water_vol[i]
 
-            #cell[0].pres[0] = 6.2
             cell[0].pres[0] = lum_pres[0]
             for i in range(NS):
                 cell[0].conc[i,0] = soluts_flow[i]/cell[0].vol[0]
