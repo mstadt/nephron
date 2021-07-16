@@ -52,3 +52,6 @@ Published papers related to/using model:
 * **human multiple nephron (sex-specific):** 2021 Hu et al. "Sex differences in solute and water handling in the human kidney: Modeling and functional implications" https://www-sciencedirect-com.proxy.lib.uwaterloo.ca/science/article/pii/S2589004221006350
 * **diabetic human (sex-specific):** 2021 Hu et al. "A Computational Model of Kidney Function in a Patient with Diabetes" https://www.mdpi.com/1422-0067/22/11/5819
 * **pregnant rat:** (under review)
+
+## Previous versions
+Previous versions of this model are given at https://github.com/uwrhu
