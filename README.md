@@ -54,4 +54,4 @@ Published papers related to/using model:
 * **pregnant rat:** (under review)
 
 ## Previous versions
-Previous versions of this model are given at https://github.com/uwrhu
+Previous versions of this model are on [this](https://github.com/uwrhu) page.
