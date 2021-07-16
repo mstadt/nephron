@@ -23,7 +23,7 @@ volref_Cell    10.0
 volref_LIS	0.7
 #
 #  compartment areas (actual)
-vol_Lumen_male      0.00511
+vol_Lumen_male      0.00495
 vol_Cell	 7.74582
 vol_LIS		-1.53296
 #

@@ -646,32 +646,32 @@ def read_params(cell,filename,j):
                     if compart_id[tmp[1]] == 0:	
                         if cell.type == 'jux1':
                             if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
+                                cell.vol[0] = 0.007
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux2':
                             if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
+                                cell.vol[0] = 0.007
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
 
                         elif cell.type == 'jux3':
                             if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
+                                cell.vol[0] = 0.007
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux4':
                             if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
+                                cell.vol[0] = 0.007
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux5':
                             if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
+                                cell.vol[0] = 0.007
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
