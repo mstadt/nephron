@@ -372,7 +372,7 @@ file_HCO2_flux_beta = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'
 file_K_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_K_total_flux'+sup_or_jux+'.txt','w')
 file_Na_flux_total = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_total_flux'+sup_or_jux+'.txt','w')
 file_Na_flux_baso = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_baso_flux'+sup_or_jux+'.txt','w')
-file_Na_flux_Cell_LIS = open('./'+file_to_save+'/'+cell[0].sex+humOrrat[0:3]+'_'+cell[0].segment+'_Na_Cell_LIS_flux'+sup_or_jux+'.txt','w')
+file_Na_flux_Cell_LIS = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Na_Cell_LIS_flux'+sup_or_jux+'.txt','w')
 file_water_flux = open('./'+file_to_save+'/'+cell[0].sex+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_water_flux_apical'+sup_or_jux+'.txt','w')
 
 for j in range(1,N):
