@@ -5,33 +5,56 @@ import numpy as np
 import os
 import argparse
 
-compare = 2 #2 or 3
+compare = 3 #2 or 3
 save_figs = 0 # if want to save figs set to 1
 #solute_list = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu', 'TA', 'osmolality']
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'osmolality', 'pH']
 
-direct1 = 'Male_rat_normal'
-sex1 = 'male'
+direct1 = 'Female_rat_Non_diab-multiple'
+sup_or_jux1 = 'jux5'
 
-direct2 = 'female-original'
+direct2 = 'nephron'
+sup_or_jux2 = 'jux5'
+
+direct3 = 'nonpregnant_rat-final'
+sup_or_jux3 = 'jux5'
+
+
+sex1 = 'female'
 sex2 = 'female'
-
-direct3 = 'female-updated'
-sex3 = 'female'
+sex3 = 'nonpregnant'
 
 label1 = direct1
 label2 = direct2
+label3 = direct3
 
-segs_sup_early = ['pt', 's3', 'sdl']
-segs_sup_late = ['mtal', 'ctal', 'dct', 'cnt']
-segs_jux = ['pt', 's3', 'sdl', 'ldl','lal','mtal','ctal', 'dct', 'cnt']
-segs_cd = ['ccd', 'omcd', 'imcd']
+# segs_sup_early = ['pt', 's3', 'sdl']
+# segs_sup_late = ['mtal', 'ctal', 'dct', 'cnt']
+# segs_jux = ['pt', 's3', 'sdl', 'ldl','lal','mtal','ctal', 'dct', 'cnt']
+
+segs_sup_early = ['sdl']
+segs_sup_late = []
+segs_jux = ['sdl']
+
+plot_cd = 0
+if plot_cd:
+    segs_cd = ['ccd', 'omcd', 'imcd']
+
 
 
 humOrrat = 'rat'
 
-segs_total = segs_jux + segs_cd
-Ncells = [176, 25, 200, 200, 200, 200, 200, 200, 200, 200, 200, 200]
+if plot_cd:
+    segs_total = segs_jux + segs_cd
+else:
+    segs_total = segs_jux
+    
+Ncells = 200*np.ones(len(segs_total))
+if segs_total[0].upper() == 'PT':
+    Ncells[0] = 176
+    Ncells[1] = 25
+elif segs_total[0].upper() == 'S3':
+    Ncells[0] = 25
 
 #==========================================================================
 # save figures/comments options (note: requires save_figs == 1)
@@ -120,7 +143,8 @@ for sol in range(len(solute_list)):
     data1_jux3, data2_jux3, data3_jux3 = segment_data(segs_jux, '_jux3', solute)
     data1_jux4, data2_jux4, data3_jux4 = segment_data(segs_jux, '_jux4', solute)
     data1_jux5, data2_jux5, data3_jux5 = segment_data(segs_jux, '_jux5', solute)
-    data1_cd, data2_cd, data3_cd = segment_data(segs_cd, '', solute)
+    if plot_cd:
+        data1_cd, data2_cd, data3_cd = segment_data(segs_cd, '', solute)
 
 
 #======================================================================
@@ -157,30 +181,69 @@ for sol in range(len(solute_list)):
     if solute == 'pH':
         shift = -0.1
     else:
-        shift = -5
+        shift = -3
     
     # only plotting the jux5 for the concentrations
     sup1_early = ax.plot(sup_early_pos, data1_sup_early, color = c1, linewidth=2, label = direct1)
     sup1_late = ax.plot(sup_late_pos, data1_sup_late, color = c1, linewidth=2)
-    jux1 = ax.plot(jux_pos,data1_jux5, color = c1, linestyle = 'dashed', linewidth = 2)
-    cd1 = ax.plot(cd_pos, data1_cd, color = c1, linewidth = 2)
+    if sup_or_jux1 == 'jux1':
+        jux1 = ax.plot(jux_pos,data1_jux1, color = c1, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux1 == 'jux2':
+        jux1 = ax.plot(jux_pos,data1_jux2, color = c1, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux1 == 'jux3':
+        jux1 = ax.plot(jux_pos,data1_jux3, color = c1, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux1 == 'jux4':
+        jux1 = ax.plot(jux_pos,data1_jux4, color = c1, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux1 == 'jux5':
+        jux1 = ax.plot(jux_pos,data1_jux5, color = c1, linestyle = 'dashed', linewidth = 2)
+    else:
+        raise Exception('which juxtamedullary nephron to plot?')
+    if plot_cd:
+        cd1 = ax.plot(cd_pos, data1_cd, color = c1, linewidth = 2)
     
     sup2_early = ax.plot(sup_early_pos, data2_sup_early, color = c2, linewidth=2, label = direct2)
     sup2_late = ax.plot(sup_late_pos, data2_sup_late, color = c2, linewidth=2)
-    jux2 = ax.plot(jux_pos,data2_jux5, color = c2, linestyle = 'dashed', linewidth = 2)
-    cd2 = ax.plot(cd_pos, data2_cd, color = c2, linewidth = 2)
+    if sup_or_jux2 == 'jux1':
+        jux2 = ax.plot(jux_pos,data2_jux1, color = c2, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux2 == 'jux2':
+        jux2 = ax.plot(jux_pos,data2_jux2, color = c2, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux2 == 'jux3':
+        jux2 = ax.plot(jux_pos,data2_jux3, color = c2, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux2 == 'jux4':
+        jux2 = ax.plot(jux_pos,data2_jux4, color = c2, linestyle = 'dashed', linewidth = 2)
+    elif sup_or_jux2 == 'jux5':
+        jux2 = ax.plot(jux_pos,data2_jux5, color = c2, linestyle = 'dashed', linewidth = 2)
+    else:
+        raise Exception('which juxt nephron to plot?')
+    if plot_cd:
+        cd2 = ax.plot(cd_pos, data2_cd, color = c2, linewidth = 2)
     
     if compare >2:
         sup3_early = ax.plot(sup_early_pos, data3_sup_early, color = c3, linewidth=2, label = direct3)
         sup3_late = ax.plot(sup_late_pos, data3_sup_late, color = c3, linewidth=2)
-        jux3 = ax.plot(jux_pos,data3_jux5, color = c3, linestyle = 'dashed', linewidth = 2)
-        cd3 = ax.plot(cd_pos, data3_cd, color = c3, linewidth = 2)
+        if sup_or_jux3 == 'jux1':
+            jux3 = ax.plot(jux_pos,data3_jux1, color = c3, linestyle = 'dashed', linewidth = 2)
+        elif sup_or_jux3 == 'jux2':
+            jux3 = ax.plot(jux_pos,data3_jux2, color = c3, linestyle = 'dashed', linewidth = 2)
+        elif sup_or_jux3 == 'jux3':
+            jux3 = ax.plot(jux_pos,data3_jux3, color = c3, linestyle = 'dashed', linewidth = 2)
+        elif sup_or_jux3 == 'jux4':
+            jux3 = ax.plot(jux_pos,data3_jux4, color = c3, linestyle = 'dashed', linewidth = 2)
+        elif sup_or_jux3 == 'jux5':
+            jux3 = ax.plot(jux_pos,data3_jux5, color = c3, linestyle = 'dashed', linewidth = 2)
+        else:
+            raise Exception('which juxt nephron to plot?')
+        if plot_cd:
+            cd3 = ax.plot(cd_pos, data3_cd, color = c3, linewidth = 2)
     
     start = 0
-    jux_full = data1_jux5 + data1_cd
+    if plot_cd:
+        jux_full = data1_jux5 + data1_cd
+    else:
+        jux_full = data1_jux5
     for seg in range(len(segs_total)):
         end = Ncells[seg] + start
-        height = jux_full[start] + shift
+        height = jux_full[int(start)] + shift
         plt.hlines(height, start, end, colors = 'k', linestyles = 'dashed')
         temp = start + (end - start)/2.0
         plt.text(temp, height, segs_total[seg].upper(), fontsize = text_size)
@@ -200,6 +263,7 @@ for sol in range(len(solute_list)):
         ax.set_ylabel('['+solute+'] (mM)', fontsize = ylab_size)
         ax.set_title(solute + ' concentration', fontsize = title_size)
     
+   
     if save_figs:
         if solute == 'pH':
             plt.savefig('./'+plot_folder+'/pH',bbox_inches = 'tight')
@@ -207,5 +271,6 @@ for sol in range(len(solute_list)):
             plt.savefig('./'+plot_folder+'/osmolality',bbox_inches = 'tight')
         else:
             plt.savefig('./'+plot_folder+'/'+solute+' concentration', bbox_inches = 'tight')
-                
+            
+print('dashed line is the juxtamedullary concentration, solid is superficial')
             

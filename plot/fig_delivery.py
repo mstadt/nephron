@@ -5,29 +5,29 @@ import numpy as np
 import os
 import argparse
 
-compare = 3 #2 or 3
+compare = 2#2 or 3
 save_figs = 0 # if want to save figs
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
 
 
-direct1 = 'female-original'
-sex1 = 'female'
+direct1 = 'male-nephron'
+sex1 = 'male'
 
-direct2 = 'female-updated'
-sex2 = 'female'
+direct2 = 'male-tgf4'
+sex2 = 'male'
 
-direct3 = 'fem-update1'
-sex3 = 'female'
+direct3 = 'male-torqR-s'
+sex3 = 'male'
 
 label1 = direct1
 label2 = direct2
 label3 = direct3
 
 segs_early = ['pt', 'sdl', 'mtal', 'dct', 'cnt']
-segs_cd = ['ccd','imcd']
+segs_cd = ['ccd', 'imcd'] # no imcd for the MP rat right now
 seg_labels = ['PT', 'DL', 'mTAL', 'DCT', 'CNT', 'CCD', 'urine']
-
+flag = 1 # set to 1 if there is IMCD
 humOrrat = 'rat' # set to 'hum' for human model
 
 
@@ -40,6 +40,11 @@ neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_
 neph_per_kidney = 36000 #number of nephrons per kidney
 p_to_mu = 1e-6 #convert pmol to micromole
 cf = neph_per_kidney * p_to_mu
+
+mu_conv = 1e-3 #from mumol to mmol
+min_per_day = 1440
+sol_conv = mu_conv * min_per_day
+vol_conv = min_per_day
 
 #==========================================================================
 # save figures/comments options (note: requires save_figs == 1)
@@ -182,11 +187,11 @@ for solute in solute_list:
     if compare > 2:
         direct_deliv_num3, direct_vals3, sup_vals3, jux_vals3 = get_data(direct3, sex3, solute, segs_early)
     
-    
-    dir_del_urine1 = get_out_deliv(direct1, sex1, solute, 'imcd','')
-    dir_del_urine2 = get_out_deliv(direct2, sex2, solute, 'imcd', '')
-    if compare > 2:
-        dir_del_urine3 = get_out_deliv(direct3, sex3, solute, 'imcd', '')
+    if 'imcd' in segs_cd:
+        dir_del_urine1 = get_out_deliv(direct1, sex1, solute, 'IMCD','')
+        dir_del_urine2 = get_out_deliv(direct2, sex2, solute, 'IMCD', '')
+        if compare > 2:
+            dir_del_urine3 = get_out_deliv(direct3, sex3, solute, 'IMCD', '')
  
 #===================================================
 # print relevant values
@@ -194,20 +199,44 @@ for solute in solute_list:
     print(direct1)
     print('sup vals: ' + str(sup_vals1))
     print('jux vals: ' + str(jux_vals1))
-    print('urine delivery: ' + str(dir_del_urine1))
+    if flag:
+        if solute == 'Volume':
+            print('urine delivery (ml/min): ' + str(dir_del_urine1))
+            daily_deliv = vol_conv * dir_del_urine1
+            print('urine delivery (ml/day): ' + str(daily_deliv))
+        else:
+            print('urine delivery (mumol/min): ' + str(dir_del_urine1))
+            daily_deliv = sol_conv * dir_del_urine1
+            print('urine delivery (mmol/day): ' + str(daily_deliv) )
     print('\n')
     
     print(direct2)
     print('sup vals: ' + str(sup_vals2))
     print('jux vals: ' + str(jux_vals2))
-    print('urine delivery: ' + str(dir_del_urine2))
+    if flag:
+        if solute == 'Volume':
+            print('urine delivery (ml/min): ' + str(dir_del_urine2))
+            daily_deliv = vol_conv * dir_del_urine2
+            print('urine delivery (ml/day): ' + str(daily_deliv))
+        else:
+            print('urine delivery (mumol/min): ' + str(dir_del_urine2))
+            daily_deliv = sol_conv * dir_del_urine2
+            print('urine delivery (mmol/day): ' + str(daily_deliv) )
     print('\n')
     
     if compare > 2:
         print(direct3)
         print('sup vals: ' + str(sup_vals3))
         print('jux vals: ' + str(jux_vals3))
-        print('urine delivery: ' + str(dir_del_urine3))
+        if flag:
+            if solute == 'Volume':
+                print('urine delivery (ml/min) ' + str(dir_del_urine3))
+                daily_deliv = vol_conv * dir_del_urine3
+                print('urine delivery (ml/day): ' + str(daily_deliv))
+            else:
+                print('urine delivery (mumol/min): ' + str(dir_del_urine3))
+                daily_deliv = sol_conv * dir_del_urine3
+                print('urine delivery (mmol/day): ' + str(daily_deliv) )
         print('\n')
     
     # full_deliv1 = np.append(direct_deliv_num1, dir_del_urine1)
@@ -240,32 +269,35 @@ for solute in solute_list:
     
     # positiions
     sup_pos = np.arange(len(seg_labels[:6]))
-    #full_pos = np.arange(len(seg_labels))
+    full_pos = np.arange(len(seg_labels))
     later_pos = np.arange(len(seg_labels[:6]), len(seg_labels))
     
     
     # bar1
     sup1 = ax.bar(sup_pos, sup_vals1, bar_width, align = 'center', edgecolor = 'black', color = c1, label = label1)
     jux1 = ax.bar(sup_pos, jux_vals1, bar_width, bottom = sup_vals1, align='center', edgecolor = 'black', color = 'white')
-    urine1 = ax.bar(later_pos, dir_del_urine1, bar_width, align='center', edgecolor='black', color = c1)
+    if flag:
+        urine1 = ax.bar(later_pos, dir_del_urine1, bar_width, align='center', edgecolor='black', color = c1)
     
     # bar2
     sup2 = ax.bar(sup_pos + bar_width, sup_vals2, bar_width, align = 'center', edgecolor = 'black', color = c2, label = label2)
     jux2 = ax.bar(sup_pos + bar_width, jux_vals2, bar_width, bottom = sup_vals2, align = 'center', edgecolor = 'black', color = 'white')
-    urine2 = ax.bar(later_pos + bar_width, dir_del_urine2, bar_width, align='center', edgecolor='black', color=c2)
+    if flag:
+        urine2 = ax.bar(later_pos + bar_width, dir_del_urine2, bar_width, align='center', edgecolor='black', color=c2)
     
     if compare >2:
         # bar3
         sup3 = ax.bar(sup_pos + 2*bar_width, sup_vals3, bar_width, align = 'center', edgecolor = 'black', color = c3, label=label3)
         jux3 = ax.bar(sup_pos + 2*bar_width, jux_vals3, bar_width, bottom = sup_vals3, align = 'center', edgecolor = 'black', color = 'white')
-        urine3 = ax.bar(later_pos + 2*bar_width, dir_del_urine3, bar_width, align = 'center', edgecolor = 'black', color = c3)
+        if flag:
+            urine3 = ax.bar(later_pos + 2*bar_width, dir_del_urine3, bar_width, align = 'center', edgecolor = 'black', color = c3)
     
     ax.set_xticks(np.arange(len(seg_labels))+(compare-1)*0.5*bar_width)
     ax.set_xticklabels(seg_labels, fontsize=xticklab_size)
     ax.legend(fontsize=leg_size)
     plt.yticks(fontsize=yticklab_size)
     if solute == 'Volume':
-        ax.set_ylabel('Volume delivery (nl/min)', fontsize = ylab_size)
+        ax.set_ylabel('Volume delivery (ml/min)', fontsize = ylab_size)
     else:
         ax.set_ylabel(solute + ' delivery ($\mu$mol/min)', fontsize = ylab_size)
     ax.set_title(solute + ' delivery', fontsize = title_size)

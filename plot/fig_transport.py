@@ -14,13 +14,13 @@ save_figs = 0 # if want to save figs set to 1
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'Volume']
 #solute_list = ['Na']
 
-direct1 = 'female-original'
+direct1 = 'female-updated'
 sex1 = 'female'
 
-direct2 = 'female-updated'
+direct2 = '2021-07-07midpregnant_rat'
 sex2 = 'female'
 
-direct3 = 'fem-update1'
+direct3 = '2021-07-07latepregnant_rat'
 sex3 = 'female'
 
 label1 = direct1
@@ -30,6 +30,7 @@ label3 = direct3
 segment_early = ['pt','s3','sdl','mtal','ctal','dct','cnt']
 segment_jux = ['sdl','ldl','lal']
 segment_cd = ['ccd','omcd','imcd']
+#segment_cd = ['ccd', 'omcd']
 
 
 humOrrat = 'rat' # set to 'hum' for human model
