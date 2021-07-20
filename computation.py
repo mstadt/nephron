@@ -30,9 +30,9 @@ parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str
 parser.add_argument('--species',choices=['human','rat'],required = True,type = str, help = 'Human model or Rat model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
 parser.add_argument('--segment', choices = ['PT','S3','SDL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
-parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','jux5', ''], required=True, type=str, help = 'which nephron type? (sup/jux1/jux2/etc), '' is for collecting duct')
 parser.add_argument('--savefile', required=True, type=str, help = 'where to save?')
 # optional input
+parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','jux5', ''], default='', type=str, help = 'which nephron type? (sup/jux1/jux2/etc), '' is for collecting duct')
 # diabetic options
 parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100'],default = None,type = str,help = 'any transporter inhibition?')
@@ -47,6 +47,11 @@ humOrrat = args.species
 sup_or_multi = args.type
 segment = args.segment
 sup_or_jux = args.suporjux
+
+if sup_or_jux == '':
+	if segment[-2:] != 'CD':
+		print('segment: ' + segment)
+		raise Exception('sup or jux required for nephron segments')
 
 diabete = args.diabetes
 inhib = args.inhibition
