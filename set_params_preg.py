@@ -137,7 +137,7 @@ def read_params_preg(cell,filename,j):
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.9 #0.3*0.9, updated female
+                            cell.len = 0.3*0.85 #0.3*0.9, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'hum':
                     if cell.segment == 'cTAL':
@@ -159,7 +159,10 @@ def read_params_preg(cell,filename,j):
             elif compare_string_prefix(id,"Pressure"):
                 cell.pres[0] = value
                 if cell.type !='sup' and cell.segment == 'PT' and cell.humOrrat == 'rat':
-                    cell.pres[0] = 12.5
+                    if cell.preg == 'mid':
+                        cell.pres[0] = 13.0
+                    elif cell.preg == 'late':
+                        cell.pres[0] = 13.7
 
                 elif cell.type == 'sup' and cell.segment == 'PT': #not done jux segments for preg models
                     if cell.preg == 'mid':
