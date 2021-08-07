@@ -77,6 +77,7 @@ else:
 def multiprocessing_func(sup_or_jux):
     compute_segment(sup_or_jux, sex, humOrrat, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
 
+print('nephron segments begin')
 #compute nephron segments
 if sup_or_multi == 'multiple':
     if __name__ == '__main__':
