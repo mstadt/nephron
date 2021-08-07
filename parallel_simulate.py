@@ -77,11 +77,17 @@ else:
 def multiprocessing_func(sup_or_jux):
     compute_segment(sup_or_jux, sex, humOrrat, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
 
-if __name__ == '__main__':
+if sup_or_multi == 'multiple':
+    if __name__ == '__main__':
 
-    pool = multiprocessing.Pool()
-    pool.map(multiprocessing_func,parts)
-    pool.close()
+        pool = multiprocessing.Pool()
+        pool.map(multiprocessing_func,parts)
+        pool.close()
+elif sup_or_multi == 'superficial':
+    compute_segment('sup',sex, humOrrat, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
+else:
+    print('sup_or_multi: ' + sup_or_multi)
+    raise Exception('sup_or_multi is superficial or multiple')
 
     #========================================================
     # Cortical collecting duct
