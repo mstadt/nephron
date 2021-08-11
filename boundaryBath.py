@@ -64,9 +64,15 @@ def boundaryBath(cell,i):
         if cell.humOrrat == 'rat':
             pHplasma = 7.323
             phpap = 7.0
+        elif cell.humOrrat == 'mou':
+            pHplasma = 7.323
+            phpap = 7.0
         elif cell.humOrrat == 'hum':
             pHplasma = 7.4
             phpap = 7.3
+        else:
+            print('cell.humOrrat: ' + str(cell.humOrrat))
+            raise Exception('what is species?')
 
         if cell.unx == 'Y':
             pHplasma = 7.4-0.1
@@ -115,6 +121,11 @@ def boundaryBath(cell,i):
                 total = cell.total*0.9
             elif cell.humOrrat == 'rat':
                 total = cell.total*0.88
+            elif cell.humOrrat == 'mou':
+                total = cell.total*0.88
+            else:
+                print('cell.humOrrat: ' + str(cell.humOrrat))
+                raise Exception('what is species?')
             pos = i/total
         elif cell.segment == 'CNT':
             TotAmmCT = 0.1
@@ -162,9 +173,15 @@ def boundaryBath(cell,i):
         if cell.humOrrat == 'rat':
             pHplasma = 7.323
             phpap = 7.0
+        elif cell.humOrrat == 'mou':
+            pHplasma = 7.323
+            phpap = 7.0
         elif cell.humOrrat == 'hum':
             pHplasma = 7.4
             phpap = 7.3
+        else:
+            print('cell.humOrrat: ' + str(cell.humOrrat))
+            raise Exception('what is species?')
 
         if cell.unx == 'Y':
             pHplasma = 7.4-0.1
@@ -221,9 +238,15 @@ def boundaryBath(cell,i):
             if cell.humOrrat == 'rat':
                 pHplasma = 7.323
                 phpap = 7.0
+            elif cell.humOrrat == 'mou':
+                pHplasma = 7.323
+                phpap = 7.0
             elif cell.humOrrat == 'hum':
                 pHplasma = 7.4
                 phpap = 7.3
+            else:
+                print('cell.humOrrat: ' + str(cell.humOrrat))
+                raise Exception('what is species?')
 
             if cell.unx == 'Y':
                 pHplasma = 7.4-0.1
@@ -282,6 +305,15 @@ def boundaryBath(cell,i):
                 NPT=0.88*cell.total
                 pHplasma = 7.323
                 phpap = 7.0
+
+            elif cell.humOrrat == 'mou':
+                NPT=0.88*cell.total
+                pHplasma = 7.323
+                phpap = 7.0
+
+            else:
+                print('cell.humOrrat: ' + str(cell.humOrrat))
+                raise Exception('what is species?')
 
             if cell.unx == 'Y':
                 pHplasma = 7.4-0.1
@@ -356,9 +388,15 @@ def boundaryBath(cell,i):
         if cell.humOrrat == 'rat':
             pHplasma = 7.323
             phpap = 7.0
+        elif cell.humOrrat == 'mou':
+            pHplasma = 7.323
+            phpap = 7.0
         elif cell.humOrrat == 'hum':
             pHplasma = 7.4
             phpap = 7.3
+        else:
+            print('cell.humOrrat: ' + str(cell.humOrrat))
+            raise Exception('what is species?')
 
         if cell.unx == 'Y':
             pHplasma = 7.4-0.1

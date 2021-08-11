@@ -29,7 +29,12 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         #Dependence of Lumen-Cell permeability to Na (ENac) on Na concentrations and on flow
         facCaMP=1.0
         facphMP=1.0
-        NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
+        if cell.humOrrat == 'rat':
+            NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
+        elif cell.humOrrat == 'mou':
+            NaMPq0=cell.vol_init[0]-(0.6e-6)/60/Vref 
+        elif cell.humOrrat == 'hum':
+            NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
         
         # Added by Dania:        
@@ -38,7 +43,12 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
     elif cell.segment == 'CCD':
         #Dependence of Lumen-Cell permeability to Na (ENac) on Na concentrations and on flow
         facphMP=1.0
-        NaMPq0=cell.vol_init[0]-(0.1e-6)/60/Vref
+        if cell.humOrrat == 'rat':
+            NaMPq0=cell.vol_init[0]-(0.1e-6)/60/Vref
+        elif cell.humOrrat == 'mou':
+            NaMPq0=cell.vol_init[0]-(0.03e-6)/60/Vref
+        elif cell.humOrrat == 'hum':
+            NaMPq0=cell.vol_init[0]-(0.1e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
                 
         # Added by Dania:

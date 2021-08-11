@@ -43,6 +43,15 @@ def compute_water_fluxes (cell):
                 else:
                     print('cell.preg: ' + str(cell.preg))
                     raise Exception('what is pregnancy status?')
+        elif cell.humOrrat == 'mou':
+            if cell.sex == 'male':
+                PB = 9.0
+            elif cell.sex == 'female':
+                PB = 8.0
+        else:
+            print('cell.humOrrat: ' + str(cell.humOrrat))
+            raise Exception('what is species?')
+        
     else:
         PB=0
 
@@ -52,7 +61,7 @@ def compute_water_fluxes (cell):
     PRES[3] = PRES[0]
     PRES[5] = PB/(RTosm*Cref)
     PRES[4] = PRES[5]+(cell.vol[4]/cell.volref[4]-1)/compl/(RTosm*Cref) 
-    if cell.humOrrat == 'rat':
+    if cell.humOrrat == 'rat' or cell.humOrrat == 'mou':
         if cell.segment == 'SDL'or cell.segment == 'LDL' or cell.segment == 'LAL':
             PRES[1] = PRES[5]
 

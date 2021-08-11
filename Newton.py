@@ -81,8 +81,8 @@ def broyden(func,x,k,type):
 #=====================================================
 # rat newton solver
 def newton_rat(func,x,k,cell):
-    if cell.humOrrat != 'rat':
-        raise Exception('newton_rat only for rat model')
+    if cell.humOrrat != 'rat' and cell.humOrrat != 'mou':
+        raise Exception('newton_rat only for rat or mouse model')
     fun=equations.conservation_eqs
     f=np.matrix(fun(x,k))
     TOLpcn = 1
@@ -210,7 +210,7 @@ def newton_rat(func,x,k,cell):
                     else:
                         amp = 0.5
                 else:
-                    amp = 0.6
+                    amp = 0.8
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1000:
