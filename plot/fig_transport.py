@@ -8,39 +8,48 @@ import argparse
 #========================================
 # user input
 #========================================
-compare = 3 #2, 3
+compare = 1#2, 3
 save_figs = 0 # if want to save figs set to 1
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'Volume']
 #solute_list = ['Na']
+#solute_list = ['K']
 
-direct1 = 'female-updated'
+direct1 = 'latepregnant_rat2021-08-11'
 sex1 = 'female'
 
-direct2 = '2021-07-07midpregnant_rat'
+direct2 = 'female-multi2021-08-11'
 sex2 = 'female'
 
-direct3 = '2021-07-07latepregnant_rat'
+direct3 = '2021-07-23latepregnant_rat'
 sex3 = 'female'
 
 label1 = direct1
 label2 = direct2
 label3 = direct3
 
-segment_early = ['pt','s3','sdl','mtal','ctal','dct','cnt']
-segment_jux = ['sdl','ldl','lal']
-segment_cd = ['ccd','omcd','imcd']
-#segment_cd = ['ccd', 'omcd']
+
+
+segment_early = ['PT', 'S3', 'SDL', 'mTAL', 'cTAL', 'DCT', 'CNT']
+segment_jux = ['SDL', 'LDL', 'LAL']
+segment_cd = ['CCD','OMCD','IMCD']
 
 
 humOrrat = 'rat' # set to 'hum' for human model
 
 # conversion factors
-sup_ratio = 2.0/3.0
+if humOrrat == 'rat':
+    sup_ratio = 2.0/3.0
+elif humOrrat == 'hum':
+    sup_ratio = 0.85
+    
 jux_ratio = 1-sup_ratio
 neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_ratio, 0.05*jux_ratio ]
 
-neph_per_kidney = 36000 #number of nephrons per kidney
+if humOrrat == 'rat':
+    neph_per_kidney = 36000 #number of nephrons per kidney
+elif humOrrat == 'hum':
+    neph_per_kidney = 1000000
 p_to_mu = 1e-6 #convert pmol to micromole
 cf = neph_per_kidney * p_to_mu
 
@@ -107,10 +116,10 @@ def get_data(direct, sex, solute, segments):
     
     for s in range(len(segments)):
         seg = segments[s]
-        if seg[-2:] == 'cd':
+        if seg[-2:].lower() == 'cd':
             print('segment: ' + seg)
             raise Exception('not for collecting duct, use get_cd_data for cd')
-        if seg != 'ldl' and seg != 'lal':
+        if seg.lower() != 'ldl' and seg.lower() != 'lal':
             sup_trans[s] = get_transport(direct, sex, solute, seg, '_sup')
         jux1_trans[s] = get_transport(direct, sex, solute, seg, '_jux1')
         jux2_trans[s] = get_transport(direct, sex, solute, seg, '_jux2')
@@ -133,7 +142,7 @@ def get_cd_data(direct, sex, solute, segments):
     
     for s in range(len(segments)):
         seg = segments[s]
-        if seg[-2:] != 'cd':
+        if seg[-2:].lower() != 'cd':
             print('segment: ' + seg)
             raise Exception('only for collecting duct segments')
         trans[s] = get_transport(direct, sex, solute, seg, '')
@@ -145,17 +154,20 @@ def get_cd_data(direct, sex, solute, segments):
 for solute in solute_list:
     print(solute)
     sup_vals1, jux_vals1, trans_vals1 = get_data(direct1, sex1, solute, segment_early)
-    sup_vals2, jux_vals2, trans_vals2 = get_data(direct2, sex2, solute, segment_early)
+    if compare>1:
+        sup_vals2, jux_vals2, trans_vals2 = get_data(direct2, sex2, solute, segment_early)
     if compare > 2:
         sup_vals3, jux_vals3, trans_vals3 = get_data(direct3, sex3, solute, segment_early)
     
     jux_dl_vals1 = get_data(direct1, sex1, solute, segment_jux)[1]
-    jux_dl_vals2 = get_data(direct2, sex2, solute, segment_jux)[1]
+    if compare>1:
+        jux_dl_vals2 = get_data(direct2, sex2, solute, segment_jux)[1]
     if compare > 2:
         jux_dl_vals3 = get_data(direct3, sex3, solute, segment_jux)[1]
     
     cd_vals1 = get_cd_data(direct1, sex1, solute, segment_cd)
-    cd_vals2 = get_cd_data(direct2, sex2, solute, segment_cd)
+    if compare>1:
+        cd_vals2 = get_cd_data(direct2, sex2, solute, segment_cd)
     if compare > 2:
         cd_vals3 = get_cd_data(direct3, sex3, solute, segment_cd)
     
@@ -167,12 +179,13 @@ for solute in solute_list:
     print('cd vals: '+str(cd_vals1))
     print('\n')
     
-    print(direct2)
-    print('sup vals: ' + str(sup_vals2))
-    print('jux vals: ' + str(jux_vals2))
-    print('jux dl vals: '+str(jux_dl_vals2))
-    print('cd vals: '+str(cd_vals2))
-    print('\n')
+    if compare>1:
+        print(direct2)
+        print('sup vals: ' + str(sup_vals2))
+        print('jux vals: ' + str(jux_vals2))
+        print('jux dl vals: '+str(jux_dl_vals2))
+        print('cd vals: '+str(cd_vals2))
+        print('\n')
     
     if compare > 2:
         print(direct3)
@@ -189,68 +202,80 @@ for solute in solute_list:
     
     # cd considered separately
     sup_final1 = np.zeros(len(segment_transport)-1)
-    sup_final2 = np.zeros(len(segment_transport)-1)
+    if compare>1:
+        sup_final2 = np.zeros(len(segment_transport)-1)
     if compare > 2:
         sup_final3 = np.zeros(len(segment_transport)-1)
     
     jux_final1 = np.zeros(len(segment_transport)-1)
-    jux_final2 = np.zeros(len(segment_transport)-1)
+    if compare > 1:
+        jux_final2 = np.zeros(len(segment_transport)-1)
     if compare > 2:
         jux_final3 = np.zeros(len(segment_transport)-1)
     
     # PT = pct & s3
     sup_final1[0] = sum(sup_vals1[0:1+1]) 
-    sup_final2[0] = sum(sup_vals2[0:1+1])
+    if compare>1:
+        sup_final2[0] = sum(sup_vals2[0:1+1])
     if compare>2:
         sup_final3[0] = sum(sup_vals3[0:1+1])
     
     jux_final1[0] = sum(jux_vals1[0:1+1])
-    jux_final2[0] = sum(jux_vals2[0:1+1])
+    if compare>1:
+        jux_final2[0] = sum(jux_vals2[0:1+1])
     if compare > 2:
         jux_final3[0] = sum(jux_vals3[0:1+1])
     
     # DL = sdl for sup, sdl + ldl for jux
     sup_final1[1] = sup_vals1[2]
-    sup_final2[1] = sup_vals2[2]
+    if compare>1:
+        sup_final2[1] = sup_vals2[2]
     if compare > 2:
         sup_final3[1] = sup_vals3[2]
     #sdl + ldl
     jux_final1[1] = sum(jux_dl_vals1[0:1+1])
-    jux_final2[1] = sum(jux_dl_vals2[0:1+1])
+    if compare>1:
+        jux_final2[1] = sum(jux_dl_vals2[0:1+1])
     if compare > 2:
         jux_final3[1] = sum(jux_dl_vals3[0:1+1])
     
     # LAL
     jux_final1[2] = jux_dl_vals1[-1]
-    jux_final2[2] = jux_dl_vals2[-1]
+    if compare>1:
+        jux_final2[2] = jux_dl_vals2[-1]
     if compare > 2:
         jux_final3[2] = jux_dl_vals3[-1]
     
     # TAL = mTAL + cTAL
     sup_final1[3] = sum(sup_vals1[3:4+1])
-    sup_final2[3] = sum(sup_vals2[3:4+1])
+    if compare>1:
+        sup_final2[3] = sum(sup_vals2[3:4+1])
     if compare > 2:
         sup_final3[3] = sum(sup_vals3[3:4+1])
     
     jux_final1[3] = sum(jux_vals1[3:4+1])
-    jux_final2[3] = sum(jux_vals2[3:4+1])
+    if compare>1:
+        jux_final2[3] = sum(jux_vals2[3:4+1])
     if compare > 2:
         jux_final3[3] = sum(jux_vals3[3:4+1])
     
     # DCT, CNT
     sup_final1[4:5+1] = sup_vals1[5:6+1]
-    sup_final2[4:5+1] = sup_vals2[5:6+1]
+    if compare>1:
+        sup_final2[4:5+1] = sup_vals2[5:6+1]
     if compare > 2:
         sup_final3[4:5+1] = sup_vals3[5:6+1]
     
     jux_final1[4:5+1] = jux_vals1[5:6+1]
-    jux_final2[4:5+1] = jux_vals2[5:6+1]
+    if compare>1:
+        jux_final2[4:5+1] = jux_vals2[5:6+1]
     if compare > 2:
         jux_final3[4:5+1] = jux_vals3[5:6+1]
     
     # CD = ccd + omcd + imcd
     cd_final1 = sum(cd_vals1)
-    cd_final2 = sum(cd_vals2)
+    if compare>1:
+        cd_final2 = sum(cd_vals2)
     if compare > 2:
         cd_final3 = sum(cd_vals3)
     
@@ -290,13 +315,14 @@ for solute in solute_list:
     cd1 = ax.bar(cd_pos, cd_final1, bar_width, align = 'center', edgecolor = 'black',
                  color = c1)
     
-    # bar2
-    sup2 = ax.bar(neph_pos+bar_width, sup_final2, bar_width, align = 'center', edgecolor = 'black',
-                  color = c2, label=label2)
-    jux2 = ax.bar(neph_pos+bar_width, jux_final2, bar_width, bottom = sup_final2, align = 'center',
-                  edgecolor = 'black', color = 'white')
-    cd2 = ax.bar(cd_pos+bar_width, cd_final2, bar_width, align = 'center', edgecolor = 'black',
-                 color = c2)
+    if compare>1:
+        # bar2
+        sup2 = ax.bar(neph_pos+bar_width, sup_final2, bar_width, align = 'center', edgecolor = 'black',
+                      color = c2, label=label2)
+        jux2 = ax.bar(neph_pos+bar_width, jux_final2, bar_width, bottom = sup_final2, align = 'center',
+                      edgecolor = 'black', color = 'white')
+        cd2 = ax.bar(cd_pos+bar_width, cd_final2, bar_width, align = 'center', edgecolor = 'black',
+                     color = c2)
     
     if compare > 2:
         # bar3

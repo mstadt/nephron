@@ -9,35 +9,43 @@ compare = 2#2 or 3
 save_figs = 0 # if want to save figs
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
+#solute_list = ['K']
 
+humOrrat = 'rat' # set to 'hum' for human model, 'rat for rat model 
 
-direct1 = 'male-nephron'
-sex1 = 'male'
+direct1 = 'latepregnant_rat2021-08-11'
+sex1 = 'female'
 
-direct2 = 'male-tgf4'
-sex2 = 'male'
+direct2 = 'female-multi2021-08-11'
+sex2 = 'female'
 
-direct3 = 'male-torqR-s'
-sex3 = 'male'
+direct3 = '2021-07-25latepreg'
+sex3 = 'female'
 
 label1 = direct1
 label2 = direct2
 label3 = direct3
 
-segs_early = ['pt', 'sdl', 'mtal', 'dct', 'cnt']
-segs_cd = ['ccd', 'imcd'] # no imcd for the MP rat right now
+
+segs_early = ['PT', 'SDL', 'mTAL', 'DCT', 'CNT']
+segs_cd = ['CCD', 'IMCD']
 seg_labels = ['PT', 'DL', 'mTAL', 'DCT', 'CNT', 'CCD', 'urine']
 flag = 1 # set to 1 if there is IMCD
-humOrrat = 'rat' # set to 'hum' for human model
+
+
 
 
 # conversion factors
-sup_ratio = 2.0/3.0
+if humOrrat == 'rat':
+    sup_ratio = 2.0/3.0
+    neph_per_kidney = 36000 #number of nephrons per kidney
+elif humOrrat == 'hum':
+    sup_ratio = 0.85
+    neph_per_kidney = 1000000
 jux_ratio = 1-sup_ratio
 neph_weight = [sup_ratio, 0.4*jux_ratio, 0.3*jux_ratio, 0.15*jux_ratio, 0.1*jux_ratio, 0.05*jux_ratio ]
 
 
-neph_per_kidney = 36000 #number of nephrons per kidney
 p_to_mu = 1e-6 #convert pmol to micromole
 cf = neph_per_kidney * p_to_mu
 
@@ -183,15 +191,17 @@ def get_data(direct, sex, solute, segments):
 for solute in solute_list:
     print(solute)
     direct_deliv_num1, direct_vals1, sup_vals1, jux_vals1 = get_data(direct1, sex1, solute, segs_early)
-    direct_deliv_num2, direct_vals2, sup_vals2, jux_vals2 = get_data(direct2, sex2, solute, segs_early)
-    if compare > 2:
-        direct_deliv_num3, direct_vals3, sup_vals3, jux_vals3 = get_data(direct3, sex3, solute, segs_early)
-    
-    if 'imcd' in segs_cd:
-        dir_del_urine1 = get_out_deliv(direct1, sex1, solute, 'IMCD','')
-        dir_del_urine2 = get_out_deliv(direct2, sex2, solute, 'IMCD', '')
+    if compare > 1:
+        direct_deliv_num2, direct_vals2, sup_vals2, jux_vals2 = get_data(direct2, sex2, solute, segs_early)
         if compare > 2:
-            dir_del_urine3 = get_out_deliv(direct3, sex3, solute, 'IMCD', '')
+            direct_deliv_num3, direct_vals3, sup_vals3, jux_vals3 = get_data(direct3, sex3, solute, segs_early)
+    
+    if flag:
+        dir_del_urine1 = get_out_deliv(direct1, sex1, solute, 'IMCD','')
+        if compare > 1:
+            dir_del_urine2 = get_out_deliv(direct2, sex2, solute, 'IMCD', '')
+            if compare > 2:
+                dir_del_urine3 = get_out_deliv(direct3, sex3, solute, 'IMCD', '')
  
 #===================================================
 # print relevant values
@@ -210,19 +220,20 @@ for solute in solute_list:
             print('urine delivery (mmol/day): ' + str(daily_deliv) )
     print('\n')
     
-    print(direct2)
-    print('sup vals: ' + str(sup_vals2))
-    print('jux vals: ' + str(jux_vals2))
-    if flag:
-        if solute == 'Volume':
-            print('urine delivery (ml/min): ' + str(dir_del_urine2))
-            daily_deliv = vol_conv * dir_del_urine2
-            print('urine delivery (ml/day): ' + str(daily_deliv))
-        else:
-            print('urine delivery (mumol/min): ' + str(dir_del_urine2))
-            daily_deliv = sol_conv * dir_del_urine2
-            print('urine delivery (mmol/day): ' + str(daily_deliv) )
-    print('\n')
+    if compare>1:
+        print(direct2)
+        print('sup vals: ' + str(sup_vals2))
+        print('jux vals: ' + str(jux_vals2))
+        if flag:
+            if solute == 'Volume':
+                print('urine delivery (ml/min): ' + str(dir_del_urine2))
+                daily_deliv = vol_conv * dir_del_urine2
+                print('urine delivery (ml/day): ' + str(daily_deliv))
+            else:
+                print('urine delivery (mumol/min): ' + str(dir_del_urine2))
+                daily_deliv = sol_conv * dir_del_urine2
+                print('urine delivery (mmol/day): ' + str(daily_deliv) )
+        print('\n')
     
     if compare > 2:
         print(direct3)
@@ -279,11 +290,12 @@ for solute in solute_list:
     if flag:
         urine1 = ax.bar(later_pos, dir_del_urine1, bar_width, align='center', edgecolor='black', color = c1)
     
-    # bar2
-    sup2 = ax.bar(sup_pos + bar_width, sup_vals2, bar_width, align = 'center', edgecolor = 'black', color = c2, label = label2)
-    jux2 = ax.bar(sup_pos + bar_width, jux_vals2, bar_width, bottom = sup_vals2, align = 'center', edgecolor = 'black', color = 'white')
-    if flag:
-        urine2 = ax.bar(later_pos + bar_width, dir_del_urine2, bar_width, align='center', edgecolor='black', color=c2)
+    if compare>1:
+        # bar2
+        sup2 = ax.bar(sup_pos + bar_width, sup_vals2, bar_width, align = 'center', edgecolor = 'black', color = c2, label = label2)
+        jux2 = ax.bar(sup_pos + bar_width, jux_vals2, bar_width, bottom = sup_vals2, align = 'center', edgecolor = 'black', color = 'white')
+        if flag:
+            urine2 = ax.bar(later_pos + bar_width, dir_del_urine2, bar_width, align='center', edgecolor='black', color=c2)
     
     if compare >2:
         # bar3
