@@ -28,14 +28,13 @@ label1 = direct1
 label2 = direct2
 label3 = direct3
 
-
-
 segment_early = ['PT', 'S3', 'SDL', 'mTAL', 'cTAL', 'DCT', 'CNT']
 segment_jux = ['SDL', 'LDL', 'LAL']
 segment_cd = ['CCD','OMCD','IMCD']
 
 
-humOrrat = 'rat' # set to 'hum' for human model
+
+humOrrat = 'hum' # set to 'hum' for human model
 
 # conversion factors
 if humOrrat == 'rat':

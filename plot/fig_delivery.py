@@ -5,7 +5,7 @@ import numpy as np
 import os
 import argparse
 
-compare = 2#2 or 3
+compare = 1#2 or 3
 save_figs = 0 # if want to save figs
 
 solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
@@ -17,6 +17,7 @@ direct1 = 'latepregnant_rat2021-08-11'
 sex1 = 'female'
 
 direct2 = 'female-multi2021-08-11'
+
 sex2 = 'female'
 
 direct3 = '2021-07-25latepreg'
