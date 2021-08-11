@@ -40,6 +40,52 @@ def compare_sex(sex, cell):
     else:
         return True
 
+def set_torq_params(species,sex,preg):
+    if species == 'hum':
+        Radref = 0.0037/2.0e0  # Fortran:Change this to be half of the male diameter given in PTparams_M.dat.diam=0.0036 but this is changed to match Fortran code.
+        torqR = 0.0014 #Reference radius
+        torqL = 2.50e-4 #Microvillous length
+        torqd = 1.5e-05 #Height above the microvillous tip
+        torqvm = 0.020 #Compliance Fortran Code
+        PbloodPT = 20.0e0 #Reference pressure
+    elif species == 'rat':
+        if sex == 'male':
+            Radref = 0.0025/2.0
+            torqR = 0.00112
+            torqvm = 0.030
+            PbloodPT = 9.0e0
+        elif sex == 'female':
+            torqR = 0.00095
+            torqvm = 0.030
+            if preg == 'non':
+                Radref = 0.002125/2.0 #female radius
+                PbloodPT = 8.0e0
+            elif preg == 'mid':
+                Radref = 0.0024225/2.0
+                PbloodPT = 4.0e0
+            elif preg == 'late':
+                Radref = 0.002465/2.0
+                PbloodPT = 4.0e0
+        torqL = 2.50e-4
+        torqd = 1.50e-5
+    elif species == 'mou':
+        if sex == 'male':
+            Radref = 0.002/2.0
+            torqR = 0.001
+            torqvm = 0.0275
+            PbloodPT = 9.0e0
+        elif sex == 'female':
+            Radref = 0.002125/2.0 #female radius
+            torqR = 0.00095
+            torqvm = 0.030
+            PbloodPT = 8.0e0
+        torqL = 2.50e-4
+        torqd = 1.50e-5
+    else:
+        print('cell.humOrrat: ' + str(cell.humOrrat))
+        raise Exception('what is species?')
+    return Radref,torqR,torqvm,PbloodPT,torqL,torqd
+
 def read_params(cell,filename,j):
 
     file = open(filename,'r')
@@ -144,7 +190,20 @@ def read_params(cell,filename,j):
                 else:
                     cell.len = value
 
+    # parameter files specify superficial segmental lengths; for some segments, lengths are different for juxtamedullary nephrons, so we overwrite them here...
                 if cell.type != 'sup' and cell.humOrrat == 'rat':
+                    if cell.segment == 'cTAL':
+                        if cell.sex == 'male':
+                            cell.len = 0.05
+                        elif cell.sex == 'female':
+                            cell.len = 0.05*0.9 #0.05*0.85, updated female
+                    elif cell.segment == 'CNT':
+                        if cell.sex == 'male':
+                            cell.len = 0.3
+                        elif cell.sex == 'female':
+                            cell.len = 0.3*0.9 #0.3*0.85, updated female
+
+                if cell.type != 'sup' and cell.humOrrat == 'mou':
                     if cell.segment == 'cTAL':
                         if cell.sex == 'male':
                             cell.len = 0.05
@@ -207,12 +266,20 @@ def read_params(cell,filename,j):
             # Luminal pressure:
             elif compare_string_prefix(id,"Pressure"):
                 cell.pres[0] = value
+                
+            # parameter files specify pressure (value) for superficial nephrons; we manually specify juxtamedullary pressure values...
                 if cell.type !='sup' and cell.segment == 'PT' and cell.humOrrat == 'rat':
                     if cell.sex == 'male':
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
                         cell.pres[0] = 12.5
-             
+
+                if cell.type !='sup' and cell.segment == 'PT' and cell.humOrrat == 'mou':
+                    if cell.sex == 'male':
+                        cell.pres[0] = 12.5
+                    elif cell.sex == 'female':
+                        cell.pres[0] = 12.5
+
                 if cell.diabete != 'Non' and cell.humOrrat == 'hum':
                     if cell.type == 'sup' and cell.segment == 'PT':
                         if cell.sex == 'male':
@@ -249,7 +316,7 @@ def read_params(cell,filename,j):
                 cell.area[ind2][ind1] = value  # symmetry
                 cell.area_init[ind1][ind2] = value
                 cell.area_init[ind2][ind1] = value
-                if cell.type != 'sup' and cell.humOrrat == 'rat':
+                if cell.type != 'sup' and (cell.humOrrat == 'rat' or cell.humOrrat == 'mou'):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.area[ind1][ind2] = 1.75*cell.area[ind1][ind2]
                         cell.area[ind2][ind1] = cell.area[ind1][ind2]
@@ -385,7 +452,7 @@ def read_params(cell,filename,j):
                 newTransp.act = value/(href*Cref)
                 #print('transporter')
                 #print(newTransp.membrane_id,newTransp.type,newTransp.act)
-                if cell.type != 'sup' and cell.sex == 'female' and cell.humOrrat == 'rat':
+                if cell.type != 'sup' and cell.sex == 'female' and (cell.humOrrat == 'rat' or cell.humOrrat == 'mou'):
                     if cell.segment == 'mTAL' or cell.segment == 'cTAL':
                         if newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F' or newTransp.type == 'NaKATPase':
                             newTransp.act = 1.5*value/(href*Cref)
@@ -609,6 +676,8 @@ def read_params(cell,filename,j):
                         cell.conc[14,0] = 20.0
                     elif cell.segment == 'PT' and cell.humOrrat == 'rat':
                         cell.conc[14,0] = 25.0
+                    elif cell.segment == 'PT' and cell.humOrrat == 'mou':
+                        cell.conc[14,0] = 25.0
 
             # Reference impermeat concentration (for cell)
             # or oncotic pressure for lumen/LIS/bath
@@ -641,7 +710,9 @@ def read_params(cell,filename,j):
 
             # Actual volume flows:
             elif compare_string_prefix(id,"vol"):
-                tmp = (id).split('_')  
+                tmp = (id).split('_')
+
+                # data files specify values for superficial nephrons, so we hardcord juxmedullary nephron values
                 if cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'rat':
                     if compart_id[tmp[1]] == 0:	
                         if cell.type == 'jux1':
@@ -656,7 +727,6 @@ def read_params(cell,filename,j):
                             elif cell.sex == 'female':
                                 cell.vol[0] = 0.006
                             cell.vol_init[0] = cell.vol[0]
-
                         elif cell.type == 'jux3':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
@@ -678,6 +748,43 @@ def read_params(cell,filename,j):
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
                         cell.vol_init[compart_id[tmp[1]]] = float(num[0])
+                        
+                elif cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'mou':
+                    if compart_id[tmp[1]] == 0:	
+                        if cell.type == 'jux1':
+                            if cell.sex == 'male':
+                                cell.vol[0] = 0.0075
+                            elif cell.sex == 'female':
+                                cell.vol[0] = 0.006
+                            cell.vol_init[0] = cell.vol[0]
+                        elif cell.type == 'jux2':
+                            if cell.sex == 'male':
+                                cell.vol[0] = 0.0075
+                            elif cell.sex == 'female':
+                                cell.vol[0] = 0.006
+                            cell.vol_init[0] = cell.vol[0]
+                        elif cell.type == 'jux3':
+                            if cell.sex == 'male':
+                                cell.vol[0] = 0.0075
+                            elif cell.sex == 'female':
+                                cell.vol[0] = 0.006
+                            cell.vol_init[0] = cell.vol[0]
+                        elif cell.type == 'jux4':
+                            if cell.sex == 'male':
+                                cell.vol[0] = 0.0075
+                            elif cell.sex == 'female':
+                                cell.vol[0] = 0.006
+                            cell.vol_init[0] = cell.vol[0]
+                        elif cell.type == 'jux5':
+                            if cell.sex == 'male':
+                                cell.vol[0] = 0.0075
+                            elif cell.sex == 'female':
+                                cell.vol[0] = 0.006
+                            cell.vol_init[0] = cell.vol[0]
+                    else:
+                        cell.vol[compart_id[tmp[1]]] = float(num[0])
+                        cell.vol_init[compart_id[tmp[1]]] = float(num[0])
+                        
                 elif cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'hum':
                     if compart_id[tmp[1]] == 0:
                         cell.vol[0] = 0.02222
@@ -690,6 +797,22 @@ def read_params(cell,filename,j):
                     cell.vol_init[compart_id[tmp[1]]] = float(num[0])
 
                 if cell.diabete != 'Non' and cell.humOrrat == 'rat':
+                    if cell.sex == 'male':
+                        if cell.segment == 'PT' and cell.type == 'sup':
+                            cell.vol[0] = 0.0075
+                            cell.vol_init[0] = cell.vol[0]
+                        if cell.segment == 'PT' and cell.type != 'sup':
+                            cell.vol[0] = 0.008775
+                            cell.vol_init[0] = cell.vol[0]
+                    elif cell.sex == 'female':
+                        if cell.segment == 'PT' and cell.type == 'sup':
+                            cell.vol[0] = 0.004*1.75#1.5
+                            cell.vol_init[0] = cell.vol[0]
+                        if cell.segment == 'PT' and cell.type != 'sup':
+                            cell.vol[0] = 0.006*1.17
+                            cell.vol_init[0] = cell.vol[0]
+
+                if cell.diabete != 'Non' and cell.humOrrat == 'mou':
                     if cell.sex == 'male':
                         if cell.segment == 'PT' and cell.type == 'sup':
                             cell.vol[0] = 0.0075

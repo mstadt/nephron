@@ -11,12 +11,13 @@ save_figs = 0 # if want to save figs
 solute_list = ['Na','K','Cl','HCO3','urea','NH4', 'TA', 'Volume']
 #solute_list = ['K']
 
-humOrrat = 'hum' # set to 'hum' for human model, 'rat for rat model 
+humOrrat = 'rat' # set to 'hum' for human model, 'rat for rat model 
 
-direct1 = 'Male_hum_normal'
-sex1 = 'male'
+direct1 = 'latepregnant_rat2021-08-11'
+sex1 = 'female'
 
-direct2 = 'female-updated'
+direct2 = 'female-multi2021-08-11'
+
 sex2 = 'female'
 
 direct3 = '2021-07-25latepreg'
@@ -26,8 +27,9 @@ label1 = direct1
 label2 = direct2
 label3 = direct3
 
-segs_early = ['pt', 'sdl', 'mtal', 'dct', 'cnt']
-segs_cd = ['ccd', 'imcd'] # no imcd for the MP rat right now
+
+segs_early = ['PT', 'SDL', 'mTAL', 'DCT', 'CNT']
+segs_cd = ['CCD', 'IMCD']
 seg_labels = ['PT', 'DL', 'mTAL', 'DCT', 'CNT', 'CCD', 'urine']
 flag = 1 # set to 1 if there is IMCD
 

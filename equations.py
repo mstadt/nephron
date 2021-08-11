@@ -1,5 +1,6 @@
 from defs import *
 from values import *
+from set_params import set_torq_params
 import math
 import flux
 import copy
@@ -71,8 +72,13 @@ def conservation_eqs (x,i):
         if cell1.segment == 'IMCD':
             if cell1.humOrrat == 'rat':
                 coalesce = 0.2*(1-0.95*(i/N)**2)*np.exp(-2.75*i/N)
+            elif cell1.humOrrat == 'mou':
+                coalesce = 0.2*(1-0.95*(i/N)**2)*np.exp(-2.75*i/N)
             elif cell1.humOrrat == 'hum':
                 coalesce = 0.1*(1-0.95*(i/N)**2)*np.exp(-2.75*i/N)
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
             Bm = Bm*coalesce
             Am = Am*coalesce
     
@@ -233,39 +239,18 @@ def conservation_eqs (x,i):
             # and so we'll be using the same attributes for computation throughout.
             
             PM=cell1.pres[0]
-    
-    
-            if cell1.humOrrat == 'hum':
-                Radref = 0.0037/2.0e0  # Fortran:Change this to be half of the male diameter given in PTparams_M.dat.diam=0.0036 but this is changed to match Fortran code.
-                torqR = 0.0014 #Reference radius
-                torqL = 2.50e-4 #Microvillous length
-                torqd = 1.5e-05 #Height above the microvillous tip
-                torqvm = 0.020 #Compliance Fortran Code
-                PbloodPT = 20.0e0 #Reference pressure
-            elif cell1.humOrrat == 'rat':
-                if cell.sex.lower() == 'male':
-                    Radref = 0.0025/2.0
-                    torqR = 0.00112
-                    torqvm = 0.030
-                    PbloodPT = 9.0e0
-                elif cell.sex.lower() == 'female':
-                    torqR = 0.00095
-                    torqvm = 0.030
-                    if cell.preg == 'non':
-                        Radref = 0.002125/2.0 #female radius
-                        PbloodPT = 8.0e0
-                    elif cell.preg == 'mid':
-                        Radref = 0.0024225/2.0 # mp radius
-                        PbloodPT = 4.0e0
-                    elif cell.preg == 'late':
-                        Radref = 0.002465/2.0 #lp radius
-                        PbloodPT = 4.0e0
-                torqL = 2.50e-4
-                torqd = 1.50e-5
+
+            Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell1.humOrrat,cell1.sex,cell1.preg)
+
             if cell1.humOrrat == 'hum':
                 fac1 = 8.0*visc*(cell1.volref[0]*Vref)*torqL/(Radref**2) 
             elif cell1.humOrrat == 'rat':
                 fac1 = 8.0*visc*(cell1.vol_init[0]*Vref)*torqL/(Radref**2)
+            elif cell1.humOrrat == 'mou':
+                fac1 = 8.0*visc*(cell1.vol_init[0]*Vref)*torqL/(Radref**2)
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
             fac2 = 1.0 + (torqL+torqd)/Radref + 0.50*((torqL/Radref)**2)
             TM0= fac1*fac2
     
@@ -353,13 +338,9 @@ def conservation_eqs (x,i):
 #     For Pressure
 #---------------------------------------------------------------------72    
        # Added by Dania: PT and S3 are the only compliant segments.
+        Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell1.humOrrat,cell1.sex,cell1.preg)
+       
         if cell1.humOrrat == 'hum':
-            Radref = 0.0037/2.0e0  # Fortran:Change this to be half of the male diameter given in PTparams_M.dat.diam=0.0036 but this is changed to match Fortran code.
-            torqR = 0.0014 #Reference radius
-            torqL = 2.50e-4 #Microvillous length
-            torqd = 1.5e-05 #Height above the microvillous tip
-            torqvm = 0.020 #Compliance Fortran Code
-            PbloodPT = 20.0e0 #Reference pressure
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
                 Amcompl = PI*(RMcompl**2)
@@ -367,26 +348,6 @@ def conservation_eqs (x,i):
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
         elif cell1.humOrrat == 'rat':
-            if cell.sex == 'male':
-                Radref = 0.0025/2.0
-                torqR = 0.00112
-                torqvm = 0.030
-                PbloodPT = 9.0e0
-            elif cell.sex == 'female':
-                torqR = 0.00095
-                torqvm = 0.030
-                if cell.preg == 'non':
-                    Radref = 0.002125/2.0
-                    PbloodPT = 8.0
-                elif cell.preg == 'mid':
-                    Radref = 0.0024225/2.0
-                    PbloodPT = 4.0
-                elif cell.preg == 'late':
-                    Radref = 0.002465/2.0
-                    PbloodPT = 4.0
-            torqL = 2.50e-4
-            torqd = 1.50e-5
-
             RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
             Amcompl = PI*(RMcompl**2)
             if cell1.segment == 'PT' or cell1.segment == 'S3':
@@ -396,12 +357,29 @@ def conservation_eqs (x,i):
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
 
+        elif cell1.humOrrat == 'mou':
+            RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
+            Amcompl = PI*(RMcompl**2)
+            if cell1.segment == 'PT' or cell1.segment == 'S3':
+                RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
+                Amcompl = PI*(RMcompl**2)
+                factor1 = 8.0*PI*visc/(Amcompl**2)
+            else:
+                factor1 = 8.0*PI*visc/(Am**2)
+        else:
+            print('cell1.humOrrat: ' + str(cell1.humOrrat))
+            raise Exception('what is species?')
+
         if cell1.segment == 'IMCD':
             if cell1.humOrrat == 'rat':
                 factor1 = factor1*coalesce*2
+            elif cell1.humOrrat == 'mou':
+                factor1 = factor1*coalesce*2
             elif cell1.humOrrat == 'hum':
                 factor1 = factor1*coalesce*1.0
-
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
 
         fvec[6+3*NS] = PM1-PM0+factor1*cell1.vol[0]*Vref*cell1.len/cell1.total
         #print(PM1,PM0,factor1,cell1.vol[0])
@@ -425,13 +403,23 @@ def conservation_eqs (x,i):
         if cell1.segment == 'CNT':
             if cell1.humOrrat == 'rat':
                 coalesce = 2.0**(-2.32*(i+1)/cell1.total)
+            elif cell1.humOrrat == 'mou':
+                coalesce = 2.0**(-2.32*(i+1)/cell1.total)
             elif cell1.humOrrat == 'hum':
                 coalesce = 2.0**(-3.32*(i+1)/cell1.total)
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
         elif cell1.segment == 'CCD' or cell1.segment == 'OMCD':
             if cell1.humOrrat == 'rat':
                 coalesce = 0.2
+            elif cell1.humOrrat == 'mou':
+                coalesce = 0.2
             elif cell1.humOrrat == 'hum':    
                 coalesce = 0.1
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
         else:
             coalesce = 1.0
 
@@ -706,10 +694,21 @@ def conservation_eqs (x,i):
         if cell1.segment == 'CNT':
             if cell1.humOrrat == 'rat':
                 ratio = 8.0*PI*visc/(Am**2)*coalesce*2
+            elif cell1.humOrrat == 'mou':
+                ratio = 8.0*PI*visc/(Am**2)*coalesce*2
             elif cell1.humOrrat == 'hum':
                 ratio = 8.0*PI*visc/(Am**2)*coalesce*1.0
+            else:
+                print('cell1.humOrrat: ' + str(cell1.humOrrat))
+                raise Exception('what is species?')
+
         elif cell1.segment == 'CCD' or cell1.segment == 'OMCD':
             ratio = 8.0*PI*visc/(Am**2)*coalesce
+
+        else:
+            print('cell1.segment: '+str(cell1.segment))
+            raise Exception ('ratio not set for this segment')
+            
         fvec[5*NS+10] = cell1.pres[0]-cell0.pres[0]+ratio*cell1.vol[0]*Vref*cell1.len/cell1.total  
     else:
 

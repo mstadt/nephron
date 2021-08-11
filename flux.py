@@ -1,6 +1,7 @@
 import numpy as np
 from defs import *
 from values import *
+from set_params import set_torq_params
 import electrochemical 
 import water
 import glucose
@@ -128,37 +129,17 @@ def compute_fluxes (cell,j):
         #torque-modulated effects
         
         PM=cell.pres[0]
-        if cell.humOrrat == 'hum':
-            Radref = 0.0037/2.0e0  # Fortran:Change this to be half of the male diameter given in PTparams_M.dat.diam=0.0036 but this is changed to match Fortran code.
-            torqR = 0.0014 #Reference radius
-            torqL = 2.50e-4 #Microvillous length
-            torqd = 1.5e-05 #Height above the microvillous tip
-            torqvm = 0.020 #Compliance Fortran Code
-            PbloodPT = 20.0e0 #Reference pressure
-        elif cell.humOrrat == 'rat':
-            if cell.sex == 'male':
-                Radref = 0.0025/2.0
-                torqR = 0.00112
-                torqvm = 0.030
-                PbloodPT = 9.0e0
-            elif cell.sex == 'female':
-                torqR = 0.00095
-                torqvm = 0.030
-                if cell.preg == 'non':
-                    Radref = 0.002125/2.0 #female radius
-                    PbloodPT = 8.0e0
-                elif cell.preg == 'mid':
-                    Radref = 0.0024225/2.0
-                    PbloodPT = 4.0e0
-                elif cell.preg == 'late':
-                    Radref = 0.002465/2.0
-                    PbloodPT = 4.0e0
-            torqL = 2.50e-4
-            torqd = 1.50e-5
+        Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell.humOrrat,cell.sex,cell.preg)
+
         if cell.humOrrat == 'rat':
+            fac1 = 8.0*visc*(cell.vol_init[0]*Vref)*torqL/(Radref**2)
+        elif cell.humOrrat == 'mou':
             fac1 = 8.0*visc*(cell.vol_init[0]*Vref)*torqL/(Radref**2)
         elif cell.humOrrat == 'hum':
             fac1 = 8.0*visc*(cell.volref[0]*Vref)*torqL/(Radref**2)
+        else:
+            print('cell.humOrrat: ' + str(cell.humOrrat))
+            raise Exception('what is species?')
         fac2 = 1.0 + (torqL+torqd)/Radref + 0.50*((torqL/Radref)**2)
         TM0= fac1*fac2
     

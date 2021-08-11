@@ -15,10 +15,10 @@ solute_list = ['Na','K','Cl','HCO3','urea','NH4','TA', 'Volume']
 #solute_list = ['Na']
 #solute_list = ['K']
 
-direct1 = 'Male_hum_normal'
-sex1 = 'male'
+direct1 = 'latepregnant_rat2021-08-11'
+sex1 = 'female'
 
-direct2 = '2021-07-23midpregnant_rat'
+direct2 = 'female-multi2021-08-11'
 sex2 = 'female'
 
 direct3 = '2021-07-23latepregnant_rat'
@@ -28,9 +28,10 @@ label1 = direct1
 label2 = direct2
 label3 = direct3
 
-segment_early = ['pt','s3','sdl','mtal','ctal','dct','cnt']
-segment_jux = ['sdl','ldl','lal']
-segment_cd = ['ccd','omcd','imcd']
+segment_early = ['PT', 'S3', 'SDL', 'mTAL', 'cTAL', 'DCT', 'CNT']
+segment_jux = ['SDL', 'LDL', 'LAL']
+segment_cd = ['CCD','OMCD','IMCD']
+
 
 
 humOrrat = 'hum' # set to 'hum' for human model
@@ -114,10 +115,10 @@ def get_data(direct, sex, solute, segments):
     
     for s in range(len(segments)):
         seg = segments[s]
-        if seg[-2:] == 'cd':
+        if seg[-2:].lower() == 'cd':
             print('segment: ' + seg)
             raise Exception('not for collecting duct, use get_cd_data for cd')
-        if seg != 'ldl' and seg != 'lal':
+        if seg.lower() != 'ldl' and seg.lower() != 'lal':
             sup_trans[s] = get_transport(direct, sex, solute, seg, '_sup')
         jux1_trans[s] = get_transport(direct, sex, solute, seg, '_jux1')
         jux2_trans[s] = get_transport(direct, sex, solute, seg, '_jux2')
@@ -140,7 +141,7 @@ def get_cd_data(direct, sex, solute, segments):
     
     for s in range(len(segments)):
         seg = segments[s]
-        if seg[-2:] != 'cd':
+        if seg[-2:].lower() != 'cd':
             print('segment: ' + seg)
             raise Exception('only for collecting duct segments')
         trans[s] = get_transport(direct, sex, solute, seg, '')

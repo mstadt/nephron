@@ -27,6 +27,9 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     elif humOrrat == 'rat':
         for i in range(N):
             cell[i].humOrrat = 'rat'
+    elif humOrrat == 'mouse':
+        for i in range(N):
+            cell[i].humOrrat = 'mou'
     # the diabetic status of cell.
     if diabete != 'Non':
         for i in range(N):
@@ -242,8 +245,13 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             soluts_flow = [0 for i in range(NS)]
             if humOrrat == 'rat':
                 neph_weight = [2/3,(1/3)*0.4,(1/3)*0.3,(1/3)*0.15,(1/3)*0.1,(1/3)*0.05]
+            elif humOrrat == 'mouse':  # MOUSE: NEED ADJUSTMENT
+                neph_weight = [2/3,(1/3)*0.4,(1/3)*0.3,(1/3)*0.15,(1/3)*0.1,(1/3)*0.05]
             elif humOrrat == 'human':
                 neph_weight = [0.85,(0.15)*0.4,(0.15)*0.3,(0.15)*0.15,(0.15)*0.1,(0.15)*0.05]
+            else:
+                print('humOrrat: ' + str(humOrrat))
+                raise Exception('what is species?')
             water_vol = []
             lum_pres = []
             for neph in nephs:
@@ -383,9 +391,11 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
                     sol = Newton_preg.newton_preg_rat(equations.conservation_eqs,x,i,cell[i])
                 else:
                     sol = Newton.newton_rat(equations.conservation_eqs,x,i,cell[i])
+            elif humOrrat == 'mouse':
+                sol = Newton.newton_rat(equations.conservation_eqs,x,i,cell[i])
             else:
                 print('humOrrat:' + humOrrat)
-                raise Exception('human or rat?', humOrrat)
+                raise Exception('human, rat or mouse?', humOrrat)
         elif method == 'Broyden':
             sol = Newton.broyden(equations.conservation_eqs,x,i,cell[i].segment)
         else:

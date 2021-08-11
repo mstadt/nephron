@@ -166,6 +166,8 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 0.2
                     else:
                         amp = 0.1
+                elif iter > 100:
+                    amp = 0.7
                 else:
                     if k==0:
                         amp = 0.5
