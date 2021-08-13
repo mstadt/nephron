@@ -32,7 +32,7 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         if cell.humOrrat == 'rat':
             NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
         elif cell.humOrrat == 'mou':
-            NaMPq0=cell.vol_init[0]-(0.6e-6)/60/Vref 
+            NaMPq0=cell.vol_init[0]-(1.6e-6)/60/Vref 
         elif cell.humOrrat == 'hum':
             NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
@@ -46,7 +46,7 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         if cell.humOrrat == 'rat':
             NaMPq0=cell.vol_init[0]-(0.1e-6)/60/Vref
         elif cell.humOrrat == 'mou':
-            NaMPq0=cell.vol_init[0]-(0.03e-6)/60/Vref
+            NaMPq0=cell.vol_init[0]-(0.08e-6)/60/Vref
         elif cell.humOrrat == 'hum':
             NaMPq0=cell.vol_init[0]-(0.1e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
