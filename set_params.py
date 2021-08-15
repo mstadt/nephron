@@ -204,16 +204,16 @@ def read_params(cell,filename,j):
                             cell.len = 0.3*0.9 #0.3*0.85, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'mou':
-                    if cell.segment == 'cTAL':
+                    if cell.segment == 'PT':
                         if cell.sex == 'male':
-                            cell.len = 0.05
+                            cell.len = 0.6
                         elif cell.sex == 'female':
                             cell.len = 0.05*0.9 #0.05*0.85, updated female
-                    elif cell.segment == 'CNT':
-                        if cell.sex == 'male':
-                            cell.len = 0.3
-                        elif cell.sex == 'female':
-                            cell.len = 0.3*0.9 #0.3*0.85, updated female
+                    #elif cell.segment == 'CNT':
+                    #    if cell.sex == 'male':
+                    #        cell.len = 0.12
+                    #    elif cell.sex == 'female':
+                    #        cell.len = 0.3*0.9 #0.3*0.85, updated female
 
                 if cell.type != 'sup' and cell.humOrrat == 'hum':
                     if cell.segment == 'cTAL':
@@ -316,7 +316,7 @@ def read_params(cell,filename,j):
                 cell.area[ind2][ind1] = value  # symmetry
                 cell.area_init[ind1][ind2] = value
                 cell.area_init[ind2][ind1] = value
-                if cell.type != 'sup' and (cell.humOrrat == 'rat' or cell.humOrrat == 'mou'):
+                if cell.type != 'sup' and (cell.humOrrat == 'rat'):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.area[ind1][ind2] = 1.75*cell.area[ind1][ind2]
                         cell.area[ind2][ind1] = cell.area[ind1][ind2]
@@ -751,36 +751,11 @@ def read_params(cell,filename,j):
                         
                 elif cell.segment == 'PT' and cell.type != 'sup' and cell.humOrrat == 'mou':
                     if compart_id[tmp[1]] == 0:	
-                        if cell.type == 'jux1':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux2':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux3':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux4':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
-                        elif cell.type == 'jux5':
-                            if cell.sex == 'male':
-                                cell.vol[0] = 0.0075
-                            elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
-                            cell.vol_init[0] = cell.vol[0]
+                        if cell.sex == 'male':
+                            cell.vol[0] = 0.001533
+                        elif cell.sex == 'female':
+                            cell.vol[0] = 0.006
+                        cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
                         cell.vol_init[compart_id[tmp[1]]] = float(num[0])
