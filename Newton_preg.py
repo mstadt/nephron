@@ -60,10 +60,12 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CNT':
             if cell.sex == 'female':
                 if cell.type == 'sup':
-                    if np.linalg.norm(f)>100:
+                    if np.linalg.norm(f)>1000:
                         amp = 0.17
+                    elif np.linalg.norm(f)>100:
+                        amp = 0.6
                     else:
-                        amp = 0.8
+                        amp = 0.9
                 elif cell.type == 'jux1':
                     if np.linalg.norm(f)>5000:
                         if k==0:
@@ -125,11 +127,11 @@ def newton_preg_rat(func,x,k,cell):
             if cell.preg == 'mid':
                 if np.linalg.norm(f)>1000:
                     if k==0:
-                        amp = 0.05
+                        amp = 0.5
                     else:
-                        amp = 0.8
+                        amp = 0.7
                 else:
-                    amp = 0.75
+                    amp = 0.9
             elif cell.preg == 'late':
                 if np.linalg.norm(f)>1000:
                     if k==0:
