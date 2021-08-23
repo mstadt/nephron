@@ -557,6 +557,8 @@ def read_params_preg(cell,filename,j):
                 cell.ep[compart_id[tmp[1]]] = float(num[0])
             
             # Interstitial concentration parameters
+            # CM: cortico-medullary boundary; OI: outer-inner stripe boundary; Pap: papillary tip
+            # changes for altered concentrations (i.e., in pregnancy) are made in boundaryBath
             elif compare_string_prefix(id,'cm'):
                 cell.cm = []
                 for i in num:

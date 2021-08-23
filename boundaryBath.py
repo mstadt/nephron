@@ -232,6 +232,14 @@ def boundaryBath(cell,i):
         if cell.sex=='female' and cell.humOrrat=='rat':
            cell.conc[1,5]=cell.conc[1,5]-1
            cell.conc[2,5]=cell.conc[2,5]-1
+           if cell.preg == 'mid':
+               # conc of Na, K altered in MP rat
+               cell.conc[0,5] = cell.conc[0,5]*0.95
+               cell.conc[1,5] = cell.conc[1,5]*1.2
+           elif cell.preg == 'late':
+               # conc of Na, K altered in LP rat
+               cell.conc[0,5] = cell.conc[0,5]*0.95
+               cell.conc[1,5] = cell.conc[1,5]*1.3
     
     elif cell.segment=='S3':
         if i == 1:
