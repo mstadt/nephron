@@ -9,13 +9,13 @@ def newton_preg_rat(func,x,k,cell):
         raise Exception('newton_preg_rat only for rat model')
     if cell.sex.lower() != 'female':
         print('sex: ' + cell.sex)
-        raise Exception('pregnant only for female rat')
+        raise Exception('newton_preg only for pregnant female rat')
     fun=equations.conservation_eqs
     f=np.matrix(fun(x,k))
     TOLpcn = 1
     i = 1
     iter = 0
-    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
+    while(np.linalg.norm(f) > 0.0001) and (iter<150): 
         i += 1
         J = np.matrix(Jac(fun,x,k))
         IJ = J.I
