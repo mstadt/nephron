@@ -2,17 +2,17 @@ from values import *
 import numpy as np
 from defs import *
 
-# def female_conc(cell, i):
-#     cell.conc[1,5]=cell.conc[1,5]-1
-#     cell.conc[2,5]=cell.conc[2,5]-1
-#     if cell.preg == 'mid':
-#         # conc of Na, K altered in MP rat
-#         cell.conc[0,5] = cell.conc[0,5]*0.95
-#         cell.conc[1,5] = cell.conc[1,5]*1.2
-#     elif cell.preg == 'late':
-#         # conc of Na, K altered in LP rat
-#         cell.conc[0,5] = cell.conc[0,5]*0.95
-#         cell.conc[1,5] = cell.conc[1,5]*1.3
+def female_conc(cell, i):
+    cell.conc[1,5]=cell.conc[1,5]-1
+    cell.conc[2,5]=cell.conc[2,5]-1
+    if cell.preg == 'mid':
+        # conc of Na, K altered in MP rat
+        cell.conc[0,:] = cell.conc[0,:]*0.95
+        cell.conc[1,:] = cell.conc[1,:]*1.2
+    elif cell.preg == 'late':
+        # conc of Na, K altered in LP rat
+        cell.conc[0,:] = cell.conc[0,:]*0.95
+        cell.conc[1,:] = cell.conc[1,:]*1.3
     
 
 def boundaryBath(cell,i):
@@ -170,16 +170,7 @@ def boundaryBath(cell,i):
         cell.conc[2,5] = cell.conc[2,5]+elecS
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat == 'rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
-           if cell.preg == 'mid':
-               # conc of Na, K altered in MP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.2
-           elif cell.preg == 'late':
-               # conc of Na, K altered in LP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.3
+            female_conc(cell, i)
 
     elif cell.segment=='mTAL' or cell.segment=='SDL' or cell.segment=='OMCD':
 
@@ -249,16 +240,7 @@ def boundaryBath(cell,i):
  
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
-           if cell.preg == 'mid':
-               # conc of Na, K altered in MP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.2
-           elif cell.preg == 'late':
-               # conc of Na, K altered in LP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.3
+            female_conc(cell, i)
     
     elif cell.segment=='S3':
         if i == 1:
@@ -390,16 +372,7 @@ def boundaryBath(cell,i):
             
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
-           if cell.preg == 'mid':
-               # conc of Na, K altered in MP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.2
-           elif cell.preg == 'late':
-               # conc of Na, K altered in LP rat
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.3
+            female_conc(cell, i)
 
     elif cell.segment == 'IMCD' or cell.segment == 'LDL' or cell.segment == 'LAL':
         if cell.type == 'jux1':
@@ -481,14 +454,7 @@ def boundaryBath(cell,i):
 
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
-           if cell.preg == 'mid':
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.2
-           elif cell.preg == 'late':
-               cell.conc[0,5] = cell.conc[0,5]*0.95
-               cell.conc[1,5] = cell.conc[1,5]*1.3
+            female_conc(cell, i)
 
     else:
         cell.conc[:,5] = cell.conc[:,5]
