@@ -55,7 +55,10 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 0.8
         # DCT
         elif cell.segment == 'DCT':
-            amp = 1.0
+            if iter < 100:
+                amp = 1.0
+            else:
+                amp = 0.7
         # CNT
         elif cell.segment == 'CNT':
             if cell.sex == 'female':
