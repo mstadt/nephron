@@ -22,7 +22,7 @@ unx: **N, Y** (optional, default: N)
 
 Notes:
 * Human only have ACE and SGLT2 inhibition cases. The others are for rats.
-* pregnancy: only has been characterized for normal pregnant rat (i.e., not done for humans and for diabetes)
+* pregnancy: only has been characterized for normal pregnant rat superficial nephron at this time (i.e., not done for humans and for diabetes, also multiple nephron)
 
 ### Understanding output
 
