@@ -5,14 +5,15 @@ from defs import *
 def female_conc(cell, i):
     cell.conc[1,5]=cell.conc[1,5]-1
     cell.conc[2,5]=cell.conc[2,5]-1
-    if cell.preg == 'mid':
-        # conc of Na, K altered in MP rat
-        cell.conc[0,:] = cell.conc[0,:]*0.95
-        cell.conc[1,:] = cell.conc[1,:]*1.2
-    elif cell.preg == 'late':
-        # conc of Na, K altered in LP rat
-        cell.conc[0,:] = cell.conc[0,:]*0.95
-        cell.conc[1,:] = cell.conc[1,:]*1.3
+    if cell.segment == 'PT':
+        if cell.preg == 'mid':
+            # conc of Na, K altered in MP rat
+            cell.conc[0,:] = cell.conc[0,:]*0.95
+            cell.conc[1,:] = cell.conc[1,:]*1.2
+        elif cell.preg == 'late':
+            # conc of Na, K altered in LP rat
+            cell.conc[0,:] = cell.conc[0,:]*0.95
+            cell.conc[1,:] = cell.conc[1,:]*1.3
     
 
 def boundaryBath(cell,i):
