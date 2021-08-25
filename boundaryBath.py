@@ -3,15 +3,16 @@ import numpy as np
 from defs import *
 
 def female_conc(cell, i):
+    # Concentrations of K, Cl are lower in female rat.
     cell.conc[1,5]=cell.conc[1,5]-1
     cell.conc[2,5]=cell.conc[2,5]-1
     if cell.segment == 'PT':
         if cell.preg == 'mid':
-            # conc of Na, K altered in MP rat
+            # conc of Na, K different in MP rat plasma
             cell.conc[0,:] = cell.conc[0,:]*0.95
             cell.conc[1,:] = cell.conc[1,:]*1.2
         elif cell.preg == 'late':
-            # conc of Na, K altered in LP rat
+            # conc of Na, K different in LP rat plasma
             cell.conc[0,:] = cell.conc[0,:]*0.95
             cell.conc[1,:] = cell.conc[1,:]*1.3
     
@@ -169,7 +170,6 @@ def boundaryBath(cell,i):
             elecS = elecS+zval[j]*cell.conc[j,5]
 
         cell.conc[2,5] = cell.conc[2,5]+elecS
-        #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat == 'rat':
             female_conc(cell, i)
 
