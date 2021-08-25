@@ -2,6 +2,21 @@ from values import *
 import numpy as np
 from defs import *
 
+def female_conc(cell, i):
+    # Concentrations of K, Cl are lower in female rat.
+    cell.conc[1,5]=cell.conc[1,5]-1
+    cell.conc[2,5]=cell.conc[2,5]-1
+    if cell.segment == 'PT':
+        if cell.preg == 'mid':
+            # conc of Na, K different in MP rat plasma
+            cell.conc[0,:] = cell.conc[0,:]*0.95
+            cell.conc[1,:] = cell.conc[1,:]*1.2
+        elif cell.preg == 'late':
+            # conc of Na, K different in LP rat plasma
+            cell.conc[0,:] = cell.conc[0,:]*0.95
+            cell.conc[1,:] = cell.conc[1,:]*1.3
+    
+
 def boundaryBath(cell,i):
     if cell.humOrrat == 'rat':
         if cell.inhib == 'NHE3-50':
@@ -58,9 +73,8 @@ def boundaryBath(cell,i):
             cell.pap[1] = TotPotPap_100NKCCinhib
             cell.pap[2] = TotCloPap_100NKCCinhib
             cell.pap[8] = TotureaPap_100NKCCinhib
-
+            
     if cell.segment=='cTAL' or cell.segment == 'MD' or cell.segment=='DCT' or cell.segment=='PT' or cell.segment == 'CNT' or cell.segment == 'CCD':
-        
         if cell.humOrrat == 'rat':
             pHplasma = 7.323
             phpap = 7.0
@@ -156,11 +170,8 @@ def boundaryBath(cell,i):
             elecS = elecS+zval[j]*cell.conc[j,5]
 
         cell.conc[2,5] = cell.conc[2,5]+elecS
-        
-        #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat == 'rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
+            female_conc(cell, i)
 
     elif cell.segment=='mTAL' or cell.segment=='SDL' or cell.segment=='OMCD':
 
@@ -230,8 +241,7 @@ def boundaryBath(cell,i):
  
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
+            female_conc(cell, i)
     
     elif cell.segment=='S3':
         if i == 1:
@@ -363,8 +373,7 @@ def boundaryBath(cell,i):
             
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1
+            female_conc(cell, i)
 
     elif cell.segment == 'IMCD' or cell.segment == 'LDL' or cell.segment == 'LAL':
         if cell.type == 'jux1':
@@ -446,7 +455,7 @@ def boundaryBath(cell,i):
 
         #  Concentrations of K, Cl are lower in female rat.
         if cell.sex=='female' and cell.humOrrat=='rat':
-           cell.conc[1,5]=cell.conc[1,5]-1
-           cell.conc[2,5]=cell.conc[2,5]-1   
+            female_conc(cell, i)
+
     else:
         cell.conc[:,5] = cell.conc[:,5]

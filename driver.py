@@ -62,7 +62,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     if cell[0].segment == 'PT':
         # Initial concentrations in Lumen at entrance of PT should be the same as in Bath:
-        # cell[0].conc[:,0] = cell[0].conc[:,5]
+        #cell[0].conc[:,0] = cell[0].conc[:,5]
         if cell[0].diabete != 'Non' and cell[0].humOrrat == 'rat':
             if cell[0].sex == 'male':
                 if cell[0].segment == 'PT' and cell[0].type == 'sup':

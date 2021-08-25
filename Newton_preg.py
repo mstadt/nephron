@@ -9,13 +9,13 @@ def newton_preg_rat(func,x,k,cell):
         raise Exception('newton_preg_rat only for rat model')
     if cell.sex.lower() != 'female':
         print('sex: ' + cell.sex)
-        raise Exception('pregnant only for female rat')
+        raise Exception('newton_preg only for pregnant female rat')
     fun=equations.conservation_eqs
     f=np.matrix(fun(x,k))
     TOLpcn = 1
     i = 1
     iter = 0
-    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
+    while(np.linalg.norm(f) > 0.0001) and (iter<150): 
         i += 1
         J = np.matrix(Jac(fun,x,k))
         IJ = J.I
@@ -55,7 +55,10 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 0.8
         # DCT
         elif cell.segment == 'DCT':
-            amp = 1.0
+            if iter < 100:
+                amp = 1.0
+            else:
+                amp = 0.7
         # CNT
         elif cell.segment == 'CNT':
             if cell.sex == 'female':
@@ -125,13 +128,22 @@ def newton_preg_rat(func,x,k,cell):
         # CCD     
         elif cell.segment == 'CCD':
             if cell.preg == 'mid':
-                if np.linalg.norm(f)>1000:
+                if np.linalg.norm(f)>5000:
                     if k==0:
-                        amp = 0.5
+                        amp = 0.1 #0.05
+                    else:
+                        amp = 0.5 #0.8
+                elif np.linalg.norm(f)>1000:
+                    amp = 0.5 
+                elif np.linalg.norm(f)>100:
+                    amp = 0.8
+                elif np.linalg.norm(f)>10:
+                    if iter > 10:
+                        amp = 0.7
                     else:
                         amp = 0.7
                 else:
-                    amp = 0.9
+                    amp = 0.95 #1.0
             elif cell.preg == 'late':
                 if np.linalg.norm(f)>1000:
                     if k==0:
