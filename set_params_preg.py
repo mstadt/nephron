@@ -332,9 +332,9 @@ def read_params_preg(cell,filename,j):
 
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        preg_rat = 1.3
+                        preg_rat = 1.0 #1.3
                     elif cell.preg == 'late':
-                        preg_rat = 1.5
+                        preg_rat = 1.0 #1.5
                     #PNa
                     cell.h[0,0,4] = 10400.0*preg_rat
                     cell.h[0,4,5] = 5000.0*preg_rat
