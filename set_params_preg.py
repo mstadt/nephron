@@ -440,7 +440,7 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
                 elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                     if cell.preg == 'mid':
-                        preg_rat = 1.4 #1.8
+                        preg_rat = 1.8
                     elif cell.preg == 'late':
                         preg_rat = 2.0
                 elif newTransp.type == 'KCC4':
