@@ -404,9 +404,9 @@ def read_params_preg(cell,filename,j):
                 if newTransp.type == 'NHE3':
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.preg == 'mid':
-                        preg_rat = 1.1 #1.4
+                        preg_rat = 1.25 #1.4
                     elif cell.preg == 'late':
-                        preg_rat = 1.5
+                        preg_rat = 1.5 # TO CHANGE
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
                         if cell.preg == 'mid':
