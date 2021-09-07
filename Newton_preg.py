@@ -154,34 +154,6 @@ def newton_preg_rat(func,x,k,cell):
         # OMCD
         elif cell.segment == 'OMCD':
             amp = 1.0
-            # if np.linalg.norm(f)>5000:
-            #     if cell.preg == 'mid':
-            #         amp = 1.0 #0.1
-            #     elif cell.preg == 'late':
-            #         amp = 1.0 #0.1
-            # elif np.linalg.norm(f)>1000:
-            #     if cell.preg == 'mid':
-            #         if k==0:
-            #             amp = 1.0
-            #         else:
-            #             amp = 1.0
-            #     elif cell.preg == 'late':
-            #         amp = 1.0
-            # elif np.linalg.norm(f)>500:
-            #     if cell.preg == 'mid':
-            #         amp = 1.0 #0.7
-            #     elif cell.preg == 'late':
-            #         amp = 1.0 #0.6
-            # elif np.linalg.norm(f)>100:
-            #     if cell.preg == 'mid':
-            #         amp = 1.0 #0.8 #0.7
-            #     elif cell.preg == 'late':
-            #         amp = 1.0 #0.7
-            # else:
-            #     if cell.preg == 'mid':
-            #         amp = 1.0
-            #     elif cell.preg == 'late':
-            #         amp = 1.0 #0.8 #0.9
         # IMCD
         elif cell.segment == 'IMCD':
             if cell.preg == 'mid':
@@ -192,18 +164,8 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 0.5 
                 elif np.linalg.norm(f)>1000:
                     amp = 0.5
-                elif np.linalg.norm(f)>100:
-                    amp = 1.0
-                    # if k==0:
-                    #     amp = 0.1
-                    # else:
-                    #     amp = 0.5
                 else:
                     amp = 1.0
-                    # if k==0:
-                    #     amp = 0.5
-                    # else:
-                    #     amp = 0.86
             elif cell.preg == 'late':
                 if np.linalg.norm(f)>5000:
                     if k==0:
@@ -212,12 +174,6 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 0.5 
                 elif np.linalg.norm(f)>1000:
                     amp = 0.5
-                elif np.linalg.norm(f)>100:
-                    amp = 1.0
-                    # if k==0:
-                    #     amp = 0.1
-                    # else:
-                    #     amp = 0.5
                 else:
                     amp = 1.0
         else:
