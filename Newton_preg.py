@@ -129,18 +129,16 @@ def newton_preg_rat(func,x,k,cell):
             if cell.preg == 'mid':
                 if np.linalg.norm(f)>5000:
                     if k==0:
-                        amp = 0.1 #0.05
+                        amp = 0.1 
                     else:
-                        amp = 0.5 #0.8
+                        amp = 0.5
                 elif np.linalg.norm(f)>1000:
-                    amp = 1.0 #0.5 
-                elif np.linalg.norm(f)>100:
-                    amp = 1.0 #0.8
-                elif np.linalg.norm(f)>10:
-                    if iter > 10:
-                        amp = 0.7
+                    amp = 1.0   
+                elif iter > 75:
+                    if np.linalg.norm(f)>1:
+                        amp = 0.8
                     else:
-                        amp = 1.0 #0.7
+                        amp = 0.95
                 else:
                     amp = 1.0
             elif cell.preg == 'late':
