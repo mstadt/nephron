@@ -29,7 +29,11 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         facCaMP=1.0
         facphMP=1.0
         if cell.humOrrat == 'rat':
-            NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
+            flow_ref = 2.0e-6
+            if cell.preg != 'non':
+                # higher flow during pregnancy
+                flow_ref = 1.4*2.0e-6
+            NaMPq0=cell.vol_init[0]-(flow_ref)/60/Vref
         elif cell.humOrrat == 'mou':
             NaMPq0=cell.vol_init[0]-(1.6e-6)/60/Vref 
         elif cell.humOrrat == 'hum':
