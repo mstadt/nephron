@@ -330,18 +330,18 @@ def read_params_preg(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
 
-                if cell.segment == 'PT' or cell.segment == 'S3':
-                    if cell.preg == 'mid':
-                        preg_rat = 1.0 #1.3
-                    elif cell.preg == 'late':
-                        preg_rat = 1.0 #1.5
-                    #PNa
-                    cell.h[0,0,4] = 10400.0*preg_rat
-                    cell.h[0,4,5] = 5000.0*preg_rat
-                    #PCl
-                    cell.h[2,0,4] = 8000.0*preg_rat
-                    cell.h[2,4,5] = 6000.0*preg_rat
-                elif cell.segment == 'DCT' and cell.preg == 'late':
+                # if cell.segment == 'PT' or cell.segment == 'S3':
+                #     if cell.preg == 'mid':
+                #         preg_rat = 1.0 
+                #     elif cell.preg == 'late':
+                #         preg_rat = 1.0 
+                #     #PNa
+                #     cell.h[0,0,4] = 10400.0*preg_rat
+                #     cell.h[0,4,5] = 5000.0*preg_rat
+                #     #PCl
+                #     cell.h[2,0,4] = 8000.0*preg_rat
+                #     cell.h[2,4,5] = 6000.0*preg_rat
+                if cell.segment == 'DCT' and cell.preg == 'late':
                     if j>0.66*cell.total:
                         #DCT2
                         cell.h[1,0,1] = 0.6*0.35
