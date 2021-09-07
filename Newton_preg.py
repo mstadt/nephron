@@ -16,6 +16,9 @@ def newton_preg_rat(func,x,k,cell):
     i = 1
     iter = 0
     while(np.linalg.norm(f) > 0.0001) and (iter<150): 
+        if np.linalg.norm(f)>1e12:
+            raise Exception('Newton solver diverged')
+            
         i += 1
         J = np.matrix(Jac(fun,x,k))
         IJ = J.I
@@ -151,14 +154,17 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>5000:
                 if cell.preg == 'mid':
-                    amp = 0.1
+                    amp = 1.0 #0.1
                 elif cell.preg == 'late':
-                    amp = 0.1
+                    amp = 1.0 #0.1
             elif np.linalg.norm(f)>1000:
                 if cell.preg == 'mid':
-                    amp = 0.5
+                    if k==0:
+                        amp = 1.0
+                    else:
+                        amp = 1.0
                 elif cell.preg == 'late':
-                    amp = 0.5
+                    amp = 1.0
             elif np.linalg.norm(f)>500:
                 if cell.preg == 'mid':
                     amp = 1.0 #0.7
