@@ -408,7 +408,7 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         preg_rat = 1.5 # TO CHANGE
                 elif newTransp.type == 'NaKATPase':
-                    if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
+                    if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT' or cell.segment == 'CNT':
                         if cell.preg == 'mid':
                             preg_rat = 0.7
                         elif cell.preg == 'late':
@@ -418,11 +418,9 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 1.2
                         elif cell.preg == 'late':
                             preg_rat = 1.1 # THIS SHOULD BE CHANGED!
-                    elif cell.segment == 'DCT' or cell.segment == 'CNT':
-                        preg_rat = 1.0
                     elif cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.8
+                            preg_rat = 0.7
                         elif cell.preg == 'late':
                             preg_rat = 0.76
                     elif cell.segment == 'OMCD':
