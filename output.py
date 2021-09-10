@@ -100,17 +100,6 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file.write(str(cell[j].pres[0])+'\n')
     file.close()
 
-    #================================
-    # print diameter along PT 
-    #================================
-    # pt is only compliant segment
-    if cell.segment == 'PT' or cell.segment == 'S3':
-        file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
-        for j in range(N):
-            file.write(str(cell[j].diam)+'\n')
-        file.close()
-
-
     #========================================================
     # output transcellular and paracelluar Na fluxes 
     #========================================================
