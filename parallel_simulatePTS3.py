@@ -172,6 +172,13 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
     for j in range(NPT):
         file.write(str(pt[j].pres[0])+'\n')
     file.close()
+    #================================
+    # print diameter along PT 
+    #================================
+    file = open('./'+file_to_save+'/'+pt[j].sex+'_'+pt[0].humOrrat+'_'+pt[j].segment+'_diameter.txt', 'a')
+    for j in range(NPT):
+        file.write(str(pt[j].diam))
+    file.close()
     #========================================================
     # output fluxes through transporters
     #========================================================
@@ -319,12 +326,7 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
                 raise Exception('What is this?',transporter_type)	
     print('%s PCT finished.' %(sup_or_jux))
     print('\n')
-    #================================
-    # print diameter along PT 
-    #================================
-    file = open('./'+file_to_save+'/'+pt[j].sex+'_'+pt[0].humOrrat+'_'+pt[j].segment+'_diameter.txt', 'a')
-    file.write(str(pt[j].diam))
-    file.close()
+
     #========================================================
     # S3
     #========================================================
@@ -373,7 +375,8 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
     # print diameter along PT 
     #================================
     file = open('./'+file_to_save+'/'+s3[j].sex+'_'+s3[0].humOrrat+'_'+s3[j].segment+'_diameter.txt', 'a')
-    file.write(str(s3[j].diam))
+    for j in range(NS3):
+        file.write(str(s3[j].diam)+'\n')
     file.close()
     #========================================================
     # output S3 solute flows in Lumen and Cell
