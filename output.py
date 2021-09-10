@@ -100,6 +100,16 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file.write(str(cell[j].pres[0])+'\n')
     file.close()
 
+    #================================
+    # print diameter along PT 
+    #================================
+    # pt is only compliant segment
+    if cell.segment == 'PT' or cell.segment == 'S3':
+        file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
+        file.write(str(cell[j].diam))
+        file.close()
+
+
     #========================================================
     # output transcellular and paracelluar Na fluxes 
     #========================================================
@@ -220,12 +230,3 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
                 else:
                     print('transport: ' + transporter_type)
                     raise Exception('What is this?',transporter_type)
-
-
-    #================================
-    # print diameter along PT 
-    #================================
-    # pt is only compliant segment
-    file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
-    file.write(str(cell[j].diam))
-    file.close()
