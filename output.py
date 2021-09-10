@@ -104,7 +104,9 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     # print diameter along PT 
     #================================
     # pt is only compliant segment
+    print(cell.segment)
     if cell.segment == 'PT' or cell.segment == 'S3':
+        print('HELLO!')
         file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
         file.write(str(cell[j].diam))
         file.close()
