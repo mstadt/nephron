@@ -177,7 +177,7 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
     #================================
     file = open('./'+file_to_save+'/'+pt[j].sex+'_'+pt[0].humOrrat+'_'+pt[j].segment+'_diameter.txt', 'a')
     for j in range(NPT):
-        file.write(str(pt[j].diam))
+        file.write(str(pt[j].RMcompl)+'\n')
     file.close()
     #========================================================
     # output fluxes through transporters
