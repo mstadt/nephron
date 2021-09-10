@@ -322,8 +322,8 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
     #================================
     # print diameter along PT 
     #================================
-    file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
-    file.write(str(cell[j].diam))
+    file = open('./'+file_to_save+'/'+pt[j].sex+'_'+pt[0].humOrrat+'_'+pt[j].segment+'_diameter.txt', 'a')
+    file.write(str(pt[j].diam))
     file.close()
     #========================================================
     # S3
@@ -372,8 +372,8 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
     #================================
     # print diameter along PT 
     #================================
-    file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
-    file.write(str(cell[j].diam))
+    file = open('./'+file_to_save+'/'+s3[j].sex+'_'+s3[0].humOrrat+'_'+s3[j].segment+'_diameter.txt', 'a')
+    file.write(str(s3[j].diam))
     file.close()
     #========================================================
     # output S3 solute flows in Lumen and Cell
