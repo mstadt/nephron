@@ -92,7 +92,7 @@ class membrane:
         # luminal diameter
         self.diam = 0
         # radius, changes in PT only
-        self.RMcomp = 0
+        self.RMcompl = 0
         # surface area
         self.area = np.zeros(NC*NC).reshape((NC,NC))
         # initial surface area
