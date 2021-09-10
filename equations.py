@@ -344,7 +344,6 @@ def conservation_eqs (x,i):
         if cell1.humOrrat == 'hum':
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
-                cell1.RMcompl = RMcompl
                 Amcompl = PI*(RMcompl**2)
                 factor1 = 8.0*PI*visc/(Amcompl**2)
             else:
@@ -352,14 +351,6 @@ def conservation_eqs (x,i):
         elif cell1.humOrrat == 'rat':
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
-                cell1.RMcompl = RMcompl
-                
-                # tracking
-                fname = 'tracking_RMcompl.txt'
-                f1 = open(fname, 'a')
-                f1.write(str(RMcompl)+'\n')
-                f1.close()
-
                 Amcompl = PI*(RMcompl**2)
                 factor1 = 8.0*PI*visc/(Amcompl**2)
             else:
@@ -368,7 +359,6 @@ def conservation_eqs (x,i):
         elif cell1.humOrrat == 'mou':
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
-                cell1.RMcompl = RMcompl
                 Amcompl = PI*(RMcompl**2)
                 factor1 = 8.0*PI*visc/(Amcompl**2)
             else:

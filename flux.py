@@ -18,9 +18,6 @@ import NHE1
 import math
 
 def compute_fluxes (cell,j):
-    
-
-
     # update LIS-bath surface area, based on LIS volume
     cell.area[4][5] = 0.02*max(cell.vol[4]/cell.volref[4],1.0)
     cell.area[5][4] = cell.area[4][5]  
@@ -144,6 +141,8 @@ def compute_fluxes (cell,j):
         TM0= fac1*fac2
     
         RMtorq = torqR*(1.0e0+torqvm*(PM - PbloodPT))
+        # update RMcompl based on compliant radius
+        cell.RMcompl = RMtorq
         factor1 = 8.0*visc*(cell.vol[0]*Vref)*torqL/(RMtorq**2) 
         factor2 = 1.0 + (torqL+torqd)/RMtorq + 0.50*((torqL/RMtorq)**2)
         Torque = factor1*factor2
