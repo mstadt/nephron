@@ -254,17 +254,14 @@ def conservation_eqs (x,i):
             fac2 = 1.0 + (torqL+torqd)/Radref + 0.50*((torqL/Radref)**2)
             TM0= fac1*fac2
     
-            RMtorq = torqR*(1.0e0+torqvm*(PM - PbloodPT)) # Factor that coincides with papers. Used to generate equations at any point below the inlet in fcn2PT.f90.
-#            RMtorq = torqR*(1.0e0+torqvm*2*np.tanh(0.5*(PMb - PbloodPT))) # From Fortran Code: Used to generate non-linear equations at the inlet in fcn1PT.f90.
-            factor1 = 8.0*visc*(cell1.vol[0]*Vref)*torqL/(RMtorq**2) # Rui
+            RMtorq = torqR*(1.0e0+torqvm*(PM - PbloodPT)) 
+            factor1 = 8.0*visc*(cell1.vol[0]*Vref)*torqL/(RMtorq**2) 
             factor2 = 1.0 + (torqL+torqd)/RMtorq + 0.50*((torqL/RMtorq)**2)
             Torque = factor1*factor2
     
             Scaletorq = 1.0 + TS*scaleT*(Torque/TM0-1.0)
-#            Scaletorq = 2.69129
 
             Qnh4 = 0.25e-6/(href*Cref)*Scaletorq
-            #print(Qnh4)
         else:
             Qnh4 = 0.0
 
