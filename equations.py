@@ -337,8 +337,9 @@ def conservation_eqs (x,i):
 #---------------------------------------------------------------------72
 #     For Pressure
 #---------------------------------------------------------------------72    
-       # Added by Dania: PT and S3 are the only compliant segments.
-        Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell1.humOrrat,cell1.sex,cell1.preg)
+       # PT and S3 are the only compliant segments.
+        if cell1.segment == 'PT' or cell1.segment == 'S3':       
+            Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell1.humOrrat,cell1.sex,cell1.preg)
        
         if cell1.humOrrat == 'hum':
             if cell1.segment == 'PT' or cell1.segment == 'S3':
@@ -348,8 +349,6 @@ def conservation_eqs (x,i):
             else:
                 factor1 = 8.0*PI*visc/(Am**2)
         elif cell1.humOrrat == 'rat':
-            RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
-            Amcompl = PI*(RMcompl**2)
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
                 Amcompl = PI*(RMcompl**2)
@@ -358,8 +357,6 @@ def conservation_eqs (x,i):
                 factor1 = 8.0*PI*visc/(Am**2)
 
         elif cell1.humOrrat == 'mou':
-            RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
-            Amcompl = PI*(RMcompl**2)
             if cell1.segment == 'PT' or cell1.segment == 'S3':
                 RMcompl = torqR*(1.0e0+torqvm*(cell1.pres[0] - PbloodPT))
                 Amcompl = PI*(RMcompl**2)
@@ -665,7 +662,6 @@ def conservation_eqs (x,i):
         facA = np.exp(np.log(10.0)*(cell1.pH[2]-pKbuf))
         facB = np.exp(np.log(10.0)*(cell1.pH[3]-pKbuf))
 
-        # Modified by Dania:
         CbufP = cell1.cbuftot[1]*volP*facP/(1+facP)
         CbufA = cell1.cbuftot[2]*volA*facA/(1+facA)
         CbufB = cell1.cbuftot[3]*volB*facB/(1+facB)
