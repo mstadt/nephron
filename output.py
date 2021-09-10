@@ -78,9 +78,9 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         osm_lis = 0
         osm_b = 0
         for i in range(NS):
-            osm_l = osm_l +cell[j].conc[i,0]
-            osm_c = osm_c +cell[j].conc[i,1]
-            osm_lis = osm_lis+cell[j].conc[i,4]
+            osm_l = osm_l +cell[j].conc[i,0] 
+            osm_c = osm_c +cell[j].conc[i,1] 
+            osm_lis = osm_lis+cell[j].conc[i,4] 
             osm_b = osm_b +cell[j].conc[i,5]
 
         file_lumen.write(str(osm_l)+'\n')
@@ -220,3 +220,12 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
                 else:
                     print('transport: ' + transporter_type)
                     raise Exception('What is this?',transporter_type)
+
+
+    #================================
+    # print diameter along PT 
+    #================================
+    # pt is only compliant segment
+    file = open('./'+file_to_save+'/'+cell[j].sex+'_'+cell[0].humOrrat+'_'+cell[j].segment+'_diameter.txt', 'a')
+    file.write(str(cell[j].diam))
+    file.close()
