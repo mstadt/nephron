@@ -101,7 +101,7 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     file.close()
 
     #========================================================
-    # output transcellular and paralcelluar Na fluxes 
+    # output transcellular and paracelluar Na fluxes 
     #========================================================
     for j in range(N):
 
