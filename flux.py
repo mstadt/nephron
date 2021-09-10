@@ -144,8 +144,8 @@ def compute_fluxes (cell,j):
         # tracking
         fname1 = 'tracking_RMtorq_fluxfile.txt'
         f1 = open(fname1, 'a')
-        f1.write(str(RMtorq) + '\n'
-        f1.close())
+        f1.write(str(RMtorq) + '\n')
+        f1.close()
 
         factor1 = 8.0*visc*(cell.vol[0]*Vref)*torqL/(RMtorq**2) 
         factor2 = 1.0 + (torqL+torqd)/RMtorq + 0.50*((torqL/RMtorq)**2)
