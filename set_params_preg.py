@@ -375,7 +375,7 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 0.9*newdLA.perm 
                         elif cell.preg == 'late':
                             newdLA.perm = 0.85*newdLA.perm
-                if cell.segment == 'DCT':
+                elif cell.segment == 'DCT':
                     # K-Cl cotransporter
                     if newdLA.solute_id == (1,2):
                         if cell.preg == 'late':
