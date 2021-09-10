@@ -94,10 +94,8 @@ def read_params_preg(cell,filename,j):
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
                         cell.diam = value*1.14
-                        cell.RMcompl = cell.diam/2.0
                     elif cell.preg == 'late':
                         cell.diam = value*1.16
-                        cell.RMcompl = cell.diam/2.0
                 else:
                     if cell.preg == 'mid':
                         cell.diam = value*1.08

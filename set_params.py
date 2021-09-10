@@ -128,7 +128,6 @@ def read_params(cell,filename,j):
                 # diabetic diameter
                 if cell.diabete == 'Non':
                     cell.diam = value
-                    cell.RMcompl = value/2.0
                 elif cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.diam = value*1.1
