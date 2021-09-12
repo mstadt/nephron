@@ -56,7 +56,7 @@ def set_torq_params(species,sex,preg):
             PbloodPT = 9.0e0
         elif sex == 'female':
             if preg == 'non':
-                torqR = 0.0010 #0.00095
+                torqR = 0.00095
                 torqvm = 0.030
                 Radref = 0.002125/2.0 #female radius
                 PbloodPT = 8.0e0
