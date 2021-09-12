@@ -210,8 +210,8 @@ transport_Lumen_Cell_SGLT1	0.00833333333e-5
 transport_Cell_Bath_GLUT1	0.3e-5
 transport_Cell_LIS_GLUT1	0.3e-5
 #transport_Cell_Bath_GLUT2	0.1625e-5
-transport_Lumen_Cell_NHE3_male	2.7777777e-08
-#transport_Lumen_Cell_NHE3_female	2.7777777e-08
+#transport_Lumen_Cell_NHE3_male	2.7777777e-08
+transport_Lumen_Cell_NHE3_female	2.7777777e-08
 transport_Lumen_Cell_NHE3_female	2.3055555e-08
 transport_Cell_Bath_NaKATPase	300e-9
 transport_Cell_LIS_NaKATPase	300e-9
