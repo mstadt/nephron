@@ -9,6 +9,7 @@
 from values import *
 from defs import *
 import numpy as np
+from set_params import set_torq_params
 
 def compute_water_fluxes (cell):
 
@@ -28,29 +29,31 @@ def compute_water_fluxes (cell):
   
     
     if cell.segment == 'PT' or cell.segment == 'S3':
-        if cell.humOrrat == 'hum':
-            PB = 20.0 #This is the reference pressure in plasma that we use to compute the torque and scaling factor.
-        elif cell.humOrrat == 'rat':
-            if cell.sex == 'male':
-                PB = 9.0
-            elif cell.sex == 'female':
-                if cell.preg == 'non':
-                    PB = 8.0
-                elif cell.preg == 'mid':
-                    PB = 4.0
-                elif cell.preg == 'late':
-                    PB = 4.0
-                else:
-                    print('cell.preg: ' + str(cell.preg))
-                    raise Exception('what is pregnancy status?')
-        elif cell.humOrrat == 'mou':
-            if cell.sex == 'male':
-                PB = 9.0
-            elif cell.sex == 'female':
-                PB = 8.0
-        else:
-            print('cell.humOrrat: ' + str(cell.humOrrat))
-            raise Exception('what is species?')
+        Radref,torqR,torqvm,PbloodPT,torqL,torqd = set_torq_params(cell.humOrrat,cell.sex,cell.preg)
+        PB = PbloodPT
+        # if cell.humOrrat == 'hum':
+        #     PB = 20.0 #This is the reference pressure in plasma that we use to compute the torque and scaling factor.
+        # elif cell.humOrrat == 'rat':
+        #     if cell.sex == 'male':
+        #         PB = 9.0
+        #     elif cell.sex == 'female':
+        #         if cell.preg == 'non':
+        #             PB = 8.0
+        #         elif cell.preg == 'mid':
+        #             PB = 4.0
+        #         elif cell.preg == 'late':
+        #             PB = 4.0
+        #         else:
+        #             print('cell.preg: ' + str(cell.preg))
+        #             raise Exception('what is pregnancy status?')
+        # elif cell.humOrrat == 'mou':
+        #     if cell.sex == 'male':
+        #         PB = 9.0
+        #     elif cell.sex == 'female':
+        #         PB = 8.0
+        # else:
+        #     print('cell.humOrrat: ' + str(cell.humOrrat))
+        #     raise Exception('what is species?')
         
     else:
         PB=0
