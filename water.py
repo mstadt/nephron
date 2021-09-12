@@ -84,13 +84,13 @@ def compute_water_fluxes (cell):
 
             jvol[l][k] = -jvol[k][l]
 
-            if (cell.flag==2) and (i==0) and (j==1):
-                print(cell.area[i][j] * cell.dLPV[i][j],'\t',PRES[i]-PRES[j],'\t',-ONC[i]+ONC[j],'\t',-osm)
-                print('\n')
+            # if (cell.flag==2) and (i==0) and (j==1):
+            #     print(cell.area[i][j] * cell.dLPV[i][j],'\t',PRES[i]-PRES[j],'\t',-ONC[i]+ONC[j],'\t',-osm)
+            #     print('\n')
                 
-            if (cell.flag==2) and (i==0) and (j==4):
-                print(cell.area[i][j] * cell.dLPV[i][j],'\t',PRES[i]-PRES[j],'\t',-ONC[i]+ONC[j],'\t',-osm)
-                print('\n')
+            # if (cell.flag==2) and (i==0) and (j==4):
+            #     print(cell.area[i][j] * cell.dLPV[i][j],'\t',PRES[i]-PRES[j],'\t',-ONC[i]+ONC[j],'\t',-osm)
+            #     print('\n')
 
     return jvol
 
