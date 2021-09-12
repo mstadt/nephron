@@ -164,12 +164,6 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         cell.pres[0] = 13.7
 
-                elif cell.type == 'sup' and cell.segment == 'PT': #not done jux segments for preg models
-                    if cell.preg == 'mid':
-                        cell.pres[0] = 11.8
-                    if cell.preg == 'late':
-                        cell.pres[0] = 12.5
-
             # pH:
             elif compare_string_prefix(id,"pH"):
                 for i in range(6):
