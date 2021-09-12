@@ -82,7 +82,7 @@ def set_torq_params(species,sex,preg):
         torqL = 2.50e-4
         torqd = 1.50e-5
     else:
-        print('cell.humOrrat: ' + str(cell.humOrrat))
+        print('cell.humOrrat: ' + str(species))
         raise Exception('what is species?')
     return Radref,torqR,torqvm,PbloodPT,torqL,torqd
 
