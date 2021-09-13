@@ -231,7 +231,7 @@ def read_params_preg(cell,filename,j):
                                 if cell.preg == 'mid':
                                     preg_rat = 2.5
                                 elif cell.preg == 'late':
-                                    preg_rat = 3.4
+                                    preg_rat = 2.5
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
                 #print('water permeability')
