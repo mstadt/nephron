@@ -368,11 +368,13 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             x[5*NS+10]=cell[i].pres[0]
     
         else:
-            x = np.zeros(NS+3)
-            x[0:NS] = cell[i].conc[:,0]
-            x[NS] = cell[i].vol[0]
-            x[NS+1] = cell[i].pres[0]
-            x[NS+2] = -1 
+            print('cell.segment:' + cell.segment)
+            raise Exception('cell.segment not characterized')
+            # x = np.zeros(NS+3)
+            # x[0:NS] = cell[i].conc[:,0]
+            # x[NS] = cell[i].vol[0]
+            # x[NS+1] = cell[i].pres[0]
+            # x[NS+2] = -1 
     
         # set up nonlinear system
         equations.conservation_init (cell[i],cell[i+1],celln,dx)
