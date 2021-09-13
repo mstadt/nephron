@@ -372,8 +372,16 @@ def read_params_preg(cell,filename,j):
                 elif cell.segment == 'DCT':
                     # K-Cl cotransporter
                     if newdLA.solute_id == (1,2):
-                        if cell.preg == 'late':
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.2*newdLA.perm
+                        elif cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
+                elif newdLA.solute_id == (2,3):
+                    # Cl-HCO3 cotransporter
+                    if cell.preg == 'mid':
+                        newdLA.perm = 1.5*newdLA.perm
+                    elif cell.preg == 'late':
+                        newdLA.perm = 1.5*newdLA.perm
 
                 cell.dLA.append(newdLA)
 
@@ -427,12 +435,12 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
                 elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                     if cell.preg == 'mid':
-                        preg_rat = 1.4 #1.8
+                        preg_rat = 1.5 #1.4 #1.8
                     elif cell.preg == 'late':
                         preg_rat = 1.5 #LOOK TO LOWER THIS TOO!
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.0
+                        preg_rat = 1.2
                     elif cell.preg == 'late':
                         preg_rat = 1.5
                 elif newTransp.type == 'NCC':
@@ -462,6 +470,11 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.9
                     elif cell.preg == 'late':
                         preg_rat = 0.8
+                elif newTransp.type == 'AE1':
+                    if cell.preg == 'mid':
+                        preg_rat = 1.5
+                    elif cell.preg == 'late':
+                        preg_rat = 1.5
                 else:
                     preg_rat = 1.0
                 newTransp.act = preg_rat*newTransp.act
