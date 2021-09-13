@@ -12,6 +12,7 @@ def female_conc(cell, i):
             cell.conc[0,:] = cell.conc[0,:]*0.95
             cell.conc[1,:] = cell.conc[1,:]*1.1
             cell.conc[2,:] = cell.conc[2,:]*0.95
+            cell.conc[3,:] = cell.conc[3,:]*0.95
         elif cell.preg == 'late':
             # conc of Na, K, Cl different in LP rat plasma
             cell.conc[0,:] = cell.conc[0,:]*0.95
