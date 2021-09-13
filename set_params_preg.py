@@ -372,8 +372,16 @@ def read_params_preg(cell,filename,j):
                 elif cell.segment == 'DCT':
                     # K-Cl cotransporter
                     if newdLA.solute_id == (1,2):
-                        if cell.preg == 'late':
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.2*newdLA.perm
+                        elif cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
+                elif newdLA.solute_id == (2,3):
+                    # Cl-HCO3 cotransporter
+                    if cell.preg == 'mid':
+                        newdLA.perm = 1.5*newdLA.perm
+                    elif cell.preg == 'late':
+                        newdLA.perm = 1.5*newdLA.perm
 
                 cell.dLA.append(newdLA)
 
