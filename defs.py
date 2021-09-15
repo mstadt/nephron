@@ -150,6 +150,7 @@ class membrane:
         self.flag=0
         
         # interstitial concentration parameters of solutes
+        # CM: cortico-medullary boundary; OI: outer-inner stripe boundary; Pap: papillary tip
         self.cm = []
         self.oi = []
         self.pap = []
