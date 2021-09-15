@@ -85,7 +85,7 @@ if sup_or_jux != '':
 	sup_or_jux = '_' + sup_or_jux
 
 if cell[0].preg != 'non':
-	sex_or_preg = cell[0].preg
+	sex_or_preg = cell[0].preg + 'pregnant'
 else:
 	sex_or_preg = cell[0].sex
 
