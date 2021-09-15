@@ -99,6 +99,7 @@ def compute_segmentPTS3(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,p
 
     pt=compute(NPT,filename,'Broyden',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg)
     
+    Scaletorq = np.zeros(NPT)
     for j in range(NPT):
         if pt[j].segment == 'PT':
             TS = 1.3
