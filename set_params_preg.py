@@ -324,16 +324,36 @@ def read_params_preg(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
 
-                if cell.segment == 'DCT' and cell.preg == 'late':
+                if cell.segment == 'DCT':
                     if j>0.66*cell.total:
                         #DCT2
-                        cell.h[1,0,1] = 0.6*0.35
-                elif cell.segment == 'CNT' and cell.preg == 'late':
-                    cell.h[1,0,1] = 8.0*0.35
-                elif cell.segment == 'CCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = 2.8*0.55
-                elif cell.segment == 'OMCD' and cell.preg == 'late':
-                    cell.h[1,0,1] = 2.4*0.55
+                        if cell.preg == 'late':
+                            preg_rat = 0.35
+                            cell.h[1,0,1] = 0.6*preg_rat
+                        elif cell.preg == 'mid':
+                            preg_rat = 0.75
+                            cell.h[1,0,1] = 0.6*preg_rat
+                elif cell.segment == 'CNT':
+                    if cell.preg == 'late':
+                        preg_rat = 0.35
+                        cell.h[1,0,1] = 8.0*preg_rat
+                    elif cell.preg == 'mid':
+                        preg_rat = 0.75
+                        cell.h[1,0,1] = 8.0*preg_rat
+                elif cell.segment == 'CCD':
+                    if cell.preg == 'late':
+                        preg_rat = 0.55
+                        cell.h[1,0,1] = 2.8*preg_rat
+                    elif cell.preg == 'mid':
+                        preg_rat = 0.9
+                        cell.h[1,0,1] = 2.8*preg_rat
+                elif cell.segment == 'OMCD':
+                    if cell.preg == 'late':
+                        preg_rat = 0.55
+                        cell.h[1,0,1] = 2.4*preg_rat
+                    elif cell.preg == 'mid':
+                        preg_rat = 0.9
+                        cell.h[1,0,1] = 2.4*preg_rat
                     
                             
             # Coupled transporters:
@@ -362,7 +382,7 @@ def read_params_preg(cell,filename,j):
                     # K-Cl cotransporter
                     if newdLA.solute_id == (1,2):
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.2*newdLA.perm
+                            newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
                 elif newdLA.solute_id == (2,3):
@@ -444,7 +464,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 2.0
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 1.0
+                        preg_rat = 1.75
                     elif cell.preg == 'late':
                         preg_rat = 2.5
                 elif newTransp.type == 'Pendrin':
