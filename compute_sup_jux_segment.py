@@ -106,7 +106,7 @@ def compute_segment(sup_or_jux,sex,humOrrat,sup_or_multi,diabete,inhib,unx,preg,
         filename ='./datafiles/S3params_F_'+humOrrat[0:3]+'.dat'
     s3=compute(NS3,filename,'Newton',sup_or_jux,diabete,humOrrat,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx,preg = preg)
 
-    Scaletorq = np.zeros(NPT)
+    Scaletorq = np.zeros(NS3)
     
     for j in range(NS3):
         if s3[j].segment == 'PT':
