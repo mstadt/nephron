@@ -32,7 +32,7 @@ def newton_preg_rat(func,x,k,cell):
             amp = 1.0 
         # SDL
         elif cell.segment == 'SDL':
-            amp = 1.0 #0.2
+            amp = 1.0
         # LDL
         elif cell.segment == 'LDL':
             if np.linalg.norm(f)>5000:
@@ -58,74 +58,22 @@ def newton_preg_rat(func,x,k,cell):
             elif np.linalg.norm(f)>1000:
                 amp = 0.5
             else:
-                amp = 1.0 #0.8
+                amp = 1.0 
         # DCT
         elif cell.segment == 'DCT':
             amp = 1.0
-            # if iter < 100:
-            #     amp = 1.0
-            # else:
-            #     amp = 0.7
         # CNT
         elif cell.segment == 'CNT':
             if cell.sex == 'female':
-                if cell.type == 'sup':
-                    if np.linalg.norm(f)>1000:
-                        amp = 1.0 #0.17
-                    elif np.linalg.norm(f)>100:
-                        amp = 1.0 #0.6
-                    else:
-                        amp = 1.0 #0.9
-                elif cell.type == 'jux1':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.3
-                    else:
-                        amp = 1.0 #0.8
-                elif cell.type == 'jux2':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.3
-                    else:
-                        amp = 1.0 #0.8
-                elif cell.type == 'jux3':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.3
-                    else:
-                        amp = 1.0 #0.8
-                elif cell.type == 'jux4':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.3
-                    else:
-                        amp = 1.0 #0.8
-                elif cell.type == 'jux5':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.3
-                    else:
-                        amp =1.0 # 0.8
+                if np.linalg.norm(f)>5000:
+                    amp = 1.0 
                 else:
-                    if np.linalg.norm(f) > 5000:
-                        amp = 0.13
-                    else:
-                        amp = 1.0 #0.81
+                    amp = 1.0 
             elif cell.sex == 'male':
                 if np.linalg.norm(f)>5000:
-                    amp = 0.5
+                    amp = 1.0
                 else:
-                    amp = 1.0 #0.8
+                    amp = 1.0
         # CCD     
         elif cell.segment == 'CCD':
             if cell.preg == 'mid':
