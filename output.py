@@ -20,8 +20,10 @@ cw=Vref*60e6
 def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     if sup_or_jux != "":
         sup_or_jux = '_' + sup_or_jux
+
+    # print as pregnant model if running pregnancy case
     if cell[0].preg != 'non':
-        sex_or_preg = cell[0].preg
+        sex_or_preg = cell[0].preg + 'pregnant'
     else:
         sex_or_preg = cell[0].sex
     #========================================================
