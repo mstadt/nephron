@@ -20,7 +20,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     start=timeit.default_timer()
 
     cell = [membrane() for i in range(N)]
-    # initialize the species of cell: human or rat.
+    # initialize the species of cell
     if humOrrat == 'human':
         for i in range(N):
             cell[i].humOrrat = 'hum'
@@ -49,6 +49,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
             cell[i].inhib = inhibition
     for i in range(N):
         cell[i].unx = unx
+
     # initialize intersitital concentration and read parameters.
     for i in range(N):
         if preg != 'non':
@@ -62,7 +63,9 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     if cell[0].segment == 'PT':
         # Initial concentrations in Lumen at entrance of PT should be the same as in Bath:
-        #cell[0].conc[:,0] = cell[0].conc[:,5]
+        if cell[0].conc[:,0] != cell[0].conc[:,5]:
+            raise Exception('initial luminal concentrations do not match Bath')
+
         if cell[0].diabete != 'Non' and cell[0].humOrrat == 'rat':
             if cell[0].sex == 'male':
                 if cell[0].segment == 'PT' and cell[0].type == 'sup':
