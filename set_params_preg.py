@@ -324,6 +324,7 @@ def read_params_preg(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
 
+                # K secretion
                 if cell.segment == 'DCT':
                     if j>0.66*cell.total:
                         #DCT2
@@ -331,28 +332,28 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.35
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.75
+                            preg_rat = 0.6 #0.75
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.35
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.75
+                        preg_rat = 0.6 #0.75
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.9
+                        preg_rat = 0.75 #0.9
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.9
+                        preg_rat = 0.75 #0.9
                         cell.h[1,0,1] = 2.4*preg_rat
                     
                             
@@ -385,12 +386,12 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
-                elif newdLA.solute_id == (2,3):
-                    # Cl-HCO3 cotransporter
-                    if cell.preg == 'mid':
-                        newdLA.perm = 1.0*newdLA.perm
-                    elif cell.preg == 'late':
-                        newdLA.perm = 1.0*newdLA.perm
+                # elif newdLA.solute_id == (2,3):
+                #     # Cl-HCO3 cotransporter
+                #     if cell.preg == 'mid':
+                #         newdLA.perm = 1.0*newdLA.perm
+                #     elif cell.preg == 'late':
+                #         newdLA.perm = 1.0*newdLA.perm
 
                 cell.dLA.append(newdLA)
 
