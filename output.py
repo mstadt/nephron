@@ -97,6 +97,14 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     file_cell.close()
     file_lis.close()
     file_bath.close()
+
+    #=======================================================
+    # output pH
+    #=======================================================
+    file=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].humOrrat+'_'+cell[0].segment+'_pH_in_Lumen'+sup_or_jux+'.txt','w')
+    for j in range(1,N):
+        file.write(str(-np.log(abs(cell[j-1].conc[11,0])/1000)/np.log(10))+'\n')
+    file.close()
     
     #========================================================
     # output luminal pressure
