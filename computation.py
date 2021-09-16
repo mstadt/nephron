@@ -308,7 +308,7 @@ for j in range(1,N):
 		elif transporter_type == 'KCC4':
 			solute_id,fluxs=KCC.kcc4(cell[j].conc,memb_id,cell[j].trans[i].act,cell[j].area)
 			for k in range(len(solute_id)):
-				file = open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+'.txt','a')
+				file = open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+str(memb_id[0])+str(memb_id[1])+'.txt','a')
 				file.write(str(fluxs[k])+'\n')
 		elif transporter_type == 'ENaC':
 			solute_id,fluxs=ENaC.ENaC(cell[j],j,memb_id,cell[j].trans[i].act,cell[j].area,jvol)
