@@ -416,7 +416,7 @@ def read_params_preg(cell,filename,j):
                 if newTransp.type == 'NHE3':
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.preg == 'mid':
-                        preg_rat = 1.25 
+                        preg_rat = 1.35 
                     elif cell.preg == 'late':
                         preg_rat = 1.4
                 elif newTransp.type == 'NaKATPase':
@@ -425,19 +425,9 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.7
                         elif cell.preg == 'late':
                             preg_rat = 0.65
-                    elif cell.segment == 'mTAL':
+                    elif cell.segment == 'mTAL' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            preg_rat = 1.1
-                        elif cell.preg == 'late':
-                            preg_rat = 1.0
-                    elif cell.segment == 'OMCD':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.1
-                        elif cell.preg == 'late':
-                            preg_rat = 1.0
-                    elif cell.segment == 'IMCD':
-                        if cell.preg == 'mid':
-                            preg_rat = 1.1
+                            preg_rat = 1.2
                         elif cell.preg == 'late':
                             preg_rat = 1.0
                     else:
@@ -445,7 +435,7 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
                 elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                     if cell.preg == 'mid':
-                        preg_rat = 1.5 
+                        preg_rat = 1.3
                     elif cell.preg == 'late':
                         preg_rat = 1.75
                 elif newTransp.type == 'KCC4':
