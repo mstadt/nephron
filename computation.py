@@ -89,6 +89,21 @@ if cell[0].preg != 'non':
 else:
 	sex_or_preg = cell[0].sex
 
+file=open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Lumen_potential_'+sup_or_jux+'.txt','w')
+for j in range(1,N):
+	file.write(str(cell[j-1].ep[0])+'\n')
+file.close()
+
+file=open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_Cell_potential_'+sup_or_jux+'.txt','w')
+for j in range(1,N):
+	file.write(str(cell[j-1].ep[1])+'\n')
+file.close()
+
+file=open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_LIS_potential_'+sup_or_jux+'.txt','w')
+for j in range(1,N):
+	file.write(str(cell[j-1].ep[4])+'\n')
+file.close()
+
 file=open('./'+file_to_save+'/'+sex_or_preg+'_'+humOrrat[0:3]+'_'+cell[0].segment+'_potential_gradient_Lumen_Cell'+sup_or_jux+'.txt','w')
 for j in range(1,N):
 	file.write(str(cell[j-1].ep[0]-cell[j-1].ep[1])+'\n')
