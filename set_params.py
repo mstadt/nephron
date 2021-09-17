@@ -66,7 +66,7 @@ def set_torq_params(species,sex,preg):
                 Radref = 0.0024225/2.0
                 PbloodPT = 8.0e0 
             elif preg == 'late':
-                torqR = 0.00105 
+                torqR = 0.00103 
                 torqvm = 0.055 
                 Radref = 0.002465/2.0
                 PbloodPT = 8.0e0
