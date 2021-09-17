@@ -43,7 +43,7 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         # tracking
         fname = 'tracking_all.txt'
         f0 = open(fname, 'a')
-        f0.write('cell.vol_init[0]: ' + str(cell.vol_init[0]) + ', flow_ref/60/Vref: ' + str((flow_ref/60/Vref)) + ', cell_vol[0]: '+ str(cell.vol[0]) + ', NaMPq0: '+str(NaMPq0)+ ', cell_vol[0]/NaMPq0: '+str((cell.vol[0]/NaMPq0)) '\n')
+        f0.write('cell.vol_init[0]: ' + str(cell.vol_init[0]) + ', flow_ref/60/Vref: ' + str((flow_ref/60/Vref)) + ', cell_vol[0]: '+ str(cell.vol[0]) + ', NaMPq0: '+str(NaMPq0)+ ', cell_vol[0]/NaMPq0: '+str(cell.vol[0]/NaMPq0) + '\n')
         f0.close()
 
 
