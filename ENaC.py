@@ -32,14 +32,31 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
             flow_ref = 2.0e-6
             if cell.preg != 'non':
                 # higher flow during pregnancy
-                flow_ref = 1.2*2.0e-6
+                flow_ref = 2.5542e-6
             NaMPq0=cell.vol_init[0]-(flow_ref)/60/Vref
         elif cell.humOrrat == 'mou':
             NaMPq0=cell.vol_init[0]-(1.6e-6)/60/Vref 
         elif cell.humOrrat == 'hum':
             NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
-               
+        
+        # tracking
+        fname = 'tracking_all.txt'
+        f0 = open(fname, 'a')
+        f0.write('cell.vol_init[0]: ' + str(cell.vol_init[0]) + ', flow_ref/60/Vref: ' + str((flow_ref/60/Vref)) + ', cell_vol[0]: '+ str(cell.vol[0]) + ', NaMPq0: '+str(NaMPq0)+ ', cell_vol[0]/NaMPq0: '+str(cell.vol[0]/NaMPq0) + '\n')
+        f0.close()
+
+
+        fname1 = 'tracking_NaMPq0.txt'
+        f1 = open(fname1, 'a')
+        f1.write(str(NaMPq0)+'\n')
+        f1.close()
+
+        fname2 = 'tracking_facFvMP.txt'
+        f2 = open(fname2, 'a')
+        f2.write(str(facFvMP) + '\n')
+        f2.close()
+
         hENaC=hNaMP*facNaMP*facCaMP*facphMP*facFvMP
 
     elif cell.segment == 'CCD':
