@@ -16,13 +16,13 @@ def female_conc(cell, i):
 
             # also change in starting for bath
             cell.conc[0,5] = cell.conc[0,0]
-            cell.conc[1,5] = cell.conc[1,0] #no change in K
+            cell.conc[1,5] = cell.conc[1,0] #no change in K in MP
             cell.conc[2,5] = cell.conc[2,0]
             cell.conc[3,5] = cell.conc[3,0]
         elif cell.preg == 'late':
             # conc of Na, K, Cl, HCO3 different in LP rat plasma
             cell.conc[0,0] = cell.conc[0,0]*0.95
-            cell.conc[1,0] = cell.conc[1,0]*1.2
+            cell.conc[1,0] = cell.conc[1,0]*1.15 # upregulated K in LP
             cell.conc[2,0] = cell.conc[2,0]*0.95
             cell.conc[3,0] = cell.conc[3,0]*0.95
 
