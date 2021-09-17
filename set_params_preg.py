@@ -332,28 +332,28 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.35
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.6 #0.75
+                            preg_rat = 0.5 #0.6 #0.75
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.35
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.6 #0.75
+                        preg_rat = 0.5 #0.6 #0.75
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.75 #0.9
+                        preg_rat = 0.6 #0.75 #0.9
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.75 #0.9
+                        preg_rat = 0.6 #0.75 #0.9
                         cell.h[1,0,1] = 2.4*preg_rat
                     
                             
