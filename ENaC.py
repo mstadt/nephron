@@ -39,7 +39,18 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         elif cell.humOrrat == 'hum':
             NaMPq0=cell.vol_init[0]-(2.0e-6)/60/Vref
         facFvMP=max(0.01,1+3*((cell.vol[0]/NaMPq0)-1))
-               
+        
+        # tracking
+        fname1 = 'tracking_NaMPq0.txt'
+        f1 = open(fname1, 'a')
+        f1.write(str(NaMPq0)+'\n')
+        f1.close()
+
+        fname2 = 'tracking_facFvMP.txt'
+        f2 = open(fname2, 'a')
+        f2.write(str(facFvMP) + '\n')
+        f2.close()
+
         hENaC=hNaMP*facNaMP*facCaMP*facphMP*facFvMP
 
     elif cell.segment == 'CCD':
