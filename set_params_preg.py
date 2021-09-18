@@ -209,7 +209,7 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = 2.1
                         elif cell.segment == 'IMCD':
                             if cell.preg == 'mid':
-                                preg_rat = 2.5
+                                preg_rat = 2.0
                             elif cell.preg == 'late':
                                 preg_rat = 2.5
                     elif ind1 == 1:
@@ -420,35 +420,6 @@ def read_params_preg(cell,filename,j):
 
 
                 cell.dLA.append(newdLA)
-
-
-                # if cell.segment == 'PT' or cell.segment == 'S3':
-                #     # NaPi2
-                #     if newdLA.solute_id == (0,7):
-                #         if cell.preg == 'mid':
-                #             newdLA.perm = 0.9*newdLA.perm 
-                #         elif cell.preg == 'late':
-                #             newdLA.perm = 0.85*newdLA.perm
-                # elif cell.segment == 'DCT':
-                #     # K-Cl cotransporter
-                #     if newdLA.solute_id == (1,2):
-                #         if cell.preg == 'mid':
-                #             newdLA.perm = 1.25*newdLA.perm
-                #         elif cell.preg == 'late':
-                #             newdLA.perm = 1.5*newdLA.perm
-                # elif cell.segment == 'IMCD':
-                #     # K-Cl cotransporter
-                #     if newdLA.solute_id == (1,2):
-                #         if cell.preg == 'mid':
-                #             newdLA.perm = 1.25*newdLA.perm
-                #         elif cell.preg == 'late':
-                #             newdLA.perm = 1.5*newdLA.perm
-                    # Na-Cl cotransporter
-                    # elif newdLA.solute_id == (0,2):
-                    #     if cell.preg == 'mid':
-                    #         newdLA.perm = 1.1*newdLA.perm
-                    #     elif cell.preg == 'late':
-                    #         newdLA.perm = 1.2*newdLA.perm
 
 
             # Specific transporters:
