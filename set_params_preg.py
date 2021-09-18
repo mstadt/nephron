@@ -384,7 +384,12 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaPi2 in pregnancy not characterized for this segment')
                 # K-Cl cotransporter
                 elif newdLA.solute_id == (1,2):
-                    if cell.segment == 'DCT':
+                    if cell.segment == 'PT':
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.0*newdLA.perm
+                        elif cell.preg == 'late':
+                            newdLA.perm = 1.0*newdLA.perm
+                    elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
@@ -408,7 +413,7 @@ def read_params_preg(cell,filename,j):
                         print('segment: ' + cell.segment)
                         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
 
-                        
+
                 cell.dLA.append(newdLA)
 
 
