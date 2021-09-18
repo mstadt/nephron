@@ -480,7 +480,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 1.35
                         elif cell.preg == 'late':
-                            preg_rat = 1.0
+                            preg_rat = 1.4
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
@@ -502,7 +502,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.3
                     elif cell.preg == 'late':
-                        preg_rat = 1.75
+                        preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
                         preg_rat = 1.25
@@ -532,7 +532,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.6
                     elif cell.preg == 'late':
-                        preg_rat = 1.75
+                        preg_rat = 1.7
                 elif newTransp.type == 'NHE1':
                     if cell.preg == 'mid':
                         preg_rat = 0.9
