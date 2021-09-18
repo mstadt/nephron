@@ -422,7 +422,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 1.4
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.0
+                            preg_rat = 1.35
                         elif cell.preg == 'late':
                             preg_rat = 1.0
                     else:
