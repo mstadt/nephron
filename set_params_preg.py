@@ -396,7 +396,7 @@ def read_params_preg(cell,filename,j):
                     # Na-Cl cotransporter
                     elif newdLA.solute_id == (0,2):
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.15*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.2*newdLA.perm
                 cell.dLA.append(newdLA)
@@ -490,7 +490,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.85
                 elif newTransp.type == 'AE1':
                     if cell.preg == 'mid':
-                        preg_rat = 1.0
+                        preg_rat = 1.25
                     elif cell.preg == 'late':
                         preg_rat = 1.0
                 else:
