@@ -53,16 +53,24 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0
         # cTAL
         elif cell.segment == 'cTAL':
-            if np.linalg.norm(f)>5000:
-                amp = 0.2
-            elif np.linalg.norm(f)>2000:
-                amp = 0.3
-            elif np.linalg.norm(f)>1000:
-                amp = 0.5
-            elif np.linalg.norm(f)>100:
-                amp = 0.9
-            else:
-                amp = 1.0 
+            if cell.preg == 'mid':
+                if np.linalg.norm(f)>5000:
+                    amp = 0.2
+                elif np.linalg.norm(f)>1000:
+                    amp = 0.5
+                else:
+                    amp = 1.0 
+            elif cell.preg == 'late':
+                if np.linalg.norm(f)>5000:
+                    amp = 0.2
+                elif np.linalg.norm(f)>2000:
+                    amp = 0.3
+                elif np.linalg.norm(f)>1000:
+                    amp = 0.5
+                elif np.linalg.norm(f)>100:
+                    amp = 0.9
+                else:
+                    amp = 1.0 
         # DCT
         elif cell.segment == 'DCT':
             amp = 1.0
