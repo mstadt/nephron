@@ -349,57 +349,16 @@ def newton_human(func,x,k,cell):
                     amp = 0.5      
         # CNT
         elif cell.segment == 'CNT':
-            if cell.sex == 'male':
-                if np.linalg.norm(f)>100:
-                    amp = 0.5
+            if cell.sex == 'female':
+                if np.linalg.norm(f)>5000:
+                    amp = 1.0 
                 else:
-                    amp = 0.8
-            elif cell.sex == 'female':
-                if cell.type == 'sup':
-                    if np.linalg.norm(f)>100:
-                        amp = 0.5
-                    else:
-                        amp = 0.8
-                elif cell.type == 'jux1':
-                    if np.linalg.norm(f)>1000:
-                        if k==0:
-                            amp = 0.5
-                        else:
-                            amp = 0.13
-                    else:
-                        amp = 0.8
-                elif cell.type == 'jux2':
-                    if np.linalg.norm(f)>1000:
-                        if k==0:
-                            amp = 0.3
-                        else:
-                            amp = 0.5
-                    else:
-                        amp = 0.8
-                elif cell.type == 'jux3':
-                    if np.linalg.norm(f)>1000:
-                        if k==0:
-                            amp = 0.3
-                        else:
-                            amp = 0.5
-                    else:
-                        amp = 0.8
-                elif cell.type == 'jux4':
-                    if np.linalg.norm(f)>1000:
-                        if k==0:
-                            amp = 0.3
-                        else:
-                            amp = 0.5
-                    else:
-                        amp = 0.8
-                elif cell.type == 'jux5':
-                    if np.linalg.norm(f)>1000:
-                        if k==0:
-                            amp = 0.1
-                        else:
-                            amp = 0.17
-                    else:
-                        amp = 1.0
+                    amp = 1.0 
+            elif cell.sex == 'male':
+                if np.linalg.norm(f)>5000:
+                    amp = 1.0
+                else:
+                    amp = 1.0
         # CCD
         elif cell.segment == 'CCD':
             if cell.inhib == 'ACE':
