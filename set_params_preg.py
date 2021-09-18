@@ -384,7 +384,7 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaPi2 in pregnancy not characterized for this segment')
                 # K-Cl cotransporter
                 elif newdLA.solute_id == (1,2):
-                    if cell.segment == 'PT':
+                    if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.0*newdLA.perm
                         elif cell.preg == 'late':
