@@ -386,13 +386,19 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.5*newdLA.perm
-                # elif newdLA.solute_id == (2,3):
-                #     # Cl-HCO3 cotransporter
-                #     if cell.preg == 'mid':
-                #         newdLA.perm = 1.0*newdLA.perm
-                #     elif cell.preg == 'late':
-                #         newdLA.perm = 1.0*newdLA.perm
-
+                elif cell.segment == 'IMCD':
+                    # K-Cl cotransporter
+                    if newdLA.solute_id == (1,2):
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.25*newdLA.perm
+                        elif cell.preg == 'late':
+                            newdLA.perm = 1.5*newdLA.perm
+                    # Na-Cl cotransporter
+                    elif newdLA.solute_id == (0,2):
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.25*newdLA.perm
+                        elif cell.preg == 'late':
+                            newdLA.perm = 1.5*newdLA.perm
                 cell.dLA.append(newdLA)
 
             # Specific transporters:
