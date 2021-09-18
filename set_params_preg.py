@@ -540,7 +540,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.85
                 elif newTransp.type == 'AE1':
                     if cell.preg == 'mid':
-                        preg_rat = 1.1
+                        preg_rat = 1.0 #1.1
                     elif cell.preg == 'late':
                         preg_rat = 1.4
                 else:
