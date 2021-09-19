@@ -94,6 +94,7 @@ def newton_rat(func,x,k,cell):
         elif iter == maxiter:
             print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
             print('error size: '+ str(np.linalg.norm(f)))
+            print('\n')
             
         i += 1
         J = np.matrix(Jac(fun,x,k))

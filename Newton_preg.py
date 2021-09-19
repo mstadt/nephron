@@ -21,7 +21,7 @@ def newton_preg_rat(func,x,k,cell):
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
         elif iter == maxiter:
             print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
-            print('error size: '+ str(np.linalg.norm(f)))
+            print('error size: '+ str(np.linalg.norm(f)) + '\n')
             #raise Exception('Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k))
 
         i += 1
