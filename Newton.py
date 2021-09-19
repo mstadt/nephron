@@ -162,11 +162,13 @@ def newton_rat(func,x,k,cell):
                     amp = 0.5
             elif np.linalg.norm(f)>1000:
                 amp = 0.75
+            elif iter>75:
+                amp = 0.7
             elif iter>50:
                 if np.linalg.norm(f)>1:
-                    amp = 0.8
-                else:
                     amp = 0.95
+                else:
+                    amp = 1.0
             else:
                 amp = 1.0
         # OMCD
