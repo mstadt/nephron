@@ -336,7 +336,8 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     # initial guess of unknowns
     for i in range(N-1):
-        print(i+1)
+        if (i+1)%25 == 0:
+            print('cell number: '+ str(i+1))
         celln = copy.deepcopy(cell[i+1])
         dx = 1.0e-3
         if cell[0].segment == 'PT' or cell[0].segment == 'S3' or cell[0].segment =='SDL' or cell[0].segment == 'LDL' or cell[0].segment == 'LAL' or cell[0].segment == 'mTAL' or cell[0].segment == 'cTAL' or cell[0].segment == 'MD' or cell[0].segment == 'DCT' or cell[0].segment == 'IMCD':
@@ -434,7 +435,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     
             cell[i+1].pres[0] = sol[5*NS+10]        
     
-        print('\n')
+        #print('\n')
 
 #================================OUTPUT IN TO FILE================================        
     if cell[0].segment == 'PT':
