@@ -15,11 +15,13 @@ def newton_preg_rat(func,x,k,cell):
     TOLpcn = 1
     i = 1
     iter = 0
-    while(np.linalg.norm(f) > 0.0001): #and (iter<150): 
+    maxiter = 150
+    while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): 
         if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
-        elif iter>200:
-            print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k))
+        elif iter == maxiter:
+            print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
+            print('error size: '+ str(np.linalg.norm(f)))
             #raise Exception('Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k))
 
         i += 1
