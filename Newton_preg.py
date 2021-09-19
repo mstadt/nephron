@@ -17,7 +17,7 @@ def newton_preg_rat(func,x,k,cell):
     iter = 0
     while(np.linalg.norm(f) > 0.0001) and (iter<150): 
         if np.linalg.norm(f)>1e12:
-            print('segment: ' + cell.segment + ' cell number: '+k)
+            print('segment: ' + cell.segment + ' cell number: '+ str(k))
             raise Exception('Newton solver diverged')
 
         i += 1
