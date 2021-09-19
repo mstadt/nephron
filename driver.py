@@ -336,7 +336,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     # initial guess of unknowns
     for i in range(N-1):
-        if (i+1%25) == 0:
+        if ((i+1)%25) == 0:
             print(cell.segment + ' cell number: ' + i+1)
         celln = copy.deepcopy(cell[i+1])
         dx = 1.0e-3

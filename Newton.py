@@ -158,11 +158,11 @@ def newton_rat(func,x,k,cell):
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>5000:
                 if k==0:
-                    amp = 0.25
+                    amp = 0.4
                 else:
                     amp = 0.5
             elif np.linalg.norm(f)>1000:
-                amp = 0.4
+                amp = 0.6
             elif iter>75:
                 amp = 0.7
             elif iter>50:
@@ -499,7 +499,7 @@ def newton_human(func,x,k,cell):
         x -= delta
         f = np.matrix(fun(x,k))
         iter += 1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta / x)
     return x
         
