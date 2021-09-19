@@ -417,7 +417,12 @@ def read_params_preg(cell,filename,j):
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
-
+                # Cl-HCO3 exchanger
+                elif newdLA.solute_id == (2,3):
+                    if cell.preg == 'mid':
+                        newdLA.perm = 1.0*newdLA.perm
+                    elif cell.preg == 'late':
+                        newdLA.perm = 1.5*newdLA.perm
 
                 cell.dLA.append(newdLA)
 
