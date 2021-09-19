@@ -361,117 +361,21 @@ def newton_human(func,x,k,cell):
                     amp = 1.0
         # CCD
         elif cell.segment == 'CCD':
-            if cell.inhib == 'ACE':
-                if cell.sex == 'male':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            amp = 0.8
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-                elif cell.sex == 'female':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            amp = 0.4
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-            elif cell.diabete == 'Non' and cell.inhib != 'SGLT2':
-                if cell.sex == 'male':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            if cell.unx == 'Y':
-                                amp = 0.6
-                            else:
-                                amp = 0.5
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-                elif cell.sex == 'female':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            amp = 0.2
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-            elif cell.diabete == 'Non' and cell.inhib == 'SGLT2':
-                if cell.unx == 'N':
-                    if cell.sex == 'male':
-                        if np.linalg.norm(f)>100:
-                            if k == 0:
-                                amp = 0.8
-                            else:
-                                amp = 0.2
-                        else:
-                            amp = 0.8
-                    elif cell.sex == 'female':
-                        if np.linalg.norm(f)>100:
-                            if k == 0:
-                                amp = 0.8
-                            else:
-                                amp = 0.2
-                        else:
-                            amp = 0.8
-                elif cell.unx == 'Y':
-                    if cell.sex == 'male':
-                        if np.linalg.norm(f)>100:
-                            if k == 0:
-                                amp = 0.5
-                            else:
-                                amp = 0.2
-                        else:
-                            amp = 0.8
-                    elif cell.sex == 'female':
-                        if np.linalg.norm(f)>100:
-                            if k == 0:
-                                amp = 0.2
-                            else:
-                                amp = 0.2
-                        else:
-                            amp = 0.8
-            elif cell.diabete == 'Moderate':
-                if cell.sex == 'male':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            amp = 0.5
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-                elif cell.sex == 'female':
-                    if np.linalg.norm(f)>100:
-                        if cell.inhib != 'SGLT2':
-                            amp = 0.2
-                        else:
-                            amp = 0.7
-                    else:
-                        amp = 0.8
-            elif cell.diabete == 'Severe' and cell.inhib != 'SGLT2':
-                if cell.sex == 'male':
-                    if np.linalg.norm(f)>100:
-                        if k==0:
-                            amp = 0.5
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
-                elif cell.sex == 'female':
-                    if np.linalg.norm(f)>100:
-                        if k == 0:
-                            if cell.inhib == 'SGLT2':
-                                amp = 0.47
-                            else:
-                                amp = 0.2
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.8
+            if np.linalg.norm(f)>5000:
+                if k==0:
+                    amp = 0.25
+                else:
+                    amp = 0.5
+            elif np.linalg.norm(f)>1000:
+                amp = 0.75
+            elif iter>50:
+                if np.linalg.norm(f)>1:
+                    amp = 0.8
+                else: 
+                    amp = 0.95
             else:
                 amp = 1.0
+
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>100:
