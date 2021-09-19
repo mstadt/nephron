@@ -313,16 +313,18 @@ def newton_human(func,x,k,cell):
                     amp = 0.5      
         # CNT
         elif cell.segment == 'CNT':
-            if cell.sex == 'female':
-                if np.linalg.norm(f)>5000:
-                    amp = 1.0 
+            if np.linalg.norm(f)>5000:
+                if k==0:
+                    amp = 0.2
                 else:
-                    amp = 1.0 
-            elif cell.sex == 'male':
-                if np.linalg.norm(f)>5000:
-                    amp = 1.0
+                    amp = 0.7
+            elif np.linalg.norm(f)>1000:
+                if k==0:
+                    amp = 0.5
                 else:
-                    amp = 1.0
+                    amp = 0.9
+            else:
+                amp = 1.0
         # CCD
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>5000:
