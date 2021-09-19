@@ -435,7 +435,7 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     
             cell[i+1].pres[0] = sol[5*NS+10]        
     
-        print('\n')
+        #print('\n')
 
 #================================OUTPUT IN TO FILE================================        
     if cell[0].segment == 'PT':
