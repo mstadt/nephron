@@ -30,6 +30,8 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         facphMP=1.0
         if cell.humOrrat == 'rat':
             flow_ref = 2.0e-6
+            if cell.preg == 'late':
+                flow_ref = 2.3e-6
             # if cell.preg != 'non':
             #     # higher flow during pregnancy
             #     flow_ref = 2.0e-6
@@ -64,6 +66,8 @@ def ENaC(cell,i,memb_id,hNaMP,area,jvol):
         facphMP=1.0
         if cell.humOrrat == 'rat':
             flow_ref = 0.1e-6
+            if cell.preg == 'late':
+                flow_ref = 0.15e-6
             # if cell.preg!= 'non':
             #     # higher flow during pregnancy
             #     flow_ref = 1.2*0.1e-6
