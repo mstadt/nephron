@@ -317,12 +317,12 @@ def newton_human(func,x,k,cell):
                 if k==0:
                     amp = 0.2
                 else:
-                    amp = 0.7
+                    amp = 0.3
             elif np.linalg.norm(f)>1000:
                 if k==0:
                     amp = 0.5
                 else:
-                    amp = 0.9
+                    amp = 0.7
             else:
                 amp = 1.0
         # CCD
