@@ -19,7 +19,7 @@ def newton_preg_rat(func,x,k,cell):
         if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
         elif iter>200:
-            print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k)')
+            print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k))
             #raise Exception('Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k))
 
         i += 1
