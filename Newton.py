@@ -65,7 +65,7 @@ def broyden(func,x,k,type):
         IJ=IJ-np.outer(IJ*f.T,dx)*IJ/np.inner(dx,dx+(IJ*f.T).T)
         #print(i)
         iter+=1
-        print(iter,np.linalg.norm(f))
+        #print(iter,np.linalg.norm(f))
         
         #Pause: Added by Dania
 #        input("Pausing! Press Enter to continue...")
@@ -88,9 +88,11 @@ def newton_rat(func,x,k,cell):
     TOLpcn = 1
     i = 1
     iter = 0
-    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
-        if np.linalg.norm(f)>1e12:
+    while(np.linalg.norm(f) > 0.0001): # and (iter<150): #(iter<300)
+        if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
+        elif iter>150:
+            raise Exception('Newton solver did not converge in <'+iter+' iterations in ' + cell.segment + ' cell number ' + str(k))
             
         i += 1
         J = np.matrix(Jac(fun,x,k))
