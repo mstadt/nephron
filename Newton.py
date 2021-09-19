@@ -65,9 +65,8 @@ def broyden(func,x,k,type):
         IJ=IJ-np.outer(IJ*f.T,dx)*IJ/np.inner(dx,dx+(IJ*f.T).T)
         #print(i)
         iter+=1
-        print(iter,np.linalg.norm(f))
+        #print(iter,np.linalg.norm(f))
         
-        #Pause: Added by Dania
 #        input("Pausing! Press Enter to continue...")
         #J=J+np.outer((df-dx*J.T),dx)/np.linalg.norm(x)**2
         #IJ=J.I
@@ -88,9 +87,11 @@ def newton_rat(func,x,k,cell):
     TOLpcn = 1
     i = 1
     iter = 0
-    while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
-        if np.linalg.norm(f)>1e15:
-            raise Exception('Newton solver diverged')
+    while(np.linalg.norm(f) > 0.0001): # and (iter<150): #(iter<300)
+        if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
+            raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
+        elif iter>150:
+            raise Exception('Newton solver did not converge in <'+iter+' iterations in ' + cell.segment + ' cell number ' + str(k))
             
         i += 1
         J = np.matrix(Jac(fun,x,k))
@@ -104,7 +105,7 @@ def newton_rat(func,x,k,cell):
             amp = 1.0 
         # SDL
         elif cell.segment == 'SDL':
-            amp = 0.2
+            amp = 1.0
         # LDL
         elif cell.segment == 'LDL':
             if np.linalg.norm(f)>5000:
@@ -119,127 +120,92 @@ def newton_rat(func,x,k,cell):
                 amp = 1.0
         # mTAL
         elif cell.segment == 'mTAL':
-            if np.linalg.norm(f)>100:
-                amp = 0.2
+            if np.linalg.norm(f)>5000:
+                amp = 0.5
+            elif iter>100:
+                amp = 0.95
             else:
-                amp = 0.9
+                amp = 1.0
         # cTAL
         elif cell.segment == 'cTAL':
-            if np.linalg.norm(f)>100:
+            if np.linalg.norm(f)>5000:
                 amp = 0.2
+            elif np.linalg.norm(f)>1000:
+                amp = 0.5
+            elif iter>100:
+                if np.linalg.norm(f)>1:
+                    amp = 0.9
+                else:
+                    amp = 0.95
             else:
-                amp = 0.8
+                amp = 1.0
         # DCT
         elif cell.segment == 'DCT':
             amp = 1.0
         # CNT
         elif cell.segment == 'CNT':
-            if cell.sex == 'female':
-                if cell.type == 'sup':
-                    if np.linalg.norm(f)>100:
-                        amp = 0.17
-                    else:
-                        amp = 0.9
-                elif cell.type == 'jux1':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.1
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.9
-                elif cell.type == 'jux2':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.1
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.9
-                elif cell.type == 'jux3':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp = 0.17
-                        else:
-                            amp = 0.2
-                    else:
-                        amp = 0.9
-                elif cell.type == 'jux4':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp=0.17
-                        else:
-                            amp=0.2
-                    else:
-                        amp=0.9
-                elif cell.type == 'jux5':
-                    if np.linalg.norm(f)>5000:
-                        if k==0:
-                            amp=0.17
-                        else:
-                            amp=0.2
-                    else:
-                        amp=0.9
+            if np.linalg.norm(f)>5000:
+                amp = 0.25
+            elif np.linalg.norm(f)>1000:
+                amp = 0.5
+            elif iter > 50:
+                if np.linalg.norm(f)>1:
+                    amp = 0.8
                 else:
-                    if np.linalg.norm(f) > 5000:
-                        amp = 0.17
-                    else:
-                        amp = 0.9
-            elif cell.sex == 'male':
-                if cell.type == 'sup':
-                    if np.linalg.norm(f)>5000:
-                        amp = 0.5
-                    else:
-                        amp = 0.8
-                else:
-                    if np.linalg.norm(f)>5000:
-                        amp = 0.13
-                    else:
-                        amp = 1.0
+                    amp = 0.95
+            else:
+                amp = 1.0
         # CCD     
         elif cell.segment == 'CCD':
-            if cell.sex == 'female':
-                if np.linalg.norm(f)>1000:
-                    if k==0:
-                        amp = 0.3
-                    else:
-                        amp = 0.1
+            if np.linalg.norm(f)>5000:
+                if k==0:
+                    amp = 0.4
                 else:
-                    amp = 0.8
-            elif cell.sex == 'male':
-                if np.linalg.norm(f)>1000:
-                    if k==0:
-                        amp = 0.4
-                    else:
-                        amp = 0.5
-                elif iter > 100:
-                    if np.linalg.norm(f)<1:
-                        amp = 0.5
+                    amp = 0.5
+            elif np.linalg.norm(f)>1000:
+                amp = 0.6
+            elif iter>75:
+                amp = 0.7
+            elif iter>50:
+                if np.linalg.norm(f)>1:
+                    amp = 0.95
                 else:
-                    amp = 0.8
+                    amp = 1.0
+            else:
+                amp = 1.0
         # OMCD
         elif cell.segment == 'OMCD':
-            if np.linalg.norm(f)>1000:
-                if k== 0:
-                    amp = 0.3
-                else:
-                    amp = 0.8
+            if np.linalg.norm(f)>5000:
+                amp = 0.25
+            elif np.linalg.norm(f)>1000:
+                amp = 0.5
             elif np.linalg.norm(f)>100:
-                amp = 0.8
+                amp = 1.0
             else:
                 amp = 1.0
         # IMCD
         elif cell.segment == 'IMCD':
-            if np.linalg.norm(f)>1000:
+            if np.linalg.norm(f)>5000:
                 if k==0:
-                    amp = 0.08
+                    amp = 0.25 
                 else:
-                    amp = 0.05
-            else:
-                if k==0:
-                    amp = 0.5
+                    amp = 0.5 
+            elif np.linalg.norm(f)>1000:
+                amp = 1.0 #0.5
+            elif iter>75:
+                if np.linalg.norm(f)>10:
+                    amp = 0.75
+                elif np.linalg.norm(f)>1:
+                    amp = 0.9
+                else:
+                    amp = 1.0
+            elif iter>50:
+                if np.linalg.norm(f)>10:
+                    amp = 0.8
                 else:
                     amp = 0.9
+            else:
+                amp = 1.0
         else:
             print('What is this segment?', cell.segment)
             raise Exception('cell.segment is not characterized')
@@ -349,16 +315,18 @@ def newton_human(func,x,k,cell):
                     amp = 0.5      
         # CNT
         elif cell.segment == 'CNT':
-            if cell.sex == 'female':
-                if np.linalg.norm(f)>5000:
-                    amp = 1.0 
+            if np.linalg.norm(f)>5000:
+                if k==0:
+                    amp = 0.2
                 else:
-                    amp = 1.0 
-            elif cell.sex == 'male':
-                if np.linalg.norm(f)>5000:
-                    amp = 1.0
+                    amp = 0.3
+            elif np.linalg.norm(f)>1000:
+                if k==0:
+                    amp = 0.5
                 else:
-                    amp = 1.0
+                    amp = 0.7
+            else:
+                amp = 1.0
         # CCD
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>5000:
@@ -532,7 +500,7 @@ def newton_human(func,x,k,cell):
         x -= delta
         f = np.matrix(fun(x,k))
         iter += 1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta / x)
     return x
         
