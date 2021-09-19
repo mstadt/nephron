@@ -91,7 +91,7 @@ def newton_rat(func,x,k,cell):
     while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
         if np.linalg.norm(f)>1e12:
             print('segment: '+cell.segment + ' cell number: ' + str(k))
-            raise Exception('Newton solver diverged')
+            raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
             
         i += 1
         J = np.matrix(Jac(fun,x,k))
