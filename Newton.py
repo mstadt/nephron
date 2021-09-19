@@ -65,9 +65,8 @@ def broyden(func,x,k,type):
         IJ=IJ-np.outer(IJ*f.T,dx)*IJ/np.inner(dx,dx+(IJ*f.T).T)
         #print(i)
         iter+=1
-        print(iter,np.linalg.norm(f))
+        #print(iter,np.linalg.norm(f))
         
-        #Pause: Added by Dania
 #        input("Pausing! Press Enter to continue...")
         #J=J+np.outer((df-dx*J.T),dx)/np.linalg.norm(x)**2
         #IJ=J.I
