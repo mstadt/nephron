@@ -90,7 +90,6 @@ def newton_rat(func,x,k,cell):
     iter = 0
     while(np.linalg.norm(f) > 0.0001) and (iter<150): #(iter<300)
         if np.linalg.norm(f)>1e12:
-            print('segment: '+cell.segment + ' cell number: ' + str(k))
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
             
         i += 1
@@ -145,7 +144,9 @@ def newton_rat(func,x,k,cell):
         # CNT
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>5000:
-                amp = 1.0
+                amp = 0.25
+            elif np.linalg.norm(f)>1000:
+                amp = 0.5
             elif iter > 50:
                 if np.linalg.norm(f)>1:
                     amp = 0.8
