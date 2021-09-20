@@ -406,12 +406,12 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (0,2):
                     if cell.segment == 'OMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     else:
@@ -449,12 +449,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.35 
+                            preg_rat = 1.3
                         elif cell.preg == 'late':
                             preg_rat = 1.5 #1.4
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.35
+                            preg_rat = 1.3
                         elif cell.preg == 'late':
                             preg_rat = 1.5 #1.4
                     else:
@@ -463,12 +463,12 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.7
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.7
                     elif cell.segment == 'DCT' or cell.segment == 'CNT':
                         if cell.preg == 'mid':
-                            preg_rat = 0.7
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.7
                     elif cell.segment == 'mTAL' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
