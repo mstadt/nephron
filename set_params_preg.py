@@ -406,12 +406,12 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (0,2):
                     if cell.segment == 'OMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.0*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.0*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     else:
