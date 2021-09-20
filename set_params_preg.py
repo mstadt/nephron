@@ -388,17 +388,17 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.25*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     else:
                         print('segment: '+cell.segment)
                         raise Exception('K-Cl coupled transporter not characterized for pregnancy in this segment')
@@ -422,7 +422,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         newdLA.perm = 1.0*newdLA.perm
                     elif cell.preg == 'late':
-                        newdLA.perm = 1.5*newdLA.perm
+                        newdLA.perm = 1.0*newdLA.perm
 
                 cell.dLA.append(newdLA)
 
@@ -471,16 +471,16 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.7
-                    elif cell.segment == 'mTAL' or cell.segment == 'OMCD':
+                    elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
                         elif cell.preg == 'late':
                             preg_rat = 1.0
-                    elif cell.segment == 'IMCD':
+                    elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
                         elif cell.preg == 'late':
-                            preg_rat = 1.0
+                            preg_rat = 1.1
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
