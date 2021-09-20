@@ -507,7 +507,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.0
                     elif cell.preg == 'late':
-                        preg_rat = 1.0
+                        preg_rat = 0.95
                 elif newTransp.type == 'Pendrin':
                     if cell.preg == 'mid':
                         preg_rat = 1.6
@@ -517,7 +517,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 0.9
                     elif cell.preg == 'late':
-                        preg_rat = 0.85
+                        preg_rat = 0.8
                 elif newTransp.type == 'AE1':
                     if cell.preg == 'mid':
                         preg_rat = 1.0 
