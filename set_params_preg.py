@@ -445,12 +445,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 1.3
                         elif cell.preg == 'late':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             preg_rat = 1.3
                         elif cell.preg == 'late':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
@@ -502,7 +502,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 2.0
                     elif cell.preg == 'late':
-                        preg_rat = 2.5
+                        preg_rat = 2.25
                 elif newTransp.type == 'HATPase':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
@@ -522,7 +522,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.0 
                     elif cell.preg == 'late':
-                        preg_rat = 1.5
+                        preg_rat = 1.0
                 else:
                     preg_rat = 1.0
                 newTransp.act = preg_rat*newTransp.act
