@@ -88,6 +88,11 @@ def newton_rat(func,x,k,cell):
     i = 1
     iter = 0
     maxiter = 150
+
+    # check
+    if np.isnan(np.linalg.norm(f)):
+        raise Exception('norm(f) is Nan')
+
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): #(iter<300)
         if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
             raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
