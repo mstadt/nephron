@@ -195,7 +195,9 @@ def read_params_preg(cell,filename,j):
                     # pregnancy water perm (transcellular)
                     if ind1 == 0 and ind2 == 1:
                         if cell.segment == 'SDL':
-                            if cell.preg == 'late':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.0
+                            elif cell.preg == 'late':
                                 preg_rat = 3.0
                         elif cell.segment == 'CCD':
                             if cell.preg == 'mid':
