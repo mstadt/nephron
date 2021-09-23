@@ -85,23 +85,17 @@ def newton_preg_rat(func,x,k,cell):
             amp = 1.0
         # CNT
         elif cell.segment == 'CNT':
-            if cell.sex == 'female':
-                if np.linalg.norm(f)>5000:
-                    amp = 0.5
-                elif np.linalg.norm(f)>1500:
-                    amp = 0.7
-                elif iter > 50:
-                    if np.linalg.norm(f)>1:
-                        amp = 0.85
-                    else:
-                        amp = 0.95
+            if np.linalg.norm(f)>5000:
+                amp = 0.5
+            elif np.linalg.norm(f)>1500:
+                amp = 0.7
+            elif iter > 50:
+                if np.linalg.norm(f)>1:
+                    amp = 0.85
                 else:
-                    amp = 1.0 
-            elif cell.sex == 'male':
-                if np.linalg.norm(f)>5000:
-                    amp = 1.0
-                else:
-                    amp = 1.0
+                    amp = 0.95
+            else:
+                amp = 1.0 
         # CCD     
         elif cell.segment == 'CCD':
             if cell.preg == 'mid':
