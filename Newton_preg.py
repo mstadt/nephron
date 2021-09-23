@@ -87,10 +87,12 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CNT':
             if cell.sex == 'female':
                 if np.linalg.norm(f)>5000:
-                    amp = 1.0 
+                    amp = 0.5
+                elif np.linalg.norm(f)>1500:
+                    amp = 0.7
                 elif iter > 50:
                     if np.linalg.norm(f)>1:
-                        amp = 0.8
+                        amp = 0.85
                     else:
                         amp = 0.95
                 else:
