@@ -87,7 +87,7 @@ def newton_rat(func,x,k,cell):
     TOLpcn = 1
     i = 1
     iter = 0
-    maxiter = 150
+    maxiter = 200
 
     # check
     if np.isnan(np.linalg.norm(f)):
