@@ -370,24 +370,14 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
                 x[5*NS+j]=cell[i].vol[j]
                 x[5*NS+5+j]=cell[i].ep[j]
             x[5*NS+10]=cell[i].pres[0]
-    
         else:
             print('cell.segment:' + cell[0].segment)
             raise Exception('cell.segment:' + cell[0].segment +' is not set up')
-            # x = np.zeros(NS+3)
-            # x[0:NS] = cell[i].conc[:,0]
-            # x[NS] = cell[i].vol[0]
-            # x[NS+1] = cell[i].pres[0]
-            # x[NS+2] = -1 
     
         # set up nonlinear system
         equations.conservation_init (cell[i],cell[i+1],celln,dx)
         fvec = equations.conservation_eqs (x,i)
         
-        # if cell[i].segment == 'PT':
-        #     print(fvec)
-        #     pause = input()
-
         # solving the system
         if method == 'Newton':
             if humOrrat == 'human':
