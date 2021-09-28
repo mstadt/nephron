@@ -23,7 +23,7 @@ def newton_preg_rat(func,x,k,cell):
 
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): 
         if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
-            raise Exception('Newton solver diverged in '+ cell.segment + ' at cell number: ' + str(k))
+            raise Exception('Newton solver diverged in '+cell.type + '_' + cell.segment + ' at cell number: ' + str(k))
         elif iter == maxiter:
             print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
             print('error size: '+ str(np.linalg.norm(f)) + '\n')
@@ -132,40 +132,27 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0
         # IMCD
         elif cell.segment == 'IMCD':
-            if cell.preg == 'mid':
-                if np.linalg.norm(f)>5000:
-                    if k==0:
-                        amp = 0.25 
-                    else:
-                        amp = 0.5 
-                elif np.linalg.norm(f)>1000:
-                    amp = 1.0 #0.5
-                elif iter>75:
-                    if np.linalg.norm(f)>10:
-                        amp = 0.75
-                    elif np.linalg.norm(f)>1:
-                        amp = 0.9
-                    else:
-                        amp = 1.0
-                elif iter>50:
-                    if np.linalg.norm(f)>10:
-                        amp = 0.8
-                    else:
-                        amp = 0.9
+            if np.linalg.norm(f)>5000:
+                if k==0:
+                    amp = 0.5 
+                else:
+                    amp = 0.5 
+            elif np.linalg.norm(f)>1000:
+                amp = 1.0 #0.5
+            elif iter>75:
+                if np.linalg.norm(f)>10:
+                    amp = 0.75
+                elif np.linalg.norm(f)>1:
+                    amp = 0.9
                 else:
                     amp = 1.0
-            elif cell.preg == 'late':
-                if np.linalg.norm(f)>5000:
-                    if k==0:
-                        amp = 0.25 
-                    else:
-                        amp = 0.5 
-                elif np.linalg.norm(f)>1000:
-                    amp = 1.0 #0.5
-                elif iter>75:
-                    amp = 0.95
+            elif iter>50:
+                if np.linalg.norm(f)>10:
+                    amp = 0.8
                 else:
-                    amp = 1.0
+                    amp = 0.9
+            else:
+                amp = 1.0
         else:
             print('What is this segment?', cell.segment)
             raise Exception('cell.segment is not characterized')
