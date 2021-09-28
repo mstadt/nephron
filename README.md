@@ -8,7 +8,7 @@ The options here are:
 
 sex: **Male, Female** (required);
 
-species: **human, rat** (required);
+species: **human, rat, mouse** (required); (note: mouse model is not complete)
 
 type: **superficial, multiple** (required);
 
