@@ -118,6 +118,8 @@ def newton_rat(func,x,k,cell):
         elif cell.segment == 'LDL':
             if iter>75:
                 amp = 0.9
+            elif iter>100:
+                amp = 0.7
             else:
                 amp = 1.0
         # LAL
