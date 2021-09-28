@@ -337,7 +337,10 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
     # initial guess of unknowns
     for i in range(N-1):
         if ((i+1)%20) == 0:
-            print(cell[0].type + ' ' + cell[0].segment + ' cell number: ' + str(i+1))
+            if cell[0].segment == 'CCD' or cell[0].segment == 'OMCD' or cell.segment == 'IMCD':
+                print(cell[0].segment + ' cell number: ' + str(i+1))
+            else:
+                print(cell[0].type + ' ' + cell[0].segment + ' cell number: ' + str(i+1))
 
         celln = copy.deepcopy(cell[i+1])
         dx = 1.0e-3
