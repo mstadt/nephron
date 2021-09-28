@@ -15,7 +15,10 @@ def newton_preg_rat(func,x,k,cell):
     TOLpcn = 1
     i = 1
     iter = 0
-    maxiter = 200
+    if k==0:
+        maxiter = 300
+    else:
+        maxiter = 150
 
     # check
     if np.isnan(np.linalg.norm(f)):
