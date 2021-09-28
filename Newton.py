@@ -151,9 +151,13 @@ def newton_rat(func,x,k,cell):
         # CNT
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>5000:
-                amp = 0.5
+                amp = 0.4
             elif np.linalg.norm(f)>1500:
+                amp = 0.6
+            elif np.linalg.norm(f)>1000:
                 amp = 0.7
+            elif np.linalg.norm(f)>500:
+                amp = 0.8
             elif iter > 50:
                 if np.linalg.norm(f)>1:
                     amp = 0.85
