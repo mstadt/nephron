@@ -25,7 +25,7 @@ def newton_preg_rat(func,x,k,cell):
         raise Exception('norm(f) is Nan')
 
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): 
-        if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
+        if np.linalg.norm(f)>1e14 or np.isnan(np.linalg.norm(f)):
             if cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
                 raise Exception('Newton solver diverged in ' + cell.segment + ' at cell number: ' + str(k))
             else:

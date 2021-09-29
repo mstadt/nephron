@@ -137,7 +137,10 @@ def newton_rat(func,x,k,cell):
         # mTAL
         elif cell.segment == 'mTAL':
             if np.linalg.norm(f)>5000:
-                amp = 0.5
+                if k==0:
+                    amp = 1.0
+                else:
+                    amp = 1.0
             elif iter>100:
                 amp = 0.95
             else:
