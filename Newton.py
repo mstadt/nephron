@@ -178,10 +178,16 @@ def newton_rat(func,x,k,cell):
         # CNT
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>5000:
-                if k==0:
-                    amp = 0.25
+                if cell.type == 'jux3':
+                    if k==0:
+                        amp = 1.0
+                    else:
+                        amp = 0.5
                 else:
-                    amp = 0.4
+                    if k==0:
+                        amp = 0.25
+                    else:
+                        amp = 0.4
             elif np.linalg.norm(f)>1500:
                 if k==0:
                     amp = 0.4
