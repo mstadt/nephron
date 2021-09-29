@@ -89,12 +89,12 @@ def newton_preg_rat(func,x,k,cell):
                 if cell.preg == 'mid':
                     amp = 0.3
                 elif cell.preg == 'late':
-                    amp = 1.0
+                    amp = 0.3
             elif np.linalg.norm(f)>2000:
                 if cell.preg == 'mid':
                     amp = 0.7
                 elif cell.preg == 'late':
-                    amp = 1.0
+                    amp = 0.7
             elif np.linalg.norm(f)>1000:
                 if cell.preg == 'mid':
                     amp = 1.0 #0.8
@@ -102,9 +102,9 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 1.0
             elif iter > 50:
                 if np.linalg.norm(f)>1:
-                    amp = 1.0 #0.85
+                    amp = 1.0 
                 else:
-                    amp = 1.0 #0.95
+                    amp = 1.0 
             else:
                 amp = 1.0 
         # CCD     
