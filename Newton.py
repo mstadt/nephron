@@ -98,9 +98,15 @@ def newton_rat(func,x,k,cell):
 
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): #(iter<300)
         if np.linalg.norm(f)>1e12 or np.isnan(np.linalg.norm(f)):
-            raise Exception('Newton solver diverged in '+ cell.type + ' ' + cell.segment + ' at cell number: ' + str(k))
+            if cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                raise Exception('Newton solver diverged in ' + cell.segment + ' at cell number: ' + str(k))
+            else:
+                raise Exception('Newton solver diverged in '+ cell.type + ' ' + cell.segment + ' at cell number: ' + str(k))
         elif iter == maxiter:
-            print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
+            if cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.segment + ' cell number ' + str(k) + '\n')
+            else:
+                print('Warning!!: Newton solver did not converge in <'+str(iter)+' iterations in ' + cell.type + ' ' + cell.segment + ' cell number ' + str(k) + '\n')
             print('error size: '+ str(np.linalg.norm(f)))
             print('\n')
             
