@@ -1,4 +1,4 @@
-# This file is used to check individual segment. Type 'python computation.py' in the terminal to run.
+# This file is used to check individual segment. Type 'python3 computation.py' in the terminal to run.
 # requires outlet files from previous simulation
 from driver import compute
 from values import *
