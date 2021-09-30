@@ -1,4 +1,4 @@
-# This file is used to check individual segment. Type 'python computation.py' in the terminal to run.
+# This file is used to check individual segment. Type 'python3 computation.py' in the terminal to run.
 # requires outlet files from previous simulation
 from driver import compute
 from values import *
@@ -29,7 +29,7 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat', 'mouse'],required = True,type = str, help = 'Human model or Rat model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
-parser.add_argument('--segment', choices = ['PT','S3','SDL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
+parser.add_argument('--segment', choices = ['PT','S3','SDL', 'LDL', 'LAL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
 parser.add_argument('--savefile', required=True, type=str, help = 'where to save?')
 # optional input
 parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','jux5', ''], default='', type=str, help = 'which nephron type? (sup/jux1/jux2/etc), '' is for collecting duct')
@@ -49,9 +49,16 @@ segment = args.segment
 sup_or_jux = args.suporjux
 
 if sup_or_jux == '':
-	if segment[-2:] != 'CD':
-		print('segment: ' + segment)
-		raise Exception('sup or jux required for nephron segments')
+	if sup_or_multi == 'multiple':
+		if segment[-2:] != 'CD':
+			print('segment: ' + segment)
+			raise Exception('sup or jux required for multiple nephron segments')
+	elif sup_or_multi == 'superficial':
+		if segment[-2:] != 'CD':
+			sup_or_jux = 'sup'
+	else:
+		print('sup_or_multi: ' + sup_or_multi)
+		raise Exception('what is this sup_or_multi? ' + sup_or_multi)
 
 diabete = args.diabetes
 inhib = args.inhibition

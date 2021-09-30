@@ -336,8 +336,11 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
 
     # initial guess of unknowns
     for i in range(N-1):
-        if ((i+1)%25) == 0:
-            print(cell[0].segment + ' cell number: ' + str(i+1) + '\n')
+        if ((i+1)%20) == 0:
+            if cell[0].segment == 'CCD' or cell[0].segment == 'OMCD' or cell[0].segment == 'IMCD':
+                print(cell[0].segment + ' cell number: ' + str(i+1))
+            else:
+                print(cell[0].type + ' ' + cell[0].segment + ' cell number: ' + str(i+1))
 
         celln = copy.deepcopy(cell[i+1])
         dx = 1.0e-3
@@ -370,24 +373,14 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',humOrrat = 'human',s
                 x[5*NS+j]=cell[i].vol[j]
                 x[5*NS+5+j]=cell[i].ep[j]
             x[5*NS+10]=cell[i].pres[0]
-    
         else:
             print('cell.segment:' + cell[0].segment)
             raise Exception('cell.segment:' + cell[0].segment +' is not set up')
-            # x = np.zeros(NS+3)
-            # x[0:NS] = cell[i].conc[:,0]
-            # x[NS] = cell[i].vol[0]
-            # x[NS+1] = cell[i].pres[0]
-            # x[NS+2] = -1 
     
         # set up nonlinear system
         equations.conservation_init (cell[i],cell[i+1],celln,dx)
         fvec = equations.conservation_eqs (x,i)
         
-        # if cell[i].segment == 'PT':
-        #     print(fvec)
-        #     pause = input()
-
         # solving the system
         if method == 'Newton':
             if humOrrat == 'human':
