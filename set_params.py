@@ -716,7 +716,7 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"vol"):
                 tmp = (id).split('_')
 
-                # data files specify values for superficial nephrons, so we hardcord juxmedullary nephron values
+                # data files specify values for superficial nephrons, juxmedullary nephron values are hardcoded here
                 if cell.segment == 'PT' and cell.type != 'sup' and cell.species == 'rat':
                     if compart_id[tmp[1]] == 0:	
                         if cell.type == 'jux1':
