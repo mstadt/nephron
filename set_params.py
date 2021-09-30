@@ -200,12 +200,12 @@ def read_params(cell,filename,j):
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
-                            cell.len = 0.05*0.9 #0.05*0.85, updated female
+                            cell.len = 0.05*0.9
                     elif cell.segment == 'CNT':
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.9 #0.3*0.85, updated female
+                            cell.len = 0.3*0.9 
 
                 if cell.type != 'sup' and cell.species == 'mou':
                     if cell.segment == 'PT':
