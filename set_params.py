@@ -200,12 +200,12 @@ def read_params(cell,filename,j):
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
-                            cell.len = 0.05*0.9 #0.05*0.85, updated female
+                            cell.len = 0.05*0.9
                     elif cell.segment == 'CNT':
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
-                            cell.len = 0.3*0.9 #0.3*0.85, updated female
+                            cell.len = 0.3*0.9 
 
                 if cell.type != 'sup' and cell.species == 'mou':
                     if cell.segment == 'PT':
@@ -271,7 +271,7 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"Pressure"):
                 cell.pres[0] = value
                 
-            # parameter files specify pressure (value) for superficial nephrons; we manually specify juxtamedullary pressure values...
+            # parameter files specify pressure (value) for superficial nephrons
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'rat':
                     if cell.sex == 'male':
                         cell.pres[0] = 12.5
@@ -716,7 +716,7 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"vol"):
                 tmp = (id).split('_')
 
-                # data files specify values for superficial nephrons, so we hardcord juxmedullary nephron values
+                # data files specify values for superficial nephrons, juxmedullary nephron values are hardcoded here
                 if cell.segment == 'PT' and cell.type != 'sup' and cell.species == 'rat':
                     if compart_id[tmp[1]] == 0:	
                         if cell.type == 'jux1':
