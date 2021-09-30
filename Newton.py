@@ -80,7 +80,7 @@ def broyden(func,x,k,type):
 #=====================================================
 # rat newton solver
 def newton_rat(func,x,k,cell):
-    if cell.humOrrat != 'rat' and cell.humOrrat != 'mou':
+    if cell.species != 'rat' and cell.species != 'mou':
         raise Exception('newton_rat only for rat or mouse model')
     fun=equations.conservation_eqs
     f=np.matrix(fun(x,k))
@@ -309,7 +309,7 @@ def newton_rat(func,x,k,cell):
 
 # human newton solver
 def newton_human(func,x,k,cell):
-    if cell.humOrrat != 'hum':
+    if cell.species != 'hum':
         raise Exception('newton_human only for human model')
     fun=equations.conservation_eqs
     f=np.matrix(fun(x,k))
