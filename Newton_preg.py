@@ -147,6 +147,8 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0
             elif np.linalg.norm(f)>100:
                 amp = 1.0
+            elif iter>100:
+                amp = 0.9
             else:
                 amp = 1.0
         # IMCD
