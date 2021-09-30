@@ -131,10 +131,7 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"Diameter"):
                 # diabetic diameter
                 if cell.diabete == 'Non':
-                    if cell.type == 'sup':
-                        cell.diam = value
-                    else:
-                        cell.diam = value*1.05
+                    cell.diam = value
                 elif cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.diam = value*1.1
@@ -274,7 +271,7 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"Pressure"):
                 cell.pres[0] = value
                 
-            # parameter files specify pressure (value) for superficial nephrons; we manually specify juxtamedullary pressure values...
+            # parameter files specify pressure (value) for superficial nephrons
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'rat':
                     if cell.sex == 'male':
                         cell.pres[0] = 12.5
