@@ -49,9 +49,16 @@ segment = args.segment
 sup_or_jux = args.suporjux
 
 if sup_or_jux == '':
-	if segment[-2:] != 'CD':
-		print('segment: ' + segment)
-		raise Exception('sup or jux required for nephron segments')
+	if sup_or_multi == 'multiple':
+		if segment[-2:] != 'CD':
+			print('segment: ' + segment)
+			raise Exception('sup or jux required for multiple nephron segments')
+	elif sup_or_multi == 'superficial':
+		if segment[-2:] != 'CD':
+			sup_or_jux = 'sup'
+	else:
+		print('sup_or_multi: ' + sup_or_multi)
+		raise Exception('what is this sup_or_multi? ' + sup_or_multi)
 
 diabete = args.diabetes
 inhib = args.inhibition
