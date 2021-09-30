@@ -4,8 +4,8 @@ import numpy as np
 from Newton import Jac
 
 def newton_preg_rat(func,x,k,cell):
-    if cell.humOrrat != 'rat':
-        print('humOrrat:' + cell.humOrrat)
+    if cell.species != 'rat':
+        print('species:' + cell.species)
         raise Exception('newton_preg_rat only for rat model')
     if cell.sex.lower() != 'female':
         print('sex: ' + cell.sex)
