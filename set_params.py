@@ -131,7 +131,10 @@ def read_params(cell,filename,j):
             elif compare_string_prefix(id,"Diameter"):
                 # diabetic diameter
                 if cell.diabete == 'Non':
-                    cell.diam = value
+                    if cell.type == 'sup':
+                        cell.diam = value
+                    else:
+                        cell.diam = value*1.05
                 elif cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.diam = value*1.1
