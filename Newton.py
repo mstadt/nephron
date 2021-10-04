@@ -249,7 +249,7 @@ def newton_rat(func,x,k,cell):
                 elif np.linalg.norm(f)>5:
                     amp = 0.9
                 else:
-                    amp = 1.0
+                    amp = 0.9 #1.0
             else:
                 amp = 1.0
         # OMCD
