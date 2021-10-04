@@ -197,11 +197,13 @@ def read_params(cell,filename,j):
     # parameter files specify superficial segmental lengths; for some segments, lengths are different for juxtamedullary nephrons, so we overwrite them here...
                 if cell.type != 'sup' and cell.species == 'rat':
                     if cell.segment == 'cTAL':
+                        # cTAL is short in jux nephrons
                         if cell.sex == 'male':
                             cell.len = 0.05
                         elif cell.sex == 'female':
                             cell.len = 0.05*0.9
                     elif cell.segment == 'CNT':
+                        # CNT is longer in jux nephrons
                         if cell.sex == 'male':
                             cell.len = 0.3
                         elif cell.sex == 'female':
