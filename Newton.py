@@ -94,6 +94,8 @@ def newton_rat(func,x,k,cell):
 
     # check
     if np.isnan(np.linalg.norm(f)):
+        print(cell.segment)
+        print(cell.type)
         raise Exception('norm(f) is Nan')
 
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): #(iter<300)
