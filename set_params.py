@@ -725,31 +725,31 @@ def read_params(cell,filename,j):
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux2':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux3':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux4':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux5':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
