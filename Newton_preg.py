@@ -54,12 +54,16 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'LDL':
             if np.linalg.norm(f)>5000:
                 amp = 0.5
+            elif iter>75:
+                amp = 0.95
             else:
                 amp = 1.0
         # LAL
         elif cell.segment == 'LAL':
             if np.linalg.norm(f)>5000:
                 amp = 0.5
+            elif iter>75:
+                amp = 0.95
             else:
                 amp = 1.0
         # mTAL
