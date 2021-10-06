@@ -91,16 +91,22 @@ def read_params_preg(cell,filename,j):
             # Diameter:
             elif compare_string_prefix(id,"Diameter"):
                 # pregnant diameter
+                preg_rat = 1.0 # reset preg_rat
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.diam = value*1.14
+                        preg_rat = 1.14
                     elif cell.preg == 'late':
-                        cell.diam = value*1.16
+                        preg_rat = 1.16
                 else:
                     if cell.preg == 'mid':
-                        cell.diam = value*1.08
+                        preg_rat = 1.08
                     elif cell.preg == 'late':
-                        cell.diam = value*1.1
+                        preg_rat = 1.1
+
+                if cell.type != 'sup':
+                    preg_rat = preg_rat*1.02 #2% increase in juxt nephron diameter
+
+                cell.diam = value*preg_rat
 
             # Length:
             elif compare_string_prefix(id,"Length"):
@@ -162,7 +168,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         cell.pres[0] = 13.0
                     elif cell.preg == 'late':
-                        cell.pres[0] = 13.7
+                        cell.pres[0] = 13.0
 
             # pH:
             elif compare_string_prefix(id,"pH"):
@@ -590,9 +596,9 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for jux nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.006*1.4 
+                            cell.vol[0] = 0.00852 
                         elif cell.preg == 'late':
-                            cell.vol[0] = 0.006*1.0333333 
+                            cell.vol[0] = 0.00568
                         cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
