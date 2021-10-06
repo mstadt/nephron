@@ -133,7 +133,7 @@ def read_params(cell,filename,j):
                 if cell.diabete == 'Non':
                     cell.diam = value
                     if cell.type != 'sup':
-                        cell.diam = value*1.02
+                        cell.diam = value*1.02 #slight increase in juxt diam size
                 elif cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.diam = value*1.1
