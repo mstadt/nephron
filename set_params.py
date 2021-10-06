@@ -132,6 +132,8 @@ def read_params(cell,filename,j):
                 # diabetic diameter
                 if cell.diabete == 'Non':
                     cell.diam = value
+                    if cell.type != 'sup':
+                        cell.diam = value*1.02
                 elif cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         cell.diam = value*1.1
@@ -278,7 +280,7 @@ def read_params(cell,filename,j):
                     if cell.sex == 'male':
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
-                        cell.pres[0] = 12.5
+                        cell.pres[0] = 13.0 #12.5
 
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'mou':
                     if cell.sex == 'male':
@@ -725,31 +727,31 @@ def read_params(cell,filename,j):
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux2':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux3':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux4':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                         elif cell.type == 'jux5':
                             if cell.sex == 'male':
                                 cell.vol[0] = 0.0075
                             elif cell.sex == 'female':
-                                cell.vol[0] = 0.006
+                                cell.vol[0] = 0.0056
                             cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
