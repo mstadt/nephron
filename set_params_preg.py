@@ -166,9 +166,9 @@ def read_params_preg(cell,filename,j):
                 cell.pres[0] = value
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'rat':
                     if cell.preg == 'mid':
-                        cell.pres[0] = 12.5 #13.0
+                        cell.pres[0] = 12.5
                     elif cell.preg == 'late':
-                        cell.pres[0] = 12.5 #13.0
+                        cell.pres[0] = 12.5
 
             # pH:
             elif compare_string_prefix(id,"pH"):
