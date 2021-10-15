@@ -103,8 +103,8 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         preg_rat = 1.1
 
-                if cell.type != 'sup':
-                    preg_rat = preg_rat*1.02 #2% increase in juxt nephron diameter
+                # if cell.type != 'sup':
+                #     preg_rat = preg_rat*1.02 #2% increase in juxt nephron diameter
 
                 cell.diam = value*preg_rat
 
@@ -596,7 +596,7 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for jux nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.00784 #0.00852 
+                            cell.vol[0] = 0.0085 
                         elif cell.preg == 'late':
                             cell.vol[0] = 0.006 #0.00568
                         cell.vol_init[0] = cell.vol[0]
