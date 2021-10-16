@@ -91,7 +91,7 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>5000:
                 if cell.preg == 'mid':
-                    amp = 0.3
+                    amp = 0.25
                 elif cell.preg == 'late':
                     amp = 0.3
             elif np.linalg.norm(f)>2000:
@@ -185,7 +185,7 @@ def newton_preg_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        #print(iter, np.linalg.norm(f))
+        print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
         
