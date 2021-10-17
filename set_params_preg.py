@@ -230,17 +230,17 @@ def read_params_preg(cell,filename,j):
                                     preg_rat = 3.0
                             elif cell.segment == 'CCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 1.5
+                                    preg_rat = 1.25
                                 elif cell.preg == 'late':
                                     preg_rat = 2.0
                             elif cell.segment == 'OMCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 1.5
+                                    preg_rat = 1.25
                                 elif cell.preg == 'late':
                                     preg_rat = 2.0
                             elif cell.segment == 'IMCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 2.0
+                                    preg_rat = 1.5
                                 elif cell.preg == 'late':
                                     preg_rat = 2.75
 
@@ -413,21 +413,21 @@ def read_params_preg(cell,filename,j):
                     else:
                         print('segment: '+cell.segment)
                         raise Exception('K-Cl coupled transporter not characterized for pregnancy in this segment')
-                # Na-Cl cotransporter
-                # elif newdLA.solute_id == (0,2):
-                #     if cell.segment == 'OMCD':
-                #         if cell.preg == 'mid':
-                #             newdLA.perm = 1.0*newdLA.perm
-                #         elif cell.preg == 'late':
-                #             newdLA.perm = 1.0*newdLA.perm
-                #     elif cell.segment == 'IMCD':
-                #         if cell.preg == 'mid':
-                #             newdLA.perm = 1.0*newdLA.perm
-                #         elif cell.preg == 'late':
-                #             newdLA.perm = 1.0*newdLA.perm
-                #     else:
-                #         print('segment: ' + cell.segment)
-                #         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
+                #Na-Cl cotransporter
+                elif newdLA.solute_id == (0,2):
+                    if cell.segment == 'OMCD':
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.1*newdLA.perm
+                        elif cell.preg == 'late':
+                            newdLA.perm = 1.0*newdLA.perm
+                    elif cell.segment == 'IMCD':
+                        if cell.preg == 'mid':
+                            newdLA.perm = 1.1*newdLA.perm
+                        elif cell.preg == 'late':
+                            newdLA.perm = 1.0*newdLA.perm
+                    else:
+                        print('segment: ' + cell.segment)
+                        raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
 
                 cell.dLA.append(newdLA)
 
