@@ -112,7 +112,10 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 0.7
             elif np.linalg.norm(f)>1000:
                 if cell.preg == 'mid':
-                    amp = 1.0 #0.8
+                    if cell.type == 'jux1':
+                        amp = 0.8
+                    else:
+                        amp = 1.0 #0.8
                 elif cell.preg == 'late':
                     amp = 1.0
             elif iter > 50:
