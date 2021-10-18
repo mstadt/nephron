@@ -219,5 +219,8 @@ def newton_preg_rat(func,x,k,cell):
         iter+=1
         print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
+
+        if np.isnan(np.linalg.norm(f)):
+            raise Exception('norm(f) is Nan')
     return x
         
