@@ -70,7 +70,7 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'mTAL':
             if np.linalg.norm(f)>1e6:
                 if cell.type == 'jux2':
-                    amp = 0.05
+                    amp = 0.1
                 else:
                     amp = 0.1
             elif np.linalg.norm(f)>5000:
@@ -214,8 +214,16 @@ def newton_preg_rat(func,x,k,cell):
             print('What is this segment?', cell.segment)
             raise Exception('cell.segment is not characterized')
         delta = amp*np.array(F*IJ.T)[0]
-        x-= delta
+        xold = x
+        x -= delta
         f = np.matrix(fun(x,k))
+
+        # extra check
+        if np.isnan(np.linalg.norm(f)) or np.linalg.norm(f)>1e14:
+            amp = amp/3
+            delta = amp*np.array(F*IJ.T)[0]
+            x = xold - delta
+
         iter+=1
         print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
