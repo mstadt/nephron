@@ -223,12 +223,12 @@ def newton_preg_rat(func,x,k,cell):
             amp = amp/3
             delta = amp*np.array(F*IJ.T)[0]
             x = xold - delta
+            f = np.matrix(fun(x,k))
 
         iter+=1
         print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
 
-        if np.isnan(np.linalg.norm(f)):
-            raise Exception('norm(f) is Nan')
+
     return x
         
