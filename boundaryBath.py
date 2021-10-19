@@ -89,6 +89,15 @@ def boundaryBath(cell,i):
             cell.pap[1] = TotPotPap_100NKCCinhib
             cell.pap[2] = TotCloPap_100NKCCinhib
             cell.pap[8] = TotureaPap_100NKCCinhib
+        elif cell.preg == 'mid':
+            cell.oi[0] = TotSodOI_MP
+            cell.oi[1] = TotPotOI_MP
+            cell.oi[2] = TotCloOI_MP
+            cell.oi[3] = TotHCO3OI_MP
+            cell.pap[0] = TotSodPap_MP
+            cell.pap[1] = TotPotPap_MP
+            cell.pap[2] = TotCloPap_MP
+            cell.pap[3] = TotHCO3Pap_MP
             
     if cell.segment=='cTAL' or cell.segment == 'MD' or cell.segment=='DCT' or cell.segment=='PT' or cell.segment == 'CNT' or cell.segment == 'CCD':
         if cell.species == 'rat':
