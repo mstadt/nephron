@@ -98,7 +98,7 @@ def newton_preg_rat(func,x,k,cell):
             if np.linalg.norm(f)>5000:
                 if cell.preg == 'mid':
                     if cell.type == 'jux2':
-                        amp = 0.4
+                        amp = 0.25
                     elif cell.type == 'jux3':
                         amp = 0.4
                     elif cell.type == 'jux4':
