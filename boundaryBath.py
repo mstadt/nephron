@@ -93,11 +93,9 @@ def boundaryBath(cell,i):
             cell.oi[0] = TotSodOI_MP
             cell.oi[1] = TotPotOI_MP
             cell.oi[2] = TotCloOI_MP
-            cell.oi[8] = TotureaOI_MP
             cell.pap[0] = TotSodPap_MP
             cell.pap[1] = TotPotPap_MP
             cell.pap[2] = TotCloPap_MP
-            cell.pap[8] = TotureaPap_MP
             
     if cell.segment=='cTAL' or cell.segment == 'MD' or cell.segment=='DCT' or cell.segment=='PT' or cell.segment == 'CNT' or cell.segment == 'CCD':
         if cell.species == 'rat':
