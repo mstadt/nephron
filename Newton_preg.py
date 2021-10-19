@@ -229,8 +229,8 @@ def newton_preg_rat(func,x,k,cell):
         print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
 
-        print(f)
-        input('pausing...')
+        #print(f)
+        #input('pausing...')
 
 
     return x
