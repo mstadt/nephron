@@ -22,7 +22,7 @@ def newton_preg_rat(func,x,k,cell):
 
     # check
     if np.isnan(np.linalg.norm(f)):
-        raise Exception('norm(f) is Nan')
+        raise Exception(cell.segment + ' norm(f) is Nan')
 
     while(np.linalg.norm(f) > 0.0001) and (iter<maxiter+1): 
         if np.linalg.norm(f)>1e14 or np.isnan(np.linalg.norm(f)):
