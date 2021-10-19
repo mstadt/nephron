@@ -121,36 +121,36 @@ TotSodCM = 144.0
 TotSodOI_noinhib = 299.0
 TotSodOI_100NKCCinhib = 180.0
 TotSodOI_70NKCCinhib = 239.5
-TotSodOI_MP = 290.0
+TotSodOI_MP = 281.1
 TotSodPap_noinhib = 349.0
 TotSodPap_50inhib = 324.0
 TotSodPap_80inhib = 274.0
 TotSodPap_100NKCCinhib = 140.0
 TotSodPap_70NKCCinhib = 244.5
-TotSodPap_MP = 335.5
+TotSodPap_MP = 328.0
 
 TotPotCM = 4.9
 TotPotOI_noinhib = 10.0
 TotPotOI_100NKCCinhib = 5.0
 TotPotOI_70NKCCinhib = 7.5
-TotPotOI_MP = 10.25
+TotPotOI_MP = 10.0
 TotPotPap_noinhib = 20.0
 TotPotPap_80inhib = 10.0
 TotPotPap_100NKCCinhib = 5.0
 TotPotPap_70NKCCinhib = 12.5
-TotPotPap_MP = 20.5
+TotPotPap_MP = 20.0
 
 TotCloCM = 116.17
 TotCloOI_noinhib = 279.94
 TotCloOI_100NKCCinhib = 158.0
 TotCloOI_70NKCCinhib = 218.97
-TotCloOI_MP = 270.0
+TotCloOI_MP = 263.0
 TotCloPap_noinhib = 344.92
 TotCloPap_50inhib = 320.0
 TotCloPap_80inhib = 260.0
 TotCloPap_100NKCCinhib = 136.0
 TotCloPap_70NKCCinhib = 240.46
-TotCloPap_MP = 330.0
+TotCloPap_MP = 324.2
 
 TotureaCM = 8.0
 TotureaOI_noinhib = 60.0
@@ -158,10 +158,15 @@ TotureaOI_50inhib = 50.0
 TotureaOI_80inhib = 20.0
 TotureaOI_100NKCCinhib = 20.0
 TotureaOI_70NKCCinhib = 40.0
-TotureaOI_MP = 55.0 # no change
+
 TotureaPap_noinhib = 200.0
 TotureaPap_50inhib = 180.0
 TotureaPap_80inhib = 20.0
 TotureaPap_100NKCCinhib = 20.0
 TotureaPap_70NKCCinhib = 110.0
-TotureaPap_MP = 195.0 # no change
+
+
+TotHCO3OI_noinhib = 25.0
+TotHCO3OI_MP = 23.5
+TotHCO3Pap_noinhib = 25.0
+TotHCO3Pap_MP = 23.5
