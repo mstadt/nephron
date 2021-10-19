@@ -68,23 +68,14 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0
         # mTAL
         elif cell.segment == 'mTAL':
-            if np.linalg.norm(f)>1e6:
-                if cell.type == 'jux1':
-                    amp = 0.1
-                else:
-                    amp = 1.0
-            elif np.linalg.norm(f)>1e4:
-                if cell.type == 'jux1':
-                    amp = 0.3
-                elif cell.type == 'jux2':
-                    amp = 1.0
-                else:
-                    amp = 1.0
+            if np.linalg.norm(f)>5000:
+                amp = 0.2
+            elif np.linalg.norm(f)>2000:
+                amp = 0.3
             elif np.linalg.norm(f)>1000:
-                if cell.type == 'jux4':
-                    amp = 1.0
-                else:
-                    amp = 1.0
+                amp = 0.5
+            elif np.linalg.norm(f)>100:
+                amp = 0.9
             else:
                 amp = 1.0
         # cTAL
