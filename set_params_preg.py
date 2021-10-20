@@ -207,54 +207,54 @@ def read_params_preg(cell,filename,j):
                             if cell.preg == 'mid':
                                 preg_rat = 1.0
                             elif cell.preg == 'late':
-                                preg_rat = 3.0
+                                preg_rat = 2.5
                         elif cell.segment == 'LDL':
                             if cell.preg == 'mid':
                                 preg_rat = 1.0
                             elif cell.preg == 'late':
-                                preg_rat = 3.0
+                                preg_rat = 2.5
                         elif cell.segment == 'CCD':
                             if cell.preg == 'mid':
                                 preg_rat = 1.5
                             elif cell.preg == 'late':
-                                preg_rat = 2.0
+                                preg_rat = 1.5
                         elif cell.segment == 'OMCD':
                             if cell.preg == 'mid':
                                 preg_rat = 1.5
                             elif cell.preg == 'late':
-                                preg_rat = 2.0
+                                preg_rat = 1.5
                         elif cell.segment == 'IMCD':
                             if cell.preg == 'mid':
                                 preg_rat = 2.0
                             elif cell.preg == 'late':
-                                preg_rat = 2.75
+                                preg_rat = 2.0
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'SDL':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.0
                                 elif cell.preg == 'late':
-                                    preg_rat = 3.0
+                                    preg_rat = 2.5
                             elif cell.segment == 'LDL':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.0
                                 elif cell.preg == 'late':
-                                    preg_rat = 3.0
+                                    preg_rat = 2.5
                             elif cell.segment == 'CCD':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.5
                                 elif cell.preg == 'late':
-                                    preg_rat = 2.0
+                                    preg_rat = 1.5
                             elif cell.segment == 'OMCD':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.5
                                 elif cell.preg == 'late':
-                                    preg_rat = 2.0
+                                    preg_rat = 1.5
                             elif cell.segment == 'IMCD':
                                 if cell.preg == 'mid':
                                     preg_rat = 2.0
                                 elif cell.preg == 'late':
-                                    preg_rat = 2.75
+                                    preg_rat = 2.0
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
                 #print('water permeability')
@@ -468,12 +468,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 1.4
                         elif cell.preg == 'late':
-                            preg_rat = 1.4
+                            preg_rat = 1.2
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             preg_rat = 1.4
                         elif cell.preg == 'late':
-                            preg_rat = 1.4
+                            preg_rat = 1.2
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
@@ -482,12 +482,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 0.75
                         elif cell.preg == 'late':
-                            preg_rat = 0.7
+                            preg_rat = 0.65
                     elif cell.segment == 'DCT' or cell.segment == 'CNT':
                         if cell.preg == 'mid':
                             preg_rat = 0.75
                         elif cell.preg == 'late':
-                            preg_rat = 0.7
+                            preg_rat = 0.65
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
@@ -520,7 +520,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 2.0
                     elif cell.preg == 'late':
-                        preg_rat = 2.15
+                        preg_rat = 2.1
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
                         preg_rat = 2.0
