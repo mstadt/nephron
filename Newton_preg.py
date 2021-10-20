@@ -95,10 +95,14 @@ def newton_preg_rat(func,x,k,cell):
             amp = 1.0
         # CNT
         elif cell.segment == 'CNT':
-            if np.linalg.norm(f)>5000:
+            if np.linalg.norm(f)>1e6:
+                amp = 0.25
+            elif np.linalg.norm(f)>5000:
                 if cell.preg == 'mid':
-                    if cell.type == 'jux2':
-                        amp = 0.25
+                    if cell.type == 'jux1':
+                        amp = 0.4
+                    elif cell.type == 'jux2':
+                        amp = 0.4
                     elif cell.type == 'jux3':
                         amp = 0.4
                     elif cell.type == 'jux4':
