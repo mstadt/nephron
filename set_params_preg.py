@@ -409,17 +409,17 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (1,2):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.25*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.25*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.25*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.3*newdLA.perm
                     else:
@@ -466,12 +466,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                         elif cell.preg == 'late':
                             preg_rat = 1.4
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                         elif cell.preg == 'late':
                             preg_rat = 1.4
                     else:
@@ -508,7 +508,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.45
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.25
+                        preg_rat = 1.3
                     elif cell.preg == 'late':
                         preg_rat = 1.3
                 elif newTransp.type == 'NCC':
@@ -518,7 +518,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.9
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
-                        preg_rat = 1.8
+                        preg_rat = 2.0
                     elif cell.preg == 'late':
                         preg_rat = 2.15
                 elif newTransp.type == 'HKATPase':
