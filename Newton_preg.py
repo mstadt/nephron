@@ -138,7 +138,7 @@ def newton_preg_rat(func,x,k,cell):
                 if np.linalg.norm(f)>1:
                     amp = 0.9 
                 else:
-                    print('here')
+                    #print('here')
                     amp = 0.5
             else:
                 amp = 1.0 
@@ -225,7 +225,7 @@ def newton_preg_rat(func,x,k,cell):
             f = np.matrix(fun(x,k))
 
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
 
         #print(f)
