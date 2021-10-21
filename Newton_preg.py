@@ -138,7 +138,8 @@ def newton_preg_rat(func,x,k,cell):
                 if np.linalg.norm(f)>1:
                     amp = 0.9 
                 else:
-                    amp = 0.85
+                    print('here')
+                    amp = 0.5
             else:
                 amp = 1.0 
         # CCD     
