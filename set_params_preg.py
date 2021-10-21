@@ -116,7 +116,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.157142
+                        cell.len = value*1.15
                     elif cell.preg == 'late':
                         cell.len = value*1.195
                 # juxtamedullary segments lengths
