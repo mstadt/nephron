@@ -203,7 +203,12 @@ def read_params_preg(cell,filename,j):
                 if cell.preg != 'non':
                     # pregnancy water perm (transcellular)
                     if ind1 == 0 and ind2 == 1:
-                        if cell.segment == 'SDL':
+                        if cell.segment == 'PT' or cell.segment == 'S3':
+                            if cell.preg == 'mid':
+                                preg_rat = 1.0
+                            elif cell.preg == 'late':
+                                preg_rat = 2.0
+                        elif cell.segment == 'SDL':
                             if cell.preg == 'mid':
                                 preg_rat = 1.0
                             elif cell.preg == 'late':
@@ -230,7 +235,12 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = 2.0
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
-                            if cell.segment == 'SDL':
+                            if cell.segment == 'PT' or cell.segment == 'S3':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.0
+                                elif cell.preg == 'late':
+                                    preg_rat = 2.0
+                            elif cell.segment == 'SDL':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.0
                                 elif cell.preg == 'late':
