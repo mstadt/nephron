@@ -362,14 +362,14 @@ def read_params_preg(cell,filename,j):
                     if j>0.66*cell.total:
                         #DCT2
                         if cell.preg == 'late':
-                            preg_rat = 0.35
+                            preg_rat = 0.3
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
                             preg_rat = 0.525 
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
-                        preg_rat = 0.35
+                        preg_rat = 0.3
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
                         preg_rat = 0.525 
@@ -478,12 +478,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 1.4
                         elif cell.preg == 'late':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             preg_rat = 1.4
                         elif cell.preg == 'late':
-                            preg_rat = 1.3
+                            preg_rat = 1.4
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
@@ -497,7 +497,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 0.75
                         elif cell.preg == 'late':
-                            preg_rat = 0.65
+                            preg_rat = 0.675
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
@@ -520,7 +520,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.3
                     elif cell.preg == 'late':
-                        preg_rat = 1.5
+                        preg_rat = 1.45
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
                         preg_rat = 1.3
