@@ -520,7 +520,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.3
                     elif cell.preg == 'late':
-                        preg_rat = 1.45
+                        preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
                         preg_rat = 1.3
@@ -540,7 +540,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 2.0
                     elif cell.preg == 'late':
-                        preg_rat = 2.2
+                        preg_rat = 2.3
                 elif newTransp.type == 'HATPase':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
@@ -555,7 +555,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 0.9
                     elif cell.preg == 'late':
-                        preg_rat = 0.85
+                        preg_rat = 0.9
                 elif newTransp.type == 'AE1':
                     if cell.preg == 'mid':
                         preg_rat = 1.0 
