@@ -174,7 +174,7 @@ TotureaPap_70NKCCinhib = 110.0
 
 TotHCO3OI_noinhib = 25.0
 TotHCO3OI_MP = 23.5
-TotHCO3OI_LP = 25.0*0.93
+TotHCO3OI_LP = 25.0*0.94
 TotHCO3Pap_noinhib = 25.0
 TotHCO3Pap_MP = 23.5
-TotHCO3Pap_LP = 25.0*0.93
+TotHCO3Pap_LP = 25.0*0.94
