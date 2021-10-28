@@ -119,7 +119,7 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     #========================================================
     file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_diameter'+sup_or_jux+'.txt', 'w')
     for j in range(N):
-        file.write(str(cell[j].diam+'\n'))
+        file.write(str(cell[j].diam)+'\n')
     file.close()
 
     #=========================================================
