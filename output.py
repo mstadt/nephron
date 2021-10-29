@@ -122,13 +122,14 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file.write(str(cell[j].diam)+'\n')
     file.close()
 
-    #=========================================================
-    # output Scaletorq
-    #=========================================================
-    file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_Scaletorq'+sup_or_jux+'.txt', 'w')
+    #========================================================
+    # output length 
+    #========================================================
+    file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_length'+sup_or_jux+'.txt', 'w')
     for j in range(N):
-        file.write(str(Scaletorq[j])+'\n')
+        file.write(str(cell[j].len)+'\n')
     file.close()
+
 
     #========================================================
     # output transcellular and paracelluar Na fluxes 
