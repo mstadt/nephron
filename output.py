@@ -115,6 +115,22 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
     file.close()
 
     #========================================================
+    # output diameter 
+    #========================================================
+    file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_diameter'+sup_or_jux+'.txt', 'w')
+    for j in range(N):
+        file.write(str(cell[j].diam)+'\n')
+    file.close()
+
+    #=========================================================
+    # output Scaletorq
+    #=========================================================
+    file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_Scaletorq'+sup_or_jux+'.txt', 'w')
+    for j in range(N):
+        file.write(str(Scaletorq[j])+'\n')
+    file.close()
+
+    #========================================================
     # output transcellular and paracelluar Na fluxes 
     #========================================================
     for j in range(N):
@@ -130,9 +146,9 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file_Na_para = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_paracellular_Na'+sup_or_jux+'.txt','a')
         file_Na_para.write(str(jsol[0,0,4])+'\n')
 
-    #========================================================
-    # output transporter-mediated fluxes 
-    #========================================================
+        #========================================================
+        # output transporter-mediated fluxes 
+        #========================================================
 
         if cell[j].segment!='SDL' and cell[j].segment!='LDL' and cell[j].segment!='LAL':
             for i in range(len(cell[j].trans)):
