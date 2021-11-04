@@ -94,20 +94,20 @@ def read_params_preg(cell,filename,j):
                 preg_rat = 1.0 # reset preg_rat
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        preg_rat = 1.05
+                        preg_rat = 1.07
                     elif cell.preg == 'late':
                         preg_rat = 1.07
                 else:
                     if cell.preg == 'mid':
-                        preg_rat = 1.025
+                        preg_rat = 1.05
                     elif cell.preg == 'late':
-                        preg_rat = 1.025
+                        preg_rat = 1.05
 
                 if cell.type != 'sup':
                     if cell.preg == 'mid':
                         preg_rat = preg_rat*1.0
                     elif cell.preg == 'late':
-                        preg_rat = preg_rat*1.0 
+                        preg_rat = preg_rat*1.025 
 
                 cell.diam = value*preg_rat
 
