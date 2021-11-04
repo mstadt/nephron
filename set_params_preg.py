@@ -615,9 +615,9 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for sup nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.0057 #0.004*1.425
+                            cell.vol[0] = 0.0057 #0.004*1.3
                         elif cell.preg == 'late':
-                            cell.vol[0] = 0.006 #0.004*1.5
+                            cell.vol[0] = 0.0048 #0.004*1.2
                         cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0]) 
@@ -626,9 +626,9 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for jux nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.008 
+                            cell.vol[0] = 0.00728 #0.0056*1.3
                         elif cell.preg == 'late':
-                            cell.vol[0] = 0.006
+                            cell.vol[0] = 0.00672 #0.0056*1.2
                         cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
