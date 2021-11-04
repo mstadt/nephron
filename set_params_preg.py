@@ -118,7 +118,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         cell.len = value*1.14
                     elif cell.preg == 'late':
-                        cell.len = value*1.16
+                        cell.len = value*1.165
                 # juxtamedullary segments lengths
                 elif cell.segment == 'LDL' or cell.segment == 'LAL':
                     if cell.type == 'jux1':
