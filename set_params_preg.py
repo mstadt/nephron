@@ -105,9 +105,9 @@ def read_params_preg(cell,filename,j):
 
                 if cell.type != 'sup':
                     if cell.preg == 'mid':
-                        preg_rat = preg_rat*1.02 #2% increase in juxt nephron diameter
+                        preg_rat = preg_rat*1.0
                     elif cell.preg == 'late':
-                        preg_rat = preg_rat*1.0 # no increase in LP model... low jux flow
+                        preg_rat = preg_rat*1.0 
 
                 cell.diam = value*preg_rat
 
@@ -207,7 +207,7 @@ def read_params_preg(cell,filename,j):
                             if cell.preg == 'mid':
                                 preg_rat = 1.0
                             elif cell.preg == 'late':
-                                preg_rat = 1.5
+                                preg_rat = 1.0
                         elif cell.segment == 'SDL':
                             if cell.preg == 'mid':
                                 preg_rat = 1.0
@@ -239,7 +239,7 @@ def read_params_preg(cell,filename,j):
                                 if cell.preg == 'mid':
                                     preg_rat = 1.0
                                 elif cell.preg == 'late':
-                                    preg_rat = 1.5
+                                    preg_rat = 1.0
                             elif cell.segment == 'SDL':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.0
