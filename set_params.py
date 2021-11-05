@@ -280,7 +280,7 @@ def read_params(cell,filename,j):
                     if cell.sex == 'male':
                         cell.pres[0] = 12.5
                     elif cell.sex == 'female':
-                        cell.pres[0] = 13.0 #12.5
+                        cell.pres[0] = 12.75 #12.5
 
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'mou':
                     if cell.sex == 'male':
