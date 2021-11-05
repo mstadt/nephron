@@ -191,7 +191,10 @@ def newton_preg_rat(func,x,k,cell):
             if np.linalg.norm(f)>5000:
                 amp = 0.8
             elif np.linalg.norm(f)>1000:
-                amp = 1.0
+                if k==0:
+                    amp = 0.6
+                else:
+                    amp = 1.0
             elif np.linalg.norm(f)>100:
                 amp = 1.0
             elif iter>50:
