@@ -177,4 +177,4 @@ TotHCO3OI_MP = 25.0*0.95
 TotHCO3OI_LP = 25.0*0.95
 TotHCO3Pap_noinhib = 25.0
 TotHCO3Pap_MP = 25.0*0.95
-TotHCO3Pap_LP = 25.0*0.95
+TotHCO3Pap_LP = 25.0*0.96
