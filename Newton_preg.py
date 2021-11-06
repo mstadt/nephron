@@ -187,9 +187,9 @@ def newton_preg_rat(func,x,k,cell):
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1e6:
-                amp = 0.5
+                amp = 0.65
             if np.linalg.norm(f)>5000:
-                amp = 0.8
+                amp = 0.75
             elif np.linalg.norm(f)>1000:
                 if k==0:
                     amp = 0.6
