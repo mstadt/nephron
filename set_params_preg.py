@@ -476,12 +476,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.3
+                            preg_rat = 1.5
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.3
+                            preg_rat = 1.5
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     else:
