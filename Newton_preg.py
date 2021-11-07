@@ -147,6 +147,11 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 0.5
                 else:
                     amp = 0.76
+            elif iter>10:
+                if np.linalg.norm(f)<1:
+                    amp = 0.5
+                else:
+                    amp = 1.0
             else:
                 amp = 1.0 
         # CCD     
