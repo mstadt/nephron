@@ -105,7 +105,7 @@ def read_params_preg(cell,filename,j):
 
                 if cell.type != 'sup':
                     if cell.preg == 'mid':
-                        preg_rat = preg_rat*1.0
+                        preg_rat = preg_rat*1.03
                     elif cell.preg == 'late':
                         preg_rat = preg_rat*1.025 
 
