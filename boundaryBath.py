@@ -24,7 +24,7 @@ def female_conc(cell, i):
             cell.conc[0,0] = cell.conc[0,0]*0.95
             cell.conc[1,0] = cell.conc[1,0]*1.15 # upregulated K in LP
             cell.conc[2,0] = cell.conc[2,0]*0.95
-            cell.conc[3,0] = cell.conc[3,0]*0.96
+            cell.conc[3,0] = cell.conc[3,0]*0.975
 
             # also change in starting for bath
             cell.conc[0,5] = cell.conc[0,0]
