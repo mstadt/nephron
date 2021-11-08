@@ -365,28 +365,28 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.45
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.575 
+                            preg_rat = 0.57 
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.45
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.575 
+                        preg_rat = 0.57 
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.725 
+                        preg_rat = 0.72 
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.725 
+                        preg_rat = 0.72 
                         cell.h[1,0,1] = 2.4*preg_rat
                     
                             
@@ -419,17 +419,17 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (1,2):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.375*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.375*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     else:
@@ -444,7 +444,7 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 1.075*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.05*newdLA.perm
+                            newdLA.perm = 1.1*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.075*newdLA.perm
                     else:
@@ -528,7 +528,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.35
+                        preg_rat = 1.375
                     elif cell.preg == 'late':
                         preg_rat = 1.35
                 elif newTransp.type == 'NCC':
@@ -543,7 +543,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 2.15
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 2.05
+                        preg_rat = 2.4
                     elif cell.preg == 'late':
                         preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
