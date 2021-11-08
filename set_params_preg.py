@@ -441,12 +441,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             newdLA.perm = 1.1*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.1*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
@@ -476,12 +476,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.42
+                            preg_rat = 1.4
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.42
+                            preg_rat = 1.4
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     else:
@@ -538,12 +538,12 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.9
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
-                        preg_rat = 2.0
+                        preg_rat = 1.95
                     elif cell.preg == 'late':
                         preg_rat = 2.15
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 2.4
+                        preg_rat = 2.45
                     elif cell.preg == 'late':
                         preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
