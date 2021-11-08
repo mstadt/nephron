@@ -444,7 +444,7 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 1.075*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.075*newdLA.perm
                     else:
@@ -476,12 +476,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.5
+                            preg_rat = 1.45
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.5
+                            preg_rat = 1.45
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                     else:
@@ -500,7 +500,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.8
                     elif cell.segment == 'CNT':
                         if cell.preg == 'mid':
-                            preg_rat = 0.85
+                            preg_rat = 0.8
                         elif cell.preg == 'late':
                             preg_rat = 0.8
                     elif cell.segment == 'mTAL':
@@ -510,7 +510,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 1.0
                     elif cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.8
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.75
                     elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
