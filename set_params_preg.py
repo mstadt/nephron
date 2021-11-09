@@ -505,12 +505,12 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.8
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 1.2
+                            preg_rat = 1.15
                         elif cell.preg == 'late':
                             preg_rat = 1.0
                     elif cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.73
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.75
                     elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
