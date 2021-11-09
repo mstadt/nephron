@@ -426,12 +426,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     else:
                         print('segment: '+cell.segment)
                         raise Exception('K-Cl coupled transporter not characterized for pregnancy in this segment')
@@ -502,7 +502,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 0.75
                         elif cell.preg == 'late':
-                            preg_rat = 0.8
+                            preg_rat = 0.75
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.15
@@ -530,7 +530,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.4
                     elif cell.preg == 'late':
-                        preg_rat = 1.35
+                        preg_rat = 1.35 # 1.35
                 elif newTransp.type == 'NCC':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
