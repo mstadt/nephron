@@ -105,7 +105,7 @@ def read_params_preg(cell,filename,j):
 
                 if cell.type != 'sup':
                     if cell.preg == 'mid':
-                        preg_rat = preg_rat*1.035
+                        preg_rat = preg_rat*1.03
                     elif cell.preg == 'late':
                         preg_rat = preg_rat*1.03
 
@@ -116,7 +116,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.145
+                        cell.len = value*1.1425
                     elif cell.preg == 'late':
                         cell.len = value*1.165
                 # juxtamedullary segments lengths
