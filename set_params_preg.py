@@ -379,14 +379,14 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.7 
+                        preg_rat = 0.75
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.7 
+                        preg_rat = 0.75 
                         cell.h[1,0,1] = 2.4*preg_rat
                     
                             
@@ -439,12 +439,12 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (0,2):
                     if cell.segment == 'OMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.1*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.05*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.1*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.05*newdLA.perm
                     else:
@@ -538,12 +538,12 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.9
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
-                        preg_rat = 1.95
+                        preg_rat = 1.85
                     elif cell.preg == 'late':
                         preg_rat = 2.15
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 2.45
+                        preg_rat = 2.5
                     elif cell.preg == 'late':
                         preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
@@ -553,7 +553,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.0
                 elif newTransp.type == 'Pendrin':
                     if cell.preg == 'mid':
-                        preg_rat = 1.6
+                        preg_rat = 1.65
                     elif cell.preg == 'late':
                         preg_rat = 1.7
                 elif newTransp.type == 'NHE1':
