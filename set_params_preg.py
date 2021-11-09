@@ -99,13 +99,13 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.07
                 else:
                     if cell.preg == 'mid':
-                        preg_rat = 1.055
+                        preg_rat = 1.05
                     elif cell.preg == 'late':
                         preg_rat = 1.05
 
                 if cell.type != 'sup':
                     if cell.preg == 'mid':
-                        preg_rat = preg_rat*1.035
+                        preg_rat = preg_rat*1.03
                     elif cell.preg == 'late':
                         preg_rat = preg_rat*1.03
 
@@ -116,7 +116,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.145
+                        cell.len = value*1.1425
                     elif cell.preg == 'late':
                         cell.len = value*1.165
                 # juxtamedullary segments lengths
@@ -220,17 +220,17 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = 1.5
                         elif cell.segment == 'CCD':
                             if cell.preg == 'mid':
-                                preg_rat = 1.5
+                                preg_rat = 1.4
                             elif cell.preg == 'late':
                                 preg_rat = 1.4
                         elif cell.segment == 'OMCD':
                             if cell.preg == 'mid':
-                                preg_rat = 1.5
+                                preg_rat = 1.4
                             elif cell.preg == 'late':
                                 preg_rat = 1.4
                         elif cell.segment == 'IMCD':
                             if cell.preg == 'mid':
-                                preg_rat = 2.0
+                                preg_rat = 1.8
                             elif cell.preg == 'late':
                                 preg_rat = 1.8
                     elif ind1 == 1:
@@ -252,17 +252,17 @@ def read_params_preg(cell,filename,j):
                                     preg_rat = 1.5
                             elif cell.segment == 'CCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 1.5
+                                    preg_rat = 1.4
                                 elif cell.preg == 'late':
                                     preg_rat = 1.4
                             elif cell.segment == 'OMCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 1.5
+                                    preg_rat = 1.4
                                 elif cell.preg == 'late':
                                     preg_rat = 1.4
                             elif cell.segment == 'IMCD':
                                 if cell.preg == 'mid':
-                                    preg_rat = 2.0
+                                    preg_rat = 1.8
                                 elif cell.preg == 'late':
                                     preg_rat = 1.8
 
@@ -365,28 +365,28 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.45
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.575 
+                            preg_rat = 0.5
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.45
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.575 
+                        preg_rat = 0.5
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.725 
+                        preg_rat = 0.75
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
                         preg_rat = 0.7
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.725 
+                        preg_rat = 0.75 
                         cell.h[1,0,1] = 2.4*preg_rat
                     
                             
@@ -424,12 +424,12 @@ def read_params_preg(cell,filename,j):
                             newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
                             newdLA.perm = 1.1*newdLA.perm
                     else:
@@ -439,14 +439,14 @@ def read_params_preg(cell,filename,j):
                 elif newdLA.solute_id == (0,2):
                     if cell.segment == 'OMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.15*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
-                            newdLA.perm = 1.1*newdLA.perm
+                            newdLA.perm = 1.15*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.075*newdLA.perm
+                            newdLA.perm = 1.05*newdLA.perm
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
@@ -476,12 +476,12 @@ def read_params_preg(cell,filename,j):
                     # PCT, S3, mTAL, cTAL, DCT
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            preg_rat = 1.5
+                            preg_rat = 1.3
                         elif cell.preg == 'late':
                             preg_rat = 1.175
                     elif cell.segment == 'mTAL' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.5
+                            preg_rat = 1.3
                         elif cell.preg == 'late':
                             preg_rat = 1.175
                     else:
@@ -500,22 +500,22 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.75
                     elif cell.segment == 'CNT':
                         if cell.preg == 'mid':
-                            preg_rat = 0.85
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.8
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 1.2
+                            preg_rat = 1.15
                         elif cell.preg == 'late':
                             preg_rat = 1.0
                     elif cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.8
+                            preg_rat = 0.75
                         elif cell.preg == 'late':
                             preg_rat = 0.7
                     elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
                         if cell.preg == 'mid':
-                            preg_rat = 1.2
+                            preg_rat = 1.125
                         elif cell.preg == 'late':
                             preg_rat = 1.0
                     else:
@@ -528,7 +528,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.35
+                        preg_rat = 1.4
                     elif cell.preg == 'late':
                         preg_rat = 1.35
                 elif newTransp.type == 'NCC':
@@ -538,12 +538,12 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 0.9
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
-                        preg_rat = 2.05
+                        preg_rat = 1.85
                     elif cell.preg == 'late':
                         preg_rat = 2.15
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 2.05
+                        preg_rat = 2.5
                     elif cell.preg == 'late':
                         preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
@@ -553,7 +553,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.0
                 elif newTransp.type == 'Pendrin':
                     if cell.preg == 'mid':
-                        preg_rat = 1.6
+                        preg_rat = 1.65
                     elif cell.preg == 'late':
                         preg_rat = 1.7
                 elif newTransp.type == 'NHE1':
