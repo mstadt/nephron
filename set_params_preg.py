@@ -633,7 +633,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             cell.vol[0] = 0.00728 #0.0056*1.3
                         elif cell.preg == 'late':
-                            cell.vol[0] = 0.00672 #0.0056*1.2
+                            cell.vol[0] = 0.006664 #0.0056*1.2
                         cell.vol_init[0] = cell.vol[0]
                     else:
                         cell.vol[compart_id[tmp[1]]] = float(num[0])
