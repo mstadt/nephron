@@ -631,7 +631,7 @@ def read_params_preg(cell,filename,j):
                     # SNGFR for jux nephrons
                     if compart_id[tmp[1]] == 0:
                         if cell.preg == 'mid':
-                            cell.vol[0] = 0.00725 #0.0056*1.295
+                            cell.vol[0] = 0.007224 #0.0056*1.29
                         elif cell.preg == 'late':
                             cell.vol[0] = 0.00672 #0.0056*1.2
                         cell.vol_init[0] = cell.vol[0]
