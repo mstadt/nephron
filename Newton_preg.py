@@ -122,7 +122,7 @@ def newton_preg_rat(func,x,k,cell):
                     elif cell.type == 'jux2':
                         amp = 0.5
                     elif cell.type == 'jux3':
-                        amp = 0.5
+                        amp = 0.35
                     elif cell.type == 'jux4':
                         amp = 0.5
                     else:
