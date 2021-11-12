@@ -362,28 +362,28 @@ def read_params_preg(cell,filename,j):
                     if j>0.66*cell.total:
                         #DCT2
                         if cell.preg == 'late':
-                            preg_rat = 0.45
+                            preg_rat = 0.525
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
                             preg_rat = 0.6
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
-                        preg_rat = 0.45
+                        preg_rat = 0.525
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
                         preg_rat = 0.6
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
-                        preg_rat = 0.7
+                        preg_rat = 0.725
                         cell.h[1,0,1] = 2.8*preg_rat
                     elif cell.preg == 'mid':
                         preg_rat = 0.775
                         cell.h[1,0,1] = 2.8*preg_rat
                 elif cell.segment == 'OMCD':
                     if cell.preg == 'late':
-                        preg_rat = 0.7
+                        preg_rat = 0.825
                         cell.h[1,0,1] = 2.4*preg_rat
                     elif cell.preg == 'mid':
                         preg_rat = 0.875 
