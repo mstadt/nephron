@@ -441,12 +441,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             newdLA.perm = 1.15*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.05*newdLA.perm
+                            newdLA.perm = 1.1*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.15*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.05*newdLA.perm
+                            newdLA.perm = 1.1*newdLA.perm
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('Na-Cl coupled transporter not characterized for pregnancy in this segment')
