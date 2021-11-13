@@ -171,7 +171,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         cell.pres[0] = 12.75
                     elif cell.preg == 'late':
-                        cell.pres[0] = 12.6
+                        cell.pres[0] = 12.75
 
             # pH:
             elif compare_string_prefix(id,"pH"):
