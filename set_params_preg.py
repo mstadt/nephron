@@ -490,7 +490,8 @@ def read_params_preg(cell,filename,j):
                             newTransp.act = 1.5*value/(href*Cref)
                         elif newTransp.type == 'KCC4':
                             newTransp.act = 2.0*value/(href*Cref)
-
+                preg_rat = 1.0
+                HT_rat = 1.0
                 # pregnant model values
                 if newTransp.type == 'NHE3':
                     # PCT, S3, mTAL, cTAL, DCT
@@ -507,6 +508,10 @@ def read_params_preg(cell,filename,j):
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
+                    if cell.HT != 'N':
+                        HT_rat = 0.8
+                        preg_rat = preg_rat*HT_rat
+                        
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
                         if cell.preg == 'mid':
@@ -546,6 +551,9 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.15
                     elif cell.preg == 'late':
                         preg_rat = 1.5
+                    if cell.HT != 'N':
+                        HT_rat = 0.3
+                        preg_rat = preg_rat*HT_rat
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
                         preg_rat = 1.4
@@ -556,6 +564,9 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.0
                     elif cell.preg == 'late':
                         preg_rat = 0.9
+                    if cell.HT != 'N':
+                        HT_rat = 1.72
+                        preg_rat = preg_rat*HT_rat
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
                         preg_rat = 2.075
