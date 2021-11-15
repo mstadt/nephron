@@ -15,7 +15,7 @@ import boundaryBath
 import time
 import os
 
-def compute(N,filename,method,sup_or_jux=None,diabete='Non',species = 'human',sup_or_multi = 'superficial',inhibition=None,unx = 'N',preg='non'):
+def compute(N,filename,method,sup_or_jux=None,diabete='Non',species = 'human',sup_or_multi = 'superficial',inhibition=None,unx = 'N',preg='non', HT='N'):
 
     start=timeit.default_timer()
 
@@ -34,6 +34,10 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',species = 'human',su
     if diabete != 'Non':
         for i in range(N):
             cell[i].diabete = diabete
+    # hypertension status of cell
+    if HT != 'N':
+        for i in range(N):
+            cell[i].HT = HT
     # pregnancy status of cell
     if preg != 'non':
         for i in range(N):

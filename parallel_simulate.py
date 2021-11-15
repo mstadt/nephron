@@ -23,6 +23,7 @@ parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','N
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
 # pregnancy option
 parser.add_argument('--pregnant', choices=['mid','late'], default='non', type=str, help='pregnant female? (mid/late)')
+parser.add_argument('--HT',choices=['N','Y'],default = 'N',type = str,help = 'hypertension?')
 
 args = parser.parse_args()
 sex = args.sex
@@ -32,6 +33,7 @@ diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
 preg = args.pregnant
+HT = args.HT
 
 if diabete != 'Non':
     if preg != 'non':
@@ -47,8 +49,12 @@ elif preg != 'non':
         raise Exception('pregnant model not set up for human or mouse yet')
     if inhib != None:
         raise Exception('pregnant model does not have inhibition set up yet')
-
-    file_to_save = preg+'pregnant_'+species[0:3]
+    if HT == 'Y':
+        file_to_save = preg+'pregnant_'+species[0:3]+'_HT'
+    else:
+        file_to_save = preg+'pregnant_'+species[0:3]
+elif HT != 'N':
+    file_to_save = sex + '_' + species[0:3]+'_HT'
 else:
     file_to_save = sex + '_' + species[0:3] +'_normal'
     
@@ -64,7 +70,7 @@ if os.path.isdir('outlets') == False:
     os.makedirs('outlets')
     
 def multiprocessing_func(sup_or_jux):
-    compute_segment(sup_or_jux, sex, species, sup_or_multi, diabete, inhib, unx, preg, file_to_save)
+    compute_segment(sup_or_jux, sex, species, sup_or_multi, diabete, inhib, unx, preg, HT, file_to_save)
 
 if __name__ == '__main__':
 
@@ -84,7 +90,7 @@ if __name__ == '__main__':
         filename = './datafiles/CCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/CCDparams_F_'+species[0:3]+'.dat'
-    ccd=compute(NCCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg=preg)
+    ccd=compute(NCCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg=preg, HT=HT)
 
     Scaletorq = np.ones(NCCD)
 
@@ -105,9 +111,9 @@ if __name__ == '__main__':
     else:
         filename ='./datafiles/OMCDparams_F_'+species[0:3]+'.dat'
     if ccd[0].sex == 'male':
-        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
+        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg, HT=HT)
     elif ccd[0].sex == 'female':
-        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
+        omcd=compute(NOMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg, HT=HT)
 
     Scaletorq = np.ones(NOMCD)
 
@@ -127,7 +133,7 @@ if __name__ == '__main__':
         filename = './datafiles/IMCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/IMCDparams_F_'+species[0:3]+'.dat'
-    imcd=compute(NIMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg)
+    imcd=compute(NIMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg, HT=HT)
 
     Scaletorq = np.ones(NIMCD)
 
