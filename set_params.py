@@ -455,7 +455,17 @@ def read_params(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
-                    cell.h[1,0,1] = 0.5*value*1.0e-5/href                   
+                    cell.h[1,0,1] = 0.5*value*1.0e-5/href   
+
+                # ROMK2 change in HT rat
+                if cell.HT != 'N':
+                    temp = cell.h[1,0,1]
+                    if cell.segment == 'DCT':
+                        if j>0.66*cell.total:
+                            # DCT2
+                            cell.h[1,0,1] = 0.1*temp
+                    elif cell.segment == 'CNT':
+                        cell.h[1,0,1] = 0.1*temp
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
