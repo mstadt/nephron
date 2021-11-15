@@ -686,6 +686,15 @@ def read_params(cell,filename,j):
                             newTransp.act = 1.3*value/(href*Cref)
                         elif cell.sex == 'female':
                             newTransp.act = 1.2*value/(href*Cref)
+                
+                if cell.HT != 'N':
+                    if newTransp.type == 'NCC':
+                        newTransp.act = 3.85*value/(href*Cref)
+                    elif newTransp.type == 'NHE3':
+                        newTransp.act = 1.9*value/(href*Cref)
+                    elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
+                        newTransp.act = 0.85*value/(href*Cref)
+
                 cell.trans.append(newTransp)
 
             # Solute concentrations:
