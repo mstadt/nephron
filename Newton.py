@@ -178,11 +178,11 @@ def newton_rat(func,x,k,cell):
         # DCT
         elif cell.segment == 'DCT':
             if np.linalg.norm(f)>1e8:
-                amp = 0.2
+                amp = 1.0
             elif np.linalg.norm(f)>1e5:
-                amp = 0.45
+                amp = 1.0
             elif np.linalg.norm(f)>5000:
-                amp = 0.8
+                amp = 1.0
             else:
                 amp = 1.0
         # CNT
