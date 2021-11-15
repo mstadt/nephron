@@ -367,12 +367,17 @@ def read_params(cell,filename,j):
 
                 if cell.HT != 'N':
                     # AQP2 changed
-                    if cell.segment == 'CCD':
-                        HT_rat = 1.9
-                    elif cell.segment == 'OMCD':
-                        HT_rat = 1.9
-                    elif cell.segment == 'IMCD':
-                        HT_rat = 1.9
+                    HT_rat = 1.0
+                    # AQP2 on the apical interface
+                    if ind1 == 0 and ind2 == 1:
+                        if cell.segment == 'CCD':
+                            HT_rat = 1.9
+                        elif cell.segment == 'OMCD':
+                            HT_rat = 1.9
+                        elif cell.segment == 'IMCD':
+                            HT_rat = 1.9
+
+                    cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):

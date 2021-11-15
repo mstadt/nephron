@@ -233,40 +233,39 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = 1.8
                             elif cell.preg == 'late':
                                 preg_rat = 1.8
-
-                                # AQP2 is on the APICAL CELL MEMBRANE! What is this 4,5???
-                    # elif ind1 == 1:
-                    #     if ind2 == 4 or ind2 == 5:
-                    #         if cell.segment == 'PT' or cell.segment == 'S3':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.0
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.0
-                    #         elif cell.segment == 'SDL':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.1
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.5
-                    #         elif cell.segment == 'LDL':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.1
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.5
-                    #         elif cell.segment == 'CCD':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.4
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.4
-                    #         elif cell.segment == 'OMCD':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.4
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.4
-                    #         elif cell.segment == 'IMCD':
-                    #             if cell.preg == 'mid':
-                    #                 preg_rat = 1.8
-                    #             elif cell.preg == 'late':
-                    #                 preg_rat = 1.8
+                                
+                    elif ind1 == 1:
+                        if ind2 == 4 or ind2 == 5:
+                            if cell.segment == 'PT' or cell.segment == 'S3':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.0
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.0
+                            elif cell.segment == 'SDL':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.1
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.5
+                            elif cell.segment == 'LDL':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.1
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.5
+                            elif cell.segment == 'CCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.4
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.4
+                            elif cell.segment == 'OMCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.4
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.4
+                            elif cell.segment == 'IMCD':
+                                if cell.preg == 'mid':
+                                    preg_rat = 1.8
+                                elif cell.preg == 'late':
+                                    preg_rat = 1.8
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
                 #print('water permeability')
