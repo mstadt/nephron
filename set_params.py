@@ -364,6 +364,15 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'IMCD':
                         cell.dLPV[0,1] = cell.dLPV[0,1]*1.4
                         cell.dLPV[1,5] = cell.dLPV[1,5]*1.4
+
+                if cell.HT != 'N':
+                    # AQP2 changed
+                    if cell.segment == 'CCD':
+                        HT_rat = 1.9
+                    elif cell.segment == 'OMCD':
+                        HT_rat = 1.9
+                    elif cell.segment == 'IMCD':
+                        HT_rat = 1.9
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
