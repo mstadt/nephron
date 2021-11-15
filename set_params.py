@@ -376,6 +376,15 @@ def read_params(cell,filename,j):
                             HT_rat = 1.9
                         elif cell.segment == 'IMCD':
                             HT_rat = 1.9
+                    # basolateral interface
+                    elif ind1 == 1:
+                        if ind2 == 4 or ind2 == 5:
+                            if cell.segment == 'CCD':
+                                HT_rat = 1.9
+                            elif cell.segment == 'OMCD':
+                                HT_rat = 1.9
+                            elif cell.segment == 'IMCD':
+                                HT_rat = 1.9
 
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
