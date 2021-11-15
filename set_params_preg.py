@@ -199,6 +199,7 @@ def read_params_preg(cell,filename,j):
                 # dLPV = Pf/Pfref
 
                 preg_rat = 1.0 #reset to 1.0, will change if needed
+                HT_rat = 1.0
 
                 if cell.preg != 'non':
                     # pregnancy water perm (transcellular)
@@ -223,17 +224,26 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = 1.4
                             elif cell.preg == 'late':
                                 preg_rat = 1.4
+                            if cell.HT != 'N':
+                                HT_rat = 0.5
+                                preg_rat = preg_rat*HT_rat
                         elif cell.segment == 'OMCD':
                             if cell.preg == 'mid':
                                 preg_rat = 1.4
                             elif cell.preg == 'late':
                                 preg_rat = 1.4
+                            if cell.HT != 'N':
+                                HT_rat = 0.5
+                                preg_rat = preg_rat*HT_rat
                         elif cell.segment == 'IMCD':
                             if cell.preg == 'mid':
                                 preg_rat = 1.8
                             elif cell.preg == 'late':
                                 preg_rat = 1.8
-                                
+                            if cell.HT != 'N':
+                                HT_rat = 0.5
+                                preg_rat = preg_rat*HT_rat
+
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'PT' or cell.segment == 'S3':
@@ -256,16 +266,25 @@ def read_params_preg(cell,filename,j):
                                     preg_rat = 1.4
                                 elif cell.preg == 'late':
                                     preg_rat = 1.4
+                                if cell.HT != 'N':
+                                    HT_rat = 0.5
+                                    preg_rat = preg_rat*HT_rat
                             elif cell.segment == 'OMCD':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.4
                                 elif cell.preg == 'late':
                                     preg_rat = 1.4
+                                if cell.HT != 'N':
+                                    HT_rat = 0.5
+                                    preg_rat = preg_rat*HT_rat
                             elif cell.segment == 'IMCD':
                                 if cell.preg == 'mid':
                                     preg_rat = 1.8
                                 elif cell.preg == 'late':
                                     preg_rat = 1.8
+                                if cell.HT != 'N':
+                                    HT_rat = 0.5
+                                    preg_rat = preg_rat*HT_rat
 
                 cell.dLPV[ind1][ind2] = value/Pfref*preg_rat
                 #print('water permeability')
