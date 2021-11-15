@@ -276,9 +276,9 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     print('%s DCT finished.'%(sup_or_jux))
     print('\n')
     
-    #========================================================
+    #=======================================================
     # Connecting tubule
-    #========================================================
+    #=======================================================
     print('%s CNT start' %(sup_or_jux))
     NCNT = 200
     if sex == 'Male':
