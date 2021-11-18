@@ -463,7 +463,7 @@ def read_params(cell,filename,j):
                     if cell.segment == 'DCT':
                         if j>0.66*cell.total:
                             # DCT2
-                            cell.h[1,0,1] = 0.15*temp
+                            cell.h[1,0,1] = 0.175*temp
                     elif cell.segment == 'CNT':
                         cell.h[1,0,1] = 0.15*temp
                     elif cell.segment == 'CCD':
@@ -703,7 +703,7 @@ def read_params(cell,filename,j):
                 
                 if cell.HT != 'N':
                     if newTransp.type == 'NCC':
-                        HT_rat = 3.0
+                        HT_rat = 2.85
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NHE3':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'mTAL':
