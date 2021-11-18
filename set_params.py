@@ -371,7 +371,7 @@ def read_params(cell,filename,j):
                     # AQP2 on the apical interface
                     if ind1 == 0 and ind2 == 1:
                         if cell.segment == 'CCD':
-                            HT_rat = 1.9
+                            HT_rat = 1.8
                         elif cell.segment == 'OMCD':
                             HT_rat = 1.9
                         elif cell.segment == 'IMCD':
@@ -380,7 +380,7 @@ def read_params(cell,filename,j):
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'CCD':
-                                HT_rat = 1.9
+                                HT_rat = 1.8
                             elif cell.segment == 'OMCD':
                                 HT_rat = 1.9
                             elif cell.segment == 'IMCD':
@@ -463,9 +463,13 @@ def read_params(cell,filename,j):
                     if cell.segment == 'DCT':
                         if j>0.66*cell.total:
                             # DCT2
-                            cell.h[1,0,1] = 0.1*temp
+                            cell.h[1,0,1] = 0.15*temp
                     elif cell.segment == 'CNT':
-                        cell.h[1,0,1] = 0.1*temp
+                        cell.h[1,0,1] = 0.15*temp
+                    elif cell.segment == 'CCD':
+                        cell.h[1,0,1] = 0.15*temp
+                    elif cell.segment == 'OMCD':
+                        cell.h[1,0,1] = 0.70*temp
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
@@ -699,11 +703,35 @@ def read_params(cell,filename,j):
                 
                 if cell.HT != 'N':
                     if newTransp.type == 'NCC':
-                        newTransp.act = 3.5*value/(href*Cref)
+                        HT_rat = 3.0
+                        newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NHE3':
-                        newTransp.act = 1.9*value/(href*Cref)
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'mTAL':
+                            HT_rat = 0.8
+                        elif cell.segment == 'cTAL' or cell.segment == 'DCT':
+                            HT_rat = 1.0
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NHE3 activity not done for this segment in HT rat model')
+                        newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
-                        newTransp.act = 0.85*value/(href*Cref)
+                        if cell.segment == 'mTAL':
+                            HT_rat = 0.85
+                        elif cell.segment == 'cTAL':
+                            HT_rat = 1.60
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NKCC2 activity not done for this segment in HT rat model')
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'NaKATPase':
+                        if cell.segment == 'mTAL':
+                            HT_rat = 0.75
+                        else:
+                            HT_rat = 1.0
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'ENaC':
+                        HT_rat = 1.2
+                        newTransp.act = HT_rat*value/(href*Cref)
 
                 cell.trans.append(newTransp)
 
