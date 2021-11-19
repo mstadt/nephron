@@ -218,7 +218,7 @@ def newton_rat(func,x,k,cell):
         # CNT
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>1e6:
-                amp = 0.3
+                amp = 0.35
             if np.linalg.norm(f)>5000:
                 if cell.type == 'jux2':
                     if k==0:
@@ -232,7 +232,7 @@ def newton_rat(func,x,k,cell):
                         amp = 0.75
                 elif cell.type == 'jux4':
                     if k==0:
-                        amp = 1.0
+                        amp = 0.5
                     else:
                         amp = 0.5
                 elif cell.type == 'jux5':
@@ -240,9 +240,14 @@ def newton_rat(func,x,k,cell):
                         amp = 1.0
                     else:
                         amp = 0.5
+                elif cell.type == 'jux1':
+                    if k==0:
+                        amp = 0.5
+                    else:
+                        amp = 0.5
                 else:
                     if k==0:
-                        amp = 0.25
+                        amp = 0.5
                     else:
                         amp = 0.4
             elif np.linalg.norm(f)>1500:
