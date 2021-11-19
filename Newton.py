@@ -306,9 +306,15 @@ def newton_rat(func,x,k,cell):
             elif np.linalg.norm(f)>1e4:
                 amp = 0.65
             elif np.linalg.norm(f)>5000:
-                amp = 1.0
+                if k==0:
+                    amp = 0.75
+                else:
+                    amp = 1.0
             elif np.linalg.norm(f)>1000:
-                amp = 1.0
+                if k==0:
+                    amp = 0.8
+                else:
+                    amp = 1.0
             elif np.linalg.norm(f)>100:
                 amp = 1.0
             elif iter>115:
