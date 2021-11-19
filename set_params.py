@@ -463,13 +463,23 @@ def read_params(cell,filename,j):
                     if cell.segment == 'DCT':
                         if j>0.66*cell.total:
                             # DCT2
-                            cell.h[1,0,1] = 0.175*temp
+                            HT_rat = 0.175
+                            cell.h[1,0,1] = HT_rat*0.6
                     elif cell.segment == 'CNT':
-                        cell.h[1,0,1] = 0.15*temp
+                        HT_rat = 0.15
+                        cell.h[1,0,1] = HT_rat*8.0
                     elif cell.segment == 'CCD':
-                        cell.h[1,0,1] = 0.15*temp
+                        HT_rat = 0.15
+                        if cell.sex == 'Female':
+                            cell.h[1,0,1] = HT_rat*1.4
+                        elif cell.sex == 'Male':
+                            cell.h[1,0,1] = HT_rat*2.0
                     elif cell.segment == 'OMCD':
-                        cell.h[1,0,1] = 0.70*temp
+                        HT_rat = 0.70
+                        if cell.sex == 'Female':
+                            cell.h[1,0,1] = HT_rat*2.4
+                        elif cell.sex == 'Male':
+                            cell.h[1,0,1] = HT_rat*2.0
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
