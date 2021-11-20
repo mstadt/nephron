@@ -528,7 +528,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.25
+                        preg_rat = 1.3
                     elif cell.preg == 'late':
                         preg_rat = 1.35 
                 elif newTransp.type == 'NCC':
