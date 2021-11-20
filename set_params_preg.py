@@ -490,7 +490,7 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 0.75
+                            preg_rat = 0.725
                         elif cell.preg == 'late':
                             preg_rat = 0.65
                     elif cell.segment == 'DCT':
@@ -528,7 +528,7 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.3
+                        preg_rat = 1.35
                     elif cell.preg == 'late':
                         preg_rat = 1.35 
                 elif newTransp.type == 'NCC':
