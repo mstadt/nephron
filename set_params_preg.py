@@ -365,14 +365,14 @@ def read_params_preg(cell,filename,j):
                             preg_rat = 0.55
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.6
+                            preg_rat = 0.65
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.6
+                        preg_rat = 0.65
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
@@ -490,7 +490,7 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 0.725
+                            preg_rat = 0.745
                         elif cell.preg == 'late':
                             preg_rat = 0.65
                     elif cell.segment == 'DCT':
@@ -523,12 +523,12 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
                 elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                     if cell.preg == 'mid':
-                        preg_rat = 1.15
+                        preg_rat = 1.155
                     elif cell.preg == 'late':
                         preg_rat = 1.5
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.35
+                        preg_rat = 1.25
                     elif cell.preg == 'late':
                         preg_rat = 1.35 
                 elif newTransp.type == 'NCC':
