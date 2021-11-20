@@ -116,7 +116,7 @@ def read_params_preg(cell,filename,j):
                 # pregnant PT length
                 if cell.segment == 'PT' or cell.segment == 'S3':
                     if cell.preg == 'mid':
-                        cell.len = value*1.1425
+                        cell.len = value*1.15
                     elif cell.preg == 'late':
                         cell.len = value*1.165
                 # juxtamedullary segments lengths
@@ -388,7 +388,7 @@ def read_params_preg(cell,filename,j):
                                 preg_rat = preg_rat*HT_rat
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
-                            preg_rat = 0.6
+                            preg_rat = 0.65
                             if cell.HT != 'N':
                                 HT_rat = 0.2
                                 preg_rat = preg_rat*HT_rat
@@ -401,7 +401,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = preg_rat*HT_rat
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
-                        preg_rat = 0.6
+                        preg_rat = 0.65
                         if cell.HT != 'N':
                             HT_rat = 0.2
                             preg_rat = preg_rat*HT_rat
@@ -538,7 +538,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = HT_rat*preg_rat
                     elif cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 1.4
+                            preg_rat = 1.2
                         elif cell.preg == 'late':
                             preg_rat = 1.175
                         if cell.HT != 'N':
@@ -554,7 +554,7 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 0.725
+                            preg_rat = 0.745
                         elif cell.preg == 'late':
                             preg_rat = 0.65
                         if cell.HT != 'N':
@@ -562,12 +562,12 @@ def read_params_preg(cell,filename,j):
                             preg_rat = HT_rat*preg_rat
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
-                            preg_rat = 0.75
+                            preg_rat = 0.8
                         elif cell.preg == 'late':
                             preg_rat = 0.75
                     elif cell.segment == 'CNT':
                         if cell.preg == 'mid':
-                            preg_rat = 0.75
+                            preg_rat = 0.8
                         elif cell.preg == 'late':
                             preg_rat = 0.75
                     elif cell.segment == 'mTAL':
@@ -580,7 +580,7 @@ def read_params_preg(cell,filename,j):
                             preg_rat = HT_rat*preg_rat
                     elif cell.segment == 'CCD':
                         if cell.preg == 'mid':
-                            preg_rat = 0.75
+                            preg_rat = 0.8
                         elif cell.preg == 'late':
                             preg_rat = 0.7
                     elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
@@ -594,7 +594,7 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                     if cell.segment == 'mTAL':
                         if cell.preg == 'mid':
-                            preg_rat = 1.15
+                            preg_rat = 1.155
                         elif cell.preg == 'late':
                             preg_rat = 1.5
                         if cell.HT != 'N':
@@ -610,7 +610,7 @@ def read_params_preg(cell,filename,j):
                         raise Exception('NKCC2 activity not done for pregnancy in this segment')
                 elif newTransp.type == 'KCC4':
                     if cell.preg == 'mid':
-                        preg_rat = 1.4
+                        preg_rat = 1.35
                     elif cell.preg == 'late':
                         preg_rat = 1.35 
                 elif newTransp.type == 'NCC':
