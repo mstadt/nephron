@@ -364,6 +364,29 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'IMCD':
                         cell.dLPV[0,1] = cell.dLPV[0,1]*1.4
                         cell.dLPV[1,5] = cell.dLPV[1,5]*1.4
+
+                if cell.HT != 'N':
+                    # AQP2 changed
+                    HT_rat = 1.0
+                    # AQP2 on the apical interface
+                    if ind1 == 0 and ind2 == 1:
+                        if cell.segment == 'CCD':
+                            HT_rat = 1.8
+                        elif cell.segment == 'OMCD':
+                            HT_rat = 1.9
+                        elif cell.segment == 'IMCD':
+                            HT_rat = 1.9
+                    # basolateral interface
+                    elif ind1 == 1:
+                        if ind2 == 4 or ind2 == 5:
+                            if cell.segment == 'CCD':
+                                HT_rat = 1.8
+                            elif cell.segment == 'OMCD':
+                                HT_rat = 1.9
+                            elif cell.segment == 'IMCD':
+                                HT_rat = 1.9
+
+                    cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
@@ -432,7 +455,31 @@ def read_params(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
-                    cell.h[1,0,1] = 0.5*value*1.0e-5/href                   
+                    cell.h[1,0,1] = 0.5*value*1.0e-5/href   
+
+                # ROMK2 change in HT rat
+                if cell.HT != 'N':
+                    temp = cell.h[1,0,1]
+                    if cell.segment == 'DCT':
+                        if j>0.66*cell.total:
+                            # DCT2
+                            HT_rat = 0.175
+                            cell.h[1,0,1] = HT_rat*0.6
+                    elif cell.segment == 'CNT':
+                        HT_rat = 0.15
+                        cell.h[1,0,1] = HT_rat*8.0
+                    elif cell.segment == 'CCD':
+                        HT_rat = 0.15
+                        if cell.sex == 'Female':
+                            cell.h[1,0,1] = HT_rat*1.4
+                        elif cell.sex == 'Male':
+                            cell.h[1,0,1] = HT_rat*2.0
+                    elif cell.segment == 'OMCD':
+                        HT_rat = 0.70
+                        if cell.sex == 'Female':
+                            cell.h[1,0,1] = HT_rat*2.4
+                        elif cell.sex == 'Male':
+                            cell.h[1,0,1] = HT_rat*2.0
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
@@ -663,6 +710,39 @@ def read_params(cell,filename,j):
                             newTransp.act = 1.3*value/(href*Cref)
                         elif cell.sex == 'female':
                             newTransp.act = 1.2*value/(href*Cref)
+                
+                if cell.HT != 'N':
+                    if newTransp.type == 'NCC':
+                        HT_rat = 2.85
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'NHE3':
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'mTAL':
+                            HT_rat = 0.8
+                        elif cell.segment == 'cTAL' or cell.segment == 'DCT':
+                            HT_rat = 1.0
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NHE3 activity not done for this segment in HT rat model')
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
+                        if cell.segment == 'mTAL':
+                            HT_rat = 0.85
+                        elif cell.segment == 'cTAL':
+                            HT_rat = 1.60
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NKCC2 activity not done for this segment in HT rat model')
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'NaKATPase':
+                        if cell.segment == 'mTAL':
+                            HT_rat = 0.75
+                        else:
+                            HT_rat = 1.0
+                        newTransp.act = HT_rat*value/(href*Cref)
+                    elif newTransp.type == 'ENaC':
+                        HT_rat = 1.2
+                        newTransp.act = HT_rat*value/(href*Cref)
+
                 cell.trans.append(newTransp)
 
             # Solute concentrations:
