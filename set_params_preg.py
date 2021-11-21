@@ -408,7 +408,7 @@ def read_params_preg(cell,filename,j):
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
                     if cell.preg == 'late':
-                        preg_rat = 0.725
+                        preg_rat = 0.75
                         if cell.HT != 'N':
                             HT_rat = 0.25
                             preg_rat = preg_rat*HT_rat
@@ -465,17 +465,17 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             newdLA.perm = 1.35*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'DCT':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     elif cell.segment == 'IMCD':
                         if cell.preg == 'mid':
                             newdLA.perm = 1.4*newdLA.perm
                         elif cell.preg == 'late':
-                            newdLA.perm = 1.35*newdLA.perm
+                            newdLA.perm = 1.3*newdLA.perm
                     else:
                         print('segment: '+cell.segment)
                         raise Exception('K-Cl coupled transporter not characterized for pregnancy in this segment')
@@ -524,7 +524,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 1.4
                         elif cell.preg == 'late':
-                            preg_rat = 1.175
+                            preg_rat = 1.2
                         if cell.HT != 'N':
                             HT_rat = 0.75
                             preg_rat = HT_rat*preg_rat
@@ -569,7 +569,7 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 0.8
                         elif cell.preg == 'late':
-                            preg_rat = 0.75
+                            preg_rat = 0.775
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
@@ -582,12 +582,12 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'mid':
                             preg_rat = 0.8
                         elif cell.preg == 'late':
-                            preg_rat = 0.7
+                            preg_rat = 0.75
                     elif cell.segment == 'IMCD' or cell.segment == 'OMCD':
                         if cell.preg == 'mid':
                             preg_rat = 1.2
                         elif cell.preg == 'late':
-                            preg_rat = 1.075
+                            preg_rat = 1.0775
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NaKATPase activity not done for pregnancy in segment')
@@ -612,7 +612,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.35
                     elif cell.preg == 'late':
-                        preg_rat = 1.35 
+                        preg_rat = 1.3 
                 elif newTransp.type == 'NCC':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
