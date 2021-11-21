@@ -183,7 +183,9 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.35
                 elif cell.type == 'sup':
-                    amp = 0.5
+                    amp = 0.2
+                elif cell.type == 'jux4':
+                    amp = 0.25
                 else:
                     amp = 0.3
             elif np.linalg.norm(f)>1e5:
@@ -192,6 +194,8 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.65
                 elif cell.type == 'sup':
+                    amp = 0.425
+                elif cell.type == 'jux4':
                     amp = 0.5
                 else:
                     amp = 0.7
@@ -201,7 +205,9 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.75
                 elif cell.type == 'sup':
-                    amp = 0.5
+                    amp = 0.65
+                elif cell.type == 'jux4':
+                    amp = 0.75
                 else:
                     amp = 0.9
             elif np.linalg.norm(f)>2500:
@@ -210,7 +216,9 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.85
                 elif cell.type == 'sup':
-                    amp = 0.5
+                    amp = 1.0
+                elif cell.type == 'jux4':
+                    amp = 0.6
                 else:
                     amp = 1.0
             else:
@@ -232,7 +240,7 @@ def newton_rat(func,x,k,cell):
                         amp = 0.75
                 elif cell.type == 'jux4':
                     if k==0:
-                        amp = 0.5
+                        amp = 0.4
                     else:
                         amp = 0.5
                 elif cell.type == 'jux5':
@@ -275,12 +283,12 @@ def newton_rat(func,x,k,cell):
                 amp = 0.25
             if np.linalg.norm(f)>5000:
                 if k==0:
-                    amp = 0.76
+                    amp = 0.5
                 else:
                     amp = 0.8 #0.5
             elif np.linalg.norm(f)>1000:
                 if k==0:
-                    amp = 0.8
+                    amp = 0.7
                 else:
                     amp = 0.8 #0.75
             elif iter>75:
