@@ -130,6 +130,20 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file.write(str(cell[j].len)+'\n')
     file.close()
 
+    #==========================================================
+    # potential gradient
+    #===========================================================
+
+    file=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_potential_gradient_Lumen_Cell'+sup_or_jux+'.txt','w')
+    for j in range(1,N):
+        file.write(str(cell[j-1].ep[0]-cell[j-1].ep[1])+'\n')
+    file.close()
+
+    file=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[0].segment+'_potential_gradient_Lumen_LIS'+sup_or_jux+'.txt','w')
+    for j in range(1,N):
+        file.write(str(cell[j-1].ep[0]-cell[j-1].ep[4])+'\n')
+    file.close()
+
 
     #========================================================
     # output transcellular and paracelluar Na fluxes 
@@ -147,6 +161,30 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
         file_Na_para = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_paracellular_Na'+sup_or_jux+'.txt','a')
         file_Na_para.write(str(jsol[0,0,4])+'\n')
 
+        file_k_apical=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_K_apical_ecd.txt','a')
+        file_k_apical.write(str(jsol[1,0,1])+'\n')
+        file_nh4_apical=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_NH4_apical_ecd.txt','a')
+        file_nh4_apical.write(str(jsol[10,0,1])+'\n')
+        file_h_apical=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_H_apical_ecd.txt','a')
+        file_h_apical.write(str(jsol[11,0,1])+'\n')
+        file_cl_apical=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_Cl_apical_ecd.txt','a')
+        file_cl_apical.write(str(jsol[2,0,1])+'\n')
+
+
+        file_na_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_Na_para_ecd.txt','a')
+        file_na_para.write(str(jsol[0,0,4])+'\n')
+        file_k_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_K_para_ecd.txt','a')
+        file_k_para.write(str(jsol[1,0,4])+'\n')
+        file_nh4_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_NH4_para_ecd.txt','a')
+        file_nh4_para.write(str(jsol[10,0,4])+'\n')
+        file_h_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_H_para_ecd.txt','a')
+        file_h_para.write(str(jsol[11,0,4])+'\n')
+        file_cl_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_Cl_para_ecd.txt','a')
+        file_cl_para.write(str(jsol[2,0,4])+'\n')
+        file_hco3_para=open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_HCO3_para_ecd.txt','a')
+        file_hco3_para.write(str(jsol[3,0,4])+'\n')
+
+
         #========================================================
         # output transporter-mediated fluxes 
         #========================================================
@@ -159,12 +197,12 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
                 if transporter_type == 'SGLT1':
                     solute_id,fluxs = glucose.sglt1(cell[j],cell[j].ep,memb_id,cell[j].trans[i].act,cell[j].area)
                     for k in range(len(solute_id)):
-                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+sup_or_jux+'.txt','a')
+                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+str(memb_id[0])+str(memb_id[1])+sup_or_jux+'.txt','a')
                         file.write(str(fluxs[k]*Scaletorq[j])+'\n')
                 elif transporter_type == 'SGLT2':
                     solute_id,fluxs = glucose.sglt2(cell[j],cell[j].ep,memb_id,cell[j].trans[i].act,cell[j].area)
                     for k in range(len(solute_id)):
-                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+sup_or_jux+'.txt','a')
+                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+memb_id+sup_or_jux+'.txt','a')
                         file.write(str(fluxs[k]*Scaletorq[j])+'\n')
                 elif transporter_type == 'GLUT1':
                     solute_id,fluxs=glucose.glut1(cell[j],cell[j].ep,memb_id,cell[j].trans[i].act,cell[j].area)
@@ -210,7 +248,7 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
                 elif transporter_type == 'KCC4':
                     solute_id,fluxs=KCC.kcc4(cell[j].conc,memb_id,cell[j].trans[i].act,cell[j].area)
                     for k in range(len(solute_id)):
-                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+sup_or_jux+'.txt','a')
+                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+str(memb_id[0])+str(memb_id[1])+sup_or_jux+'.txt','a')
                         file.write(str(fluxs[k]*Scaletorq[j])+'\n')
                 elif transporter_type == 'ENaC':
                     solute_id,fluxs=ENaC.ENaC(cell[j],j,memb_id,cell[j].trans[i].act,cell[j].area,jvol)
