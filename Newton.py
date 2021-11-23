@@ -183,7 +183,7 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.35
                 elif cell.type == 'sup':
-                    amp = 0.2
+                    amp = 0.3
                 elif cell.type == 'jux4':
                     amp = 0.25
                 else:
@@ -194,7 +194,7 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.65
                 elif cell.type == 'sup':
-                    amp = 0.425
+                    amp = 0.5
                 elif cell.type == 'jux4':
                     amp = 0.5
                 else:
@@ -205,7 +205,7 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.75
                 elif cell.type == 'sup':
-                    amp = 0.65
+                    amp = 0.7
                 elif cell.type == 'jux4':
                     amp = 0.75
                 else:
@@ -216,7 +216,7 @@ def newton_rat(func,x,k,cell):
                 elif cell.type == 'jux2':
                     amp = 0.85
                 elif cell.type == 'sup':
-                    amp = 1.0
+                    amp = 0.8
                 elif cell.type == 'jux4':
                     amp = 0.6
                 else:
