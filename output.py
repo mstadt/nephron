@@ -202,7 +202,7 @@ def output_segment_results(cell,sup_or_jux,Scaletorq,file_to_save,N):
                 elif transporter_type == 'SGLT2':
                     solute_id,fluxs = glucose.sglt2(cell[j],cell[j].ep,memb_id,cell[j].trans[i].act,cell[j].area)
                     for k in range(len(solute_id)):
-                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+memb_id+sup_or_jux+'.txt','a')
+                        file = open('./'+file_to_save+'/'+sex_or_preg+'_'+cell[0].species+'_'+cell[j].segment+'_'+transporter_type+'_'+solute[solute_id[k]]+sup_or_jux+'.txt','a')
                         file.write(str(fluxs[k]*Scaletorq[j])+'\n')
                 elif transporter_type == 'GLUT1':
                     solute_id,fluxs=glucose.glut1(cell[j],cell[j].ep,memb_id,cell[j].trans[i].act,cell[j].area)
