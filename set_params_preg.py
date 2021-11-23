@@ -547,9 +547,6 @@ def read_params_preg(cell,filename,j):
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NHE3 activity not done for pregnancy in this segment')
-                    if cell.HT != 'N':
-                        HT_rat = 0.8
-                        preg_rat = preg_rat*HT_rat
 
                 elif newTransp.type == 'NaKATPase':
                     if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
