@@ -19,6 +19,8 @@ solute_id = {
     'glucose' : 14
     }
 
+    print('hello')
+
 # valence
 solute_val = collections.OrderedDict()
 solute_val['Na'] = 1
