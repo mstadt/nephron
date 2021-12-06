@@ -2,6 +2,7 @@ from driver import compute
 from values import *
 from defs import *
 from set_params import set_torq_params
+import re
 import electrochemical 
 import water
 import glucose
