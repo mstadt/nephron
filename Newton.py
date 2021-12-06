@@ -216,6 +216,8 @@ def newton_rat(func,x,k,cell):
                     amp = 0.5
                 elif cell.type == 'jux2':
                     amp = 0.75
+                elif cell.type == 'jux3':
+                    amp = 0.75
                 elif cell.type == 'sup':
                     if cell.HT == 'Y':
                         amp = 0.65
