@@ -177,74 +177,7 @@ def newton_rat(func,x,k,cell):
                 amp = 1.0
         # DCT
         elif cell.segment == 'DCT':
-            if np.linalg.norm(f)>1e8:
-                if cell.type == 'jux1':
-                    amp = 0.35 #0.25
-                elif cell.type == 'jux2':
-                    amp = 0.35
-                elif cell.type == 'jux3':
-                    amp = 0.35
-                elif cell.type == 'sup':
-                    if cell.HT == 'Y':
-                        amp = 0.3
-                    else:
-                        amp = 0.2
-                elif cell.type == 'jux4':
-                    amp = 0.25
-                elif cell.type == 'jux5':
-                    amp = 0.45
-                else:
-                    amp = 0.3
-            elif np.linalg.norm(f)>1e5:
-                if cell.type == 'jux1':
-                    amp = 0.5
-                elif cell.type == 'jux2':
-                    amp = 0.65
-                elif cell.type == 'jux3':
-                    amp = 0.5
-                elif cell.type == 'sup':
-                    if cell.HT == 'Y':
-                        amp = 0.5
-                    else:
-                        amp = 0.425
-                elif cell.type == 'jux4':
-                    amp = 0.5
-                else:
-                    amp = 0.7
-            elif np.linalg.norm(f)>5000:
-                if cell.type == 'jux1':
-                    amp = 0.5
-                elif cell.type == 'jux2':
-                    amp = 0.75
-                elif cell.type == 'jux3':
-                    amp = 0.75
-                elif cell.type == 'sup':
-                    if cell.HT == 'Y':
-                        amp = 0.65
-                    else:
-                        amp = 0.7
-                elif cell.type == 'jux4':
-                    amp = 0.75
-                elif cell.type == 'jux5':
-                    amp = 0.75
-                else:
-                    amp = 0.9
-            elif np.linalg.norm(f)>2500:
-                if cell.type == 'jux1':
-                    amp = 0.5
-                elif cell.type == 'jux2':
-                    if cell.HT == 'Y':
-                        amp = 0.85
-                    else:
-                        amp = 1.0
-                elif cell.type == 'sup':
-                    amp = 0.8
-                elif cell.type == 'jux4':
-                    amp = 0.6
-                else:
-                    amp = 1.0
-            else:
-                amp = 1.0
+            amp = 1.0
         # CNT
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>1e6:
