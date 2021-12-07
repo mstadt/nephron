@@ -248,21 +248,21 @@ def newton_rat(func,x,k,cell):
                 if k==0:
                     amp = 0.7
                 else:
-                    amp = 0.8 #0.75
+                    amp = 1.0 #0.75
             elif iter>75:
                 amp = 1.0
             elif iter>50:
                 if np.linalg.norm(f)>1:
-                    amp = 0.8
+                    amp = 1.0
                 else:
                     amp = 1.0
             elif iter>30:
                 if np.linalg.norm(f)>20:
-                    amp = 0.8
+                    amp = 1.0
                 elif np.linalg.norm(f)>5:
-                    amp = 0.9
+                    amp = 1.0
                 else:
-                    amp = 0.9 #1.0
+                    amp = 1.0
             else:
                 amp = 1.0
         # OMCD
