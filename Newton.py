@@ -255,7 +255,7 @@ def newton_rat(func,x,k,cell):
                 if np.linalg.norm(f)>1:
                     amp = 0.8
                 else:
-                    amp = 0.95
+                    amp = 1.0
             elif iter>30:
                 if np.linalg.norm(f)>20:
                     amp = 0.8
@@ -330,7 +330,7 @@ def newton_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
     
