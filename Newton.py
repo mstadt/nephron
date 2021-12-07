@@ -229,12 +229,12 @@ def newton_rat(func,x,k,cell):
                 else:
                     amp = 0.7
             elif iter > 100:
-                amp = 0.625
+                amp = 0.65
             elif iter > 50:
                 if np.linalg.norm(f)>1:
-                    amp = 0.85
+                    amp = 1.0
                 else:
-                    amp = 0.95
+                    amp = 1.0
             else:
                 amp = 1.0
         # CCD     
