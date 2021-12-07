@@ -185,7 +185,7 @@ def newton_rat(func,x,k,cell):
             if np.linalg.norm(f)>5000:
                 if cell.type == 'jux2':
                     if k==0:
-                        amp = 0.5
+                        amp = 0.4
                     else:
                         amp = 0.5
                 elif cell.type == 'jux3':
