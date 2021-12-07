@@ -597,11 +597,19 @@ def read_params_preg(cell,filename,j):
                         if cell.HT != 'N':
                             HT_rat = 0.3
                             preg_rat = HT_rat*preg_rat
+                        if cell.inhib == 'NKCC2-70':
+                            preg_rat = preg_rat*(1-0.7)
+                        if cell.inhib == 'NKCC2-100':
+                            preg_rat = preg_rat*(1-1)
                     elif cell.segment == 'cTAL':
                         if cell.preg == 'mid':
                             preg_rat = 1.15
                         elif cell.preg == 'late':
                             preg_rat = 1.5
+                        if cell.inhib == 'NKCC2-70':
+                            preg_rat = preg_rat*(1-0.7)
+                        if cell.inhib == 'NKCC2-100':
+                            preg_rat = preg_rat*(1-1)
                     else:
                         print('segment: ' + cell.segment)
                         raise Exception('NKCC2 activity not done for pregnancy in this segment')
@@ -613,6 +621,10 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'NCC':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
+                        if cell.inhib == 'NCC-70':
+                            preg_rat = preg_rat*(1-0.7)
+                        elif cell.inhib == 'NCC-100':
+                            preg_rat = preg_rat*(1-1)
                     elif cell.preg == 'late':
                         preg_rat = 0.45
                     if cell.HT != 'N':
@@ -626,6 +638,10 @@ def read_params_preg(cell,filename,j):
                     if cell.HT != 'N':
                         HT_rat = 1.20
                         preg_rat = preg_rat*HT_rat
+                    if cell.inhib == 'ENaC-70':
+                        preg_rat = preg_rat*(1-0.7)
+                    if cell.inhib == 'ENaC-100':
+                        preg_rat = preg_rat*(1-1)
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
                         preg_rat = 2.25
