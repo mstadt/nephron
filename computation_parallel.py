@@ -11,6 +11,7 @@ import argparse
 import multiprocessing
 import output
 from set_params import set_torq_params
+import re
 
 solute = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu']
 compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
