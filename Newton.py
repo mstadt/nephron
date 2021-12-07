@@ -245,11 +245,7 @@ def newton_rat(func,x,k,cell):
                 if k==0:
                     amp = 0.5
                 else:
-<<<<<<< Updated upstream
-                    amp = 0.85 #0.5
-=======
                     amp = 1.0 #0.5
->>>>>>> Stashed changes
             elif np.linalg.norm(f)>1000:
                 if k==0:
                     amp = 0.7
@@ -268,11 +264,7 @@ def newton_rat(func,x,k,cell):
                 elif np.linalg.norm(f)>5:
                     amp = 1.0
                 else:
-<<<<<<< Updated upstream
-                    amp = 1.0
-=======
                     amp = 1.0 #1.0
->>>>>>> Stashed changes
             else:
                 amp = 1.0
         # OMCD
