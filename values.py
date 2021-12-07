@@ -162,21 +162,33 @@ TotPotPap_MP = 20.0*MPPotchange
 TotPotPap_MP_100NKCCinhib = 5.0*MPPotchange
 TotPotPap_MP_70NKCCinhib = 7.5*MPPotchange
 TotPotPap_LP = 20.0*LPPotchange
+TotPotPap_LP_100NKCCinhib = 5.0*LPPotchange
+TotPotPap_LP_70NKCCinhib = 7.5*LPPotchange
 
 # Cl-
 TotCloCM = 116.17
 TotCloOI_noinhib = 279.94
 TotCloOI_100NKCCinhib = 158.0
 TotCloOI_70NKCCinhib = 218.97
-TotCloOI_MP = 279.94*0.95
-TotCloOI_LP = 279.94*0.95
+MPClchange = 0.95
+TotCloOI_MP = 279.94*MPClchange
+TotCloOI_MP_100NKCCinhib = 158.0*MPClchange
+TotCloOI_MP_70NKCCinhib = 218.97*MPClchange
+LPClchange = 0.95
+TotCloOI_LP = 279.94*LPClchange
+TotCloOI_LP_100NKCCinhib = 158.0*LPClchange
+TotCloOI_LP_70NKCCinhib = 218.97*LPClchange
 TotCloPap_noinhib = 344.92
 TotCloPap_50inhib = 320.0
 TotCloPap_80inhib = 260.0
 TotCloPap_100NKCCinhib = 136.0
 TotCloPap_70NKCCinhib = 240.46
-TotCloPap_MP = 344.92*0.95
-TotCloPap_LP = 344.92*0.95
+TotCloPap_MP = 344.92*MPClchange
+TotCloPap_MP_100NKCCinhib = 136.0*MPClchange
+TotCloPap_MP_70NKCCinhib = 240.46*MPClchange
+TotCloPap_LP = 344.92*LPClchange
+TotCloPap_LP_100NKCCinhib = 136.0*LPClchange
+TotCloPap_LP_70NKCCinhib = 240.46*LPClchange
 
 # urea
 TotureaCM = 8.0
