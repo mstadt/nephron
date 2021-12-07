@@ -614,7 +614,7 @@ def read_params_preg(cell,filename,j):
                     if cell.preg == 'mid':
                         preg_rat = 1.0
                     elif cell.preg == 'late':
-                        preg_rat = 0.9
+                        preg_rat = 0.45
                     if cell.HT != 'N':
                         HT_rat = 1.60
                         preg_rat = preg_rat*HT_rat
