@@ -89,6 +89,8 @@ def newton_rat(func,x,k,cell):
     iter = 0
     if k==0:
         maxiter = 300
+    elif k > 60 and k < 70:
+        maxiter = 50
     else:
         maxiter = 150
 
