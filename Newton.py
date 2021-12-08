@@ -89,6 +89,8 @@ def newton_rat(func,x,k,cell):
     iter = 0
     if k==0:
         maxiter = 300
+    elif k > 60 and k < 70:
+        maxiter = 50
     else:
         maxiter = 150
 
@@ -185,7 +187,7 @@ def newton_rat(func,x,k,cell):
             if np.linalg.norm(f)>5000:
                 if cell.type == 'jux2':
                     if k==0:
-                        amp = 0.5
+                        amp = 0.45
                     else:
                         amp = 0.5
                 elif cell.type == 'jux3':
@@ -200,7 +202,7 @@ def newton_rat(func,x,k,cell):
                         amp = 0.5
                 elif cell.type == 'jux5':
                     if k==0:
-                        amp = 1.0
+                        amp = 0.42
                     else:
                         amp = 0.5
                 elif cell.type == 'jux1':
@@ -215,12 +217,17 @@ def newton_rat(func,x,k,cell):
                         amp = 0.4
             elif np.linalg.norm(f)>1500:
                 if k==0:
-                    amp = 0.4
+                    amp = 0.55
                 else:
-                    amp = 0.6
+                    amp = 0.65
             elif np.linalg.norm(f)>1000:
                 if k==0:
-                    amp = 0.5
+                    if cell.type == 'jux2':
+                        amp = 0.65
+                    elif cell.type == 'jux5':
+                        amp = 0.85
+                    else:
+                        amp = 0.5
                 else:
                     amp = 0.7
             elif iter > 100:
@@ -235,31 +242,31 @@ def newton_rat(func,x,k,cell):
         # CCD     
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1e6:
-                amp = 0.25
+                amp = 0.45
             if np.linalg.norm(f)>5000:
                 if k==0:
                     amp = 0.5
                 else:
-                    amp = 0.8 #0.5
+                    amp = 1.0 #0.5
             elif np.linalg.norm(f)>1000:
                 if k==0:
                     amp = 0.7
                 else:
-                    amp = 0.8 #0.75
+                    amp = 1.0 #0.75
             elif iter>75:
-                amp = 0.7
+                amp = 1.0
             elif iter>50:
                 if np.linalg.norm(f)>1:
-                    amp = 0.8
+                    amp = 1.0
                 else:
-                    amp = 0.95
+                    amp = 1.0
             elif iter>30:
                 if np.linalg.norm(f)>20:
-                    amp = 0.8
+                    amp = 1.0
                 elif np.linalg.norm(f)>5:
-                    amp = 0.9
+                    amp = 1.0
                 else:
-                    amp = 0.9 #1.0
+                    amp = 1.0 #1.0
             else:
                 amp = 1.0
         # OMCD
