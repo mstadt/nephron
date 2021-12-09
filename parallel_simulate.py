@@ -53,6 +53,8 @@ elif preg != 'non':
         file_to_save = preg+'pregnant_'+species[0:3]+'_HT'
     else:
         file_to_save = preg+'pregnant_'+species[0:3]
+elif inhib != None:
+    file_to_save = inhib+'_'+sex+'_'+species[0:3]
 elif HT != 'N':
     file_to_save = sex + '_' + species[0:3]+'_HT'
 else:
