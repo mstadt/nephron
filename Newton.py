@@ -238,7 +238,7 @@ def newton_rat(func,x,k,cell):
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1e6:
                 amp = 0.25
-            if np.linalg.norm(f)>5000:
+            elif np.linalg.norm(f)>5000:
                 if k==0:
                     amp = 0.5
                 else:
