@@ -180,9 +180,11 @@ def newton_rat(func,x,k,cell):
             amp = 1.0
         # CNT
         elif cell.segment == 'CNT':
-            if np.linalg.norm(f)>1e6:
-                amp = 0.35
-            if np.linalg.norm(f)>5000:
+            if np.linalg.norm(f)>1e9:
+                amp = 0.25
+            elif np.linalg.norm(f)>1e6:
+                amp = 0.4
+            elif np.linalg.norm(f)>5000:
                 if cell.type == 'jux2':
                     if k==0:
                         amp = 0.5
@@ -236,7 +238,7 @@ def newton_rat(func,x,k,cell):
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1e6:
                 amp = 0.25
-            if np.linalg.norm(f)>5000:
+            elif np.linalg.norm(f)>5000:
                 if k==0:
                     amp = 0.5
                 else:
@@ -299,11 +301,11 @@ def newton_rat(func,x,k,cell):
                 if np.linalg.norm(f)>100:
                     amp = 0.9
                 elif np.linalg.norm(f)>50:
-                    amp = 0.8
+                    amp = 0.75
                 elif np.linalg.norm(f)>1:
-                    amp = 1.0
+                    amp = 0.5
                 else:
-                    amp = 1.0
+                    amp = 0.5
             elif iter>75:
                 if np.linalg.norm(f)>100:
                     amp = 0.95
@@ -327,7 +329,7 @@ def newton_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        #print(iter, np.linalg.norm(f))
+        print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
     
