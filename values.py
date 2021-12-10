@@ -1,5 +1,6 @@
 # The values here are updated from the male human model. 
 
+N=200
 # physical constants
 RT    = 2.57
 RTosm = 1.93e4

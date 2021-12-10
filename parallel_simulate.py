@@ -85,29 +85,13 @@ if __name__ == '__main__':
     #========================================================
     print('Collecting duct begin')
     print('CCD start')
-
+    NCCD = 200
     if sex == 'Male':
         filename = './datafiles/CCDparams_M_'+species[0:3]+'.dat'
     elif sex == 'Female':
         filename = './datafiles/CCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/CCDparams_F_'+species[0:3]+'.dat'
-
-    file = open(filename, 'r')
-    line = file.readline()
-    while (line):
-        line = line.replace('\t', ' ')
-        terms = line.split(' ')
-        if ((line[0][0] != '#') and ('total' == terms[0])):
-            first_space_pos = line.index(' ')
-            num = re.findall(r'-?\d+\.?\d*[Ee]?[+-]?\d*', line[first_space_pos:len(line)])
-            NCCD = float(num[0])
-            break
-        else:
-            line = file.readline()
-    file.close()
-    NCCD = int(NCCD)
-
     ccd=compute(NCCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg=preg, HT=HT)
 
     Scaletorq = np.ones(NCCD)
@@ -121,29 +105,13 @@ if __name__ == '__main__':
     # Outer medullary collecting duct
     #========================================================
     print('OMCD start')
-
+    NOMCD = 200
     if sex == 'Male':
         filename = './datafiles/OMCDparams_M_'+species[0:3]+'.dat'
     elif sex == 'Female':
         filename = './datafiles/OMCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/OMCDparams_F_'+species[0:3]+'.dat'
-
-    file = open(filename, 'r')
-    line = file.readline()
-    while (line):
-        line = line.replace('\t', ' ')
-        terms = line.split(' ')
-        if ((line[0][0] != '#') and ('total' == terms[0])):
-            first_space_pos = line.index(' ')
-            num = re.findall(r'-?\d+\.?\d*[Ee]?[+-]?\d*', line[first_space_pos:len(line)])
-            NOMCD = float(num[0])
-            break
-        else:
-            line = file.readline()
-    file.close()
-    NOMCD = int(NOMCD)
-
     if ccd[0].sex == 'male':
         omcd=compute(NOMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg, HT=HT)
     elif ccd[0].sex == 'female':
@@ -160,29 +128,13 @@ if __name__ == '__main__':
     # Inner medullary collecting duct
     #========================================================
     print('IMCD start')
-
+    NIMCD = 200
     if sex == 'Male':
         filename = './datafiles/IMCDparams_M_'+species[0:3]+'.dat'
     elif sex == 'Female':
         filename = './datafiles/IMCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/IMCDparams_F_'+species[0:3]+'.dat'
-
-    file = open(filename, 'r')
-    line = file.readline()
-    while (line):
-        line = line.replace('\t', ' ')
-        terms = line.split(' ')
-        if ((line[0][0] != '#') and ('total' == terms[0])):
-            first_space_pos = line.index(' ')
-            num = re.findall(r'-?\d+\.?\d*[Ee]?[+-]?\d*', line[first_space_pos:len(line)])
-            NIMCD = float(num[0])
-            break
-        else:
-            line = file.readline()
-    file.close()
-    NIMCD = int(NIMCD)
-
     imcd=compute(NIMCD,filename,'Newton',diabete=diabete,species=species,sup_or_multi=sup_or_multi,inhibition=inhib,unx=unx, preg=preg, HT=HT)
 
     Scaletorq = np.ones(NIMCD)
