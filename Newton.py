@@ -236,7 +236,7 @@ def newton_rat(func,x,k,cell):
                 amp = 1.0
         # CCD     
         elif cell.segment == 'CCD':
-            if np.linalg.norm(f)>1e6:
+            if np.linalg.norm(f)>1e8:
                 amp = 0.25
             elif np.linalg.norm(f)>5000:
                 if k==0:
@@ -249,7 +249,7 @@ def newton_rat(func,x,k,cell):
                 else:
                     amp = 0.8 #0.75
             elif iter>75:
-                amp = 0.7
+                amp = 0.75
             elif iter>50:
                 if np.linalg.norm(f)>1:
                     amp = 0.8
@@ -261,7 +261,7 @@ def newton_rat(func,x,k,cell):
                 elif np.linalg.norm(f)>5:
                     amp = 0.9
                 else:
-                    amp = 0.9 #1.0
+                    amp = 1.0
             else:
                 amp = 1.0
         # OMCD
@@ -329,7 +329,7 @@ def newton_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
     
