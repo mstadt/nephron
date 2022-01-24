@@ -750,7 +750,7 @@ def read_params(cell,filename,j):
                             HT_rat = 1.0
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'ENaC':
-                        HT_rat = 1.2
+                        HT_rat = 1.25
                         newTransp.act = HT_rat*value/(href*Cref)
 
                 cell.trans.append(newTransp)
