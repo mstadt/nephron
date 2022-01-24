@@ -640,7 +640,7 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         preg_rat = 2.15
                     if cell.HT != 'N':
-                        HT_rat = 1.20
+                        HT_rat = 1.30
                         preg_rat = preg_rat*HT_rat
                     if cell.inhib == 'ENaC-70':
                         preg_rat = preg_rat*(1-0.7)
