@@ -204,7 +204,7 @@ def newton_rat(func,x,k,cell):
                     if k==0:
                         amp = 0.75
                     else:
-                        amp = 0.4
+                        amp = 0.25
                 elif cell.type == 'jux1':
                     if k==0:
                         amp = 0.5
