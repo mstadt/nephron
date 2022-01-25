@@ -453,7 +453,11 @@ def read_params_preg(cell,filename,j):
                 if newdLA.solute_id == (0,7):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
-                            newdLA.perm = 0.9*newdLA.perm 
+                            if cell.HT != 'N':
+                                HT_rat = 0.9
+                                newdLA.perm = HT_rat*0.9*newdLA.perm
+                            else:
+                                newdLA.perm = 0.9*newdLA.perm 
                         elif cell.preg == 'late':
                             newdLA.perm = 0.85*newdLA.perm
                     else:

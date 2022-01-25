@@ -495,6 +495,16 @@ def read_params(cell,filename,j):
                     coef.append(int(num[i]))
                 newdLA.coef = coef
                 newdLA.solute_id = vals[2:len(vals)]
+
+                # HTN
+                if cell.HT != 'N':
+                    # NaPi2
+                    if newdLA.solute_id == (0,7):
+                        if cell.segment == 'PT' or cell.segment == 'S3':
+                            HT_rat = 0.9
+                            newdLA.perm = HT_rat*newdLA.perm
+
+
                 cell.dLA.append(newdLA)
 
             # Specific transporters:
