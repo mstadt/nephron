@@ -371,20 +371,20 @@ def read_params(cell,filename,j):
                     # AQP2 on the apical interface
                     if ind1 == 0 and ind2 == 1:
                         if cell.segment == 'CCD':
-                            HT_rat = 1.8
+                            HT_rat = 1.5
                         elif cell.segment == 'OMCD':
-                            HT_rat = 1.9
+                            HT_rat = 1.5
                         elif cell.segment == 'IMCD':
-                            HT_rat = 1.9
+                            HT_rat = 1.5
                     # basolateral interface
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'CCD':
-                                HT_rat = 1.8
+                                HT_rat = 1.5
                             elif cell.segment == 'OMCD':
-                                HT_rat = 1.9
+                                HT_rat = 1.5
                             elif cell.segment == 'IMCD':
-                                HT_rat = 1.9
+                                HT_rat = 1.5
 
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
@@ -457,7 +457,7 @@ def read_params(cell,filename,j):
                 if cell.inhib == 'ACE' and cell.segment == 'DCT':
                     cell.h[1,0,1] = 0.5*value*1.0e-5/href   
 
-                # ROMK2 change in HT rat
+                # ROMK2 (K secretion) change in HT rat
                 if cell.HT != 'N':
                     temp = cell.h[1,0,1]
                     if cell.segment == 'DCT':
@@ -466,7 +466,7 @@ def read_params(cell,filename,j):
                             HT_rat = 0.175
                             cell.h[1,0,1] = HT_rat*0.6
                     elif cell.segment == 'CNT':
-                        HT_rat = 0.15
+                        HT_rat = 0.2
                         cell.h[1,0,1] = HT_rat*8.0
                     elif cell.segment == 'CCD':
                         HT_rat = 0.15
@@ -723,12 +723,12 @@ def read_params(cell,filename,j):
                 
                 if cell.HT != 'N':
                     if newTransp.type == 'NCC':
-                        HT_rat = 2.85
+                        HT_rat = 1.95
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NHE3':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'mTAL':
-                            HT_rat = 0.8
-                        elif cell.segment == 'cTAL' or cell.segment == 'DCT':
+                            HT_rat = 0.9
+                        elif cell.segment == 'cTAL' or cell.segment == 'DCT': 
                             HT_rat = 1.0
                         else:
                             print('segment: ' + cell.segment)
@@ -736,9 +736,9 @@ def read_params(cell,filename,j):
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                         if cell.segment == 'mTAL':
-                            HT_rat = 0.85
+                            HT_rat = 0.7
                         elif cell.segment == 'cTAL':
-                            HT_rat = 1.60
+                            HT_rat = 1.74
                         else:
                             print('segment: ' + cell.segment)
                             raise Exception('NKCC2 activity not done for this segment in HT rat model')
@@ -750,7 +750,7 @@ def read_params(cell,filename,j):
                             HT_rat = 1.0
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'ENaC':
-                        HT_rat = 1.3
+                        HT_rat = 1.75
                         newTransp.act = HT_rat*value/(href*Cref)
 
                 cell.trans.append(newTransp)
