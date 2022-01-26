@@ -454,7 +454,7 @@ def read_params_preg(cell,filename,j):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if cell.preg == 'mid':
                             if cell.HT != 'N':
-                                HT_rat = 0.9
+                                HT_rat = 0.85
                                 newdLA.perm = HT_rat*0.9*newdLA.perm
                             else:
                                 newdLA.perm = 0.9*newdLA.perm 
@@ -530,7 +530,7 @@ def read_params_preg(cell,filename,j):
                         elif cell.preg == 'late':
                             preg_rat = 1.2
                         if cell.HT != 'N':
-                            HT_rat = 0.85
+                            HT_rat = 0.75
                             preg_rat = HT_rat*preg_rat
                     elif cell.segment == 'mTAL':
                         if cell.preg == 'mid':
@@ -538,7 +538,7 @@ def read_params_preg(cell,filename,j):
                         elif cell.preg == 'late':
                             preg_rat = 1.175
                         if cell.HT != 'N':
-                            HT_rat = 0.85
+                            HT_rat = 0.75
                             preg_rat = HT_rat*preg_rat
                     elif cell.segment == 'cTAL' or cell.segment == 'DCT':
                         if cell.preg == 'mid':

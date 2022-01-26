@@ -501,7 +501,7 @@ def read_params(cell,filename,j):
                     # NaPi2
                     if newdLA.solute_id == (0,7):
                         if cell.segment == 'PT' or cell.segment == 'S3':
-                            HT_rat = 0.9
+                            HT_rat = 0.85
                             newdLA.perm = HT_rat*newdLA.perm
 
 
@@ -727,7 +727,7 @@ def read_params(cell,filename,j):
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NHE3':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'mTAL':
-                            HT_rat = 0.9
+                            HT_rat = 0.82
                         elif cell.segment == 'cTAL' or cell.segment == 'DCT': 
                             HT_rat = 1.0
                         else:
