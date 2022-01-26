@@ -371,20 +371,20 @@ def read_params(cell,filename,j):
                     # AQP2 on the apical interface
                     if ind1 == 0 and ind2 == 1:
                         if cell.segment == 'CCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                         elif cell.segment == 'OMCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                         elif cell.segment == 'IMCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                     # basolateral interface
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'CCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
                             elif cell.segment == 'OMCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
                             elif cell.segment == 'IMCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
 
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
