@@ -745,7 +745,7 @@ def read_params(cell,filename,j):
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NaKATPase':
                         if cell.segment == 'mTAL':
-                            HT_rat = 0.75
+                            HT_rat = 0.70
                         else:
                             HT_rat = 1.0
                         newTransp.act = HT_rat*value/(href*Cref)
