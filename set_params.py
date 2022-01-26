@@ -469,13 +469,13 @@ def read_params(cell,filename,j):
                         HT_rat = 0.2
                         cell.h[1,0,1] = HT_rat*8.0
                     elif cell.segment == 'CCD':
-                        HT_rat = 0.15
+                        HT_rat = 1.0
                         if cell.sex == 'Female':
                             cell.h[1,0,1] = HT_rat*1.4
                         elif cell.sex == 'Male':
                             cell.h[1,0,1] = HT_rat*2.0
                     elif cell.segment == 'OMCD':
-                        HT_rat = 0.70
+                        HT_rat = 1.0
                         if cell.sex == 'Female':
                             cell.h[1,0,1] = HT_rat*2.4
                         elif cell.sex == 'Male':
