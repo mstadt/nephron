@@ -599,7 +599,7 @@ def read_params_preg(cell,filename,j):
                         elif cell.preg == 'late':
                             preg_rat = 1.5
                         if cell.HT != 'N':
-                            HT_rat = 0.4
+                            HT_rat = 0.45
                             preg_rat = HT_rat*preg_rat
                         if cell.inhib == 'NKCC2-70':
                             preg_rat = preg_rat*(1-0.7)
