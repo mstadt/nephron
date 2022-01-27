@@ -371,20 +371,20 @@ def read_params(cell,filename,j):
                     # AQP2 on the apical interface
                     if ind1 == 0 and ind2 == 1:
                         if cell.segment == 'CCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                         elif cell.segment == 'OMCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                         elif cell.segment == 'IMCD':
-                            HT_rat = 1.5
+                            HT_rat = 1.3
                     # basolateral interface
                     elif ind1 == 1:
                         if ind2 == 4 or ind2 == 5:
                             if cell.segment == 'CCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
                             elif cell.segment == 'OMCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
                             elif cell.segment == 'IMCD':
-                                HT_rat = 1.5
+                                HT_rat = 1.3
 
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                                 
@@ -469,13 +469,13 @@ def read_params(cell,filename,j):
                         HT_rat = 0.2
                         cell.h[1,0,1] = HT_rat*8.0
                     elif cell.segment == 'CCD':
-                        HT_rat = 0.15
+                        HT_rat = 1.0
                         if cell.sex == 'Female':
                             cell.h[1,0,1] = HT_rat*1.4
                         elif cell.sex == 'Male':
                             cell.h[1,0,1] = HT_rat*2.0
                     elif cell.segment == 'OMCD':
-                        HT_rat = 0.70
+                        HT_rat = 1.0
                         if cell.sex == 'Female':
                             cell.h[1,0,1] = HT_rat*2.4
                         elif cell.sex == 'Male':
@@ -745,12 +745,12 @@ def read_params(cell,filename,j):
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'NaKATPase':
                         if cell.segment == 'mTAL':
-                            HT_rat = 0.75
+                            HT_rat = 0.70
                         else:
                             HT_rat = 1.0
                         newTransp.act = HT_rat*value/(href*Cref)
                     elif newTransp.type == 'ENaC':
-                        HT_rat = 1.75
+                        HT_rat = 1.45
                         newTransp.act = HT_rat*value/(href*Cref)
 
                 cell.trans.append(newTransp)

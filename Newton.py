@@ -202,7 +202,7 @@ def newton_rat(func,x,k,cell):
                         amp = 0.5
                 elif cell.type == 'jux5':
                     if k==0:
-                        amp = 0.75
+                        amp = 0.5
                     else:
                         amp = 0.25
                 elif cell.type == 'jux1':
@@ -329,7 +329,7 @@ def newton_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
     
