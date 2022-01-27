@@ -94,6 +94,7 @@ def newton_preg_rat(func,x,k,cell):
                 amp = 1.0 
         # DCT
         elif cell.segment == 'DCT':
+            # the options were added for the HTN model
             if np.linalg.norm(f)>1e5:
                 if cell.type == 'jux1':
                     amp = 0.5
@@ -102,6 +103,14 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 1.0
                     else:
                         amp = 0.6
+                else:
+                    amp = 1.0
+            elif np.linalg.norm(f)>5000:
+                if cell.type == 'jux4':
+                    if k==0:
+                        amp = 1.0
+                    else:
+                        amp = 0.5
                 else:
                     amp = 1.0
             else:
