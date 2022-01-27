@@ -635,7 +635,7 @@ def read_params_preg(cell,filename,j):
                     elif cell.preg == 'late':
                         preg_rat = 0.45
                     if cell.HT != 'N':
-                        HT_rat = 1.75
+                        HT_rat = 1.70
                         preg_rat = preg_rat*HT_rat
                 elif newTransp.type == 'ENaC':
                     if cell.preg == 'mid':
