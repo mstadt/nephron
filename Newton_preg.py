@@ -95,7 +95,7 @@ def newton_preg_rat(func,x,k,cell):
         # DCT
         elif cell.segment == 'DCT':
             if np.linalg.norm(f)>1e7:
-                amp = 0.5
+                amp = 0.8
             else:
                 amp = 1.0
         # CNT
