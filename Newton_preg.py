@@ -95,41 +95,44 @@ def newton_preg_rat(func,x,k,cell):
         # DCT
         elif cell.segment == 'DCT':
             # the options were added for the HTN model
-            if np.linalg.norm(f)>1e5:
-                if cell.type == 'jux1':
-                    amp = 0.5
-                elif cell.type == 'jux4':
-                    if k==0:
-                        amp = 1.0
-                    else:
-                        amp = 0.3
-                elif cell.type == 'jux5':
-                    if k==0:
-                        amp = 1.0
-                    else:
+            if cell.HT != 'N':
+                if np.linalg.norm(f)>1e5:
+                    if cell.type == 'jux1':
                         amp = 0.5
-                else:
-                    amp = 1.0
-            elif np.linalg.norm(f)>5000:
-                if cell.type == 'jux4':
-                    if k==0:
-                        amp = 1.0
+                    elif cell.type == 'jux4':
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 0.3
+                    elif cell.type == 'jux5':
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 0.5
                     else:
-                        amp = 0.475 #0.5
-                else:
-                    amp = 1.0
-            elif np.linalg.norm(f)>50:
-                if cell.type == 'jux4':
-                    if k==0:
                         amp = 1.0
+                elif np.linalg.norm(f)>5000:
+                    if cell.type == 'jux4':
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 0.475 #0.5
                     else:
-                        amp = 0.7 #0.8
-                else:
-                    amp = 1.0
-            elif iter>20:
-                if cell.type == 'jux4':
-                    if np.linalg.norm(f)>10:
-                        amp = 0.75
+                        amp = 1.0
+                elif np.linalg.norm(f)>50:
+                    if cell.type == 'jux4':
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 0.7 #0.8
+                    else:
+                        amp = 1.0
+                elif iter>20:
+                    if cell.type == 'jux4':
+                        if np.linalg.norm(f)>10:
+                            amp = 0.75
+                        else:
+                            amp = 1.0
                     else:
                         amp = 1.0
                 else:
@@ -148,7 +151,10 @@ def newton_preg_rat(func,x,k,cell):
                     if cell.type == 'jux1':
                         amp = 0.275
                     elif cell.type == 'jux2':
-                        amp = 0.25
+                        if cell.HT != 'N':
+                            amp = 0.25
+                        else:
+                            amp = 0.3
                     elif cell.type == 'jux3':
                         amp = 0.25
                     elif cell.type == 'jux4':
