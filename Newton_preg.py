@@ -330,7 +330,7 @@ def newton_preg_rat(func,x,k,cell):
             f = np.matrix(fun(x,k))
 
         iter+=1
-        #print(iter, np.linalg.norm(f))
+        print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
 
         #print(f)
