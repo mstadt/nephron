@@ -136,6 +136,11 @@ def newton_preg_rat(func,x,k,cell):
                             amp = 0.75
                         else:
                             amp = 1.0
+                    elif cell.type == 'jux1':
+                        if np.linalg.norm(f)>10:
+                            amp = 0.75
+                        else:
+                            amp = 1.0
                     else:
                         amp = 1.0
                 else:
