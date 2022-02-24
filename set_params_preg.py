@@ -603,7 +603,7 @@ def read_params_preg(cell,filename,j):
                         if cell.inhib == 'NKCC2-100':
                             preg_rat = preg_rat*(1-1)
                         if cell.HT != 'N':
-                            HT_rat = 1.74
+                            HT_rat = 1.7
                             preg_rat = HT_rat*preg_rat
                     else:
                         print('segment: ' + cell.segment)
