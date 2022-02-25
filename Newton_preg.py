@@ -430,7 +430,7 @@ def newton_preg_rat(func,x,k,cell):
 
         # extra check
         if np.isnan(np.linalg.norm(f)) or np.linalg.norm(f)>1e14:
-            amp = amp/2 #amp/3
+            amp = amp/2 
             delta = amp*np.array(F*IJ.T)[0]
             x = xold - delta
             f = np.matrix(fun(x,k))
@@ -438,10 +438,7 @@ def newton_preg_rat(func,x,k,cell):
         iter+=1
         #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
-
         #print(f)
         #input('pausing...')
-
-
     return x
         
