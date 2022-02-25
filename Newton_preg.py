@@ -201,8 +201,10 @@ def newton_preg_rat(func,x,k,cell):
                     elif cell.type == 'jux3':
                         if k==0:
                             amp = 1.0
+                        elif k<160:
+                            amp = 0.7
                         else:
-                            amp = 1.0 #0.7
+                            amp = 1.0
                     else:
                         amp = 1.0
                 elif iter>20:
