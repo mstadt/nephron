@@ -384,26 +384,26 @@ def read_params_preg(cell,filename,j):
                         if cell.preg == 'late':
                             preg_rat = 0.55
                             if cell.HT != 'N':
-                                HT_rat = 0.3 #0.4 #0.2
+                                HT_rat = 0.3
                                 preg_rat = preg_rat*HT_rat
                             cell.h[1,0,1] = 0.6*preg_rat
                         elif cell.preg == 'mid':
                             preg_rat = 0.65
                             if cell.HT != 'N':
-                                HT_rat = 0.3 #0.4 #0.2
+                                HT_rat = 0.3
                                 preg_rat = preg_rat*HT_rat
                             cell.h[1,0,1] = 0.6*preg_rat
                 elif cell.segment == 'CNT':
                     if cell.preg == 'late':
                         preg_rat = 0.55
                         if cell.HT != 'N':
-                            HT_rat = 0.3 #0.4 #0.2
+                            HT_rat = 0.3
                             preg_rat = preg_rat*HT_rat
                         cell.h[1,0,1] = 8.0*preg_rat
                     elif cell.preg == 'mid':
                         preg_rat = 0.65
                         if cell.HT != 'N':
-                            HT_rat = 0.3 #0.4 #0.2
+                            HT_rat = 0.3
                             preg_rat = preg_rat*HT_rat
                         cell.h[1,0,1] = 8.0*preg_rat
                 elif cell.segment == 'CCD':
@@ -587,7 +587,7 @@ def read_params_preg(cell,filename,j):
                         elif cell.preg == 'late':
                             preg_rat = 1.5
                         if cell.HT != 'N':
-                            HT_rat = 0.45
+                            HT_rat = 0.7
                             preg_rat = HT_rat*preg_rat
                         if cell.inhib == 'NKCC2-70':
                             preg_rat = preg_rat*(1-0.7)
@@ -603,7 +603,7 @@ def read_params_preg(cell,filename,j):
                         if cell.inhib == 'NKCC2-100':
                             preg_rat = preg_rat*(1-1)
                         if cell.HT != 'N':
-                            HT_rat = 1.20
+                            HT_rat = 1.75
                             preg_rat = HT_rat*preg_rat
                     else:
                         print('segment: ' + cell.segment)
