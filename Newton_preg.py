@@ -264,6 +264,11 @@ def newton_preg_rat(func,x,k,cell):
                             amp = 1.0 #0.4
                         else:
                             amp = 0.25 #0.5
+                    elif cell.type == 'sup':
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 1.0
                     else:
                         amp = 0.5
                 elif cell.preg == 'late':
