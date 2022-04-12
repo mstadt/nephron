@@ -666,6 +666,9 @@ def read_params(cell,filename,j):
                 elif cell.inhib == 'ENaC-100':
                     if newTransp.type == 'ENaC':
                         newTransp.act = (1-1)*value/(href*Cref)
+                elif cell.inhib == 'HKA-100':
+                    if newTransp.type == 'HKATPase':
+                        newTransp.act = (1-1)*value/(href*Cref)
                 elif cell.inhib == 'SNB-70':
                     if cell.segment == 'mTAL' or cell.segment == 'cTAL':
                         if newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
