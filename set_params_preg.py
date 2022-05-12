@@ -620,8 +620,16 @@ def read_params_preg(cell,filename,j):
                             preg_rat = preg_rat*(1-0.7)
                         elif cell.inhib == 'NCC-100':
                             preg_rat = preg_rat*(1-1)
+                        elif cell.inhib == 'HKA-100':
+                            preg_rat = 1.0
                     elif cell.preg == 'late':
                         preg_rat = 0.45
+                        if cell.inhib == 'NCC-70':
+                            preg_rat = preg_rat*(1-0.7)
+                        elif cell.inhib == 'NCC-100':
+                            preg_rat = preg_rat*(1-1)
+                        elif cell.inhib == 'HKA-100':
+                            preg_rat = 1.0
                     if cell.HT != 'N':
                         HT_rat = 1.95
                         preg_rat = preg_rat*HT_rat
@@ -635,13 +643,21 @@ def read_params_preg(cell,filename,j):
                         preg_rat = preg_rat*HT_rat
                     if cell.inhib == 'ENaC-70':
                         preg_rat = preg_rat*(1-0.7)
-                    if cell.inhib == 'ENaC-100':
+                    elif cell.inhib == 'ENaC-100':
                         preg_rat = preg_rat*(1-1)
+                    elif cell.inhib == 'HKA-100':
+                        preg_rat = preg_rat*0.5 # HKA2KO mice have lower ENaC activity
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
-                        preg_rat = 2.25
+                        if cell.inhib == 'HKA-100':
+                            preg_rat = preg_rat*(1-1)
+                        else:
+                            preg_rat = 2.25
                     elif cell.preg == 'late':
-                        preg_rat = 2.75
+                        if cell.inhib == 'HKA-100':
+                            preg_rat = preg_rat*(1-1)
+                        else:
+                            preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
                     if cell.preg == 'mid':
                         preg_rat = 1.0
@@ -649,9 +665,15 @@ def read_params_preg(cell,filename,j):
                         preg_rat = 1.0
                 elif newTransp.type == 'Pendrin':
                     if cell.preg == 'mid':
-                        preg_rat = 1.65
+                        if cell.inhib == 'HKA-100':
+                            preg_rat = 1.0
+                        else:
+                            preg_rat = 1.65
                     elif cell.preg == 'late':
-                        preg_rat = 1.7
+                        if cell.inhib == 'HKA-100':
+                            preg_rat = 1.0
+                        else:
+                            preg_rat = 1.7
                 elif newTransp.type == 'NHE1':
                     if cell.preg == 'mid':
                         preg_rat = 0.9
