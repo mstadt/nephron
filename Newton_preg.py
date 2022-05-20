@@ -263,7 +263,10 @@ def newton_preg_rat(func,x,k,cell):
                     elif cell.type == 'jux4':
                         if k==0:
                             if cell.preg == 'mid':
-                                amp = 1.0
+                                if cell.inhib == 'ENaC-100':
+                                    amp = 0.5
+                                else:
+                                    amp = 1.0
                             else:
                                 amp = 0.25
                         else:
@@ -272,6 +275,8 @@ def newton_preg_rat(func,x,k,cell):
                         if k==0:
                             if cell.inhib == 'HKA-100':
                                 amp = 0.5
+                            elif cell.inhib == 'ENaC-100':
+                                amp = 0.6
                             else:
                                 amp = 1.0 #0.4
                         else:
@@ -285,7 +290,13 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 0.5
                 elif cell.preg == 'late':
                     if cell.type == 'jux1':
-                        amp = 0.45
+                        if k==0:
+                            if cell.inhib == 'ENaC-100':
+                                amp = 1.0
+                            else:
+                                amp = 0.45
+                        else:
+                            amp = 0.45
                     elif cell.type == 'jux2':
                         amp = 0.4
                     elif cell.type == 'jux3':
@@ -389,12 +400,16 @@ def newton_preg_rat(func,x,k,cell):
             if np.linalg.norm(f)>1e6:
                 if cell.inhib == 'HKA-100':
                     amp = 0.55 #1.0
+                elif cell.inhib == 'ENaC-100':
+                    amp = 0.6 #1.0
                 else:
                     amp = 0.4
             elif np.linalg.norm(f)>5000:
                 if k==0:
                     if cell.inhib == 'HKA-100':
                         amp = 0.75 #0.55 #0.3 #1.0
+                    elif cell.inhib == 'ENaC-100':
+                        amp = 1.0
                     else:
                         amp = 0.75
                 else:
