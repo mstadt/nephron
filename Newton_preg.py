@@ -273,7 +273,7 @@ def newton_preg_rat(func,x,k,cell):
                             amp = 0.25 #0.277
                     elif cell.type == 'jux5':
                         if k==0:
-                            if cell.inhib == 'HKA-100':
+                            if cell.inhib == 'HKA-100preg':
                                 amp = 0.5
                             elif cell.inhib == 'ENaC-100':
                                 amp = 0.6
@@ -398,7 +398,7 @@ def newton_preg_rat(func,x,k,cell):
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1e6:
-                if cell.inhib == 'HKA-100':
+                if cell.inhib == 'HKA-100preg':
                     amp = 0.55 #1.0
                 elif cell.inhib == 'ENaC-100':
                     amp = 0.6 #1.0
@@ -406,7 +406,7 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 0.4
             elif np.linalg.norm(f)>5000:
                 if k==0:
-                    if cell.inhib == 'HKA-100':
+                    if cell.inhib == 'HKA-100preg':
                         amp = 0.75 #0.55 #0.3 #1.0
                     elif cell.inhib == 'ENaC-100':
                         amp = 1.0
@@ -416,7 +416,7 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 1.0
             elif np.linalg.norm(f)>1000:
                 if k==0:
-                    if cell.inhib == 'HKA-100':
+                    if cell.inhib == 'HKA-100preg':
                         amp = 1.0
                     else:
                         amp = 0.75
