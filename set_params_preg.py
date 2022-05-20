@@ -650,12 +650,16 @@ def read_params_preg(cell,filename,j):
                 elif newTransp.type == 'HKATPase':
                     if cell.preg == 'mid':
                         if cell.inhib == 'HKA-100preg':
-                            preg_rat = preg_rat*(1-1)
+                            preg_rat = 0.0
+                        elif cell.inhib == 'HKA-100':
+                            preg_rat = 0.0
                         else:
                             preg_rat = 2.25
                     elif cell.preg == 'late':
                         if cell.inhib == 'HKA-100preg':
-                            preg_rat = preg_rat*(1-1)
+                            preg_rat = 0.0
+                        elif cell.inhib == 'HKA-100':
+                            preg_rat = 0.0
                         else:
                             preg_rat = 2.75
                 elif newTransp.type == 'HATPase':
