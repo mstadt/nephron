@@ -253,6 +253,11 @@ def newton_preg_rat(func,x,k,cell):
                     elif cell.type == 'jux2':
                         if cell.HT != 'N':
                             amp = 0.25
+                        elif cell.inhib == 'HKA-100':
+                            if k==0:
+                                amp = 1.0
+                            else:
+                                amp = 1.0
                         else:
                             amp = 0.3
                     elif cell.type == 'jux3':
