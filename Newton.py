@@ -283,14 +283,17 @@ def newton_rat(func,x,k,cell):
                     amp = 0.7 #1.0
                 else:
                     if cell.sex == 'male':
-                        amp = 0.7
+                        amp = 0.6
                     else:
                         amp = 0.45
             elif np.linalg.norm(f)>1e4:
                 if cell.inhib == 'HKA-100':
                     amp = 0.5 #1.0
                 else:
-                    amp = 0.65
+                    if cell.sex == 'male':
+                        amp = 1.0
+                    else:
+                        amp = 0.65
             elif np.linalg.norm(f)>5000:
                 if k==0:
                     if cell.inhib == 'HKA-100':
