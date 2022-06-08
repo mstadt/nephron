@@ -8,7 +8,8 @@ total 200           # total amount of PT cells
 #
 #  luminal pressure
 #
-pressure 11.3
+#pressure 11.3
+pressure 12.8
 #
 #  surface areas
 area_Lumen_Cell	36.0

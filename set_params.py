@@ -46,13 +46,13 @@ def set_torq_params(species,sex,preg):
         torqR = 0.0014 #Reference radius
         torqL = 2.50e-4 #Microvillous length
         torqd = 1.5e-05 #Height above the microvillous tip
-        torqvm = 0.020 #Compliance Fortran Code
+        torqvm = 0.02 #Compliance Fortran Code
         PbloodPT = 20.0e0 #Reference pressure
     elif species == 'rat':
         if sex == 'male':
-            Radref = 0.0025/2.0
+            Radref = 0.00265/2.0 #0.0025/2.0
             torqR = 0.00112
-            torqvm = 0.030
+            torqvm = 0.02 #0.030
             PbloodPT = 9.0e0
         elif sex == 'female':
             if preg == 'non':
@@ -79,7 +79,7 @@ def set_torq_params(species,sex,preg):
             torqvm = 0.0275
             PbloodPT = 9.0e0
         elif sex == 'female':
-            Radref = 0.002125/2.0 #female radius
+            Radref = 0.0018/2.0 #0.002125/2.0 #female radius
             torqR = 0.00095
             torqvm = 0.030
             PbloodPT = 8.0e0
@@ -278,9 +278,9 @@ def read_params(cell,filename,j):
             # parameter files specify pressure (value) for superficial nephrons
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'rat':
                     if cell.sex == 'male':
-                        cell.pres[0] = 12.5
+                        cell.pres[0] = 14.0 #12.5
                     elif cell.sex == 'female':
-                        cell.pres[0] = 12.75 #12.5
+                        cell.pres[0] = 14.0 #12.75 #12.5
 
                 if cell.type !='sup' and cell.segment == 'PT' and cell.species == 'mou':
                     if cell.sex == 'male':
