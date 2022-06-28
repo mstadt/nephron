@@ -359,9 +359,6 @@ def newton_preg_rat(func,x,k,cell):
         # CCD     
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1e6:
-                if k==0:
-                    amp = 1.0
-                else:
                     amp = 0.3
             elif cell.preg == 'mid':
                 if np.linalg.norm(f)>5000:
@@ -501,7 +498,7 @@ def newton_preg_rat(func,x,k,cell):
             f = np.matrix(fun(x,k))
 
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
         #print(f)
         #input('pausing...')
