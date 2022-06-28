@@ -424,6 +424,7 @@ def newton_preg_rat(func,x,k,cell):
                     elif cell.inhib == 'ENaC-100':
                         amp = 1.0
                     elif cell.type == 'sup':
+                        print('HEY!')
                         amp = 0.8
                     else:
                         amp = 0.75
