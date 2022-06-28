@@ -235,8 +235,7 @@ def newton_preg_rat(func,x,k,cell):
             if np.linalg.norm(f)>1e6:
                 if k==0:
                     if cell.inhib == 'HKA-100':
-                        print('jeu!')
-                        amp = 1.0
+                        amp = 0.75 #1.0
                     else:
                         amp = 0.4
                 else:
@@ -300,7 +299,7 @@ def newton_preg_rat(func,x,k,cell):
                             amp = 1.0
                     else:
                         if k==0:
-                            amp = 1.0
+                            amp = 0.75 #1.0
                         else:
                             amp = 0.5
                 elif cell.preg == 'late':
