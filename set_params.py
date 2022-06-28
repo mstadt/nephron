@@ -339,23 +339,6 @@ def read_params(cell,filename,j):
                 cell.dLPV[ind1][ind2] = value/Pfref
                 # symmetry
                 cell.dLPV[ind2][ind1] = value/Pfref
-                if cell.segment == 'SDL' and cell.type == 'sup':
-                    if j>=0.46*cell.total:
-                        cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
-                        cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
-                elif cell.segment == 'LDL':
-                    if cell.sex == 'male':
-                        if j>=0.4*cell.total:
-                            cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
-                            cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
-                    elif cell.sex == 'female':
-                        if j>=0.5*cell.total:
-                            cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
-                            cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
-                
-                if cell.segment == 'CNT' and cell.type !='sup':
-                    if cell.sex == 'female':
-                        cell.dLPV = cell.dLPV*4/3
 
                 if cell.diabete != 'Non':
                     if cell.segment == 'CCD':
@@ -389,11 +372,68 @@ def read_params(cell,filename,j):
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
                 
                 if cell.obese != 'N':
-                    # AQP1 changed, Pf (transcellular)
+                    # Pf (transcellular)
                     OB_rat = 1.0
                     if ind1 == 0 and ind2 == 1:
+                        # AQP1
                         if cell.segment == 'PT' or cell.segment == 'S3':
-                            if cell.sex == 'Male':
+                            if cell.sex == 'male':
+                                OB_rat = 0.77 #change below also!
+                            elif cell.sex == 'female':
+                                OB_rat = 1.13 #change below also!
+                        elif cell.segment == 'SDL':
+                            if cell.sex == 'male':
+                                OB_rat = 0.77 #change below also!
+                            elif cell.sex == 'female':
+                                OB_rat = 1.13 #change below also!
+                        # AQP2
+                        elif cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                            if cell.sex == 'male':
+                                OB_rat = 1.20 #change below also!
+                            elif cell.sex == 'female':
+                                OB_rat = 1.15 #change below also!
+                    elif ind1 == 1:
+                        if ind2 == 4 or ind2 == 5:
+                            # AQP1
+                            if cell.segment == 'PT' or cell.segment == 'S3':
+                                if cell.sex == 'male':
+                                    OB_rat = 0.77
+                                elif cell.sex == 'female':
+                                    OB_rat = 1.13
+                            elif cell.segment == 'SDL':
+                                if cell.sex == 'male':
+                                    OB_rat = 0.77
+                                elif cell.sex == 'female':
+                                    OB_rat = 1.13
+                            # AQP2
+                            elif cell.segment == 'CCD' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                                if cell.sex == 'male':
+                                    OB_rat = 1.20
+                                elif cell.sex == 'female':
+                                    OB_rat = 1.15
+                    cell.dLPV[ind1][ind2] = value/Pfref*OB_rat
+                    #symmetry
+                    cell.dLPV[ind2][ind1] = value/Pfref*OB_rat
+
+                if cell.segment == 'SDL' and cell.type == 'sup':
+                    if j>=0.46*cell.total:
+                        cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
+                        cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
+                elif cell.segment == 'LDL':
+                    if cell.sex == 'male':
+                        if j>=0.4*cell.total:
+                            cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
+                            cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
+                    elif cell.sex == 'female':
+                        if j>=0.5*cell.total:
+                            cell.dLPV[0,1]=0.00*cell.dLPV[0,1]
+                            cell.dLPV[0,4]=0.00*cell.dLPV[0,4]
+                
+                if cell.segment == 'CNT' and cell.type !='sup':
+                    if cell.sex == 'female':
+                        cell.dLPV = cell.dLPV*4/3
+                        
+                        
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):
