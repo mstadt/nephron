@@ -325,6 +325,8 @@ def newton_preg_rat(func,x,k,cell):
                 if cell.preg == 'mid':
                     if cell.inhib == 'HKA-100':
                         amp = 1.0
+                    elif cell.inhib == 'HKA-100preg':
+                        amp = 1.0
                     else:
                         amp = 0.85
                 elif cell.preg == 'late':
@@ -333,6 +335,8 @@ def newton_preg_rat(func,x,k,cell):
                 if cell.preg == 'mid':
                     if k==0:
                         if cell.inhib == 'HKA-100':
+                            amp = 1.0
+                        elif cell.inhib == 'HKA-100preg':
                             amp = 1.0
                         else:
                             amp = 0.5
