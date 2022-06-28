@@ -826,7 +826,7 @@ def read_params(cell,filename,j):
                 if cell.obese != 'N':
                     OB_rat = 1.0
                     if newTransp.type == 'NHE3':
-                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                             if cell.sex == 'male':
                                 OB_rat = 0.51
                             elif cell.sex == 'female':
