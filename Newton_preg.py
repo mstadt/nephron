@@ -359,7 +359,10 @@ def newton_preg_rat(func,x,k,cell):
         # CCD     
         elif cell.segment == 'CCD':
             if np.linalg.norm(f)>1e6:
-                amp = 0.3
+                if k==0:
+                    amp = 1.0
+                else:
+                    amp = 0.3
             elif cell.preg == 'mid':
                 if np.linalg.norm(f)>5000:
                     if k==0:
