@@ -14,7 +14,7 @@ cw=Vref*60e6
 
 parser = argparse.ArgumentParser()
 # required input
-parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
+parser.add_argument('--sex',choices=['male','female'],required = True,type = str,help = 'sex (male/female)')
 parser.add_argument('--species',choices=['human','rat','mouse'],required = True,type = str, help = 'Human, Rat, or Mouse model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
 

@@ -387,6 +387,13 @@ def read_params(cell,filename,j):
                                 HT_rat = 1.3
 
                     cell.dLPV[ind1][ind2] = value/Pfref*HT_rat
+                
+                if cell.obese != 'N':
+                    # AQP1 changed, Pf (transcellular)
+                    OB_rat = 1.0
+                    if ind1 == 0 and ind2 == 1:
+                        if cell.segment == 'PT' or cell.segment == 'S3':
+                            if cell.sex == 'Male':
                                 
             # Reflection coefficients:
             elif compare_string_prefix(id,"sig"):

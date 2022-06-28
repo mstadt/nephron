@@ -19,7 +19,7 @@ cw=Vref*60e6
 
 parser=argparse.ArgumentParser()
 # required input
-parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
+parser.add_argument('--sex',choices=['male','female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat', 'mouse'],required = True,type = str, help = 'human, rat or mouse model')
 parser.add_argument('--segment', choices = ['PT','S3','SDL', 'LDL', 'LAL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
 parser.add_argument('--savefile', required=True, type=str, help = 'where to save?')
