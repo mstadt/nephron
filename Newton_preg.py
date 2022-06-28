@@ -412,7 +412,7 @@ def newton_preg_rat(func,x,k,cell):
                     amp = 0.6 #1.0
                 elif cell.type == 'sup':
                     if k == 0:
-                        amp = 1.0
+                        amp = 0.75
                     else:
                         amp = 0.4
                 else:
