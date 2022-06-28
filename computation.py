@@ -38,6 +38,10 @@ parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','ju
 parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100', 'HKA-100', 'HKA-100preg'],default = None,type = str,help = 'any transporter inhibition?')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
+
+# obesity options
+parser.add_argument('--obese', choices = ['Y', 'N'], default = 'N', type = str, help = 'obesity? (Y,N)')
+
 # pregnancy option
 parser.add_argument('--pregnant', choices=['mid','late'], default='non', type=str, help='pregnant female? (mid/late)')
 parser.add_argument('--HT',choices=['N','Y'],default = 'N',type = str,help = 'hypertension?')
@@ -66,6 +70,7 @@ diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
 HT = args.HT
+obese = args.obese
 
 preg = args.pregnant
 
@@ -105,7 +110,7 @@ method = 'Newton'
 
 print(sup_or_jux + ' ' + segment + ' start')
 
-cell=compute(N,filename,method,sup_or_jux,diabete=diabete,species=species,sup_or_multi = sup_or_multi,inhibition=inhib,unx = unx, preg=preg, HT=HT)
+cell=compute(N,filename,method,sup_or_jux,diabete=diabete,species=species,sup_or_multi = sup_or_multi,inhibition=inhib,unx = unx, preg=preg, HT=HT, obese = obese)
 if sup_or_jux != '':
 	sup_or_jux = '_' + sup_or_jux
 
