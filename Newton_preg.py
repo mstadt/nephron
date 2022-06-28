@@ -406,14 +406,13 @@ def newton_preg_rat(func,x,k,cell):
         # OMCD
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1e6:
-                print('very big!' + cell.type)
                 if cell.inhib == 'HKA-100preg':
                     amp = 0.55 #1.0
                 elif cell.inhib == 'ENaC-100':
                     amp = 0.6 #1.0
-                elif cell.type == 'sup':
+                elif cell.preg == 'late':
                     if k == 0:
-                        print('Hey!')
+                        print('Hey late!')
                         amp = 0.75
                     else:
                         amp = 0.4
@@ -426,8 +425,8 @@ def newton_preg_rat(func,x,k,cell):
                         amp = 0.75 #0.55 #0.3 #1.0
                     elif cell.inhib == 'ENaC-100':
                         amp = 1.0
-                    elif cell.type == 'sup':
-                        print('hey there!')
+                    elif cell.type == 'late':
+                        print('hey there! late')
                         amp = 0.8
                     else:
                         amp = 0.75
