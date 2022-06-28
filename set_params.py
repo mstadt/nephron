@@ -562,7 +562,7 @@ def read_params(cell,filename,j):
                 # obesity
                 if cell.obese != 'N':
                     # NaPi2
-                    if newdLA.solute_it == (0,7):
+                    if newdLA.solute_id == (0,7):
                         OB_rat = 1.0
                         if cell.segment == 'PT' or cell.segment == 'S3':
                             if cell.sex == 'male':
