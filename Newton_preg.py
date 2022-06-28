@@ -248,8 +248,6 @@ def newton_preg_rat(func,x,k,cell):
                         else:
                             if cell.inhib == 'ENaC-70':
                                 amp = 1.0
-                            elif cell.inhib == 'HKA-100':
-                                amp = 1.0
                             else:
                                 amp = 0.275
                     elif cell.type == 'jux2':
@@ -297,7 +295,10 @@ def newton_preg_rat(func,x,k,cell):
                         else:
                             amp = 1.0
                     else:
-                        amp = 0.5
+                        if k==0:
+                            amp = 1.0
+                        else:
+                            amp = 0.5
                 elif cell.preg == 'late':
                     if cell.type == 'jux1':
                         if k==0:
