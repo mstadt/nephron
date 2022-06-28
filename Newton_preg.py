@@ -425,7 +425,7 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'OMCD':
             if np.linalg.norm(f)>1e6:
                 if cell.inhib == 'HKA-100preg':
-                    amp = 0.8 #1.0 #0.4 #0.55 #1.0
+                    amp = 0.25 #0.8 #1.0 #0.4 #0.55 #1.0
                 elif cell.inhib == 'ENaC-100':
                     amp = 0.6 #1.0
                 elif cell.preg == 'late':
