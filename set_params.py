@@ -515,6 +515,26 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'CNT':
                         HT_rat = 0.3 #0.2
                         cell.h[1,0,1] = HT_rat*8.0
+                
+                if cell.obese != 'N':
+                    temp = cell.h[1,0,1]
+                    if cell.segment == 'DCT':
+                        if j>0.66*cell.total:
+                            # DCT2
+                            if cell.sex == 'male':
+                                OB_rat = 0.72
+                                cell.h[1,0,1] = OB_rat*0.6
+                            elif cell.sex == 'female':
+                                OB_rat = 0.85
+                                cell.h[1,0,1] = OB_rat*0.6
+                    elif cell.segment == 'CNT':
+                        if cell.sex == 'male':
+                            OB_rat = 0.72
+                            cell.h[1,0,1] = OB_rat*8.0
+                        elif cell.sex == 'female':
+                            OB_rat = 0.85
+                            cell.h[1,0,1] = OB_rat*8.0
+                    
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
@@ -538,6 +558,18 @@ def read_params(cell,filename,j):
                         if cell.segment == 'PT' or cell.segment == 'S3':
                             HT_rat = 0.85
                             newdLA.perm = HT_rat*newdLA.perm
+                
+                # obesity
+                if cell.obese != 'N':
+                    # NaPi2
+                    if newdLA.solute_it == (0,7):
+                        OB_rat = 1.0
+                        if cell.segment == 'PT' or cell.segment == 'S3':
+                            if cell.sex == 'male':
+                                OB_rat = 1.0
+                            elif cell.sex == 'female':
+                                OB_rat = 1.23
+                            newdLA.perm = OB_rat*newdLA.perm
 
 
                 cell.dLA.append(newdLA)
@@ -558,7 +590,6 @@ def read_params(cell,filename,j):
                             newTransp.act = 1.5*value/(href*Cref)
                         elif newTransp.type == 'KCC4':
                             newTransp.act = 2.0*value/(href*Cref)
-
                 if cell.diabete == 'Moderate':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         if newTransp.type == 'SGLT2':
@@ -790,6 +821,50 @@ def read_params(cell,filename,j):
                     elif newTransp.type == 'ENaC':
                         HT_rat = 1.45
                         newTransp.act = HT_rat*value/(href*Cref)
+                
+                # obesity impact
+                if cell.obese != 'N':
+                    OB_rat = 1.0
+                    if newTransp.type == 'NHE3':
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL':
+                            if cell.sex == 'male':
+                                OB_rat = 0.51
+                            elif cell.sex == 'female':
+                                OB_rat = 0.64
+                        elif cell.segment == 'mTAL':
+                            if cell.sex == 'male':
+                                OB_rat = 0.45
+                            elif cell.sex == 'female':
+                                OB_rat = 0.50
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NHE3 activity not done for obesity in this segment')
+                    elif newTransp.type == 'SGLT2':
+                        if cell.sex == 'male':
+                            OB_rat = 1.0
+                        elif cell.sex == 'female':
+                            OB_rat = 1.1
+
+                    elif newTransp.type == 'SGLT1':
+                        if cell.sex == 'male':
+                            OB_rat = 2.0
+                        elif cell.sex == 'female':
+                            OB_rat = 1.84
+                    
+                    elif newTransp.type == 'NaKATPase':
+                        if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT' or cell.segment == 'CNT' or cell.segment == 'CCD':
+                            if cell.sex == 'male':
+                                OB_rat = 0.95
+                            elif cell.sex == 'female':
+                                OB_rat = 0.90
+                        elif cell.segment == 'mTAL' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
+                            if cell.sex == 'male':
+                                OB_rat = 1.0
+                            elif cell.sex == 'female':
+                                OB_rat = 1.0
+
+                    newTransp.act = OB_rat*newTransp.act
+                    
 
                 cell.trans.append(newTransp)
 
