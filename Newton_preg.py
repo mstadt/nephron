@@ -438,7 +438,7 @@ def newton_preg_rat(func,x,k,cell):
             elif np.linalg.norm(f)>5000:
                 if k==0:
                     if cell.inhib == 'HKA-100preg':
-                        amp = 0.8 #0.75 #0.55 #0.3 #1.0
+                        amp = 1.0 #0.8 #0.75 #0.55 #0.3 #1.0
                     elif cell.inhib == 'ENaC-100':
                         if cell.preg == 'mid':
                             amp = 0.8
