@@ -862,6 +862,36 @@ def read_params(cell,filename,j):
                                 OB_rat = 1.0
                             elif cell.sex == 'female':
                                 OB_rat = 1.0
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NKATPase activity not done for this segment')
+                    
+                    elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
+                        if cell.segment == 'mTAL':
+                            if cell.sex == 'male':
+                                OB_rat = 0.45
+                            elif cell.sex == 'female':
+                                OB_rat == '0.62'
+                        elif cell.segment == 'cTAL':
+                            if cell.sex == 'male':
+                                OB_rat = 0.46
+                            elif cell.sex == 'female':
+                                OB_rat = 0.65
+                        else:
+                            print('segment: ' + cell.segment)
+                            raise Exception('NKCC2 activity not done for obesity in this segment')
+                    
+                    elif newTransp.type == 'NCC':
+                        if cell.sex == 'male':
+                            OB_rat = 1.02
+                        elif cell.sex == 'female':
+                            OB_rat = 0.72
+                    
+                    elif newTransp.type == 'ENaC':
+                        if cell.sex == 'male':
+                            OB_rat = 1.44
+                        elif cell.sex == 'female':
+                            OB_rat = 0.92
 
                     newTransp.act = OB_rat*newTransp.act
                     
