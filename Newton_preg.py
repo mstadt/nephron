@@ -234,7 +234,11 @@ def newton_preg_rat(func,x,k,cell):
         elif cell.segment == 'CNT':
             if np.linalg.norm(f)>1e6:
                 if k==0:
-                    amp = 0.4
+                    if cell.inhib == 'HKA-100':
+                        print('jeu!')
+                        amp = 1.0
+                    else:
+                        amp = 0.4
                 else:
                     amp = 0.35 #0.55
             elif np.linalg.norm(f)>5000:
