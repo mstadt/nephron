@@ -517,10 +517,38 @@ def read_params(cell,filename,j):
                         cell.h[1,0,1] = HT_rat*8.0
                 
                 if cell.obese != 'N':
-                    temp = cell.h[1,0,1]
-                    if cell.segment == 'DCT':
+                    if cell.segment == 'PT' or cell.segment == 'S3':
+                        # PNa, PCl
+                        if cell.sex == 'male':
+                            OB_rat = 0.66
+                            # Na
+                            cell.h[0,0,4] = OB_rat*26.0e3
+                            # Cl
+                            cell.h[2,0,4] = OB_rat*20.0e3
+                        elif cell.sex == 'female':
+                            OB_rat = 0.66
+                            # Na
+                            cell.h[0,0,4] = OB_rat*10.4e3
+                            # Cl
+                            cell.h[2,0,4] = OB_rat*8.0e3
+                    elif cell.segment == 'SDL':
+                        # PNa, PCl
+                        if cell.sex == 'male':
+                            OB_rat = 0.66
+                            # Na
+                            cell.h[0,0,1] = OB_rat*20.0
+                            # Cl
+                            cell.h[2,0,1] = OB_rat*20.0
+                        elif cell.sex == 'female':
+                            OB_rat = 0.66
+                            # Na
+                            cell.h[0,0,1] = OB_rat*10.0
+                            # Cl
+                            cell.h[2,0,1] = OB_rat*10.0
+                    elif cell.segment == 'DCT':
                         if j>0.66*cell.total:
                             # DCT2
+                            # ROMK
                             if cell.sex == 'male':
                                 OB_rat = 0.72
                                 cell.h[1,0,1] = OB_rat*0.6
@@ -528,6 +556,7 @@ def read_params(cell,filename,j):
                                 OB_rat = 0.85
                                 cell.h[1,0,1] = OB_rat*0.6
                     elif cell.segment == 'CNT':
+                        # ROMK
                         if cell.sex == 'male':
                             OB_rat = 0.72
                             cell.h[1,0,1] = OB_rat*8.0
