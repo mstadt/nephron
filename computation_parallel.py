@@ -373,7 +373,7 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
         raise Exception(segment + ' not characterized in computation_parallel.py')
 
 def multiprocessing_func_segment(sup_or_jux):
-    compute_one_segment(sup_or_jux, segment, sex, species, sup_or_multi, diabete, inhib, unx, preg, HT, obese file_to_save)
+    compute_one_segment(sup_or_jux, segment, sex, species, sup_or_multi, diabete, inhib, unx, preg, HT, obese, file_to_save)
 
 if __name__ == '__main__':
 
