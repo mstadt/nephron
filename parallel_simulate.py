@@ -56,7 +56,7 @@ elif preg != 'non':
     if HT == 'Y':
         file_to_save = preg+'pregnant_'+species[0:3]+'_HT'
     elif inhib != None:
-        file
+        file_to_save = inhib+'_'+preg+'pregnant_'+species[0:3]
     else:
         file_to_save = preg+'pregnant_'+species[0:3]
 elif obese != 'N':
