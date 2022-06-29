@@ -58,7 +58,7 @@ if diabete != 'Non':
     if preg != 'non':
         raise Exception('pregnant diabetic not done')
 elif preg != 'non':
-    if sex == 'Male':
+    if sex == 'male':
         raise Exception('pregnant only for female')
     if species[0:3] == 'hum' or species[0:3] == 'mou':
         raise Exception('pregnant model not set up for human or mouse yet')
@@ -99,9 +99,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
             print(str(species))
             raise Exception('what is species?')
 
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/PTparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/PTparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/PTparams_F_'+species[0:3]+'.dat'
@@ -162,9 +162,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
             print('cell.species: ' + str(species))
             raise Exception('what is species?')
         
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/S3params_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/S3params_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/S3params_F_'+species[0:3]+'.dat'
@@ -227,9 +227,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
             print('species: ' + str(species))
             raise Exception('what is species?')
             
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/SDLparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/SDLparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/SDLparams_F_'+species[0:3]+'.dat'
@@ -249,9 +249,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
         if sup_or_jux != 'sup':
             print('%s LDL start' %(sup_or_jux))
             NLDL = 200
-            if sex == 'Male':
+            if sex == 'male':
                 filename = './datafiles/LDLparams_M_'+species[0:3]+'.dat'
-            elif sex == 'Female':
+            elif sex == 'female':
                 filename = './datafiles/LDLparams_F_'+species[0:3]+'.dat'
             else:
                 filename ='./datafiles/LDLparams_F_'+species[0:3]+'.dat'
@@ -270,9 +270,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
         if sup_or_jux !='sup':
             print('%s LAL start' %(sup_or_jux))
             NLAL = 200
-            if sex == 'Male':
+            if sex == 'male':
                 filename = './datafiles/LALparams_M_rat.dat'
-            elif sex == 'Female':
+            elif sex == 'female':
                 filename = './datafiles/LALparams_F_rat.dat'
             else:
                 filename ='./datafiles/LALparams_F_rat.dat'
@@ -290,9 +290,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
     elif segment == 'mTAL':
         print('%s mTAL start' %(sup_or_jux))
         NmTAL = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/mTALparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/mTALparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/mTALparams_F_'+species[0:3]+'.dat'
@@ -311,9 +311,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
     elif segment == 'cTAL':
         print('%s cTAL start' %(sup_or_jux))
         NcTAL = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/cTALparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/cTALparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/cTALparams_F_'+species[0:3]+'.dat'
@@ -332,9 +332,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
     elif segment == 'DCT':
         print('%s DCT start' %(sup_or_jux))
         NDCT = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/DCTparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/DCTparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/DCTparams_F_'+species[0:3]+'.dat'
@@ -353,9 +353,9 @@ def compute_one_segment(sup_or_jux, segment, sex,species,sup_or_multi,diabete,in
     elif segment == 'CNT':
         print('%s CNT start' %(sup_or_jux))
         NCNT = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/CNTparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/CNTparams_F_'+species[0:3]+'.dat'
         else:
             filename ='./datafiles/CNTparams_F_'+species[0:3]+'.dat'

@@ -123,9 +123,9 @@ def read_params(cell,filename,j):
 
 
             if id.lower() == "Sex".lower():
-                find = re.findall("Female".lower(), terms[-1].lower())
+                find = re.findall("female".lower(), terms[-1].lower())
                 if find:
-                    cell.sex = "Female".lower()
+                    cell.sex = "female".lower()
             
             # Diameter:
             elif compare_string_prefix(id,"Diameter"):

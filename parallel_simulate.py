@@ -49,7 +49,7 @@ if diabete != 'Non':
     else:
         file_to_save = sex+'_'+species[0:3]+'_'+diabete+'_diab'+'_'+unx+'_unx'
 elif preg != 'non':
-    if sex == 'Male':
+    if sex == 'male':
         raise Exception('pregnant only for female')
     if species[0:3] == 'hum' or species[0:3] == 'mou':
         raise Exception('pregnant model not set up for human or mouse yet')
@@ -97,9 +97,9 @@ if __name__ == '__main__':
     print('Collecting duct begin')
     print('CCD start')
     NCCD = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/CCDparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/CCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/CCDparams_F_'+species[0:3]+'.dat'
@@ -117,9 +117,9 @@ if __name__ == '__main__':
     #========================================================
     print('OMCD start')
     NOMCD = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/OMCDparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/OMCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/OMCDparams_F_'+species[0:3]+'.dat'
@@ -140,9 +140,9 @@ if __name__ == '__main__':
     #========================================================
     print('IMCD start')
     NIMCD = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/IMCDparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/IMCDparams_F_'+species[0:3]+'.dat'
     else:
         filename ='./datafiles/IMCDparams_F_'+species[0:3]+'.dat'

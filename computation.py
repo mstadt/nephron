@@ -78,9 +78,9 @@ file_to_save = args.savefile
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
 
-if sex == 'Male':
+if sex == 'male':
 	filename='./datafiles/'+segment+'params_M_'+species[0:3]+'.dat'
-elif sex == 'Female':
+elif sex == 'female':
 	filename='./datafiles/'+segment+'params_F_'+species[0:3]+'.dat'
 else:
 	print('sex: ' + sex)
