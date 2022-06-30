@@ -912,7 +912,7 @@ def read_params(cell,filename,j):
                     
                     elif newTransp.type == 'NCC':
                         if cell.sex == 'male':
-                            OB_rat = 1.02
+                            OB_rat = 1.0
                         elif cell.sex == 'female':
                             OB_rat = 0.72
                     
