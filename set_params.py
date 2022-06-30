@@ -520,13 +520,13 @@ def read_params(cell,filename,j):
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         # PNa, PCl
                         if cell.sex == 'male':
-                            OB_rat = 0.66
+                            OB_rat = 1.0 #0.66
                             # Na
                             cell.h[0,0,4] = OB_rat*26.0e3
                             # Cl
                             cell.h[2,0,4] = OB_rat*20.0e3
                         elif cell.sex == 'female':
-                            OB_rat = 0.66
+                            OB_rat = 1.0 #0.66
                             # Na
                             cell.h[0,0,4] = OB_rat*10.4e3
                             # Cl
@@ -534,13 +534,13 @@ def read_params(cell,filename,j):
                     elif cell.segment == 'SDL':
                         # PNa, PCl
                         if cell.sex == 'male':
-                            OB_rat = 0.66
+                            OB_rat = 1.0 #0.66
                             # Na
                             cell.h[0,0,1] = OB_rat*20.0
                             # Cl
                             cell.h[2,0,1] = OB_rat*20.0
                         elif cell.sex == 'female':
-                            OB_rat = 0.66
+                            OB_rat = 1.0 #0.66
                             # Na
                             cell.h[0,0,1] = OB_rat*10.0
                             # Cl
