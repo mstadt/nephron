@@ -38,7 +38,6 @@ def compute(N,filename,method,sup_or_jux=None,diabete='Non',species = 'human',su
     if obese != 'N':
         for i in range(N):
             cell[i].obese = obese
-            print(cell[i].obese)
     # hypertension status of cell
     if HT != 'N':
         for i in range(N):
