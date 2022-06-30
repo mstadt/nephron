@@ -19,7 +19,7 @@ import NHE1
 import flux
 import output
 
-def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,HT,file_to_save):
+def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,HT,obese,file_to_save):
     solute = ['Na','K','Cl','HCO3','H2CO3','CO2','HPO4','H2PO4','urea','NH3','NH4','H','HCO2','H2CO2','glu']
     compart = ['Lumen','Cell','ICA','ICB','LIS','Bath']
     cw=Vref*60e6
@@ -37,14 +37,15 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
         print(str(species))
         raise Exception('what is species?')
 
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/PTparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/PTparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/PTparams_F_'+species[0:3]+'.dat'
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
 
-    pt=compute(NPT,filename,'Broyden',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT=HT)
+    pt=compute(NPT,filename,'Broyden',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT=HT, obese = obese)
 
     Scaletorq = np.zeros(NPT)
     
@@ -99,13 +100,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
         print('cell.species: ' + str(species))
         raise Exception('what is species?')
     
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/S3params_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/S3params_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/S3params_F_'+species[0:3]+'.dat'
-    s3=compute(NS3,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx,preg = preg, HT = HT)
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
+    s3=compute(NS3,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx,preg = preg, HT = HT, obese = obese)
 
     Scaletorq = np.zeros(NS3)
     
@@ -163,14 +165,15 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
         print('species: ' + str(species))
         raise Exception('what is species?')
         
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/SDLparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/SDLparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/SDLparams_F_'+species[0:3]+'.dat'
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
     #sdl=compute(NSDL,filename,'Broyden',diabete)
-    sdl=compute(NSDL,filename,method,sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT)
+    sdl=compute(NSDL,filename,method,sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT, obese = obese)
     
     Scaletorq = np.ones(NSDL)
     output.output_segment_results(sdl,sup_or_jux,Scaletorq,file_to_save,NSDL)
@@ -184,13 +187,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     if sup_or_jux != 'sup':
         print('%s LDL start' %(sup_or_jux))
         NLDL = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/LDLparams_M_'+species[0:3]+'.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/LDLparams_F_'+species[0:3]+'.dat'
         else:
-            filename ='./datafiles/LDLparams_F_'+species[0:3]+'.dat'
-        ldl=compute(NLDL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT)
+            print('sex: ' + sex)
+            raise Exception('filename not specified')
+        ldl=compute(NLDL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
         Scaletorq = np.ones(NLDL)
         output.output_segment_results(ldl,sup_or_jux,Scaletorq,file_to_save,NLDL)
@@ -203,13 +207,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     #========================================================
         print('%s LAL start' %(sup_or_jux))
         NLAL = 200
-        if sex == 'Male':
+        if sex == 'male':
             filename = './datafiles/LALparams_M_rat.dat'
-        elif sex == 'Female':
+        elif sex == 'female':
             filename = './datafiles/LALparams_F_rat.dat'
         else:
-            filename ='./datafiles/LALparams_F_rat.dat'
-        lal=compute(NLAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT)
+            print('sex: ' + sex)
+            raise Exception('filename not specified')
+        lal=compute(NLAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi=sup_or_multi,inhibition = inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
         Scaletorq = np.ones(NLAL)
         output.output_segment_results(lal,sup_or_jux,Scaletorq,file_to_save,NLAL)
@@ -222,13 +227,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     #========================================================
     print('%s mTAL start' %(sup_or_jux))
     NmTAL = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/mTALparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/mTALparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/mTALparams_F_'+species[0:3]+'.dat'
-    mtal=compute(NmTAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT)
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
+    mtal=compute(NmTAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
     Scaletorq = np.ones(NmTAL)
     
@@ -242,13 +248,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     #========================================================
     print('%s cTAL start' %(sup_or_jux))
     NcTAL = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/cTALparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/cTALparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/cTALparams_F_'+species[0:3]+'.dat'
-    ctal=compute(NcTAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT)
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
+    ctal=compute(NcTAL,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
     Scaletorq = np.ones(NcTAL)
     
@@ -262,13 +269,14 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     #========================================================
     print('%s DCT start' %(sup_or_jux))
     NDCT = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/DCTparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/DCTparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/DCTparams_F_'+species[0:3]+'.dat'
-    dct=compute(NDCT,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT)
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
+    dct=compute(NDCT,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
     Scaletorq = np.ones(NDCT)
     
@@ -282,13 +290,15 @@ def compute_segment(sup_or_jux,sex,species,sup_or_multi,diabete,inhib,unx,preg,H
     #=======================================================
     print('%s CNT start' %(sup_or_jux))
     NCNT = 200
-    if sex == 'Male':
+    if sex == 'male':
         filename = './datafiles/CNTparams_M_'+species[0:3]+'.dat'
-    elif sex == 'Female':
+    elif sex == 'female':
         filename = './datafiles/CNTparams_F_'+species[0:3]+'.dat'
     else:
-        filename ='./datafiles/CNTparams_F_'+species[0:3]+'.dat'
-    cnt=compute(NCNT,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT)
+        print('sex: ' + sex)
+        raise Exception('filename not specified')
+        
+    cnt=compute(NCNT,filename,'Newton',sup_or_jux,diabete,species,sup_or_multi,inhib,unx = unx, preg = preg, HT = HT, obese = obese)
 
     Scaletorq = np.ones(NCNT)
     

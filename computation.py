@@ -27,7 +27,7 @@ cw=Vref*60e6
 
 parser=argparse.ArgumentParser()
 # required input
-parser.add_argument('--sex',choices=['Male','Female'],required = True,type = str,help = 'Sex')
+parser.add_argument('--sex',choices=['male','female'],required = True,type = str,help = 'Sex')
 parser.add_argument('--species',choices=['human','rat', 'mouse'],required = True,type = str, help = 'Human model or Rat model')
 parser.add_argument('--type',choices = ['superficial','multiple'],required = True,type=str,help='superficial nephron or multiple nephrons?')
 parser.add_argument('--segment', choices = ['PT','S3','SDL', 'LDL', 'LAL', 'mTAL','cTAL','DCT', 'CNT', 'CCD', 'OMCD', 'IMCD'], required=True, type=str, help = 'choose segment')
@@ -38,6 +38,10 @@ parser.add_argument('--suporjux', choices=['sup','jux1','jux2','jux3','jux4','ju
 parser.add_argument('--diabetes',choices = ['Severe','Moderate'],default='Non',type=str,help='diabete status (Severe/Moderate)')
 parser.add_argument('--inhibition',choices=['ACE','SGLT2','NHE3-50','NHE3-80','NKCC2-70','NKCC2-100','NCC-70','NCC-100','ENaC-70','ENaC-100','SNB-70','SNB-100', 'HKA-100', 'HKA-100preg'],default = None,type = str,help = 'any transporter inhibition?')
 parser.add_argument('--unx',choices=['N','Y'],default = 'N',type = str,help = 'uninephrectomy status')
+
+# obesity options
+parser.add_argument('--obese', choices = ['Y', 'N'], default = 'N', type = str, help = 'obesity? (Y,N)')
+
 # pregnancy option
 parser.add_argument('--pregnant', choices=['mid','late'], default='non', type=str, help='pregnant female? (mid/late)')
 parser.add_argument('--HT',choices=['N','Y'],default = 'N',type = str,help = 'hypertension?')
@@ -66,6 +70,7 @@ diabete = args.diabetes
 inhib = args.inhibition
 unx = args.unx
 HT = args.HT
+obese = args.obese
 
 preg = args.pregnant
 
@@ -73,9 +78,9 @@ file_to_save = args.savefile
 if os.path.isdir(file_to_save) == False:
     os.makedirs(file_to_save)
 
-if sex == 'Male':
+if sex == 'male':
 	filename='./datafiles/'+segment+'params_M_'+species[0:3]+'.dat'
-elif sex == 'Female':
+elif sex == 'female':
 	filename='./datafiles/'+segment+'params_F_'+species[0:3]+'.dat'
 else:
 	print('sex: ' + sex)
@@ -105,7 +110,7 @@ method = 'Newton'
 
 print(sup_or_jux + ' ' + segment + ' start')
 
-cell=compute(N,filename,method,sup_or_jux,diabete=diabete,species=species,sup_or_multi = sup_or_multi,inhibition=inhib,unx = unx, preg=preg, HT=HT)
+cell=compute(N,filename,method,sup_or_jux,diabete=diabete,species=species,sup_or_multi = sup_or_multi,inhibition=inhib,unx = unx, preg=preg, HT=HT, obese = obese)
 if sup_or_jux != '':
 	sup_or_jux = '_' + sup_or_jux
 
