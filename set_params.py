@@ -857,14 +857,14 @@ def read_params(cell,filename,j):
                     if newTransp.type == 'NHE3':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                             if cell.sex == 'male':
-                                OB_rat = 0.51
+                                OB_rat = 1.0 #0.51
                             elif cell.sex == 'female':
-                                OB_rat = 0.64
+                                OB_rat = 1.0 #0.64
                         elif cell.segment == 'mTAL':
                             if cell.sex == 'male':
-                                OB_rat = 0.45
+                                OB_rat = 1.0 #0.45
                             elif cell.sex == 'female':
-                                OB_rat = 0.50
+                                OB_rat = 1.0 #0.50
                         else:
                             print('segment: ' + cell.segment)
                             raise Exception('NHE3 activity not done for obesity in this segment')
