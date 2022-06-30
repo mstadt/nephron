@@ -310,7 +310,7 @@ def newton_rat(func,x,k,cell):
                             amp = 0.6
                     elif cell.sex == 'female':
                         if cell.obese == 'Y':
-                            amp = 0.7
+                            amp = 0.4
                         else:
                             amp = 0.45
             elif np.linalg.norm(f)>1e4:
@@ -328,7 +328,7 @@ def newton_rat(func,x,k,cell):
                     elif cell.sex == 'female':
                         if k ==0:
                             if cell.obese == 'Y':
-                                amp = 1.0
+                                amp = 0.7
                             else:
                                 amp = 0.65
                         else:
@@ -425,7 +425,7 @@ def newton_rat(func,x,k,cell):
         x-= delta
         f = np.matrix(fun(x,k))
         iter+=1
-        print(iter, np.linalg.norm(f))
+        #print(iter, np.linalg.norm(f))
         TOLpcn = np.max(delta/x)
     return x
     
