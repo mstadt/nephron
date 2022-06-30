@@ -316,7 +316,10 @@ def newton_rat(func,x,k,cell):
                 else:
                     if cell.sex == 'male':
                         if k==0:
-                            amp = 0.3
+                            if cell.obese == 'Y':
+                                amp = 1.0
+                            else:
+                                amp = 0.3
                         else:
                             amp = 1.0
                     else:
