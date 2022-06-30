@@ -2,7 +2,7 @@
 This is latest version of sex-specific mathematical models for epithelial transport along the nephron implemented in Python 3. Related research papers are listed below. Please cite appropriately. To improve computation time, parallel computation of different types of nephron is implemented for the multiple nephron model. 
 
 # Instructions
-To run the parallel simulation code use command: **python3 parallel_simulate.py --sex [option] --species [option] --type [option] --diabetes [option] --inhibition [option] --pregnant [option]**
+To run the parallel simulation code use command: **python3 parallel_simulate.py --sex [option] --species [option] --type [option] --diabetes [option] --inhibition [option] --pregnant [option] --obese [option]**
 
 The options here are:
 
@@ -15,6 +15,8 @@ type: **superficial, multiple** (required);
 diabetes: **Severe, Moderate, Non** (optional, default: Non);
 
 pregnant: **mid, late** (optional, default: non, only for female rat);
+
+obese: **Y, N** (optional, default: N);
 
 inhibition: **ACE, SGLT2, NHE3-50, NHE3-80, NKCC2-70, NKCC2-100, NCC-70, NCC-100, ENaC-70, ENaC-100, SNB-70, SNB-100, HKA-100, HKApreg-100** (optional, default: None).
 
