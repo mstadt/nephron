@@ -506,63 +506,65 @@ def read_params(cell,filename,j):
 
                 # ROMK2 (K secretion) change in HT rat
                 if cell.HT != 'N':
-                    temp = cell.h[1,0,1]
-                    if cell.segment == 'DCT':
-                        if j>0.66*cell.total:
-                            # DCT2
-                            HT_rat = 0.3 #0.175
-                            cell.h[1,0,1] = HT_rat*0.6
-                    elif cell.segment == 'CNT':
-                        HT_rat = 0.3 #0.2
-                        cell.h[1,0,1] = HT_rat*8.0
+                    if sid == 1 and (ind1 == 0 and ind2 == 1):
+                        temp = cell.h[1,0,1]
+                        if cell.segment == 'DCT':
+                            if j>0.66*cell.total:
+                                # DCT2
+                                HT_rat = 0.3 #0.175
+                                cell.h[1,0,1] = HT_rat*temp
+                        elif cell.segment == 'CNT':
+                            HT_rat = 0.3 #0.2
+                            cell.h[1,0,1] = HT_rat*temp
                 
                 if cell.obese != 'N':
                     if cell.segment == 'PT' or cell.segment == 'S3':
                         # PNa, PCl
-                        if cell.sex == 'male':
-                            OB_rat = 0.66
-                            # Na
-                            cell.h[0,0,4] = OB_rat*26.0e3
-                            # Cl
-                            cell.h[2,0,4] = OB_rat*20.0e3
-                        elif cell.sex == 'female':
-                            OB_rat = 0.66
-                            # Na
-                            cell.h[0,0,4] = OB_rat*10.4e3
-                            # Cl
-                            cell.h[2,0,4] = OB_rat*8.0e3
+                        if (sid == 0 or sid == 2) and (ind1 == 0 and ind2 == 4):
+                            temp = cell.h[sid, 0, 4]
+                        # PNa, PCl
+                            if cell.sex == 'male':
+                                OB_rat = 0.66
+                                cell.h[sid,0,4] = OB_rat*temp
+                                cell.h[sid,4,0] = OB_rat*temp
+                            elif cell.sex == 'female':
+                                OB_rat = 0.66
+                                cell.h[sid,0,4] = OB_rat*temp
+                                cell.h[sid,4,0] = OB_rat*temp
                     elif cell.segment == 'SDL':
                         # PNa, PCl
-                        if cell.sex == 'male':
-                            OB_rat = 0.66
-                            # Na
-                            cell.h[0,0,1] = OB_rat*20.0
-                            # Cl
-                            cell.h[2,0,1] = OB_rat*20.0
-                        elif cell.sex == 'female':
-                            OB_rat = 0.66
-                            # Na
-                            cell.h[0,0,1] = OB_rat*10.0
-                            # Cl
-                            cell.h[2,0,1] = OB_rat*10.0
+                        if (sid == 0 or sid == 2) and (ind1 == 0 and ind2 == 1):
+                            temp = cell.h[sid,0,1]
+                            if cell.sex == 'male':
+                                OB_rat = 0.66
+                                cell.h[sid,0,1] = OB_rat*temp
+                                cell.h[sid,1,0] = OB_rat*temp
+                            elif cell.sex == 'female':
+                                OB_rat = 0.66
+                                cell.h[sid,0,1] = OB_rat*temp
+                                cell.h[sid,1,0] = OB_rat*temp
                     elif cell.segment == 'DCT':
                         if j>0.66*cell.total:
-                            # DCT2
+                            if sid == 1 and (ind1 == 0 and ind2 == 1):
+                                temp = cell.h[1,0,1]
+                                # DCT2
+                                # ROMK
+                                if cell.sex == 'male':
+                                    OB_rat = 0.72
+                                    cell.h[1,0,1] = OB_rat*temp
+                                elif cell.sex == 'female':
+                                    OB_rat = 0.85
+                                    cell.h[1,0,1] = OB_rat*temp
+                    elif cell.segment == 'CNT':
+                        if sid == 1 and (ind1 ==0 and ind2 == 1):
+                            temp = cell.h[1,0,1]
                             # ROMK
                             if cell.sex == 'male':
                                 OB_rat = 0.72
-                                cell.h[1,0,1] = OB_rat*0.6
+                                cell.h[1,0,1] = OB_rat*temp
                             elif cell.sex == 'female':
                                 OB_rat = 0.85
-                                cell.h[1,0,1] = OB_rat*0.6
-                    elif cell.segment == 'CNT':
-                        # ROMK
-                        if cell.sex == 'male':
-                            OB_rat = 0.72
-                            cell.h[1,0,1] = OB_rat*8.0
-                        elif cell.sex == 'female':
-                            OB_rat = 0.85
-                            cell.h[1,0,1] = OB_rat*8.0
+                                cell.h[1,0,1] = OB_rat*temp
                     
                             
             # Coupled transporters:
