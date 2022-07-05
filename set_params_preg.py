@@ -381,7 +381,9 @@ def read_params_preg(cell,filename,j):
                 if sid == 1 and (ind1 == 0 and ind2 == 1):
                 	temp = cell.h[1,0,1]
                 	if cell.segment == 'DCT':
-                		print('hi!')
+                		if j>0.66*cell.total:
+                			if cell.preg == 'late':
+                				preg_rat = 0.55
 
 					#if cell.segment == 'DCT':
 						#print('hey!')
