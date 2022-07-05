@@ -377,49 +377,51 @@ def read_params_preg(cell,filename,j):
                             cell.h[8,0,1]=80.0
                             cell.h[8,0,4]=80.0
 
-                # K secretion
-                if cell.segment == 'DCT':
-                    if j>0.66*cell.total:
-                        #DCT2
-                        if cell.preg == 'late':
-                            preg_rat = 0.55
-                            if cell.HT != 'N':
-                                HT_rat = 0.3
-                                preg_rat = preg_rat*HT_rat
-                            cell.h[1,0,1] = 0.6*preg_rat
-                        elif cell.preg == 'mid':
-                            preg_rat = 0.65
-                            if cell.HT != 'N':
-                                HT_rat = 0.3
-                                preg_rat = preg_rat*HT_rat
-                            cell.h[1,0,1] = 0.6*preg_rat
-                elif cell.segment == 'CNT':
-                    if cell.preg == 'late':
-                        preg_rat = 0.55
-                        if cell.HT != 'N':
-                            HT_rat = 0.3
-                            preg_rat = preg_rat*HT_rat
-                        cell.h[1,0,1] = 8.0*preg_rat
-                    elif cell.preg == 'mid':
-                        preg_rat = 0.65
-                        if cell.HT != 'N':
-                            HT_rat = 0.3
-                            preg_rat = preg_rat*HT_rat
-                        cell.h[1,0,1] = 8.0*preg_rat
-                elif cell.segment == 'CCD':
-                    if cell.preg == 'late':
-                        preg_rat = 0.75
-                        cell.h[1,0,1] = 1.4*preg_rat
-                    elif cell.preg == 'mid':
-                        preg_rat = 0.775
-                        cell.h[1,0,1] = 1.4*preg_rat
-                elif cell.segment == 'OMCD':
-                    if cell.preg == 'late':
-                        preg_rat = 0.85
-                        cell.h[1,0,1] = 2.4*preg_rat
-                    elif cell.preg == 'mid':
-                        preg_rat = 0.875 
-                        cell.h[1,0,1] = 2.4*preg_rat
+                # K secretion (ROMK, BK)
+                if sid == 1 and (ind1 == 0 and ind2 == 1):
+                	temp = cell.h[1,0,1]
+					if cell.segment == 'DCT':
+						if j>0.66*cell.total:
+							#DCT2
+							if cell.preg == 'late':
+								preg_rat = 0.55
+								if cell.HT != 'N':
+									HT_rat = 0.3
+									preg_rat = preg_rat*HT_rat
+								cell.h[1,0,1] = temp*preg_rat
+							elif cell.preg == 'mid':
+								preg_rat = 0.65
+								if cell.HT != 'N':
+									HT_rat = 0.3
+									preg_rat = preg_rat*HT_rat
+								cell.h[1,0,1] = temp*preg_rat
+					elif cell.segment == 'CNT':
+						if cell.preg == 'late':
+							preg_rat = 0.55
+							if cell.HT != 'N':
+								HT_rat = 0.3
+								preg_rat = preg_rat*HT_rat
+							cell.h[1,0,1] = temp*preg_rat
+						elif cell.preg == 'mid':
+							preg_rat = 0.65
+							if cell.HT != 'N':
+								HT_rat = 0.3
+								preg_rat = preg_rat*HT_rat
+							cell.h[1,0,1] = temp*preg_rat
+					elif cell.segment == 'CCD':
+						if cell.preg == 'late':
+							preg_rat = 0.75
+							cell.h[1,0,1] = temp*preg_rat
+						elif cell.preg == 'mid':
+							preg_rat = 0.775
+							cell.h[1,0,1] = temp*preg_rat
+					elif cell.segment == 'OMCD':
+						if cell.preg == 'late':
+							preg_rat = 0.85
+							cell.h[1,0,1] = temp*preg_rat
+						elif cell.preg == 'mid':
+							preg_rat = 0.875 
+							cell.h[1,0,1] = tempp*preg_rat
                     
                             
             # Coupled transporters:
