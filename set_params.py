@@ -857,14 +857,14 @@ def read_params(cell,filename,j):
                     if newTransp.type == 'NHE3':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT':
                             if cell.sex == 'male':
-                                OB_rat = 0.51
+                                OB_rat = 0.7 #1.0 #0.51
                             elif cell.sex == 'female':
-                                OB_rat = 0.64
+                                OB_rat = 0.8 #1.0 #0.64
                         elif cell.segment == 'mTAL':
                             if cell.sex == 'male':
-                                OB_rat = 0.45
+                                OB_rat = 0.6 #1.0 #0.45
                             elif cell.sex == 'female':
-                                OB_rat = 0.50
+                                OB_rat = 0.7 #1.0 #0.50
                         else:
                             print('segment: ' + cell.segment)
                             raise Exception('NHE3 activity not done for obesity in this segment')
@@ -883,9 +883,9 @@ def read_params(cell,filename,j):
                     elif newTransp.type == 'NaKATPase':
                         if cell.segment == 'PT' or cell.segment == 'S3' or cell.segment == 'cTAL' or cell.segment == 'DCT' or cell.segment == 'CNT' or cell.segment == 'CCD':
                             if cell.sex == 'male':
-                                OB_rat = 0.95
+                                OB_rat = 1.0 #0.95
                             elif cell.sex == 'female':
-                                OB_rat = 0.90
+                                OB_rat = 1.0 #0.90
                         elif cell.segment == 'mTAL' or cell.segment == 'OMCD' or cell.segment == 'IMCD':
                             if cell.sex == 'male':
                                 OB_rat = 1.0
@@ -898,21 +898,21 @@ def read_params(cell,filename,j):
                     elif newTransp.type == 'NKCC2A' or newTransp.type == 'NKCC2B' or newTransp.type == 'NKCC2F':
                         if cell.segment == 'mTAL':
                             if cell.sex == 'male':
-                                OB_rat = 0.45
+                                OB_rat = 0.6 #0.45
                             elif cell.sex == 'female':
-                                OB_rat == '0.62'
+                                OB_rat == 0.75 #0.62
                         elif cell.segment == 'cTAL':
                             if cell.sex == 'male':
-                                OB_rat = 0.46
+                                OB_rat = 0.6 #0.46
                             elif cell.sex == 'female':
-                                OB_rat = 0.65
+                                OB_rat = 0.75 #0.65
                         else:
                             print('segment: ' + cell.segment)
                             raise Exception('NKCC2 activity not done for obesity in this segment')
                     
                     elif newTransp.type == 'NCC':
                         if cell.sex == 'male':
-                            OB_rat = 1.02
+                            OB_rat = 1.0
                         elif cell.sex == 'female':
                             OB_rat = 0.72
                     
