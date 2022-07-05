@@ -384,51 +384,38 @@ def read_params_preg(cell,filename,j):
                 		if j>0.66*cell.total:
                 			if cell.preg == 'late':
                 				preg_rat = 0.55
+                				if cell.HT != 'N':
+                					HT_rat = 0.3
+                					preg_rat = preg_rat*HT_rat
+                				cell.h[1,0,1] = temp*preg_rat
+                			elif cell.preg == 'mid':
+                				preg_rat = 0.65
+                				if cell.HT != 'N':
+                					HT_rat = 0.3
+                					preg_rat = preg_rat*HT_rat
+                				cell.h[1,0,1] = temp*preg_rat
+                	elif cell.segment == 'CNT':
+                		if cell.preg == 'late':
+                			preg_rat = 0.55
+                			if cell.HT != 'N':
+                				HT_rat = 0.3
+                				preg_rat = preg_rat*HT_rat
+                			cell.h[1,0,1]  = temp*preg_rat
+                	elif cell.segment == 'CCD':
+                		if cell.preg == 'late':
+                			preg_rat = 0.75
+                			cell.h[1,0,1] = temp*preg_rat
+                		elif cell.preg == 'mid':
+                			preg_rat = 0.775
+                			cell.h[1,0,1] = temp*preg_rat
+                	elif cell.segment == 'OMCD':
+                		if cell.preg == 'late':
+                			preg_rat = 0.85	
+                			cell.h[1,0,1] = temp*preg_rat
+                		elif cell.preg == 'mid':
+                			preg_rat = 0.875
+                			cell.h[1,0,1] = temp*preg_rat							
 
-					#if cell.segment == 'DCT':
-						#print('hey!')
-# 						if j>0.66*cell.total:
-# 							#DCT2
-# 							if cell.preg == 'late':
-# 								preg_rat = 0.55
-# 								if cell.HT != 'N':
-# 									HT_rat = 0.3
-# 									preg_rat = preg_rat*HT_rat
-# 								cell.h[1,0,1] = temp*preg_rat
-# 							elif cell.preg == 'mid':
-# 								preg_rat = 0.65
-# 								if cell.HT != 'N':
-# 									HT_rat = 0.3
-# 									preg_rat = preg_rat*HT_rat
-# 								cell.h[1,0,1] = temp*preg_rat
-# 					elif cell.segment == 'CNT':
-# 						if cell.preg == 'late':
-# 							preg_rat = 0.55
-# 							if cell.HT != 'N':
-# 								HT_rat = 0.3
-# 								preg_rat = preg_rat*HT_rat
-# 							cell.h[1,0,1] = temp*preg_rat
-# 						elif cell.preg == 'mid':
-# 							preg_rat = 0.65
-# 							if cell.HT != 'N':
-# 								HT_rat = 0.3
-# 								preg_rat = preg_rat*HT_rat
-# 							cell.h[1,0,1] = temp*preg_rat
-# 					elif cell.segment == 'CCD':
-# 						if cell.preg == 'late':
-# 							preg_rat = 0.75
-# 							cell.h[1,0,1] = temp*preg_rat
-# 						elif cell.preg == 'mid':
-# 							preg_rat = 0.775
-# 							cell.h[1,0,1] = temp*preg_rat
-# 					elif cell.segment == 'OMCD':
-# 						if cell.preg == 'late':
-# 							preg_rat = 0.85
-# 							cell.h[1,0,1] = temp*preg_rat
-# 						elif cell.preg == 'mid':
-# 							preg_rat = 0.875 
-# 							cell.h[1,0,1] = tempp*preg_rat
-                    
                             
             # Coupled transporters:
             elif compare_string_prefix(id,"coupled"):
