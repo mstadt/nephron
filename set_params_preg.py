@@ -380,7 +380,9 @@ def read_params_preg(cell,filename,j):
                 # K secretion (ROMK, BK)
                 if sid == 1 and (ind1 == 0 and ind2 == 1):
                 	temp = cell.h[1,0,1]
-                	print('hey!')
+                	if cell.segment == 'DCT':
+                		print('hi!')
+
 					#if cell.segment == 'DCT':
 						#print('hey!')
 # 						if j>0.66*cell.total:
